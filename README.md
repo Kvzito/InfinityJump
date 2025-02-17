@@ -1,5 +1,6 @@
 # InfinityDrive
 
+
 #### _Participantes_
 
 - Santiago Cordova Molina
@@ -50,15 +51,16 @@
 
 ### **Summary**
 
-Sum up your game idea in 2 sentences. A kind of elevator pitch. Keep it simple!
+Los jugadores controlan un carrito que debe superar obstáculos en mapas dinámicos, recolectando monedas para mejorarlo y alcanzar la meta. Con cada desafío, deben adaptarse, optimizar su vehículo y demostrar su habilidad para ganar. 
 
 ### **Gameplay**
 
 What should the gameplay be like? What is the goal of the game, and what kind of obstacles are in the way? What tactics should the player use to overcome them?
 
+
 ### **Mindset**
 
-What kind of mindset do you want to provoke in the player? Do you want them to feel powerful, or weak? Adventurous, or nervous? Hurried, or calm? How do you intend to provoke those emotions?
+El jugador se sentirá desafiado y motivado a mejorar, enfrentando obstáculos con una mentalidad de adaptación y estrategia. La combinación de mapas dinámicos y mejoras progresivas fomentará una sensación de logro y aventura.
 
 ## _Technical_
 
