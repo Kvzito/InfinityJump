@@ -1,15 +1,15 @@
-# InfinityDrivee
-# **Game Name Here**
+# InfinityDrive
 
-## _Game Design Document_
+#### _Participantes_
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
-- Kevin Esquivel Kvzito
+- Kevin Javier Esquivel Villafuerte
 
-##### **Copyright notice / author information / boring legal stuff nobody likes**
+##### **Copyright notice / Author Information**
 
-##
+## _Game Design Document_
+
 ## _Index_
 
 ---
