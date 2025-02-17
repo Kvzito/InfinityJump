@@ -3,7 +3,9 @@
 
 ## _Game Design Document_
 
----
+- Santiago Cordova Molina
+- Maria Rivera Gutierrez
+- Kevin Esquivel Kvzito
 
 ##### **Copyright notice / author information / boring legal stuff nobody likes**
 
