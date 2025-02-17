@@ -1,12 +1,17 @@
-# InfinityDrivee
+# InfinityDrive
+
+
+#### _Participantes_
+
+- Santiago Cordova Molina
+- Maria Rivera Gutierrez
+- Kevin Javier Esquivel Villafuerte
+  
+
+##### **Copyright notice / Author Information**
 
 ## _Game Design Document_
 
----
-
-##### **Copyright notice / author information / boring legal stuff nobody likes**
-
-##
 ## _Index_
 
 ---
@@ -15,12 +20,12 @@
 2. [Game Design](#game-design)
     1. [Summary](#summary)
     2. [Gameplay](#gameplay)
-    3. [Mindset](#mindset)
+    4. [Mindset](#mindset)
 3. [Technical](#technical)
     1. [Screens](#screens)
     2. [Controls](#controls)
     3. [Mechanics](#mechanics)
-4. [Level Design](#level-design)
+2. [Level Design](#level-design)
     1. [Themes](#themes)
         1. Ambience
         2. Objects
@@ -28,17 +33,17 @@
             2. Interactive
         3. Challenges
     2. [Game Flow](#game-flow)
-5. [Development](#development)
+3. [Development](#development)
     1. [Abstract Classes](#abstract-classes--components)
     2. [Derived Classes](#derived-classes--component-compositions)
-6. [Graphics](#graphics)
+4. [Graphics](#graphics)
     1. [Style Attributes](#style-attributes)
     2. [Graphics Needed](#graphics-needed)
-7. [Sounds/Music](#soundsmusic)
+5. [Sounds/Music](#soundsmusic)
     1. [Style Attributes](#style-attributes-1)
     2. [Sounds Needed](#sounds-needed)
     3. [Music Needed](#music-needed)
-8. [Schedule](#schedule)
+6. [Schedule](#schedule)
 
 ## _Game Design_
 
@@ -76,6 +81,16 @@ _(example)_
 ### **Controls**
 
 How will the player interact with the game? Will they be able to choose the controls? What kind of in-game events are they going to be able to trigger, and how? (e.g. pressing buttons, opening doors, etc.)
+
+Controles:
+
+- La flecha derecha hará que el coche avance y si la dejas presionada el coche empezará a acelerar.
+- La flecha izquierda hará que el coche frene si está en movimiento y que vaya para atrás si se deja presionado.
+- Con la flecha de arriba el coche podrá hacer un pequeño salto. Este salto será disponible solo al adquirir la mejora de salto.
+- Con la barra espaciadora el jugador podrá hacer un turbo que dura 1 segundo y hace que el coche sea mas veloz. Esta mejora está disponible en la tienda.
+- Con la tecla esc el jugador salirse de las diferentes pantallas y regresar a la anterior
+- Presionando la tecla “T” el jugador entrara a la tienda
+- Con la tecla “P” el jugador podrá poner el juego en pausa.
 
 ### **Mechanics**
 
