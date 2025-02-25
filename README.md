@@ -1,13 +1,13 @@
 # InfinityDrive
 
 
-#### _Participantes_
+#### _Participants_
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
 - Kevin Javier Esquivel Villafuerte
-  
 
+  
 ##### **Copyright notice / Author Information**
 
 ## _Game Design Document_
@@ -51,16 +51,15 @@
 
 ### **Summary**
 
-Los jugadores controlan un carrito que debe superar obstáculos en mapas dinámicos, recolectando monedas para mejorarlo y alcanzar la meta. Con cada desafío, deben adaptarse, optimizar su vehículo y demostrar su habilidad para ganar. 
+Players control a car that must navigate through dynamic, illustrated maps, overcoming obstacles and collecting coins to upgrade their vehicle and reach the goal. With each challenge, they must adapt, optimize their cart, and refine their skills to progress further. 
 
 ### **Gameplay**
 
-What should the gameplay be like? What is the goal of the game, and what kind of obstacles are in the way? What tactics should the player use to overcome them?
-
+The objective of the game is to drive for as long as possible while covering the greatest distance, skillfully avoiding obstacles along the way. As players progress, the environment changes, introducing new challenges that require quick thinking and precise control. Since the game takes place in a city with an illustrated art style, obstacles will include potholes, bridges, and platforms that the player must navigate. The car is controlled using arrow keys, requiring the player to carefully manage speed—slowing down to avoid hazards or accelerating to clear gaps and maximize distance. Strategic decision-making is crucial, as players must analyze the best paths to take while collecting coins. These coins can be used to purchase upgrades, either temporary boosts or permanent enhancements, to improve the cart’s performance and increase their chances of achieving a higher score. 
 
 ### **Mindset**
 
-El jugador se sentirá desafiado y motivado a mejorar, enfrentando obstáculos con una mentalidad de adaptación y estrategia. La combinación de mapas dinámicos y mejoras progresivas fomentará una sensación de logro y aventura.
+The game is designed to challenge and engage players, encouraging a mindset of adaptation, strategy, and continuous improvement. The dynamic and illustrated maps, along with the progressively increasing difficulty, create a sense of excitement and accomplishment. Players will feel motivated to refine their skills and push their limits as they progress. By carefully managing speed, navigating obstacles, and making strategic use of upgrades, they will experience a balance between risk and reward. This approach fosters a sense of adventure and determination, keeping players engaged and eager to improve with each attempt.
 
 ## _Technical_
 
@@ -79,10 +78,6 @@ El jugador se sentirá desafiado y motivado a mejorar, enfrentando obstáculos c
 _(example)_
 
 ### **Controls**
-
-How will the player interact with the game? Will they be able to choose the controls? What kind of in-game events are they going to be able to trigger, and how? (e.g. pressing buttons, opening doors, etc.)
-
-### Controles:
 
 - La flecha derecha hará que el coche avance y si la dejas presionada el coche empezará a acelerar.
 - La flecha izquierda hará que el coche frene si está en movimiento y que vaya para atrás si se deja presionado.
