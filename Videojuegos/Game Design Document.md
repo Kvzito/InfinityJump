@@ -1,14 +1,14 @@
 # InfinityDrive
 
 
-#### _Participants_
+#### _Participantes_
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
 - Kevin Javier Esquivel Villafuerte
 
   
-##### **Copyright notice / Author Information**
+###### **Aviso de derechos de autor/Información del autor**
 
 ## _Game Design Document_
 
@@ -16,68 +16,68 @@
 
 ---
 
-1. [Index](#index)
-2. [Game Design](#game-design)
-    1. [Summary](#summary)
-    2. [Gameplay](#gameplay)
-    4. [Mindset](#mindset)
-3. [Technical](#technical)
-    1. [Screens](#screens)
-    2. [Controls](#controls)
-    3. [Mechanics](#mechanics)
-2. [Level Design](#level-design)
-    1. [Themes](#themes)
-        1. Ambience
-        2. Objects
-            1. Ambient
-            2. Interactive
-        3. Challenges
-    2. [Game Flow](#game-flow)
-3. [Development](#development)
-    1. [Abstract Classes](#abstract-classes--components)
-    2. [Derived Classes](#derived-classes--component-compositions)
-4. [Graphics](#graphics)
-    1. [Style Attributes](#style-attributes)
-    2. [Graphics Needed](#graphics-needed)
-5. [Sounds/Music](#soundsmusic)
-    1. [Style Attributes](#style-attributes-1)
-    2. [Sounds Needed](#sounds-needed)
-    3. [Music Needed](#music-needed)
-6. [Schedule](#schedule)
+1. [Índice](#índice)
+2. [Diseño de juegos](#game-design)
+    1. [Resumen] (#resumen)
+    2. [Juego](#juego)
+    4. [Mentalidad](#mindset)
+3. [Técnico](#técnico)
+    1. [Pantallas] (#pantallas)
+    2. [Controles] (#controles)
+    3. [Mecánica](#mecánica)
+2. [Diseño de niveles](#level-design)
+    1. [Temas](#temas)
+        1. Ambiente
+        2. Objetos
+            1. Ambiente
+            2. Interactivo
+        3. Desafíos
+    2. [Flujo de juego](#game-flow)
+3. [Desarrollo] (#desarrollo)
+    1. [Clases abstractas](#abstract-classes--components)
+    2. [Clases derivadas](#derived-classes--component-compositions)
+4. [Gráficos](#gráficos)
+    1. [Atributos de estilo](#style-attributes)
+    2. [Gráficos necesarios] (#gráficos necesarios)
+5. [Sonidos/Música](#soundsmusic)
+    1. [Atributos de estilo](#style-attributes-1)
+    2. [Sonidos necesarios] (#sonidos-necesarios)
+    3. [Música necesaria] (#música-necesaria)
+6. [Horario](#horario)
 
-## _Game Design_
-
----
-
-### **Summary**
-
-Players control a car that must navigate through dynamic, illustrated maps, overcoming obstacles and collecting coins to upgrade their vehicle and reach the goal. With each challenge, they must adapt, optimize their cart, and refine their skills to progress further. 
-
-### **Gameplay**
-
-The objective of the game is to drive for as long as possible while covering the greatest distance, skillfully avoiding obstacles along the way. As players progress, the environment changes, introducing new challenges that require quick thinking and precise control. Since the game takes place in a city with an illustrated art style, obstacles will include potholes, bridges, and platforms that the player must navigate. The car is controlled using arrow keys, requiring the player to carefully manage speed—slowing down to avoid hazards or accelerating to clear gaps and maximize distance. Strategic decision-making is crucial, as players must analyze the best paths to take while collecting coins. These coins can be used to purchase upgrades, either temporary boosts or permanent enhancements, to improve the cart’s performance and increase their chances of achieving a higher score. 
-
-### **Mindset**
-
-The game is designed to challenge and engage players, encouraging a mindset of adaptation, strategy, and continuous improvement. The dynamic and illustrated maps, along with the progressively increasing difficulty, create a sense of excitement and accomplishment. Players will feel motivated to refine their skills and push their limits as they progress. By carefully managing speed, navigating obstacles, and making strategic use of upgrades, they will experience a balance between risk and reward. This approach fosters a sense of adventure and determination, keeping players engaged and eager to improve with each attempt.
-
-## _Technical_
+## _Juego Design_
 
 ---
 
-### **Screens**
+### **Resumen**
 
-1. Title Screen
-    1. Options
-2. Level Select
-3. Game
-    1. Inventory
-    2. Assessment / Next Level
-4. End Credits
+Los jugadores controlan un coche que debe navegar a través de mapas dinámicos e ilustrados, superando obstáculos y recogiendo monedas para mejorar su vehículo y alcanzar la meta. Con cada desafío, deben adaptarse, optimizar su carro y perfeccionar sus habilidades para progresar más. 
 
-_(example)_
+### **Juego**
 
-### **Controls**
+El objetivo del juego es conducir durante el mayor tiempo posible, cubriendo la mayor distancia posible, evitando con habilidad los obstáculos a lo largo del camino. A medida que los jugadores progresan, el entorno cambia, introduciendo nuevos desafíos que requieren un pensamiento rápido y un control preciso. Dado que el juego tiene lugar en una ciudad con un estilo de arte ilustrado, los obstáculos incluirán baches, puentes y plataformas que el jugador debe navegar. El coche se controla mediante las teclas de flecha, lo que requiere que el jugador controle cuidadosamente la velocidad-ralentización para evitar peligros o acelerar para despejar los huecos y maximizar la distancia. La toma de decisiones estratégicas es crucial, ya que los jugadores deben analizar los mejores caminos para tomar mientras recogen monedas. Estas monedas se pueden usar para comprar mejoras, ya sea aumentos temporales o mejoras permanentes, para mejorar el rendimiento del carro y aumentar sus posibilidades de lograr una puntuación más alta. 
+
+### **Mentalidad**
+
+El juego está diseñado para desafiar y involucrar a los jugadores, fomentando una mentalidad de adaptación, estrategia y mejora continua. Los mapas dinámicos e ilustrados, junto con la dificultad cada vez mayor, crean una sensación de emoción y logro. Los jugadores se sentirán motivados para perfeccionar sus habilidades y superar sus límites a medida que progresan. Al manejar cuidadosamente la velocidad, navegar por los obstáculos y hacer un uso estratégico de las mejoras, experimentarán un equilibrio entre el riesgo y la recompensa. Este enfoque fomenta un sentido de aventura y determinación, manteniendo a los jugadores comprometidos y ansiosos por mejorar con cada intento.
+
+## _Técnico
+
+---
+
+### **Pantallas**
+
+1. Pantalla de título
+    1. Opciones
+2. Selección de nivel
+3. Juego
+    1. Inventario
+    2. Evaluación/Siguiente nivel
+4. Créditos finales
+
+_(ejemplo)_
+
+### **Controles**
 
 - La flecha derecha hará que el coche avance y si la dejas presionada el coche empezará a acelerar.
 - La flecha izquierda hará que el coche frene si está en movimiento y que vaya para atrás si se deja presionado.
