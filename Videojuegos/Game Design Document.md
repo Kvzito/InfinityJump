@@ -45,7 +45,7 @@
     3. [Música necesaria] (#música-necesaria)
 6. [Horario](#horario)
 
-## _Juego Design_
+## _Diseño del Juego_
 
 ---
 
