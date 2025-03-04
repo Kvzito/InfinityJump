@@ -1,5 +1,5 @@
 # InfinityDrive 
-# Created by Sliver way syudios
+# Creado por el estudio Silver Way
 
 
 #### _Participantes_
