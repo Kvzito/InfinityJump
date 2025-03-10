@@ -45,7 +45,7 @@ Creado por el estudio Silver Way
     1. [Atributos de estilo](#style-attributes-1)
     2. [Sonidos necesarios] (#sonidos-necesarios)
     3. [Música necesaria] (#música-necesaria)
-6. [Horario](#horario)
+6. [Itinerario](#itinerario)
 
 ## _Diseño del Juego_
 
@@ -263,11 +263,11 @@ Stylistically, what kind of sound effects are you looking for? Do you want to ex
 _(example)_
 
 
-## _Schedule_
+## _Itinerario_
 
 ---
 
-1. determinar el concepto general del juego (primeras 2 semanas)
+1. determinar el concepto general del juego (primeras 3 semanas)
     1. mecánicas
         1. compra de habilidades
         2. aleatoriedad de mapas
@@ -275,24 +275,27 @@ _(example)_
   2. reglas
         1. gestión de habilidades
         2. requerimientos de 
-2. develop player and basic block classes
-    1. physics / collisions
-3. find some smooth controls/physics
-4. develop other derived classes
-    1. blocks
-        1. moving
-        2. falling
-        3. breaking
-        4. cloud
-    2. enemies
-        1. soldier
-        2. rat
-        3. etc.
-5. design levels
-    1. introduce motion/jumping
-    2. introduce throwing
-    3. mind the pacing, let the player play between lessons
-6. design sounds
-7. design music
-
-_(example)_
+2. desarrollo de documentación/issues del proyecto (semana 4)
+    1. historias de usuario
+    2. casos de uso
+    3. issues
+4. primer sprint (semana 5)
+    1. inicialización base de datos
+    2. assets del videojuego 
+6. segundo sprint (semana 6)
+    1. programación de clases abstractas del juego
+        1. Habilidades
+        2. Jugador
+        3. Obstáculos
+        4. Entorno
+7. tercer sprint (semana 7)
+    1. desarrollo de clases derivadas
+    2. desarrollo de web
+8. cuarto sprint (semana 8)
+    1. conexión de web con base de datos y videojuego
+    2. sprites y visuales
+10. quinto spritn (semana 9)
+    1. terminar visuales y audio
+    2. web completamente terminada y funcional
+11. semana 10
+    1. presentación final del videojuego
