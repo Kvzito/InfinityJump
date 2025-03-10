@@ -1,8 +1,9 @@
 # InfinityDrive 
-# Creado por el estudio Silver Way
+
 
 
 #### _Participantes_
+Creado por el estudio Silver Way
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
@@ -88,56 +89,58 @@ _(ejemplo)_
 - Presionando la tecla “T” el jugador entrara a la tienda
 - Con la tecla “P” el jugador podrá poner el juego en pausa.
 
-### **Mechanics**
+### **Mecánicas**
 
-Are there any interesting mechanics? If so, how are you going to accomplish them? Physics, algorithms, etc.
+EL juego se basa en un carro que debe superar diversos obstáculos mientras controla su velocidad. La mecánica más compleja de implmentar es el sisite de aceleración y frenado.
 
-## _Level Design_
+Cuando el jugador mantiene presionada la tecla de la flecha derecha, el carro incrementa su velocidad progresivamente. Esto permite completar el nivel en menos tiempo y facilita el cruce de ciertos obstáculos que requieren impulso. Sin embargo, al presionar la tecla de la flecha izquierda, se aplicará una fuerza de fricción que reducirá la velocidad del vehículo o permitirá detenerlo por completo.
+
+Para lograr esta mecánica, utilizaremos principios de física dentro del algoritmo del juego, específicamente:
+
+- **Aceleración:** Se implementará un sistema donde la velocidad del carro aumente progresivamente al mantener la tecla de avance presionada, con un límite máximo establecido.
+- **Desaceleración y frenado:** Se simulará la pérdida de velocidad cuando el jugador deja de acelerar o presiona la tecla de frenado. Se calculará la fricción entre las ruedas y la superficie del camino.
+- **Impacto con obstáculos:** Si el carro choca con un obstáculo, su velocidad disminuirá bruscamente o se detendrá dependiendo del tipo de colisión.
+- **Física de salto y caída:** Algunos obstáculos pueden requerir que el carro tome impulso para cruzar plataformas o esquivar huecos. La velocidad influirá en la distancia que el vehículo pueda recorrer en el aire.
+
+Cada una de estas interacciones estará integrada en el algoritmo del juego, activándose en respuesta a las acciones del jugador. Además, si el jugador no logra superar un obstáculo y pierde la partida, se reiniciará la simulación con nuevas variables para mantener la rejugabilidad.
+
+## _Diseño de Niveles_
 
 ---
 
-_(Note : These sections can safely be skipped if they&#39;re not relevant, or you&#39;d rather go about it another way. For most games, at least one of them should be useful. But I&#39;ll understand if you don&#39;t want to use them. It&#39;ll only hurt my feelings a little bit.)_
+### **Tema**
 
-### **Themes**
-
-1. Forest
-    1. Mood
-        1. Dark, calm, foreboding
-    2. Objects
-        1. _Ambient_
-            1. Fireflies
-            2. Beams of moonlight
-            3. Tall grass
+1. Cuidad
+    1. Ammbiente
+        1. Divertido, atento, movido, activo
+    2. Objetos
+        1. _Ambiente_
+            1. Calle
+            2. Edificios
+            3. Sol
+            4. Ventanas con luces
+            5. Fondo cuadrado
         2. _Interactive_
-            1. Wolves
-            2. Goblins
-            3. Rocks
-2. Castle
-    1. Mood
-        1. Dangerous, tense, active
-    2. Objects
-        1. _Ambient_
-            1. Rodents
-            2. Torches
-            3. Suits of armor
-        2. _Interactive_
-            1. Guards
-            2. Giant rats
-            3. Chests
+            1. Puentes
+            2. Baches
+            3. Fuego
+            4. Plataformas
+            5. Subidas
+            6. Bajadas
+            7. Curvas
 
-_(example)_
+### **Flujo del Juego**
 
-### **Game Flow**
-
-1. Player starts in forest
-2. Pond to the left, must move right
-3. To the right is a hill, player jumps to traverse it (&quot;jump&quot; taught)
-4. Player encounters castle - door&#39;s shut and locked
-5. There&#39;s a window within jump height, and a rock on the ground
-6. Player picks up rock and throws at glass (&quot;throw&quot; taught)
-7. … etc.
-
-_(example)_
+1. El jugador empieza a la izquierda de la pantalla.
+2. Debe avanzar hacia el frente, comenzando con poca velocidad.
+3. Mientras más tiempo mantenga presionada la tecla de avance, más rápido avanzará el carro.
+4. Al encontrarse con un bache, deberá reducir su velocidad para evitar perder el control.
+5. Si encuentra una curva, necesitará la velocidad adecuada para girar sin problemas.
+6. Si se encuentra con una plataforma, deberá avanzar con paciencia y controlar bien el carro para superarla.
+7. Si hay una pendiente, ya sea de subida o bajada, deberá ajustarse a la velocidad correcta para no perder el equilibrio ni dañar el vehículo.
+8. Después de superar cierto número de obstáculos, llegará a una bandera que indica que el nivel ha sido completado.
+9. El siguiente nivel tendrá obstáculos más difíciles.
+10. Este proceso se repetirá hasta que el jugador pierda al no lograr superar un obstáculo.
 
 ## _Development_
 
@@ -225,7 +228,7 @@ Well-designed feedback, both good (e.g. leveling up) and bad (e.g. being hit), a
 _(example)_
 
 
-## _Sounds/Music_
+## _Sonidos/Música_
 
 ---
 
@@ -237,23 +240,17 @@ Stylistically, what kind of sound effects are you looking for? Do you want to ex
 
  Remember, auditory feedback should stand out from the music and other sound effects so the player hears it well. Volume, panning, and frequency/pitch are all important aspects to consider in both music _and_ sounds - so plan accordingly!
 
-### **Sounds Needed**
+### **Sonidos  Necesitados**
 
-1. Effects
-    1. Soft Footsteps (dirt floor)
-    2. Sharper Footsteps (stone floor)
-    3. Soft Landing (low vertical velocity)
-    4. Hard Landing (high vertical velocity)
-    5. Glass Breaking
-    6. Chest Opening
-    7. Door Opening
+1. Efectos
+    1. Fuego
+    2. Estruendo (al chocar con un objeto)
+    3. Motor (cuando haces una mejora de valocidad)
+    4. Freno (cuando se desacelera el carro)
 2. Feedback
-    1. Relieved &quot;Ahhhh!&quot; (health)
-    2. Shocked &quot;Ooomph!&quot; (attacked)
-    3. Happy chime (extra life)
-    4. Sad chime (died)
-
-_(example)_
+    1. Tinteo (al agarrar una moneda)
+    2. Start (cuando empieza un nivel)
+    3. Aplauso (cuando acabas el nivel)
 
 ### **Music Needed**
 
