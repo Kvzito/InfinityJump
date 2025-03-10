@@ -267,16 +267,14 @@ _(example)_
 
 ---
 
-_(define the main activities and the expected dates when they should be finished. This is only a reference, and can change as the project is developed)_
-
-1. develop base classes
-    1. base entity
-        1. base player
-        2. base enemy
-        3. base block
-  2. base app state
-        1. game world
-        2. menu world
+1. determinar el concepto general del juego (primeras 2 semanas)
+    1. mecánicas
+        1. compra de habilidades
+        2. aleatoriedad de mapas
+        3. movimiento
+  2. reglas
+        1. gestión de habilidades
+        2. requerimientos de 
 2. develop player and basic block classes
     1. physics / collisions
 3. find some smooth controls/physics
