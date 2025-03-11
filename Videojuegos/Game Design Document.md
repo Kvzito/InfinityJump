@@ -20,12 +20,12 @@ Creado por el estudio Silver Way
 
 1. [Índice](#índice)
 2. [Diseño de juegos](#game-design)
-    1. [Resumen] (#resumen)
+    1. [Resumen](#resumen)
     2. [Juego](#juego)
     4. [Mentalidad](#mindset)
 3. [Técnico](#técnico)
-    1. [Pantallas] (#pantallas)
-    2. [Controles] (#controles)
+    1. [Pantallas](#pantallas)
+    2. [Controles](#controles)
     3. [Mecánica](#mecánica)
 2. [Diseño de niveles](#level-design)
     1. [Temas](#temas)
@@ -35,17 +35,17 @@ Creado por el estudio Silver Way
             2. Interactivo
         3. Desafíos
     2. [Flujo de juego](#game-flow)
-3. [Desarrollo] (#desarrollo)
+3. [Desarrollo](#desarrollo)
     1. [Clases abstractas](#abstract-classes--components)
     2. [Clases derivadas](#derived-classes--component-compositions)
 4. [Gráficos](#gráficos)
     1. [Atributos de estilo](#style-attributes)
-    2. [Gráficos necesarios] (#gráficos necesarios)
+    2. [Gráficos necesarios](#gráficos-necesarios)
 5. [Sonidos/Música](#soundsmusic)
     1. [Atributos de estilo](#style-attributes-1)
-    2. [Sonidos necesarios] (#sonidos-necesarios)
-    3. [Música necesaria] (#música-necesaria)
-6. [Horario](#horario)
+    2. [Sonidos necesarios](#sonidos-necesarios)
+    3. [Música necesaria](#música-necesaria)
+6. [Itinerario](#itinerario)
 
 ## _Diseño del Juego_
 
@@ -144,45 +144,41 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
 9. El siguiente nivel tendrá obstáculos más difíciles.
 10. Este proceso se repetirá hasta que el jugador pierda al no lograr superar un obstáculo.
 
-## _Development_
+## _Desarrollo_
 
 ---
 
-### **Abstract Classes / Components**
+### **Clases abstractas **
 
-1. BasePhysics
-    1. BasePlayer
-    2. BaseEnemy
-    3. BaseObject
-2. BaseObstacle
-3. BaseInteractable
+1. JugadorBase
+2. ObstaculoBase
+3. ObjetoBase
+4. MejoraBase
 
-_(example)_
 
-### **Derived Classes / Component Compositions**
+### **Clases derivadas **
 
-1. BasePlayer
-    1. PlayerMain
-    2. PlayerUnlockable
-2. BaseEnemy
-    1. EnemyWolf
-    2. EnemyGoblin
-    3. EnemyGuard (may drop key)
-    4. EnemyGiantRat
-    5. EnemyPrisoner
-3. BaseObject
-    1. ObjectRock (pick-up-able, throwable)
-    2. ObjectChest (pick-up-able, throwable, spits gold coins with key)
-    3. ObjectGoldCoin (cha-ching!)
-    4. ObjectKey (pick-up-able, throwable)
-4. BaseObstacle
-    1. ObstacleWindow (destroyed with rock)
-    2. ObstacleWall
-    3. ObstacleGate (watches to see if certain buttons are pressed)
-5. BaseInteractable
-    1. InteractableButton
+1. JugadorBase
+    1. JugadorPrincipal
+    2. JugadorModificable
+2. ObstaculoBase
+    1. Bache
+    2. Fuego
+    3. Puente
+    4. Caracol
+    5. Rampa
+    6. Elevacion
+3. ObjetoBase
+    1. Moneda
+    2. Piso
+    3. Fondo
+    4. Meta
+4. MejoraBase
+    1. Parachoques
+    2. LlantasResistentes
+    3. Nitro
 
-_(example)_
+
 
 ## _Graphics_
 
@@ -328,38 +324,39 @@ Stylistically, what kind of sound effects are you looking for? Do you want to ex
 _(example)_
 
 
-## _Schedule_
+## _Itinerario_
 
 ---
 
-_(define the main activities and the expected dates when they should be finished. This is only a reference, and can change as the project is developed)_
-
-1. develop base classes
-    1. base entity
-        1. base player
-        2. base enemy
-        3. base block
-  2. base app state
-        1. game world
-        2. menu world
-2. develop player and basic block classes
-    1. physics / collisions
-3. find some smooth controls/physics
-4. develop other derived classes
-    1. blocks
-        1. moving
-        2. falling
-        3. breaking
-        4. cloud
-    2. enemies
-        1. soldier
-        2. rat
-        3. etc.
-5. design levels
-    1. introduce motion/jumping
-    2. introduce throwing
-    3. mind the pacing, let the player play between lessons
-6. design sounds
-7. design music
-
-_(example)_
+1. determinar el concepto general del juego (primeras 3 semanas)
+    1. mecánicas
+        1. compra de habilidades
+        2. aleatoriedad de mapas
+        3. movimiento
+  2. reglas
+        1. gestión de habilidades
+        2. requerimientos de 
+2. desarrollo de documentación/issues del proyecto (semana 4)
+    1. historias de usuario
+    2. casos de uso
+    3. issues
+4. primer sprint (semana 5)
+    1. inicialización base de datos
+    2. assets del videojuego 
+6. segundo sprint (semana 6)
+    1. programación de clases abstractas del juego
+        1. Habilidades
+        2. Jugador
+        3. Obstáculos
+        4. Entorno
+7. tercer sprint (semana 7)
+    1. desarrollo de clases derivadas
+    2. desarrollo de web
+8. cuarto sprint (semana 8)
+    1. conexión de web con base de datos y videojuego
+    2. sprites y visuales
+10. quinto spritn (semana 9)
+    1. terminar visuales y audio
+    2. web completamente terminada y funcional
+11. semana 10
+    1. presentación final del videojuego
