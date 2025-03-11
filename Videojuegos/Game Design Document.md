@@ -142,45 +142,41 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
 9. El siguiente nivel tendrá obstáculos más difíciles.
 10. Este proceso se repetirá hasta que el jugador pierda al no lograr superar un obstáculo.
 
-## _Development_
+## _Desarrollo_
 
 ---
 
-### **Abstract Classes / Components**
+### **Clases abstractas **
 
-1. BasePhysics
-    1. BasePlayer
-    2. BaseEnemy
-    3. BaseObject
-2. BaseObstacle
-3. BaseInteractable
+1. JugadorBase
+2. ObstaculoBase
+3. ObjetoBase
+4. MejoraBase
 
-_(example)_
 
-### **Derived Classes / Component Compositions**
+### **Clases derivadas **
 
-1. BasePlayer
-    1. PlayerMain
-    2. PlayerUnlockable
-2. BaseEnemy
-    1. EnemyWolf
-    2. EnemyGoblin
-    3. EnemyGuard (may drop key)
-    4. EnemyGiantRat
-    5. EnemyPrisoner
-3. BaseObject
-    1. ObjectRock (pick-up-able, throwable)
-    2. ObjectChest (pick-up-able, throwable, spits gold coins with key)
-    3. ObjectGoldCoin (cha-ching!)
-    4. ObjectKey (pick-up-able, throwable)
-4. BaseObstacle
-    1. ObstacleWindow (destroyed with rock)
-    2. ObstacleWall
-    3. ObstacleGate (watches to see if certain buttons are pressed)
-5. BaseInteractable
-    1. InteractableButton
+1. JugadorBase
+    1. JugadorPrincipal
+    2. JugadorModificable
+2. ObstaculoBase
+    1. Bache
+    2. Fuego
+    3. Puente
+    4. Caracol
+    5. Rampa
+    6. Elevacion
+3. ObjetoBase
+    1. Moneda
+    2. Piso
+    3. Fondo
+    4. Meta
+4. MejoraBase
+    1. Parachoques
+    2. LlantasResistentes
+    3. Nitro
 
-_(example)_
+
 
 ## _Graphics_
 
