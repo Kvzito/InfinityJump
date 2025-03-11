@@ -14,37 +14,35 @@ Creado por el estudio Silver Way
 
 ## _Game Design Document_
 
-## _Index_
+## _Índice_
 
 ---
 
 1. [Índice](#índice)
-2. [Diseño de juegos](#game-design)
+2. [Diseño del juego](#diseño-del-juego)
     1. [Resumen](#resumen)
     2. [Juego](#juego)
-    4. [Mentalidad](#mindset)
+    4. [Mentalidad](#mentalidad)
 3. [Técnico](#técnico)
     1. [Pantallas](#pantallas)
     2. [Controles](#controles)
-    3. [Mecánica](#mecánica)
-2. [Diseño de niveles](#level-design)
-    1. [Temas](#temas)
+    3. [Mecánicas](#mecánicas)
+2. [Diseño de niveles](#diseño-de-niveles)
+    1. [Tema](#tema)
         1. Ambiente
         2. Objetos
             1. Ambiente
             2. Interactivo
         3. Desafíos
-    2. [Flujo de juego](#game-flow)
+    2. [Flujo de juego](#flujo-de-juego)
 3. [Desarrollo](#desarrollo)
-    1. [Clases abstractas](#abstract-classes--components)
-    2. [Clases derivadas](#derived-classes--component-compositions)
+    1. [Clases abstractas](#clases-abstractas)
+    2. [Clases derivadas](#clases-derivadas)
 4. [Gráficos](#gráficos)
-    1. [Atributos de estilo](#style-attributes)
-    2. [Gráficos necesarios](#gráficos-necesarios)
-5. [Sonidos/Música](#soundsmusic)
-    1. [Atributos de estilo](#style-attributes-1)
-    2. [Sonidos necesarios](#sonidos-necesarios)
-    3. [Música necesaria](#música-necesaria)
+5. [Sonidos/Música](#sonidos/música)
+    1. [Atributos de estilo](#atributos-de-estilo)
+    2. [Sonidos Necesarios](#sonidos-necesarios)
+    3. [Música Necesaria](#música-necesaria)
 6. [Itinerario](#itinerario)
 
 ## _Diseño del Juego_
@@ -63,7 +61,7 @@ El objetivo del juego es conducir durante el mayor tiempo posible, cubriendo la 
 
 El juego está diseñado para desafiar y involucrar a los jugadores, fomentando una mentalidad de adaptación, estrategia y mejora continua. Los mapas dinámicos e ilustrados, junto con la dificultad cada vez mayor, crean una sensación de emoción y logro. Los jugadores se sentirán motivados para perfeccionar sus habilidades y superar sus límites a medida que progresan. Al manejar cuidadosamente la velocidad, navegar por los obstáculos y hacer un uso estratégico de las mejoras, experimentarán un equilibrio entre el riesgo y la recompensa. Este enfoque fomenta un sentido de aventura y determinación, manteniendo a los jugadores comprometidos y ansiosos por mejorar con cada intento.
 
-## _Técnico
+## _Técnico_
 
 ---
 
@@ -113,7 +111,7 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
 ### **Tema**
 
 1. Cuidad
-    1. Ammbiente
+    1. Estado
         1. Divertido, atento, movido, activo
     2. Objetos
         1. _Ambiente_
@@ -122,7 +120,7 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
             3. Sol
             4. Ventanas con luces
             5. Fondo cuadrado
-        2. _Interactive_
+        2. _Interactivo_
             1. Puentes
             2. Baches
             3. Fuego
@@ -131,7 +129,7 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
             6. Bajadas
             7. Curvas
 
-### **Flujo del Juego**
+### **Flujo de Juego**
 
 1. El jugador empieza a la izquierda de la pantalla.
 2. Debe avanzar hacia el frente, comenzando con poca velocidad.
@@ -148,7 +146,7 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
 
 ---
 
-### **Clases abstractas **
+### **Clases abstractas**
 
 1. JugadorBase
 2. ObstaculoBase
@@ -156,7 +154,7 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
 4. MejoraBase
 
 
-### **Clases derivadas **
+### **Clases derivadas**
 
 1. JugadorBase
     1. JugadorPrincipal
@@ -180,7 +178,7 @@ Cada una de estas interacciones estará integrada en el algoritmo del juego, act
 
 
 
-## _Graphics_
+## _Gráficos_
 
 ---
 
@@ -293,7 +291,7 @@ Diseños:
 
 ---
 
-### **Style Attributes**
+### **Artibutos de estilo**
 
 Again, consistency is key. Define that consistency here. What kind of instruments do you want to use in your music? Any particular tempo, key? Influences, genre? Mood?
 
@@ -301,7 +299,7 @@ Stylistically, what kind of sound effects are you looking for? Do you want to ex
 
  Remember, auditory feedback should stand out from the music and other sound effects so the player hears it well. Volume, panning, and frequency/pitch are all important aspects to consider in both music _and_ sounds - so plan accordingly!
 
-### **Sonidos  Necesitados**
+### **Sonidos Necesarios**
 
 1. Efectos
     1. Fuego
@@ -313,7 +311,7 @@ Stylistically, what kind of sound effects are you looking for? Do you want to ex
     2. Start (cuando empieza un nivel)
     3. Aplauso (cuando acabas el nivel)
 
-### **Music Needed**
+### **Música Necesaria**
 
 1. Slow-paced, nerve-racking &quot;forest&quot; track
 2. Exciting &quot;castle&quot; track
@@ -328,35 +326,35 @@ _(example)_
 
 ---
 
-1. determinar el concepto general del juego (primeras 3 semanas)
-    1. mecánicas
+1. Determinar el concepto general del juego (primeras 3 semanas)
+    1. Mecánicas
         1. compra de habilidades
         2. aleatoriedad de mapas
         3. movimiento
-  2. reglas
-        1. gestión de habilidades
-        2. requerimientos de 
-2. desarrollo de documentación/issues del proyecto (semana 4)
-    1. historias de usuario
-    2. casos de uso
-    3. issues
-4. primer sprint (semana 5)
-    1. inicialización base de datos
-    2. assets del videojuego 
-6. segundo sprint (semana 6)
-    1. programación de clases abstractas del juego
+  2. Reglas
+        1. Gestión de habilidades
+        2. Requerimientos de 
+2. Desarrollo de documentación/issues del proyecto (semana 4)
+    1. Historias de usuario
+    2. Casos de uso
+    3. Issues
+4. Primer sprint (semana 5)
+    1. Inicialización base de datos
+    2. Assets del videojuego 
+5. Segundo sprint (semana 6)
+    1. Programación de clases abstractas del juego
         1. Habilidades
         2. Jugador
         3. Obstáculos
         4. Entorno
-7. tercer sprint (semana 7)
-    1. desarrollo de clases derivadas
-    2. desarrollo de web
-8. cuarto sprint (semana 8)
-    1. conexión de web con base de datos y videojuego
-    2. sprites y visuales
-10. quinto spritn (semana 9)
-    1. terminar visuales y audio
-    2. web completamente terminada y funcional
-11. semana 10
-    1. presentación final del videojuego
+6. Tercer sprint (semana 7)
+    1. Desarrollo de clases derivadas
+    2. Desarrollo de web
+7. Cuarto sprint (semana 8)
+    1. Conexión de web con base de datos y videojuego
+    2. Sprites y visuales
+8. Quinto sprint (semana 9)
+    1. Terminar visuales y audio
+    2. Web completamente terminada y funcional
+9. Semana 10
+    1. Presentación final del videojuego
