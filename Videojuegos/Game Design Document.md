@@ -70,12 +70,14 @@ El juego está diseñado para desafiar y involucrar a los jugadores, fomentando 
 ### **Pantallas**
 
 1. Pantalla de título
-    1. Opciones
-2. Selección de nivel
-3. Juego
-    1. Inventario
-    2. Evaluación/Siguiente nivel
-4. Créditos finales
+2. Selección de inicio de juego
+    1. Pantalla de tienda
+    2. Pantalla de inventario
+4. Pantalla de juego
+    1. Fondo Principal
+    2. Obstaulos
+    3. Pantalla de meta
+5. Créditos finales
 
 _(ejemplo)_
 
@@ -186,46 +188,109 @@ _(example)_
 
 ---
 
-### **Style Attributes**
+Para este juego vamos a usar un estilo de caricatura, para ser más específico sería un estilo como si un niño lo hubiera dibujado. Este estilo se podrá ver alrededor de todo el juego, tanto en el coche, en los obstáculos, como en los menús. Esto con la finalidad de hacer que el juego se sienta amigable desde la primera vez que lo juegas. 
 
-What kinds of colors will you be using? Do you have a limited palette to work with? A post-processed HSV map/image? Consistency is key for immersion.
+Los colores que usaremos en el juego serán simples para mantener ese estilo visual que mencionamos anteriormente. El coche comenzará con un color rojo el cual podrás cambiar en la tienda por costo de monedas. Los obstáculos seran creados todos de color negro a menos que tengan partes que lo necesiten, por ejemplo si un obstaculo tiene fuego este si sera de los colores del fuego. 
 
-What kind of graphic style are you going for? Cartoony? Pixel-y? Cute? How, specifically? Solid, thick outlines with flat hues? Non-black outlines with limited tints/shades? Emphasize smooth curvatures over sharp angles? Describe a set of general rules depicting your style here.
+Queremos hacer un nivel de tutorial el cual funcione como herramienta para que el jugador pueda aprender las mecánicas de los controles y del juego en general. Además de esto cada vez que un jugador termine un nivel y regrese a la pantalla de inicio de juego le pondremos un recordatorio de que puede entrar a la tienda a gastar su dinero en mejoras temporales o permanentes. Antes de comprarla se verá una pequeña descripción de qué es lo que hace dicha mejora.
 
-Well-designed feedback, both good (e.g. leveling up) and bad (e.g. being hit), are great for teaching the player how to play through trial and error, instead of scripting a lengthy tutorial. What kind of visual feedback are you going to use to let the player know they&#39;re interacting with something? That they \*can\* interact with something?
 
-### **Graphics Needed**
+Diseños: 
 
-1. Characters
-    1. Human-like
-        1. Goblin (idle, walking, throwing)
-        2. Guard (idle, walking, stabbing)
-        3. Prisoner (walking, running)
-    2. Other
-        1. Wolf (idle, walking, running)
-        2. Giant Rat (idle, scurrying)
-2. Blocks
-    1. Dirt
-    2. Dirt/Grass
-    3. Stone Block
-    4. Stone Bricks
-    5. Tiled Floor
-    6. Weathered Stone Block
-    7. Weathered Stone Bricks
-3. Ambient
-    1. Tall Grass
-    2. Rodent (idle, scurrying)
-    3. Torch
-    4. Armored Suit
-    5. Chains (matching Weathered Stone Bricks)
-    6. Blood stains (matching Weathered Stone Bricks)
-4. Other
-    1. Chest
-    2. Door (matching Stone Bricks)
-    3. Gate
-    4. Button (matching Weathered Stone Bricks)
+1. Coches
+    1. Coche color rojo principal
+     ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ModeloPrincipalCoche.PNG)
+    2. Coche color verde
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ModeloPrincipalVerde.PNG)
+    3. Coche color azul
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ModeloPrincipalAzul.PNG)
 
-_(example)_
+    4. Coche color morado
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ModeloPrincipalMorado.PNG)
+
+    5. Coche color amarillo
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ModeloPrincipalAmarillo.PNG)
+
+    6. Coche color naranja
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ModeloPrincipalNaranja.PNG)
+
+2. Obstaculos
+    1. Línea recta: Este obstáculo no tiene ninguna dificultad y solo es una línea recta
+       
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoLinea.jpg)
+
+    2. Triángulo: Este obstáculo empieza con una línea recta y después de convierte en un triángulo en el que el coche tiene que subir y bajar con cuidado
+       
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoTriangulo.jpg)
+
+    3. Caida:  En este obstáculo el coche debe frenar para no caer de manera agresiva y estropearse, el coche tendrá que bajar y subir el obstáculo.
+       
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoCaida.jpg)
+
+    4. Rampa: El coche deberá subir la rampa con buena velocidad para que la pueda saltar eficazmente, de otra manera el coche puede que se voltee.
+       
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoRampa.jpg)
+
+    5. Baches: El coche tendrá que bajar la velocidad al llegar para que las llantas no se le pongan. Este obstáculo se puede evitar con la mejora de resistencia de la llanta.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoBache.jpg)
+
+    6. Loop: El coche tendrá que tener una velocidad constante para que pueda subirse al loop y dar una vuelta completa sin que el coche se caiga.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoLoop.jpg)
+
+    7. Montaña: En este obstáculo el coche tiene que subir por una rampa, pasar por una línea y luego bajar por una rampa.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoMonta%C3%B1a.jpg)
+
+    8. Plataforma  Movediza: En este obstáculo las dos líneas que están en medio se irán moviendo de arriba a abajo y el coche tiene que calcular el momento exacto para avanzar y no caer.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoPlataformasMovedizas.jpg)
+
+    9. Puente Movedizo: Las dos líneas que están verticales se moverán para formar una línea. Cuando llegue este punto el coche deberá avanzar antes de que se vuelvan a levantar.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoPuenteMovediso.jpg)
+
+    10. Bola: Esta bola se estará moviendo en un péndulo y el jugador tiene que calcular en qué momento avanzar para que la bola no golpee el coche.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoBola.jpg)
+
+    11. Caída en contacto: En el momento que el coche toque una de las líneas rojas, estas empezaran a caer obligando al jugador a no frenar.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoCaidaEnContacto.jpg)
+
+    12. Fuego: Este obstáculo tiene 4 plataformas pequeñas que avientan fuego para arriba. Estas están sincronizadas en números pares y nones (Cuando las nones están prendidas las partes no). El jugador tiene que esperar el momento adecuado para avanzar y que no se queme su coche.
+        
+    ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/ObstaculoFuego.jpg)
+
+
+3. Fondos
+    1. Fondo de edificios:
+       ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/FondoJuego.png)
+
+4. Mejoras
+    1. Permanentes:
+         1. Turbo
+            
+            ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/TurboMejora.JPG)
+    2. Temporales
+         1. Escudo
+            
+            ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/EscudoMejora.JPG)
+            
+         2. Monedas Dobles
+            
+            ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/MonedasMejora.JPG)
+            
+         3. Llantas resistentes
+            
+            ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/LlantaMejora.JPG)
+
+5. Icono del  juego
+   
+   ![](https://github.com/Kvzito/InfinityDrivee/blob/main/Videojuegos/Imagenes/IconoJuego.png)
+
+
 
 
 ## _Sonidos/Música_
