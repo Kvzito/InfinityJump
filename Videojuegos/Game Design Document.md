@@ -20,12 +20,12 @@ Creado por el estudio Silver Way
 
 1. [Índice](#índice)
 2. [Diseño de juegos](#game-design)
-    1. [Resumen] (#resumen)
+    1. [Resumen](#resumen)
     2. [Juego](#juego)
     4. [Mentalidad](#mindset)
 3. [Técnico](#técnico)
-    1. [Pantallas] (#pantallas)
-    2. [Controles] (#controles)
+    1. [Pantallas](#pantallas)
+    2. [Controles](#controles)
     3. [Mecánica](#mecánica)
 2. [Diseño de niveles](#level-design)
     1. [Temas](#temas)
@@ -35,16 +35,16 @@ Creado por el estudio Silver Way
             2. Interactivo
         3. Desafíos
     2. [Flujo de juego](#game-flow)
-3. [Desarrollo] (#desarrollo)
+3. [Desarrollo](#desarrollo)
     1. [Clases abstractas](#abstract-classes--components)
     2. [Clases derivadas](#derived-classes--component-compositions)
 4. [Gráficos](#gráficos)
     1. [Atributos de estilo](#style-attributes)
-    2. [Gráficos necesarios] (#gráficos necesarios)
+    2. [Gráficos necesarios](#gráficos-necesarios)
 5. [Sonidos/Música](#soundsmusic)
     1. [Atributos de estilo](#style-attributes-1)
-    2. [Sonidos necesarios] (#sonidos-necesarios)
-    3. [Música necesaria] (#música-necesaria)
+    2. [Sonidos necesarios](#sonidos-necesarios)
+    3. [Música necesaria](#música-necesaria)
 6. [Itinerario](#itinerario)
 
 ## _Diseño del Juego_
