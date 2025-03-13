@@ -32,6 +32,10 @@
 | Como jugador quiero eventos aleatorios en la partida para sentir que es más impredecible y emocionante. | - Incluir eventos como tormentas o lluvias que afecten el camino. <br> - Asegurar que los eventos no ocurran en todas las partidas. <br> - Indicar visualmente cuando un evento esté activo. | 55 | 7 | 36 horas |
 | Como jugador competitivo quiero que haya un contador para llevar un registro de mi tiempo. | - Mostrar un contador en pantalla. <br> - Avisar cuando se supere el récord previo. <br> - Incluir una tabla de tiempos. | 85 | 3 | 48 horas |
 | Como jugador quiero que los choques tengan diferentes consecuencias para poder sentir una jugabilidad más dinámica. | - Chocar contra ciertos objetos reduce la velocidad, mientras que otros pueden hacer que el carro rebote o explote. <br> - El carro muestra daño visual progresivo si choca varias veces. <br> - Algunas colisiones pueden generar efectos físicos como volteretas o giros inesperados. | 70 | 4 | 72 horas |
+| Como emprendedor quiero un proyecto escalable y sólido para poder estar seguro de que mi inversión rendirá. | - Que tenga una base de usuarios amplia y fiel. <br> - Proyección a futuro de nuevas actualizaciones. <br> - Reporte de las estadísticas de comportamiento de los usuarios. | 80 | 5 | 120 días |
+| Como analista de datos quiero tener una base de datos legible para poder interpretar las tendencias del videojuego. | - Tablas bien relacionadas y atomizadas. <br> - Poca dependencia entre datos. <br> - Suficientes tablas. | 90 | 2 | 24 horas |
+| Como diseñador de páginas web quiero tener una página bien hecha para poder evitar cualquier amenaza y errores en el juego. | - Buena interfaz del juego. <br> - Buena encapsulación de los elementos en el HTML. <br> - CSS que le dé buen aspecto. | 90 | 2 | 48 horas |
+
 
 ## Requerimientos funcionales y no funcionales
 
