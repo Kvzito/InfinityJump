@@ -1,8 +1,6 @@
-# Historias de Usuario
+# Especificación de requerimientos de software
 
-
-
-
+## Historias de Usuario
 
 | Historia | Validación | Valor | Prioridad | Estimación |  
 |----------|----------|----------|----------|------------|
