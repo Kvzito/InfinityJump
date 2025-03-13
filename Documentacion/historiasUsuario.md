@@ -84,6 +84,7 @@
 
 
 ## Casos de uso
-### Caso #1
+### Caso videojuego
+![imagen del caso de uso de videojuego](https://github.com/Kvzito/InfinityDrivee/blob/main/Documentacion/Imagenes/casoUsoVideojuegos.jpg)
 ### Caso #2
 ### Caso #3
