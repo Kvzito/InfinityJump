@@ -39,7 +39,7 @@ Creado por el estudio Silver Way
     1. [Clases abstractas](#clases-abstractas)
     2. [Clases derivadas](#clases-derivadas)
 4. [Gráficos](#gráficos)
-5. [Sonidos/Música](#sonidos/música)
+5. [Sonidos y Música](#sonidos-y-música)
     1. [Atributos de estilo](#atributos-de-estilo)
     2. [Sonidos Necesarios](#sonidos-necesarios)
     3. [Música Necesaria](#música-necesaria)
@@ -287,17 +287,17 @@ Diseños:
 
 
 
-## _Sonidos/Música_
+## _Sonidos y Música_
 
 ---
 
-### **Artibutos de estilo**
+### **Atributos de estilo**
 
-Again, consistency is key. Define that consistency here. What kind of instruments do you want to use in your music? Any particular tempo, key? Influences, genre? Mood?
+La música del juego será alegre y enérgica, manteniendo un ritmo constante que haga que la experiencia de conducción se sienta dinámica y divertida. Queremos que los jugadores disfruten el recorrido como si estuvieran manejando en una ciudad animada.
 
-Stylistically, what kind of sound effects are you looking for? Do you want to exaggerate actions with lengthy, cartoony sounds (e.g. mario&#39;s jump), or use just enough to let the player know something happened (e.g. mega man&#39;s landing)? Going for realism? You can use the music style as a bit of a reference too.
+El juego contará con un solo track musical que se reproducirá en bucle durante la partida. Este tema será movido y entretenido, con instrumentos como sintetizadores, percusión rítmica y melodías pegajosas para mantener la emoción sin volverse repetitivo.
 
- Remember, auditory feedback should stand out from the music and other sound effects so the player hears it well. Volume, panning, and frequency/pitch are all important aspects to consider in both music _and_ sounds - so plan accordingly!
+Para los efectos de sonido, buscamos que sean claros y funcionales, proporcionando retroalimentación sin saturar la experiencia auditiva. Queremos que cada sonido ayude al jugador a reaccionar a lo que sucede en la pantalla sin distraerlo.
 
 ### **Sonidos Necesarios**
 
@@ -313,13 +313,11 @@ Stylistically, what kind of sound effects are you looking for? Do you want to ex
 
 ### **Música Necesaria**
 
-1. Slow-paced, nerve-racking &quot;forest&quot; track
-2. Exciting &quot;castle&quot; track
-3. Creepy, slow &quot;dungeon&quot; track
-4. Happy ending credits track
-5. Rick Astley&#39;s hit #1 single &quot;Never Gonna Give You Up&quot;
+El juego tendrá un único track musical en bucle, diseñado para complementar la acción sin volverse monótono. Este track será:
 
-_(example)_
+1. Alegre y rítmico, reflejando la sensación de velocidad y dinamismo.
+2. Divertido y enérgico, con un tempo constante que mantenga la emoción.
+3. Lo suficientemente neutro para no cansar al jugador en sesiones largas.
 
 
 ## _Itinerario_
