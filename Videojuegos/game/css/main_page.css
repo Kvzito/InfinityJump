@@ -1,3 +1,6 @@
+
+
+
 #headerContainer{
     grid-area: header;
     background-color: lightblue;
@@ -16,13 +19,31 @@
     margin: 0px;
   }
 
-  #canvas {
-    background-color: gray;
-    grid-area: main;
-    background-image: url('../../Imagenes/FondoJuego.png');
-    background-size: cover; /* Ajusta la imagen para cubrir todo el canvas */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que se repita */
-    display: block; /* Elimina márgenes adicionales si los hubiera */
-    margin: auto; 
-  }
+  #canvasContainer {
+    position: relative;
+    width: 1000px;  /* Establece el tamaño del contenedor */
+    height: 600px;  /* Establece el tamaño del contenedor */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+#canvas {
+  width: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
+  height: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
+  background-image: url('../../Imagenes/FondoJuego.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#botonTienda {
+  position: absolute;
+  top: 10px; /* Mantiene la distancia desde arriba */
+  left: 10px; /* Ajusta para que no esté pegado completamente a la izquierda */
+  padding: 10px 15px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}

@@ -10,6 +10,7 @@ function login() {
             // Si los datos son correctos, redirige a la página principal
             window.location.href = 'mainpage.html';
         } else {
+            // manda una notificacion para que el usuario sepa que hacer
             alert("Usuario o contraseña incorrectos.");
         }
     } else {
