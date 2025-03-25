@@ -1,3 +1,4 @@
+
 const canvasWidth = 1000;
 const canvasHeight = 600;
 
@@ -24,6 +25,10 @@ let textMoney;
 
 textMoney = new TextLabel(canvasWidth - 100, 35, "25px Ubuntu Mono", "black");
 
+// obstaculos 
+let mountain = new ObstaculoMontana(canvasWidth /2,  canvasHeight/2 + 150 );
+
+
 
 function main() {
     const canvas = document.getElementById('canvas');
@@ -33,12 +38,17 @@ function main() {
 
     ctx = canvas.getContext('2d');
 
+    console.log('main');
     
 
     drawScene(0);
 }
 
 function drawScene() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight); // Limpia el canvas antes de redibujar
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    console.log('hola'); // Limpia el canvas antes de redibujar
     textMoney.draw(ctx, `$: ${money}`);
+    mountain.draw(ctx); // Dibuja la montaña
+
+    requestAnimationFrame(drawScene);
 }
