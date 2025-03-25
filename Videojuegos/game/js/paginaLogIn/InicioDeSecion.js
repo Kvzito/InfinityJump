@@ -16,7 +16,6 @@ function main() {
     login();
 
     
-    drawScene(0);
 
     
 }
