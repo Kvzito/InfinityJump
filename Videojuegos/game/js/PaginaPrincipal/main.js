@@ -1,4 +1,12 @@
 
+/* Main JS code for our videogame
+
+Kevin Javier Esquivel Villafuerte
+María Rivera Gutierrez
+Santiago Córdova Molina
+
+24-03-2025 */
+
 const canvasWidth = 1000;
 const canvasHeight = 600;
 
@@ -38,10 +46,12 @@ function main() {
 
     ctx = canvas.getContext('2d');
 
+
     console.log('main');
     
 
     drawScene(0);
+
 }
 
 function drawScene() {
