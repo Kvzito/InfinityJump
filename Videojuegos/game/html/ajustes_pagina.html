@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/ajustes_pagina.css">
+    <script src="../js/tienda/tienda.js"></script> 
+    <title>Infinity Drive</title>
+</head>
+<body>
+    <div id="headerContainer">
+        <h1>INFINITY DRIVE</h1>
+    </div>
+
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+
+        <button id="inicioButton" onclick="irAPrincipal()">Inicio</button>
+
+        <div class="grid-container">
+            <div class="grid-item" id="grid-item-color">
+                <p>Música</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <p>Efectos de sonido</p>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        
+    </div>
+    <script> main(); </script>
+</body>
+</html>
