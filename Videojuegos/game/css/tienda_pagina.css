@@ -88,16 +88,17 @@ h1 {
 }
 
 #inicioButton {
+  display: flex;
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: #ff5733;
+  top: 10px; /* Mantiene la distancia desde arriba */
+  left: 260px; /* Ajusta para que no esté pegado completamente a la izquierda */
+  padding: 10px 15px;
+  background-color: red;
   color: white;
   border: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 #inicioButton:hover {

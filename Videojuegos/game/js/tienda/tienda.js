@@ -17,3 +17,8 @@ function main() {
 
     
 } 
+
+function irAPrincipal() {
+    console.log("Intentando redirigir a tienda_pagina.html...");
+    window.location.href = 'principal_pagina.html';
+}
