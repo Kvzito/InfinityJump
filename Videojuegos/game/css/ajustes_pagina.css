@@ -14,11 +14,12 @@
   }
   
   #canvasContainer {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
     position: relative;
-  }
+    width: 1000px;  /* Establece el tamaño del contenedor */
+    height: 600px;  /* Establece el tamaño del contenedor */
+    margin: 0 auto; /* Centra el contenedor */
+    border: 10px solid black; /* Añade un borde al contenedor */
+    }
   
   #canvas {
     background-image: url('../../Imagenes/FondoJuego.png');
@@ -34,8 +35,8 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    width: 90%;
-    top: 150px; /* Espacio en la parte superior */
+    width: 100%;
+    top: 200px; /* Espacio en la parte superior */
     z-index: 2;
     flex-wrap: wrap;
   }
@@ -48,7 +49,7 @@
     text-align: center;
     width: 150px;
     font-size: larger;
-    
+
   }
   
 
@@ -58,7 +59,7 @@
     display: flex;
     position: absolute;
     top: 10px; /* Mantiene la distancia desde arriba */
-    left: 260px; /* Ajusta para que no esté pegado completamente a la izquierda */
+    left: 10px; /* Ajusta para que no esté pegado completamente a la izquierda */
     padding: 10px 15px;
     background-color: red;
     color: white;
