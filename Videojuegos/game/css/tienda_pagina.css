@@ -40,6 +40,14 @@ h1 {
   flex-wrap: wrap;
 }
 
+
+  #canvasContainer {
+    position: relative;
+    width: 1000px;  /* Establece el tamaño del contenedor */
+    height: 600px;  /* Establece el tamaño del contenedor */
+    margin: 0 auto; /* Centra el contenedor */
+    border: 10px solid black; /* Añade un borde al contenedor */
+
 /* Estilos de los grids */
 .grid-item {
   background-color: lightblue;
@@ -47,6 +55,7 @@ h1 {
   border-radius: 10px;
   text-align: center;
   width: 150px;
+
 }
 
 .grid-item img {
