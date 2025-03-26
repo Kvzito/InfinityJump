@@ -20,11 +20,12 @@
   }
 
   #canvasContainer {
-    /* centra el canvas a la pantalla */
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-  }
+    position: relative;
+    width: 1000px;  /* Establece el tamaño del contenedor */
+    height: 600px;  /* Establece el tamaño del contenedor */
+    margin: 0 auto; /* Centra el contenedor */
+    border: 10px solid black; /* Añade un borde al contenedor */
+}
 
 
 #canvas {/* Asegura que tome todo el alto del contenedor */
