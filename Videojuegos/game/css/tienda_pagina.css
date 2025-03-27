@@ -23,7 +23,7 @@ h1 {
   height: 600px;  /* Establece el tamaño del contenedor */
   margin: 0 auto; /* Centra el contenedor */
   border: 10px solid black; /* Añade un borde al contenedor */
-  }
+}
 
 #canvas {
   background-image: url('../../Imagenes/TiendaFondo.png');
