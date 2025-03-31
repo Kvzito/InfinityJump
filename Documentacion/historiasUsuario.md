@@ -84,6 +84,9 @@
 
 
 ## Casos de uso
-### Caso #1
-### Caso #2
-### Caso #3
+### Caso videojuego
+![imagen del caso de uso de videojuego](https://github.com/Kvzito/InfinityDrivee/blob/main/Documentacion/Imagenes/casoUsoVideojuegos.jpg)
+### Caso web
+![imagen del caso de uso de web](https://github.com/Kvzito/InfinityDrivee/blob/main/Documentacion/Imagenes/casodeusoWeb.png)
+### Caso base de datos
+![imagen del caso de uso de base de datos](https://github.com/Kvzito/InfinityDrivee/blob/main/Documentacion/Imagenes/CasoDeUsoAdministradorBaseDeDatos.jpg)

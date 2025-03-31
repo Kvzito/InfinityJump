@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <meta charset = "UTF-8">
+    <link rel="stylesheet" href="../css/login_pagina.css">
+    <script src="../js/paginaLogIn/InicioDeSecion.js"></script>
+    <script src="../js/paginaLogIn/funciones/login.js"></script>
+    <title>Infinity Drive</title>
+</head>
+<body>
+    <!-- Contenedor del encabezado -->
+    <div id="headerContainer">
+        <h1>INFINITY DRIVE</h1>
+    </div>
+
+    <div id="canvasContainer">
+    <!-- Canvas -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Formulario de inicio de sesión parausuario y contraseña -->
+     <!-- Actualmente solo funciona con el usuario "hola" y la contraseña "1234"-->
+    <div id="login-form">
+        <input type="text" id="username" placeholder="Usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button onclick="login()">Iniciar sesión</button>
+    </div>
+    </div>
+    
+
+    <script> main(); </script>
+</body>
+</html>
