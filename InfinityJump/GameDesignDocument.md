@@ -58,7 +58,7 @@ Nuestro juego se trata de que nuestro personaje principal () tiene que ir saltan
 
 ### **Mentalidad**
 
-
+El juego está diseñado para que el jugador esté constantemente poniendo a pruebas sus habilidades, ya que debido a la mecánica principal del juego la cual es el salto continuo del personaje, el jugador prácticamente va a tener que estar activamente prestando atención a sus movimientos, solo hay un momento donde esto no es así, al derrotar cada uno de los mini jefes, y con mucha razón, ya que buscamos que sea algo frenético que una vez completes tengas como recompensa un momento de calma y un tiempo para poder utilizar las monedas que has ido recolectando y comprar tus mejoras favoritas.
 
 ## _Técnico_
 
