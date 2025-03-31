@@ -50,7 +50,7 @@ Creado por el estudio Silver Way
 
 ### **Resumen**
 
-Los jugadores controlan un coche que debe navegar a través de mapas dinámicos e ilustrados, superando obstáculos y recogiendo monedas para mejorar su vehículo y alcanzar la meta. Con cada desafío, deben adaptarse, optimizar su carro y perfeccionar sus habilidades para progresar más. 
+
 
 ### **Juego**
 
