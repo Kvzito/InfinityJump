@@ -1,0 +1,141 @@
+# Infinity Jump
+
+#### _Participantes_
+
+Creado por el estudio Silver Way
+
+- Santiago Cordova Molina
+- Maria Rivera Gutierrez
+- Kevin Javier Esquivel Villafuerte
+
+  
+###### **Aviso de derechos de autor/Información del autor**
+
+## _Game Design Document_
+
+## _Índice_
+
+---
+
+1. [Índice](#índice)
+2. [Diseño del juego](#diseño-del-juego)
+    1. [Resumen](#resumen)
+    2. [Juego](#juego)
+    4. [Mentalidad](#mentalidad)
+3. [Técnico](#técnico)
+    1. [Pantallas](#pantallas)
+    2. [Controles](#controles)
+    3. [Mecánicas](#mecánicas)
+2. [Diseño de niveles](#diseño-de-niveles)
+    1. [Tema](#tema)
+        1. Ambiente
+        2. Objetos
+            1. Ambiente
+            2. Interactivo
+        3. Desafíos
+    2. [Flujo de juego](#flujo-de-juego)
+3. [Desarrollo](#desarrollo)
+    1. [Clases abstractas](#clases-abstractas)
+    2. [Clases derivadas](#clases-derivadas)
+4. [Gráficos](#gráficos)
+5. [Sonidos y Música](#sonidos-y-música)
+    1. [Atributos de estilo](#atributos-de-estilo)
+    2. [Sonidos Necesarios](#sonidos-necesarios)
+    3. [Música Necesaria](#música-necesaria)
+6. [Itinerario](#itinerario)
+
+## _Diseño del Juego_
+
+---
+
+### **Resumen**
+
+Los jugadores controlan un coche que debe navegar a través de mapas dinámicos e ilustrados, superando obstáculos y recogiendo monedas para mejorar su vehículo y alcanzar la meta. Con cada desafío, deben adaptarse, optimizar su carro y perfeccionar sus habilidades para progresar más. 
+
+### **Juego**
+
+Nuestro juego se trata de que nuestro personaje principal () tiene que ir saltando entre diferentes plataformas hasta llegar a una determinada altura. Más explícitamente, esta altura va a ser lograda al pasar una serie de obstáculos, dividiendo el objetivo en 3 niveles, cada uno de estos va a estar constituido por cierto número de plataformas (100, 150 y 200 respectivamente) y un mini jefe al pasar todas estas plataformas. Cada uno de los niveles está ambientado de diferente manera, representando el progreso que hace el jugador cada que derrota a un jefe, las plataformas y el fondo cambian dependiendo del nivel en el que se encuentre. Estas plataformas son la forma de avanzar del jugador, ya que la pantalla lo que va a ir mostrando va a ser únicamente las plataformas y si el jugador no calcula bien el salto y no rebota en una de estas va a morir instantáneamente, regresando al inicio de todo el juego independientemente del nivel en el que se encontraba. Existe la posibilidad de conseguir mejoras para el jugador, ya sean temporales o permanentes a lo largo de sus intentos. Un ejemplo de una temporal sería una catapulta que te haga saltar 4 plataformas de un solo salto, un ejemplo de una mejora permanente sería disminuir la velocidad de caída del jugador en 5% para que tenga mayor control sobre esto. Los mini jefes van a encontrarse después de pasar el número de plataformas determinado por nivel, y va a ser una página diferente, donde no puedes caerte y van a haber plataformas definidas por nosotros las cuales van a constituir el nivel del jefe en sí y te van a dar la libertad de moverte para poder derrotar a este. Este jefe va a tener una barra de vida y para poder hacerle daño el jugador va a tener que saltar arriba de ellos estilo mario bros. Si el jugador colisiona con el jefe en cualquier otra parte de este que no sea su parte superior, va a recibir daño y también, con su respectiva barra de vida, eventualmente después de un número de golpes puede morir ante el jefe.
+
+### **Mentalidad**
+
+
+
+## _Técnico_
+
+---
+
+### **Pantallas**
+
+1. Pantalla de título
+2. Selección de inicio de juego
+    1. Pantalla de tienda
+    2. Pantalla de inventario
+4. Pantalla de juego
+    1. Fondo Principal
+    2. Obstaulos
+    3. Pantalla de meta
+5. Créditos finales
+
+_(ejemplo)_
+
+### **Controles**
+
+
+
+### **Mecánicas**
+
+
+
+## _Diseño de Niveles_
+
+---
+
+### **Tema**
+
+
+
+### **Flujo de Juego**
+
+
+
+## _Desarrollo_
+
+---
+
+### **Clases abstractas**
+
+
+### **Clases derivadas**
+
+
+
+## _Gráficos_
+
+---
+
+
+
+
+Diseños: 
+
+
+
+## _Sonidos y Música_
+
+---
+
+### **Atributos de estilo**
+
+
+
+### **Sonidos Necesarios**
+
+
+
+### **Música Necesaria**
+
+
+
+## _Itinerario_
+
+---
