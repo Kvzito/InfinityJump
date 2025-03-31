@@ -8,6 +8,8 @@ class ObstaculoMontana {
         this.color = "black";
     }
 
+
+    // funcion para dibujar el obstaculo
     draw(ctx) {
         ctx.strokeStyle = this.color;
         ctx.lineWidth = 3;
@@ -17,26 +19,38 @@ class ObstaculoMontana {
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x + this.width, this.y);
 
-        // Curva izquierda (subida)
+        // rampa subida
         ctx.moveTo(this.x, this.y);
-        ctx.bezierCurveTo(
-            this.x + this.width * 0.1, this.y - this.curveHeight * 0.4,  // Primer control
-            this.x + this.width * 0.25, this.y - this.curveHeight,       // Segundo control
-            this.x + this.width * 0.4, this.y - this.height              // Punto final (inicio de la parte plana)
-        );
+        ctx.lineTo(this.x + this.width * 0.4, this.y - this.height);
 
         // Parte superior plana
         ctx.lineTo(this.x + this.width * 0.6, this.y - this.height);
 
-        // Curva derecha (bajada)
-        ctx.bezierCurveTo(
-            this.x + this.width * 0.75, this.y - this.curveHeight,       // Primer control
-            this.x + this.width * 0.9, this.y - this.curveHeight * 0.4,  // Segundo control
-            this.x + this.width, this.y                                  // Punto final (de vuelta a la base)
-        );
+        // rampa bajada
+        ctx.lineTo(this.x + this.width, this.y);
 
         ctx.stroke();
     }
-}
 
-window.ObstaculoMontana = ObstaculoMontana;
+    getHeightAt(x) {
+        // Verifica si el punto está dentro del ancho del obstáculo
+        if (x < this.x || x > this.x + this.width) {
+            return null; // Fuera del rango del obstáculo
+        }
+
+        const relativeX = x - this.x; // Posición relativa dentro del obstáculo
+
+        if (relativeX < this.width * 0.4) {
+            // Curva izquierda (subida)
+            const t = relativeX / (this.width * 0.4); // Normalizar a [0, 1]
+            return this.y - t * this.height; // Altura lineal
+        } else if (relativeX < this.width * 0.6) {
+            // Parte superior plana
+            return this.y - this.height;
+        } else {
+            // Curva derecha (bajada)
+            const t = (relativeX - this.width * 0.6) / (this.width * 0.4); // Normalizar a [0, 1]
+            return this.y - (1 - t) * this.height; // Altura lineal
+        }
+    }
+}
