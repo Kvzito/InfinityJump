@@ -146,11 +146,18 @@ Habrá un cuadro explicativo con los controles del juego en el apartado de “Co
 
 ### **Atributos de estilo**
 
-### **Sonidos Necesarios**
+### **Sonidos y música necesarios**
 
-### **Música Necesaria**
+#### Sonidos
 
++ Efectos de movimiento. Efectos de sonido al rebotar en plataformas, caer al vacío o chocar con obstáculos.
++ Sonidos de los jefes. Ruidos de movimiento, golpes o ataques.
 
+#### Música
+
++ Tema del menú. Una melodía previa al inicio del juego, tranquila pero anticipatoria.
++ Música en los niveles. Un ritmo por nivel, con su propio estilo musical, como un tema misterioso en el bosque o algo más intergaláctico en el espacio.
++ Música en los jefes. Una pista única por jefe para demostrar su dificultad y desafío a la hora de encontrarlos.
 
 ## _Itinerario_
 
