@@ -27,12 +27,11 @@ Creado por el estudio Silver Way
     2. [Controles](#controles)
     3. [Mecánicas](#mecánicas)
 2. [Diseño de niveles](#diseño-de-niveles)
-    1. [Tema](#tema)
-        1. Ambiente
+    1. [Temas](#temas)
+        1. Estado
         2. Objetos
             1. Ambiente
             2. Interactivo
-        3. Desafíos
     2. [Flujo de juego](#flujo-de-juego)
 3. [Desarrollo](#desarrollo)
     1. [Clases abstractas](#clases-abstractas)
@@ -78,7 +77,7 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **Controles**
 
-+ Las flechas `←` y `→` van a servir para desplazar al personaje en su eje X, considerando que el usuario no va a tener que saltar manualmente ya que es algo automatizado, la flecha hacia arriba no va a servir de nada.
++ Las flechas ( `←` y `→` ) y las teclas `a` y `d` van a servir para desplazar al personaje en su eje X, de izquierda a derecha respectivamente, considerando que el usuario no va a tener que saltar manualmente ya que es algo automatizado, la flecha hacia arriba no va a servir de nada.
 + En momentos específicos (como el inicio de un run del jugador, o después de derrotar un minijefe) el juego le va a dar la oportunidad al jugador de presionar la tecla `T` para abrir la tienda de mejoras, en la cual podrá aprovechar sus monedas recolectadas a lo largo de los niveles.
 + Con la tecla `Esc` se despliega un menú que representa la pausa del juego, donde va a dársele la oportunidad de salir al menú principal al jugador o de reiniciar su progreso.
 
@@ -93,7 +92,37 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **Tema**
 
-
+1. Bosque
+    1. Estado
+        1. Misterioso, pasivo, inquietante
+    2. Objetos
+        1. _Ambiente_
+            1. Árboles
+            2. Montañas
+            3. Animales de bosque
+            4. Cielo despegado
+        2. _Interactivo_
+            1. Ramas
+2. Cielo
+    1. Estado
+        1. Impredecible, dinámico
+    2. Objetos
+        1. _Ambiente_
+            1. Aviones
+            2. Nubes enormes
+        3. _Interactivo_
+            1. Nubes
+            2. Pájaros
+4. Espacio exterior
+    1. Estado
+        1. Asfixiante, eufórico, frenético 
+    2. Objetos
+        1. _Ambiente_
+            1. Planetas
+            2. Estrellas fugaces 
+        3. _Interactivo_
+            1. Cohetes espaciales
+            2. OVNI's 
 
 ### **Flujo de Juego**
 
