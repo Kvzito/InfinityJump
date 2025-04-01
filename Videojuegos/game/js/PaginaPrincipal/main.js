@@ -19,7 +19,10 @@ let ctx;
 let textMoney = new TextLabel(canvasWidth - 100, 35, "25px Ubuntu Mono", "black");
 
 // obstaculos 
-let mountain = new ObstaculoMontana(canvasWidth /2 - 130,  canvasHeight/2 + 200 );
+let triangulo = new ObstaculoTriangulo(canvasWidth / 2 + 200, canvasHeight/2 + 200);
+let rampa = new ObstaculoRampa(canvasWidth / 2 - 300, canvasHeight/2 +200);
+let mountain = new ObstaculoMontana(canvasWidth /2 - 100,  canvasHeight/2 + 200 );
+let plataforma = new ObstaculoPlataforma(canvasWidth /2 - 100,  canvasHeight/2);
 let terreno =  new Terreno(0, canvasHeight - 100, canvasWidth);
 
 // coche (modelo principal)
@@ -48,9 +51,15 @@ function drawScene() {
     textMoney.draw(ctx, `$: ${money}`);
     terreno.draw(ctx);
     mountain.draw(ctx); // Dibuja la montaña
+    triangulo.draw(ctx); // dibuja obstacúlo de triangulo
+    rampa.draw(ctx); // dibuja obstacúlo rampa
+    //plataforma.update();
+    //plataforma.draw(ctx);
+
 
     
-    const obstacles = [terreno, mountain]; // Lista de obstáculos
+    const obstacles = [terreno, mountain, triangulo, rampa];
+    //const obstacles = [terreno, plataforma]; // Lista de obstáculos
 
     coche.update(obstacles); // Actualizar posición y físicas del coche
 

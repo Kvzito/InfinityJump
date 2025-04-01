@@ -38,3 +38,9 @@ class GameObject {
 
     }
 }
+
+class Rectangulo extends GameObject {
+    constructor(position, width, height, color) {
+        super(position, width, height, color, "obstacle");
+    }
+}
