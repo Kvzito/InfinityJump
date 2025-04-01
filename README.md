@@ -1,7 +1,7 @@
-# InfinityDrive
+# Infinity Jump
 
-#### _Participants_
+#### _Participantes_
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
-- Kevin Javier Esquivel Villafuerte  
+- Kevin Javier Esquivel Villafuerte A01174634
