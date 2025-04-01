@@ -18,9 +18,9 @@ Creado por el estudio Silver Way
 
 1. [📜 Índice](#índice)
 2. [🎮 Diseño del juego](#diseño-del-juego)
-    1. [📝 Resumen](#📝-resumen)
+    1. [📝 Resumen](#resumen)
     2. [🕹️ Juego](#juego)
-    3. [🧠 Mentalidad](#mentalidad)
+    3. [🧠 Mentalidad](#🧠-mentalidad)
 3. [⚙️ Técnico](#técnico)
     1. [📺 Pantallas](#pantallas)
     2. [🎛️ Controles](#controles)
@@ -73,6 +73,8 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
       1. Pantalla principal del juego
            + Pantalla de la tienda de mejoras
            + Pantalla de pausa
+                1. Pantalla de controles
+                2. Regresar al menú principal
            + Pantalla al morir
            + Pantalla por mini jefe
       3. Pantalla de estadísticas
