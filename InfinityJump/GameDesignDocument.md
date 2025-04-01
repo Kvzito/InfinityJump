@@ -6,7 +6,7 @@ Creado por el estudio Silver Way
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
-- Kevin Javier Esquivel Villafuerte
+- Kevin Javier Esquivel Villafuerte A01174634
   
 ###### **Aviso de derechos de autor/Información del autor**
 
