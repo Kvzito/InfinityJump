@@ -34,8 +34,7 @@ Creado por el estudio Silver Way
 6. [Gráficos](#gráficos)
 7. [Sonidos y Música](#sonidos-y-música)
     1. [Atributos de estilo](#atributos-de-estilo)
-    2. [Sonidos Necesarios](#sonidos-necesarios)
-    3. [Música Necesaria](#música-necesaria)
+    2. [Sonidos y música necesarios](#sonidos-y-música-necesarios)
 8. [Itinerario](#itinerario)
 
 ##  _Diseño del Juego_
@@ -153,6 +152,13 @@ Habrá un cuadro explicativo con los controles del juego en el apartado de “Co
 ---
 
 ### **Atributos de estilo**
+
+La música del juego dependerá del nivel de dificultad del nivel en el que se encuentre el jugador, es decir, no será una única temática a lo largo de todo el juego y esto reflejará el progreso del jugador a medida avanza por los niveles.
+
+Buscaremos que cada uno de estos tracks reflejen efectivamente lo que el jugador está experimentando, es decir, en cada uno de los 3 mini jefes, una canción que exprese la dificultad de estos y sea exclusiva del evento, además una para cada nivel de plataformas que si bien será más pasiva se logrará diferenciar una de la otra.
+
+Para los efectos de sonido, buscamos que sean claros y funcionales, proporcionando retroalimentación sin saturar la experiencia auditiva. Queremos que cada sonido ayude al jugador a reaccionar a lo que sucede en la pantalla sin distraerlo.
+
 
 ### **Sonidos y música necesarios**
 
