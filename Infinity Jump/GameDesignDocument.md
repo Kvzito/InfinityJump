@@ -150,20 +150,30 @@ Diseños:
 
 1. Personajes
     1. Personaje Principal
-
+   
+  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/AnimationSheet.png)
+    
     2. Enemigo 1
 
+
+
     3. Enemigo 2
+
+
        
     4. Enemigo 3
   
 
 2. Plataformas 
     1. Primer nivel: simulando un tronco, verde por dentro con contorno café.
-       
+
+       ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Plataforma1.png)
 
     2. Segundo nivel: simulando una nube, blanco por dentro con contorno azul obscuro.
 
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Nube1.png)
+![](http://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/NubeIntermedia.png)
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Nube2.png)
 
     3. Tercer nivel:  simulando una estrella, amarillo por dentro con contorno naranja.
 
@@ -171,7 +181,7 @@ Diseños:
 3. Fondos
     1. Fondo de bosque:
    
-
+  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Fondo%20Nivel%201.webp)
 
     2. Fondo de cielo: 
        
