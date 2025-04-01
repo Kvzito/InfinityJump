@@ -42,6 +42,7 @@ Creado por el estudio Silver Way
 ---
 
 ### **Resumen**
+El personaje principal salta para desplazarse verticalmente en un mapa con plataformas en aleatorio que tiene que alcanzar a la luna. Al llegar a cierta altura, tendrá que enfrentar a un enemigo para matarlo desde arriba y así avanzar al siguiente nivel. 
 
 ### **Juego**
 
@@ -92,8 +93,6 @@ En cuanto a las colisiones, el juego detectará si el usuario efectivamente ater
 Vamos a manejar físicas expeciales para ciertas mejoras, ya sean temporales o permanentes, esto con el objetivo de darle un mejor control al jugador sobre su personaje. Estas físicas pueden ser tales como una reducción en la velocidad de caida, un mayor salto o incluso un rebote en caso de caer al vacío.
 
 Los enemigos que se van a encontrar son principalmente los minijefes y eventualmente en los niveles 2 y 3 ciertas plataformas contarán con la mecánica de que si las tocas por debajo te hacen daño, y para vencerlos tienes que saltar encima de ellos. Los jefes teniendo una barra de vida la cual será reducida con cierto número de saltos.
-
-
 
 ##  _Diseño de Niveles_
 
@@ -146,6 +145,69 @@ Para este juego vamos a usar un estilo animado de pixel art. Este estilo se podr
 Los colores que usaremos en el juego serán llamativos pero siempre acorde al ambiente para que se puedan identificar en cualquier escenario, además de siempre los mejores para el estilo visual mencionado anteriormente. El personaje tendrá el mismo color blanco para que se pueda distinguir en cualquier nivel. Las plataformas cambiaran de color dependiendo del ambiente del nivel, que quede con la tematica simulando algo que se encuentre en ese ambiente. Por ejemplo, en el primer nivel que es un bosque, la plataforma es verde y café como una rama de los árboles del fondo de este mismo. 
 
 Habrá un cuadro explicativo con los controles del juego en el apartado de “Controles” que aparecerá al darle pausa al juego o en el menú principal de este. De esta manera el jugador sabrá cómo moverse. Además cada vez que el jugador complete un nivel, se regresará una nueva página en donde va a poder acceder a la tienda, en donde podrá gastar sus monedas en mejoras temporales o permanentes. Antes de comprar se verá una pequeña descripción de qué es lo que hace dicha mejora. 
+
+Diseños: 
+
+1. Personajes
+    1. Personaje Principal
+
+    2. Enemigo 1
+
+    3. Enemigo 2
+       
+    4. Enemigo 3
+  
+
+2. Plataformas 
+    1. Primer nivel: simulando un tronco, verde por dentro con contorno café.
+       
+
+    2. Segundo nivel: simulando una nube, blanco por dentro con contorno azul obscuro.
+
+
+    3. Tercer nivel:  simulando una estrella, amarillo por dentro con contorno naranja.
+
+
+3. Fondos
+    1. Fondo de bosque:
+   
+
+
+    2. Fondo de cielo: 
+       
+    
+
+    3. Fondo de espacio:
+
+   
+
+4. Mejoras
+    1. Permanentes:
+         1. Mayor salto
+
+   
+         2. Mayor daño a enemigos
+         
+         
+         3. Mejor defensa contra enemigos
+
+
+    1. Temporales
+         1. Escudo
+            
+           
+            
+         2. Monedas Dobles
+            
+            
+            
+         3. Salto Doble
+            
+           
+
+6. Icono del  juego
+   
+
 
 ##  _Sonidos y Música_
 
