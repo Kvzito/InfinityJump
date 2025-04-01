@@ -77,7 +77,7 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **Controles**
 
-+ Las flechas ( `←` y `→` ) y las teclas `a` y `d` van a servir para desplazar al personaje en su eje X, de izquierda a derecha respectivamente, considerando que el usuario no va a tener que saltar manualmente ya que es algo automatizado, la flecha hacia arriba no va a servir de nada.
++ Las flechas ( `←` y `→` ) y las teclas `A` y `D` van a servir para desplazar al personaje en su eje X, de izquierda a derecha respectivamente, considerando que el usuario no va a tener que saltar manualmente ya que es algo automatizado, la flecha hacia arriba no va a servir de nada.
 + En momentos específicos (como el inicio de un run del jugador, o después de derrotar un minijefe) el juego le va a dar la oportunidad al jugador de presionar la tecla `T` para abrir la tienda de mejoras, en la cual podrá aprovechar sus monedas recolectadas a lo largo de los niveles.
 + Con la tecla `Esc` se despliega un menú que representa la pausa del juego, donde va a dársele la oportunidad de salir al menú principal al jugador o de reiniciar su progreso.
 
@@ -126,6 +126,13 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **Flujo de Juego**
 
+1. El jugador empieza en el centro de la pantalla, debajo de las primeras plataformas visibles del primer nivel.
+2. En cuanto presiona la tecla de iniciar partida, el personaje del jugador comienza a saltar automáticamente, y el usuario tiene que comenzar a utilizar las plataformas arriba de él para ir subiendo en el nivel.
+3. Mientras más plataformas vaya subiendo, va ir encontrando objetos que le ayuden como monedas para gastar en un futuro en la tienda o mejoras de un solo uso como un gran salto de 5 plataformas. Además va a encontrarse con plataformas que tienen una mayor dificultad como las del primer nivel que van a haber algunas que desaparezcan después de un salto del usuario en ellas.
+4. Al pasar el número de plataformas por nivel, va a encontrarse con un portal que lo va a trasladar al mini jefe de cada nivel, siendo ese el punto donde no puede caerse pero sí puede morir por daño del jefe.
+5. Si derrota al jefe, se le va a dar la oportunidad de comprar mejoras en la tienda mientras sigue en esa pantalla, y en cuanto decida avanzar únicamente va a tener que saltar la plataforma que se le va a generar para tomar el portal de salida en la parte superior de la pantalla.
+6. Tiene que repetir este proceso por 3 diferentes niveles y mientras vaya progresando en estos las plataformas van a ir aumentando su nivel de dificultad y los mini jefes de cada nivel también.
+7. Concluye el juego una vez derrotado el jefe del tercer nivel y se le agradece haber jugado.
 
 
 ## _Desarrollo_
