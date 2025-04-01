@@ -27,10 +27,6 @@ Creado por el estudio Silver Way
     3. [Mecánicas](#mecánicas)
 4. [Diseño de niveles](#diseño-de-niveles)
     1. [Temas](#temas)
-        1. Estado
-        2. Objetos
-            1. Ambiente
-            2. Interactivo
     2. [Flujo de juego](#flujo-de-juego)
 5. [Desarrollo](#desarrollo)
     1. [Clases abstractas](#clases-abstractas)
@@ -87,6 +83,18 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 + Con la tecla `Esc` se despliega un menú de pausa.
 
 ### **Mecánicas**
+
+Las plataformas en Infinity Jump se generan de manera aleatoria, pero al decir esto me refiero exclusivamente al eje X en el que se encuentren y a su tipo, ya que para temas de dificultad contamos con varios tipos de plataformas. Pero en sí siempre se van a generar cada Y coordenada, con una distribución que se ajusta a la dificultad del nivel. A medida que el jugador asciende, las plataformas pueden aparecer con espaciado variable, forzando al jugador a ajustar sus tiempos de movimiento.
+
+El juego cuenta con un sistema de físicas simplificado, donde el personaje tiene una velocidad de caída constante, pero ciertos ítems pueden alterar la gravedad o permitir movimientos especiales.
+
+En cuanto a las colisiones, el juego detectará si el usuario efectivamente aterrizó en una plataforma para que al hacer contacto con esta vuelva a saltar y de esta manera conseguir llegar al mini jefe de cada nivel después de pasar por todas las plataformas de estos.
+
+Vamos a manejar físicas expeciales para ciertas mejoras, ya sean temporales o permanentes, esto con el objetivo de darle un mejor control al jugador sobre su personaje. Estas físicas pueden ser tales como una reducción en la velocidad de caida, un mayor salto o incluso un rebote en caso de caer al vacío.
+
+Los enemigos que se van a encontrar son principalmente los minijefes y eventualmente en los niveles 2 y 3 ciertas plataformas contarán con la mecánica de que si las tocas por debajo te hacen daño, y para vencerlos tienes que saltar encima de ellos. Los jefes teniendo una barra de vida la cual será reducida con cierto número de saltos.
+
+
 
 ##  _Diseño de Niveles_
 
