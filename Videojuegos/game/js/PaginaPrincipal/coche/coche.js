@@ -16,7 +16,7 @@ class Coche {
         // Propiedades físicas
         this.xSpeed = 0; // Velocidad horizontal
         this.ySpeed = 0; // Velocidad vertical
-        this.gravity = 0.2; // Fuerza de gravedad
+        this.gravity = 0.7; // Fuerza de gravedad
         this.friction = 0.98; // Fricción para reducir la velocidad horizontal
         this.grounded = false; // Indica si el coche está en el suelo
         this.rot = 0; // Rotación del coche
@@ -50,9 +50,9 @@ class Coche {
                 }
     
                 // Si el coche tiene suficiente velocidad, permitir que se despegue
-                if (this.xSpeed > 1.5) { // Ajusta este valor según la velocidad mínima para saltar
+                if (this.xSpeed > 5) { // Ajusta este valor según la velocidad mínima para saltar
                     this.grounded = false; // El coche se despega
-                    this.ySpeed = -this.xSpeed * 0.4; // Aplica un impulso vertical proporcional a la velocidad
+                    this.ySpeed = -this.xSpeed * 0.7; // Aplica un impulso vertical proporcional a la velocidad
                 }
             }
         }
@@ -67,6 +67,11 @@ class Coche {
         if (this.rot > Math.PI) this.rot = -Math.PI;
         if (this.rot < -Math.PI) this.rot = Math.PI;
     }
+
+    
+    
+    
+
 
     draw(ctx) {
         if (this.imageLoaded) {
@@ -83,6 +88,15 @@ class Coche {
     move(dx) {
         // Aplicar fuerza horizontal
         this.xSpeed += dx;
+    }
+
+    getHitCircle() {
+        const radius = Math.min(this.width, this.height) / 2 * 0.8; // Ajusta el 0.8 si quieres que sea más chico
+        return {
+            x: this.x,
+            y: this.y,
+            radius: radius
+        };
     }
 }
 

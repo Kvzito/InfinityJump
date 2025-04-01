@@ -1,9 +1,10 @@
-class ObstaculoMontana {
+class ObstaculoRampaGap {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 300; // Ancho total del obstáculo
-        this.height = 100; // Altura máxima del obstáculo
+        this.width = 300;
+        this.height = 100;
+        this.gapWidth = 60; // Tamaño del espacio vacío
         this.color = "black";
     }
 
@@ -11,19 +12,16 @@ class ObstaculoMontana {
         ctx.strokeStyle = this.color;
         ctx.lineWidth = 3;
         ctx.beginPath();
-        
-        // Inicia desde la base izquierda
-        ctx.moveTo(this.x, this.y);
 
         // Rampa de subida
+        ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x + this.width * 0.4, this.y - this.height);
+        ctx.stroke();
 
-        // Parte superior plana
-        ctx.lineTo(this.x + this.width * 0.6, this.y - this.height);
-
-        // Rampa de bajada
+        // Rampa de bajada (después del espacio)
+        ctx.beginPath();
+        ctx.moveTo(this.x + this.width * 0.4 + this.gapWidth, this.y - this.height);
         ctx.lineTo(this.x + this.width, this.y);
-
         ctx.stroke();
     }
 
@@ -36,12 +34,12 @@ class ObstaculoMontana {
             // Subida
             const t = relativeX / (this.width * 0.4);
             return this.y - t * this.height;
-        } else if (relativeX < this.width * 0.6) {
-            // Parte plana
-            return this.y - this.height;
+        } else if (relativeX < this.width * 0.4 + this.gapWidth) {
+            // Espacio vacío
+            return null;
         } else {
             // Bajada
-            const t = (relativeX - this.width * 0.6) / (this.width * 0.4);
+            const t = (relativeX - this.width * 0.4 - this.gapWidth) / (this.width * 0.6 - this.gapWidth);
             return this.y - (1 - t) * this.height;
         }
     }
