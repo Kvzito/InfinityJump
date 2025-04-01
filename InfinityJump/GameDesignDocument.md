@@ -80,6 +80,9 @@ _(ejemplo)_
 
 ### **Controles**
 
++ Las flechas `←` y `→` van a servir para desplazar al personaje en su eje X, considerando que el usuario no va a tener que saltar manualmente ya que es algo automatizado, la flecha hacia arriba no va a servir de nada.
++ En momentos específicos (como el inicio de un run del jugador, o después de derrotar un minijefe) el juego le va a dar la oportunidad al jugador de presionar la tecla `T` para abrir la tienda de mejoras, en la cual podrá aprovechar sus monedas recolectadas a lo largo de los niveles.
++ Con la tecla `Esc` se despliega un menú que representa la pausa del juego, donde va a dársele la oportunidad de salir al menú principal al jugador o de reiniciar su progreso.
 
 
 ### **Mecánicas**
