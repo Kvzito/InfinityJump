@@ -110,6 +110,16 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **🔄 Flujo de Juego**
 
+
+1. El jugador empieza en el centro de la pantalla, debajo de las primeras plataformas visibles del primer nivel
+2. En cuanto presiona la tecla de iniciar partida, el personaje del jugador comienza a saltar automáticamente, y el usuario tiene que comenzar a utilizar las plataformas arriba de él para ir subiendo en el nivel.
+3. Mientras más plataformas vaya subiendo, va ir encontrando objetos que le ayuden como monedas para gastar en un futuro en la tienda o mejoras de un solo uso como un gran salto de 5 plataformas. Además va a encontrarse con plataformas que tienen una mayor dificultad como las del primer nivel que van a haber algunas que desaparezcan después de un salto del usuario en ellas.
+4. Al pasar el número de plataformas por nivel, va a encontrarse con un portal que lo va a trasladar al mini jefe de cada nivel, siendo ese el punto donde no puede caerse pero sí puede morir por daño del jefe.
+5. Después de derrotar al jefe, se le va a dar la oportunidad de comprar mejoras en la tienda mientras sigue en esa pantalla, y en cuanto decida avanzar únicamente va a tener que saltar la plataforma que se le va a generar para tomar el portal de salida en la parte superior de la pantalla.
+6. Tiene que repetir este proceso por 3 diferentes niveles y mientras vaya progresando en estos las plataformas van a ir aumentando su nivel de dificultad y los mini jefes de cada nivel también.
+7. Concluye el juego una vez derrotado el jefe del tercer nivel y se le agradece haber jugado.
+
+
 ## 💻 _Desarrollo_
 
 ---
@@ -121,6 +131,12 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 ## 🎨 _Gráficos_
 
 ---
+
+Para este juego vamos a usar un estilo animado de pixel art. Este estilo se podrá ver alrededor de todo el juego, tanto en los personajes, el principal y los enemigos, las plataformas en los diferentes niveles, como en las páginas. Esto con la finalidad de hacer que le juego se sienta en el mismo universo aunque vayas avanzando de nivel.
+
+Los colores que usaremos en el juego serán llamativos pero siempre acorde al ambiente para que se puedan identificar en cualquier escenario, además de siempre los mejores para el estilo visual mencionado anteriormente. El personaje tendrá el mismo color blanco para que se pueda distinguir en cualquier nivel. Las plataformas cambiaran de color dependiendo del ambiente del nivel, que quede con la tematica simulando algo que se encuentre en ese ambiente. Por ejemplo, en el primer nivel que es un bosque, la plataforma es verde y café como una rama de los árboles del fondo de este mismo. 
+
+Habrá un cuadro explicativo con los controles del juego en el apartado de “Controles” que aparecerá al darle pausa al juego o en el menú principal de este. De esta manera el jugador sabrá cómo moverse. Además cada vez que el jugador complete un nivel, se regresará una nueva página en donde va a poder acceder a la tienda, en donde podrá gastar sus monedas en mejoras temporales o permanentes. Antes de comprar se verá una pequeña descripción de qué es lo que hace dicha mejora. 
 
 ## 🎵 _Sonidos y Música_
 
