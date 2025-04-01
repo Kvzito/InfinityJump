@@ -170,3 +170,37 @@ Habrá un cuadro explicativo con los controles del juego en el apartado de “Co
 ## _Itinerario_
 
 ---
+
+
+1. Determinar el concepto general del juego (primeras 3 semanas)
+    1. Mecánicas
+        1. Compra de habilidades
+        2. Aleatoriedad en las plataformas
+        3. Movimiento
+    2. Reglas
+        1. Gestión de habilidades
+        2. Requerimientos de 
+2. Desarrollo de documentación/issues del proyecto (semana 4)
+    1. Historias de usuario
+    2. Casos de uso
+    3. Issues
+4. Primer sprint (semana 5)
+    1. Inicialización base de datos
+    2. Assets del videojuego 
+5. Segundo sprint (semana 6)
+    1. Programación de clases abstractas del juego
+        1. Habilidades
+        2. Jugador
+        3. Obstáculos
+        4. Entorno
+6. Tercer sprint (semana 7)
+    1. Desarrollo de clases derivadas
+    2. Desarrollo de web
+7. Cuarto sprint (semana 8)
+    1. Conexión de web con base de datos y videojuego
+    2. Sprites y visuales
+8. Quinto sprint (semana 9)
+    1. Terminar visuales y audio
+    2. Web completamente terminada y funcional
+9. Semana 10
+    1. Presentación final del videojuego
