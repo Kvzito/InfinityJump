@@ -150,10 +150,7 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ---
 
-
-
-
-Diseños: 
+### Diseños: 
 
 
 
