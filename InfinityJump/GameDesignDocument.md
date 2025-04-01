@@ -66,17 +66,15 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **Pantallas**
 
-1. Pantalla de título
-2. Selección de inicio de juego
-    1. Pantalla de tienda
-    2. Pantalla de inventario
-4. Pantalla de juego
-    1. Fondo Principal
-    2. Obstaulos
-    3. Pantalla de meta
-5. Créditos finales
-
-_(ejemplo)_
++ Pantalla de inicio de sesión
+    - Pantalla de menú principal
+      1. Pantalla principal del juego
+           + Pantalla de la tienda de mejoras
+           + Pantalla de pausa
+           + Pantalla al morir
+           + Pantalla por mini jefe
+      3. Pantalla de estadísticas
+      4. Pantalla de créditos finales
 
 ### **Controles**
 
