@@ -18,7 +18,7 @@ Creado por el estudio Silver Way
 
 1. [📜 Índice](#índice)
 2. [🎮 Diseño del juego](#diseño-del-juego)
-    1. [📝 Resumen](#resumen)
+    1. [📝 Resumen](#📝-resumen)
     2. [🕹️ Juego](#juego)
     3. [🧠 Mentalidad](#mentalidad)
 3. [⚙️ Técnico](#técnico)
