@@ -190,7 +190,26 @@ Este enemigo va a lanzar cosas al personaje principal, haciendo más daño y com
 
 ### **Clases abstractas**
 
+1. MainCharacter
+2. Jefe
+3. Plataforma
+4. PowerUP
+
 ### **Clases derivadas**
+
+Extiende de jefe:
+1. JefeNivel1
+2. JefeNivel2
+3. JefeFinal
+
+Extiende de Plataforma
+1. PlataformaMovimiento
+2. PlataformaDestruible
+3. PlataformaOnOff
+
+Extiende de PowerUP
+1. Escudo
+2. Catapulta
 
 ## _Gráficos_
 
@@ -226,8 +245,10 @@ Diseños:
        ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Plataforma1.png)
 
     2. Segundo nivel: simulando una nube, blanco por dentro con contorno azul obscuro.
+  
+       ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/PlataformaNube.png)
 
-    3. Tercer nivel:  simulando una planeta, diferentes tonos de colores por dentro con contorno negro creando la forma 
+    4. Tercer nivel:  simulando una planeta, diferentes tonos de colores por dentro con contorno negro creando la forma 
         1. Azul
 
           ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/plataformaEspacioDos.png)
