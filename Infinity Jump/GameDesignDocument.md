@@ -42,7 +42,7 @@ Creado por el estudio Silver Way
 ---
 
 ### **Resumen**
-Un muñeco salta para desplazarse verticalmente en un mapa con plataformas en aleatorio que tiene que alcanzar a la luna, para poder cumplir su sueño. Pero al llegar a cierta altura, tendrá que enfrentar diferentes enemigos y matarlo desde arriba y para avanzar al siguiente nivel y llegar a su destino. 
+Malvin salta continuamente para desplazarse verticalmente en un mapa con plataformas en aleatorio que tiene que alcanzar a la luna, porque vio al amor de su vida desde un telescopio. Pero al acabar un nivel, tendrá que enfrentar diferentes enemigos y matarlo desde arriba y para avanzar al siguiente nivel y llegar a conquistarla. 
 
 ### **Juego**
 
@@ -115,11 +115,11 @@ Vamos a manejar físicas especiales para ciertas mejoras, ya sean temporales o p
 
  1. Caída más lenta
 
-La velocidad de caída bajará, así el jugador tiene más tiempo para recuperarse al llegar a una plataforma que más le convenga. 
+La velocidad de caída bajará, así el jugador tiene más tiempo para recuperarse al llegar a una plataforma que más le convenga. Permanente, una vez que lo compra va a tenerlo sin importar que pierda. 
 
  2. Doble salto
 
- Cuando el jugador elija esta mejora, el salto se va a duplicar en altura, así avanza más rápido y llega a alcanzar la meta más rápido. Esto le va ventaja contra enemigos cuando tenga que enfrentarlos.
+ Cuando el jugador elija esta mejora, el salto se va a duplicar en altura, así avanza más rápido y llega a alcanzar la meta más rápido. Esto le va ventaja contra enemigos cuando tenga que enfrentarlos. Permanente, una vez que lo compra va a tenerlo sin importar que pierda. 
 
  3. Escudo 
 
@@ -131,21 +131,21 @@ Aquí solo duplicaremos el número de monedas que se recogen en la partida. Esta
 
  5. Mayor daño a enemigos
 
-Los enemigos van a hacerse más poderosos y difíciles de enfrentar, con esta mejora se va a poder matar con más poder. 
+Los enemigos van a hacerse más poderosos y difíciles de enfrentar, con esta mejora se va a poder matar con más poder. Permanente, una vez que lo compra va a tenerlo sin importar que pierda. 
 
 **Enemigos**
 
 Los enemigos que se van a encontrar son principalmente los minijefes y eventualmente en los niveles 2 y 3 ciertas plataformas contarán con la mecánica de que si las tocas por debajo te hacen daño, y para vencerlos tienes que saltar encima de ellos. Los jefes teniendo una barra de vida la cual será reducida con cierto número de saltos.
 
-Primer enemigo:
+1. Primer enemigo:
 
-Es una planta, para que quede con la temática, se va a mover entre plataformas siguiendo al personaje. Si el enemigo alcanza a el personaje, el personaje va a dañarse y pierde. 
+Este va a tener un movimiento lineal. 
 
-Segundo enemigo:
+2. Segundo enemigo:
 
-Este enemigo va a 
+Este enemigo va a seguir al personaje principal, para dañarlo hasta que muera. 
 
-Tercer enemigo:
+3. Tercer enemigo:
 
 Este enemigo va a lanzar cosas al personaje principal, haciendo más daño y complicando. De la misma manera, también será rápido tratando de alcanzar al personaje para causarle más daño y matarlo. 
 
@@ -206,6 +206,7 @@ Extiende de Plataforma
 1. PlataformaMovimiento
 2. PlataformaDestruible
 3. PlataformaOnOff
+4. PlataformaCambio
 
 Extiende de PowerUP
 1. Escudo
@@ -224,20 +225,21 @@ Habrá un cuadro explicativo con los controles del juego en el apartado de “Co
 Diseños: 
 
 1. Personajes
-    1. Personaje Principal
-   
-  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/AnimationSheet.png)
-    
-    2. Enemigo 1
+   1. Personaje Principal
 
-  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Plant3_Walk_full.png)
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/AnimationSheet.png)
 
-    3. Enemigo 2
+   2. Enemigo 1
 
-
-       
-    4. Enemigo 3
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Plant3_Walk_full.png)
   
+   3. Enemigo 2
+
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/mage-NESW.png)
+  
+   4. Enemigo 3
+
+  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/enemigoTres.png)
 
 2. Plataformas 
     1. Primer nivel: simulando un tronco, verde por dentro con contorno café.
@@ -255,7 +257,7 @@ Diseños:
 
         2. Naranja
 
-          ![](http://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/plataformaEspacioUno.png)
+          ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/plataformaEspacioUno.png)
 
 
 3. Fondos
@@ -271,10 +273,6 @@ Diseños:
 
    ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/FondoEspacio.webp)   
                        
-
-4. Icono del  juego
-   
-
 
 ##  _Sonidos y Música_
 
