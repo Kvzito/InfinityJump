@@ -12,8 +12,8 @@ let mainCahracterY = canvasHeight * 7 / 8 - mainCharacterHeight;
 // fisicas
 let velocityX = 0;
 let velocityY = 0;
-let inicialVelY = -5; // velocidad inical 
-let gravedad = 0.07;
+let inicialVelY = -3; // velocidad inical 
+let gravedad = 0.05;
 
 // Hitbox reducido
 let hitboxWidth = 30;
@@ -53,11 +53,11 @@ function main() {
     ctx = canvas.getContext('2d');
 
     // Cargar imagen del spritesheet y arrancar el loop cuando cargue
-    spriteSheet = new Image();
-    spriteSheet.src = "../Assets/AnimationSheet.png";
+    mainCharacterImage = new Image();
+    mainCharacterImage.src = "../Assets/AnimationSheet.png";
 
-    spriteSheet.onload = function () {
-        mainCahracter.img = spriteSheet;
+    mainCharacterImage.onload = function () {
+        mainCahracter.img = mainCharacterImage;
         requestAnimationFrame(update); // Iniciar animación
     };
 
@@ -70,6 +70,7 @@ function main() {
 
     // Escuchar teclas para mover al personaje
     document.addEventListener("keydown", moveMainCharacter);
+    document.addEventListener("keyup", stopMainCharacter);
 }
 
 /**
@@ -95,6 +96,9 @@ function update() {
     // Detección de colisión
     for (let i = 0; i < plataformList.length; i++) {
         let plataform = plataformList[i];
+        if (velocityY < 0 && mainCahracter.y < canvasHeight*2/3){
+            plataform.y += -velocityY;
+        }
         if (detectCollision(mainCahracter, plataform) && velocityY >= 0) {
             mainCahracter.y = plataform.y - mainCahracter.height; // Acomodar arriba
             velocityY = inicialVelY; // Hacer que rebote
@@ -102,8 +106,14 @@ function update() {
         ctx.drawImage(plataform.img, plataform.x, plataform.y, plataform.width, plataform.height);
 
         // DIBUJAR HITBOX (solo para prueba)
-        ctx.strokeStyle = "red";
-        ctx.strokeRect(plataform.x, plataform.y, plataform.width, plataform.height);
+        // ctx.strokeStyle = "red";
+        // ctx.strokeRect(plataform.x, plataform.y, plataform.width, plataform.height);
+    }
+
+    // quita las plataformas que se van a abajo y crea nuevas arriba
+    while(plataformList.length > 0 && plataformList[0].y > canvasHeight){
+        plataformList.shift(); // esto uqita el primer elemento de la lista 
+        newPlataform()
     }
 
     
@@ -127,9 +137,17 @@ function detectCollision(a, b) {
  */
 function moveMainCharacter(e) {
     if (e.key === "ArrowRight" || e.key === "d") {
-        velocityX = 1;
+        velocityX = 1.5;
     } else if (e.key === "ArrowLeft" || e.key === "a") {
-        velocityX = -1;
+        velocityX = -1.5;
+    }
+}
+
+function stopMainCharacter(e) {
+    if (e.key === "ArrowRight" || e.key === "d") {
+        velocityX = 0;
+    } else if (e.key === "ArrowLeft" || e.key === "a") {
+        velocityX = 0;
     }
 }
 
@@ -140,23 +158,40 @@ function placePlataforms(){
     // starting plataform 
     let plataform = {
         img : plataformImg,
-        x: canvasWidth/2,
-        y: canvasHeight - 120,
+        x: canvasWidth/2 - 45,
+        y: canvasHeight - 150,
         width: plataformWidth,
         height: plataformHeight,
     }
 
     plataformList.push(plataform);
 
-    plataform = {
-        img : plataformImg,
-        x: canvasWidth/2 -100,
-        y: canvasHeight - 220,
-        width: plataformWidth,
-        height: plataformHeight,
-    }
+    // plataform = {
+    //     img : plataformImg,
+    //     x: canvasWidth/2 -100,
+    //     y: canvasHeight - 220,
+    //     width: plataformWidth,
+    //     height: plataformHeight,
+    // }
 
-    plataformList.push(plataform);
+    // plataformList.push(plataform);
+
+    // estas dos variables hacen que solo puedan aparecer tablas del 33% al 66% del canvas
+    let minX = canvasWidth * 0.4;       // 33%
+    let maxX = canvasWidth * 0.6;   // 66%
+
+    for(let i = 1; i < 10; i++){
+        let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
+        let plataform = {
+            img : plataformImg,
+            x: randomX,
+            y: canvasHeight - 90 * i -150,
+            width: plataformWidth,
+            height: plataformHeight,
+        }
+    
+        plataformList.push(plataform);
+    }
 }
 
 /**
@@ -170,15 +205,31 @@ function drawFrame(col, row) {
         frameWidth, frameHeight,
         mainCahracter.x, mainCahracter.y, mainCahracter.width, mainCahracter.height
     );
-    ctx.strokeStyle = "blue";
-    ctx.strokeRect(
-        mainCahracter.x + hitboxOffsetX,
-        mainCahracter.y + hitboxOffsetY,
-        hitboxWidth,
-        hitboxHeight
-    );
+    // ctx.strokeStyle = "blue";
+    // ctx.strokeRect(
+    //     mainCahracter.x + hitboxOffsetX,
+    //     mainCahracter.y + hitboxOffsetY,
+    //     hitboxWidth,
+    //     hitboxHeight
+    // );
 }
 
+function newPlataform() {
+    // estas dos variables hacen que solo puedan aparecer tablas del 33% al 66% del canvas
+    let minX = canvasWidth / 3;       
+    let maxX = canvasWidth * 2 / 3;   
+
+    let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
+        let plataform = {
+            img : plataformImg,
+            x: randomX,
+            y: -plataformHeight,
+            width: plataformWidth,
+            height: plataformHeight,
+        }
+    
+        plataformList.push(plataform);
+}
 
 // Ejecutar la función principal al cargar la página
 window.onload = main;
