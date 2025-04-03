@@ -21,6 +21,7 @@ function login() {
     }
 }
 
+
 function main() {
    
     // hace referencia al "canvas que esta en el html"
