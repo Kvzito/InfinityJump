@@ -1,0 +1,21 @@
+body{
+    text-align: center;
+    background-color: lightblue;
+}
+#headerContainer {
+    grid-area: header;
+    background-color: lightblue;
+    width: 100%;
+    height: 50px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+    text-decoration: wavy;
+    font-size: 1.5rem;
+    font-family: cursive;
+}
+
+#canvas {
+    background-image: url(../Assets/Fondo\ Nivel\ 1.webp);
+}

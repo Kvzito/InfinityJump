@@ -14,6 +14,9 @@ class MainCharacter {
         this.hitboxHeight = 40;
         this.hitboxOffsetX = 10;
         this.hitboxOffsetY = 10;
+
+        this.vida = 100;
+        this.money = 0;
     }
 
     listenControls() {

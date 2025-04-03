@@ -1,11 +1,15 @@
 
 let canvas, ctx;
-let canvasHeight = 700;
+let canvasHeight = 667;
 let canvasWidth = 1200;
 
 let mainCharacter;
 let mainCharacterImage;
 let plataformImg;
+
+let totalPlataforms = 0;
+
+const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
 // esta funcion asegura que las imagnes que se van a usar esten cargadas antes de empezar el juego
 function loadAssets(onAssetsLoaded) {
@@ -50,6 +54,7 @@ function startGame() {
     );
     mainCharacter.listenControls();
 
+    PlataformManager = new PM(level1Config); // ← usa config para este nivel
     PlataformManager.img = plataformImg;
     PlataformManager.placePlataforms();
 
@@ -77,7 +82,6 @@ function update() {
     for (let i = 0; i < PlataformManager.list.length; i++) {
         let p = PlataformManager.list[i];
 
-       
 
         // Movimiento lateral constante de las plataformas que se mueven
         if (p instanceof MovingPlataform) {
@@ -89,15 +93,21 @@ function update() {
             mainCharacter.y = p.y - mainCharacter.height;
             mainCharacter.bounce();
         }
+
+        if (p instanceof PlataformCambio) {
+            p.checkCollision(mainCharacter);
+        }
+
+
     }
 
     PlataformManager.list = PlataformManager.list.filter(p => p.y < canvasHeight);
 
     // Generar nuevas plataformas si es necesario
     let last = PlataformManager.list[PlataformManager.list.length - 1];
-    if (last && last.y > 0) {
-        PlataformManager.newPlataform();
-    }
+        if (last && last.y > 0 && !PlataformManager.cPlataform) {
+            PlataformManager.newPlataform();
+        }
     drawScene();
 }
 
@@ -112,58 +122,19 @@ function drawScene() {
 
     mainCharacter.draw(ctx); 
 
+    textVida.draw(ctx, `Vida: ${mainCharacter.vida} %`);
     
 }
 
 
-
-
-const PlataformManager = {
-    list: [],
-    img: null,
-
-    placePlataforms() {
-        this.list = [];
-        let start = new Plataform(canvasWidth / 2 - 45, canvasHeight - 150, 60, 18, this.img);
-        this.list.push(start);
-    
-        let minX = canvasWidth * 0.4;
-        let maxX = canvasWidth * 0.6;
-    
-        for (let i = 1; i < 10; i++) {
-            let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
-    
-            let isMoving = Math.random() < 0.1; // 30% de probabilidad
-    
-            let mPlataform;
-            if (isMoving) {
-                mPlataform = new MovingPlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img, 100, 0.5);
-            } else {
-                mPlataform = new Plataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);
-            }
-            this.list.push(mPlataform);
-        }
-    },
-
-    newPlataform() {
-        let minX = canvasWidth * 0.4;
-        let maxX = canvasWidth * 0.6;
-        let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
-
-        let lastY = this.list[this.list.length - 1]?.y || 0;
-        let newY = lastY - 50; // define la separacion de las plataformas
-
-        let isMoving = Math.random() < 0.1;
-
-        let p;
-        if (isMoving) {
-            p = new MovingPlataform(randomX, newY, 60, 18, this.img, 100, 0.5);
-        } else {
-            p = new Plataform(randomX, newY, 60, 18, this.img);
-        }
-        this.list.push(p);
-    }
-    
+const level1Config = {
+    probMov: 10,
+    probStatic: 90,
+    PListLevel1: [],
 };
+
+
+
+
 
 window.onload = main;
