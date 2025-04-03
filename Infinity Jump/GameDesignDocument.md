@@ -42,12 +42,13 @@ Creado por el estudio Silver Way
 ---
 
 ### **Resumen**
+Malvin salta continuamente para desplazarse verticalmente en un mapa con plataformas en aleatorio que tiene que alcanzar a la luna, porque vio al amor de su vida desde un telescopio. Pero al acabar un nivel, tendrá que enfrentar diferentes enemigos y matarlo desde arriba y para avanzar al siguiente nivel y llegar a conquistarla. 
 
 ### **Juego**
 
 Nuestro juego se trata de que nuestro personaje principal () tiene que ir saltando entre diferentes plataformas hasta llegar a una determinada altura. Más explícitamente, esta altura va a ser lograda al pasar una serie de obstáculos, dividiendo el objetivo en 3 niveles, cada uno de estos va a estar constituido por cierto número de plataformas (100, 150 y 200 respectivamente) y un mini jefe al pasar todas estas plataformas.
 
-Cada uno de los niveles está ambientado de diferente manera, representando el progreso que hace el jugador cada que derrota a un jefe, las plataformas y el fondo cambian dependiendo del nivel en el que se encuentre. Estas plataformas son la forma de avanzar del jugador, ya que la pantalla lo que va a ir mostrando va a ser únicamente las plataformas y si el jugador no calcula bien el salto y no rebota en una de estas va a morir instantáneamente, regresando al inicio de todo el juego independientemente del nivel en el que se encontraba.
+Cada uno de los niveles está ambientado de diferente manera, representando el progreso que hace el jugador cada que derrota a un jefe, las plataformas y el fondo cambian dependiendo del nivel en el que se encuentre. Estas plataformas son la forma de avanzar del jugador, ya que la pantalla lo que va a ir mostrando va a ser únicamente las plataformas y si el jugador no calcula bien el salto y no rebota en una de estas va a morir al caer, regresando al inicio de todo el juego independientemente del nivel en el que se encontraba.
 
 Existe la posibilidad de conseguir mejoras para el jugador, ya sean temporales o permanentes a lo largo de sus intentos. Un ejemplo de una temporal sería una catapulta que te haga saltar 4 plataformas de un solo salto, un ejemplo de una mejora permanente sería disminuir la velocidad de caída del jugador en 5% para que tenga mayor control sobre esto.
 
@@ -83,16 +84,70 @@ El juego está diseñado para que el jugador esté constantemente poniendo a pru
 
 ### **Mecánicas**
 
-Las plataformas en Infinity Jump se generan de manera aleatoria, pero al decir esto me refiero exclusivamente al eje X en el que se encuentren y a su tipo, ya que para temas de dificultad contamos con varios tipos de plataformas. Pero en sí siempre se van a generar cada Y coordenada, con una distribución que se ajusta a la dificultad del nivel. A medida que el jugador asciende, las plataformas pueden aparecer con espaciado variable, forzando al jugador a ajustar sus tiempos de movimiento.
+Las plataformas en Infinity Jump se generan de manera aleatoria, exclusivamente al eje X en el que se encuentren y a su tipo, ya que para temas de dificultad contamos con varios tipos de plataformas. Pero en sí siempre se van a generar cada Y coordenada, con una distribución que se ajusta a la dificultad del nivel. A medida que el jugador asciende, las plataformas pueden aparecer con espaciado variable, forzando al jugador a ajustar sus tiempos de movimiento.
 
-El juego cuenta con un sistema de físicas simplificado, donde el personaje tiene una velocidad de caída constante, pero ciertos ítems pueden alterar la gravedad o permitir movimientos especiales.
+**Plataformas**
 
-En cuanto a las colisiones, el juego detectará si el usuario efectivamente aterrizó en una plataforma para que al hacer contacto con esta vuelva a saltar y de esta manera conseguir llegar al mini jefe de cada nivel después de pasar por todas las plataformas de estos.
+Durante cada nivel las plataformas van a tener diferente diseño para que quede con la temática; en el bosque serán ramas, en el cielo serán nubes, en el espacio serán planetas. Vamos a cambiar los assets de la plataforma dependiendo de el nivel y los tipos de plataforma que son. Entre suba de nivel, las plataformas van a varias más haciéndolo más difícil para el jugador y que tenga que usar mejoras.
 
-Vamos a manejar físicas expeciales para ciertas mejoras, ya sean temporales o permanentes, esto con el objetivo de darle un mejor control al jugador sobre su personaje. Estas físicas pueden ser tales como una reducción en la velocidad de caida, un mayor salto o incluso un rebote en caso de caer al vacío.
+Los tipos de plataforma que vamos a tener son los siguientes:
+  1. Estático
+     
+     Una vez que el algoritmo elija un lugar para esta plataforma, este siempre se quedará allí sin importar que pase a su alrededor. Es una plataforma fácil para el jugador.
+     
+  2. Mobil
+     
+      Este se va a mover horizontalmente, siempre en la misma coordenada Y. Aquí el jugador tiene que medir con más precisión cuando va subir a esta plataforma. El jugador se quedará arriba de la plataforma aunque esta se mueva.
+     
+  3. Desaparece
+
+     Aquí el algoritmo también va a elegir un lugar, pero el reto aquí es que el jugador tenga un tiempo límite en la plataforma y medir cuando hacer el salto.
+
+**Movimientos**
+
+El juego cuenta con un sistema de físicas simplificado, donde el personaje tiene una velocidad de caída constante, pero ciertos ítems pueden alterar la gravedad o permitir movimientos especiales. El personaje va a estar saltando en todo momento, el jugador va a moverse con las teclas de flechas para la izquierda o derecha, con el propósito de alcanzar la plataforma que esté más a su disposición. 
+
+En cuanto a las colisiones, el juego detectará si el usuario efectivamente aterrizó en una plataforma para que al hacer contacto con esta vuelva a saltar. De esta manera logra conseguir llegar al mini jefe de cada nivel después de pasar por todas las plataformas de estos.
+
+**Mejoras**
+
+Vamos a manejar físicas especiales para ciertas mejoras, ya sean temporales o permanentes, esto con el objetivo de darle un mejor control al jugador sobre su personaje. Las mejoras van a funcionar para que el jugador pueda superar más rápido el nivel sin importar que la dificultad se complique más. 
+
+ 1. Caída más lenta
+
+La velocidad de caída bajará, así el jugador tiene más tiempo para recuperarse al llegar a una plataforma que más le convenga. Permanente, una vez que lo compra va a tenerlo sin importar que pierda. 
+
+ 2. Doble salto
+
+ Cuando el jugador elija esta mejora, el salto se va a duplicar en altura, así avanza más rápido y llega a alcanzar la meta más rápido. Esto le va ventaja contra enemigos cuando tenga que enfrentarlos. Permanente, una vez que lo compra va a tenerlo sin importar que pierda. 
+
+ 3. Escudo 
+
+ Esta mejora será un apoyo en la sección contra los enemigos. El escudo funcionará para causar menos daño si es que un enemigo lo alcanza, esto le da más oportunidad de enfrentarlo y seguir al siguiente nivel. Temporal, solo funciona hasta que el jugador pierda pero va a costar menos. 
+
+ 4. Monedas Dobles
+
+Aquí solo duplicaremos el número de monedas que se recogen en la partida. Esta mejora inspirará a los jugadores a arriesgarse más a conseguir las monedas, así pueden comprar más mejoras en la tienda. Temporal, solo funciona hasta que el jugador pierda pero va a costar menos. 
+
+ 5. Mayor daño a enemigos
+
+Los enemigos van a hacerse más poderosos y difíciles de enfrentar, con esta mejora se va a poder matar con más poder. Permanente, una vez que lo compra va a tenerlo sin importar que pierda. 
+
+**Enemigos**
 
 Los enemigos que se van a encontrar son principalmente los minijefes y eventualmente en los niveles 2 y 3 ciertas plataformas contarán con la mecánica de que si las tocas por debajo te hacen daño, y para vencerlos tienes que saltar encima de ellos. Los jefes teniendo una barra de vida la cual será reducida con cierto número de saltos.
 
+1. Primer enemigo:
+
+Este va a tener un movimiento lineal. 
+
+2. Segundo enemigo:
+
+Este enemigo va a seguir al personaje principal, para dañarlo hasta que muera. 
+
+3. Tercer enemigo:
+
+Este enemigo va a lanzar cosas al personaje principal, haciendo más daño y complicando. De la misma manera, también será rápido tratando de alcanzar al personaje para causarle más daño y matarlo. 
 
 
 ##  _Diseño de Niveles_
@@ -135,7 +190,27 @@ Los enemigos que se van a encontrar son principalmente los minijefes y eventualm
 
 ### **Clases abstractas**
 
+1. MainCharacter
+2. Jefe
+3. Plataforma
+4. PowerUP
+
 ### **Clases derivadas**
+
+Extiende de jefe:
+1. JefeNivel1
+2. JefeNivel2
+3. JefeFinal
+
+Extiende de Plataforma
+1. PlataformaMovimiento
+2. PlataformaDestruible
+3. PlataformaOnOff
+4. PlataformaCambio
+
+Extiende de PowerUP
+1. Escudo
+2. Catapulta
 
 ## _Gráficos_
 
@@ -146,6 +221,58 @@ Para este juego vamos a usar un estilo animado de pixel art. Este estilo se podr
 Los colores que usaremos en el juego serán llamativos pero siempre acorde al ambiente para que se puedan identificar en cualquier escenario, además de siempre los mejores para el estilo visual mencionado anteriormente. El personaje tendrá el mismo color blanco para que se pueda distinguir en cualquier nivel. Las plataformas cambiaran de color dependiendo del ambiente del nivel, que quede con la tematica simulando algo que se encuentre en ese ambiente. Por ejemplo, en el primer nivel que es un bosque, la plataforma es verde y café como una rama de los árboles del fondo de este mismo. 
 
 Habrá un cuadro explicativo con los controles del juego en el apartado de “Controles” que aparecerá al darle pausa al juego o en el menú principal de este. De esta manera el jugador sabrá cómo moverse. Además cada vez que el jugador complete un nivel, se regresará una nueva página en donde va a poder acceder a la tienda, en donde podrá gastar sus monedas en mejoras temporales o permanentes. Antes de comprar se verá una pequeña descripción de qué es lo que hace dicha mejora. 
+
+Diseños: 
+
+1. Personajes
+   1. Personaje Principal
+
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/AnimationSheet.png)
+
+   2. Enemigo 1
+
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Plant3_Walk_full.png)
+  
+   3. Enemigo 2
+
+![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/mage-NESW.png)
+  
+   4. Enemigo 3
+
+  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/enemigoTres.png)
+
+2. Plataformas 
+    1. Primer nivel: simulando un tronco, verde por dentro con contorno café.
+
+       ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Plataforma1.png)
+
+    2. Segundo nivel: simulando una nube, blanco por dentro con contorno azul obscuro.
+  
+       ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/PlataformaNube.png)
+
+    4. Tercer nivel:  simulando una planeta, diferentes tonos de colores por dentro con contorno negro creando la forma 
+        1. Azul
+
+          ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/plataformaEspacioDos.png)
+
+        2. Naranja
+
+          ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/plataformaEspacioUno.png)
+
+
+3. Fondos
+    1. Fondo de bosque:
+   
+  ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/Fondo%20Nivel%201.webp)
+
+    2. Fondo de cielo: 
+       
+ ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/FondoCielo.png)
+
+    3. Fondo de espacio:
+
+   ![](https://github.com/Kvzito/InfinityJump/blob/main/Infinity%20Jump/videogame/Assets/FondoEspacio.webp)   
+                       
 
 ##  _Sonidos y Música_
 

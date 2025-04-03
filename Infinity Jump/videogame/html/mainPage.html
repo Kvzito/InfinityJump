@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <script src="../js/PaginaPrincipal/funciones/ir_a_tienda.js"></script> -->
+    
+    <link rel="stylesheet" href="../css/mainPage.css">
+    <script src="../js/PaginaPrincipal/funciones/ir_a_tienda.js"></script>
+    <script src="../js/PaginaPrincipal/funciones/textoPantalla.js"></script>
+  
+    <title>Infinity Jump</title>
+</head>
+<body>
+    <div id="headerContainer">
+        <h1>INFINITY JUMP</h1>
+    </div>
+
+    <!-- Contenedor que tiene adentro el canvas -->
+    <div id="canvasContainer">
+
+        <canvas id="canvas"></canvas>
+        <!-- Botón que te manda a la pagina de la tienda -->
+        <button id="botonTienda" onclick="irATienda()">Tienda</button>
+        <button id="botonAjustes" onclick="irAjustes()">Ajustes</button>
+    </div>
+    
+    <script> main(); </script>
+</body>
+</html>

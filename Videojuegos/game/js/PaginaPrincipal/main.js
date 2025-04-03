@@ -19,11 +19,17 @@ let ctx;
 let textMoney = new TextLabel(canvasWidth - 100, 35, "25px Ubuntu Mono", "black");
 
 // obstaculos 
+<<<<<<< HEAD
 let triangulo = new ObstaculoTriangulo(canvasWidth / 2 + 200, canvasHeight/2 + 200);
 let rampa = new ObstaculoRampa(canvasWidth / 2 - 300, canvasHeight/2 +200);
 let mountain = new ObstaculoMontana(canvasWidth /2 - 100,  canvasHeight/2 + 200 );
 let plataforma = new ObstaculoPlataforma(canvasWidth /2 - 100,  canvasHeight/2);
+=======
+let mountain = new ObstaculoMontana(250,  canvasHeight/2 + 200 );
+>>>>>>> 259530bb5c9ca020e3de34668a77777808bb326c
 let terreno =  new Terreno(0, canvasHeight - 100, canvasWidth);
+let rampa = new ObstaculoRampaGap(200, canvasHeight / 2 + 200);
+let barrera =  new BarreraMovil(800, canvasHeight / 2 + 100, 20, 100, 1)
 
 // coche (modelo principal)
 let coche = new Coche(100, 350, 100, 50, "../../imagenes/ModeloPrincipalCoche.png"); // Posición inicial y dimensiones
@@ -51,12 +57,24 @@ function drawScene() {
     textMoney.draw(ctx, `$: ${money}`);
     terreno.draw(ctx);
     mountain.draw(ctx); // Dibuja la montaña
+<<<<<<< HEAD
     triangulo.draw(ctx); // dibuja obstacúlo de triangulo
     rampa.draw(ctx); // dibuja obstacúlo rampa
     //plataforma.update();
     //plataforma.draw(ctx);
 
+=======
+    //rampa.draw(ctx);
+>>>>>>> 259530bb5c9ca020e3de34668a77777808bb326c
 
+    barrera.update();
+    barrera.draw(ctx);
+
+    if (barrera.checkCollision(coche)) {
+        // Si choca, regresa el coche a la posición inicial
+        coche.x = 100;
+        coche.y = 350;
+    }
     
     const obstacles = [terreno, mountain, triangulo, rampa];
     //const obstacles = [terreno, plataforma]; // Lista de obstáculos
@@ -69,7 +87,7 @@ function drawScene() {
 }
 
 window.addEventListener('keydown', (e) => {
-    const speed = 0.8; // Fuerza aplicada al coche
+    const speed = 0.9; // Fuerza aplicada al coche
     if (e.key === 'ArrowLeft') coche.move(-speed); // Mover hacia la izquierda
     if (e.key === 'ArrowRight') coche.move(speed); // Mover hacia la derecha
 });
