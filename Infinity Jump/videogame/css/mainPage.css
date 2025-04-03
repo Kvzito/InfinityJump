@@ -6,7 +6,7 @@ body {
   
   #headerContainer{
     grid-area: header;
-    background-color: maroon;
+    background-color: lightblue;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -33,7 +33,7 @@ body {
   #canvas {
     width: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
     height: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
-    background-image: url('../Assets/FondoCielo.png');
+    background-image: url('../Assets/mainFondo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -44,7 +44,7 @@ body {
     top: 10px; /* Mantiene la distancia desde arriba */
     left: 10px; /* Ajusta para que no esté pegado completamente a la izquierda */
     padding: 10px 15px;
-    background-color: maroon;
+    background-color: #db8d1c;
     color: white;
     border: none;
     cursor: pointer;
@@ -57,7 +57,7 @@ body {
     top: 10px; /* Mantiene la distancia desde arriba */
     left: 100px; /* Ajusta para que no esté pegado completamente a la izquierda */
     padding: 10px 15px;
-    background-color: maroon;
+    background-color: #db8d1c;
     color: white;
     border: none;
     cursor: pointer;
