@@ -3,7 +3,7 @@ body{
 }
 #headerContainer {
     grid-area: header;
-    background-color: lightblue;
+    background-color: maroon;
     width: 100%;
     height: 50px; 
     display: flex;

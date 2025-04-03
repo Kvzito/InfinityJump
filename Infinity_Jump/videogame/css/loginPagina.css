@@ -26,18 +26,14 @@
     border: 10px solid black; /* Añade un borde al contenedor */
 }
 
-  #canvas {
-    width: 1000;
-    height: 600;
-    background-color: gray;
-    grid-area: main;
-    background-image: url('../../Imagenes/FondoJuego.png');
-    background-size: cover; /* Ajusta la imagen para cubrir todo el canvas */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que se repita */
-    display: block; /* Elimina márgenes adicionales si los hubiera */
-    margin: auto; 
-  }
+#canvas {
+  width: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
+  height: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
+  background-image: url('../Assets/mainFondo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
   #login-form {
     position: absolute;
