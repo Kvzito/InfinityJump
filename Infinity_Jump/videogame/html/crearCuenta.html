@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/crearPagina.css">
+    <script src="../js/paginaLogin/inicioSesion.js"></script>
+    <script src="../js/paginaLogin/crear.js"></script>
+    <title>Infinity Jump</title>
+</head>
+<body>
+    <!-- Contenedor del encabezado -->
+    <div id="headerContainer">
+        <h1>INFINITY JUMP</h1>
+    </div>
+
+    <div id="canvasContainer">
+        <!-- Canvas -->
+        <canvas id="canvas"></canvas>
+
+        <!-- Formulario de registro: usuario, contraseña y confirmar -->
+        <form id="registerForm">
+            <input type="text" id="usuario" placeholder="Escribe el nuevo usuario">
+
+            <div class="password-container">
+                <div class="campo">
+                    <input type="password" id="contrasena" placeholder="Crea una contraseña">
+                </div>
+                <div class="campo">
+                    <input type="password" id="confirmar" placeholder="Confirma la contraseña">
+                </div>
+            </div>
+
+            <div class="botones-register">
+                <button type="submit" class="boton-register">Registrar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

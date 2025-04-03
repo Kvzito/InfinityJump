@@ -51,6 +51,11 @@ body {
     border-radius: 5px;
     font-size: 16px;
   }
+
+  
+.botonTienda:hover {
+  background-color: #45a049;
+}
   
   #botonAjustes {
     position: absolute;
@@ -64,4 +69,8 @@ body {
     border-radius: 5px;
     font-size: 16px;
   
+  }
+
+  .botonAjustes:hover {
+    background-color: #45a049;
   }
