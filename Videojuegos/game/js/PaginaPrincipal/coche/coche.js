@@ -51,10 +51,14 @@ class Coche {
     
                 // Si el coche tiene suficiente velocidad, permitir que se despegue
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (this.xSpeed > 20) { // Ajusta este valor según la velocidad mínima para saltar
 =======
                 if (this.xSpeed > 5) { // Ajusta este valor según la velocidad mínima para saltar
 >>>>>>> 259530bb5c9ca020e3de34668a77777808bb326c
+=======
+ main
+>>>>>>> 28c039bb9c007a99f0e69a482f7c0206137b322f
                     this.grounded = false; // El coche se despega
                     this.ySpeed = -this.xSpeed * 0.7; // Aplica un impulso vertical proporcional a la velocidad
                 }

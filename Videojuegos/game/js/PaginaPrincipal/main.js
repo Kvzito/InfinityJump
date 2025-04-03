@@ -18,6 +18,7 @@ let ctx;
 // texto que aparece en pantalla
 let textMoney = new TextLabel(canvasWidth - 100, 35, "25px Ubuntu Mono", "black");
 
+<<<<<<< HEAD
 // obstaculos 
 <<<<<<< HEAD
 let triangulo = new ObstaculoTriangulo(canvasWidth / 2 + 200, canvasHeight/2 + 200);
@@ -27,6 +28,9 @@ let plataforma = new ObstaculoPlataforma(canvasWidth /2 - 100,  canvasHeight/2);
 =======
 let mountain = new ObstaculoMontana(250,  canvasHeight/2 + 200 );
 >>>>>>> 259530bb5c9ca020e3de34668a77777808bb326c
+=======
+
+>>>>>>> 28c039bb9c007a99f0e69a482f7c0206137b322f
 let terreno =  new Terreno(0, canvasHeight - 100, canvasWidth);
 let rampa = new ObstaculoRampaGap(200, canvasHeight / 2 + 200);
 let barrera =  new BarreraMovil(800, canvasHeight / 2 + 100, 20, 100, 1)
@@ -58,6 +62,7 @@ function drawScene() {
     terreno.draw(ctx);
     mountain.draw(ctx); // Dibuja la montaña
 <<<<<<< HEAD
+<<<<<<< HEAD
     triangulo.draw(ctx); // dibuja obstacúlo de triangulo
     rampa.draw(ctx); // dibuja obstacúlo rampa
     //plataforma.update();
@@ -66,6 +71,10 @@ function drawScene() {
 =======
     //rampa.draw(ctx);
 >>>>>>> 259530bb5c9ca020e3de34668a77777808bb326c
+=======
+
+main
+>>>>>>> 28c039bb9c007a99f0e69a482f7c0206137b322f
 
     barrera.update();
     barrera.draw(ctx);
