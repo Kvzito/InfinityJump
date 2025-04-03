@@ -146,8 +146,8 @@ const PlataformManager = {
     },
 
     newPlataform() {
-        let minX = canvasWidth / 3;
-        let maxX = canvasWidth * 2 / 3;
+        let minX = canvasWidth * 0.4;
+        let maxX = canvasWidth * 0.6;
         let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
 
         let lastY = this.list[this.list.length - 1]?.y || 0;
