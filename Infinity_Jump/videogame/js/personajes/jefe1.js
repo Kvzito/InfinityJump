@@ -7,10 +7,10 @@ class Jefe1 extends Jefe {
         this.hitboxWidth = this.width - 20;
         this.hitboxHeight = this.height - 20;
 
-        this.topHitboxHeight = 10; // pequeña hitbox arriba
-        this.angle = 0; // para el movimiento senoidal
-        this.direction = 1; // dirección de movimiento en X
-        this.speedX = 2; // velocidad horizontal
+        this.topHitboxHeight = 10; 
+        this.angle = 0; 
+        this.direction = 1; 
+        this.speedX = 2; 
         this.visible = true;    
     }
 
@@ -35,7 +35,7 @@ class Jefe1 extends Jefe {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
-        // Hitbox principal (daño al jugador)
+        // Hitbox principal que hace daño al main character
         ctx.strokeStyle = "red";
         ctx.strokeRect(
             this.x + this.hitboxOffsetX,
@@ -44,7 +44,7 @@ class Jefe1 extends Jefe {
             this.hitboxHeight
         );
 
-        // Hitbox superior (vulnerable)
+        // Hitbox superior el cual recibe daño si el maincharacter salta sobre el
         ctx.strokeStyle = "green";
         ctx.strokeRect(
             this.x,
@@ -54,6 +54,7 @@ class Jefe1 extends Jefe {
         );
     }
 
+    // colisiones y como afectan sus estadisticas
     detectarColisionConJugador(jugador) {
         const jugadorBottom = jugador.y + jugador.height;
         const jugadorTop = jugador.y;

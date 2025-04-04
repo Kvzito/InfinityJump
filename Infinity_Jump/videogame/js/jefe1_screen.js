@@ -13,6 +13,7 @@ let jefe;
 // Lista para todo el contenido del nivel
 let LevelList = [];
 
+// textos y barreras 
 const TextVidaJefe = new TextLabel(20 , 35, "30px Ubuntu Mono", "black");
 const textVida = new TextLabel(canvasWidth - 175 , 35, "30px Ubuntu Mono", "black");
 const barreraIzq = new Limite(0, 0, 10, canvasHeight, "rgb(111, 62, 67)");
@@ -27,6 +28,7 @@ function loadAssets(onAssetsLoaded) {
 
     let imagesLoaded = 0;
 
+    // no cargara hasta que todos los assets esten cargados 
     function checkLoaded() {
         imagesLoaded++;
         if (imagesLoaded === 4) {
@@ -123,7 +125,7 @@ function update() {
         mainCharacter.velocityX = 0;
     }
 
-    // Lógica especial del jefe
+    // Lógica para el jefe
     if (jefe.visible) {
         jefe.update();
         jefe.detectarColisionConJugador(mainCharacter);

@@ -6,6 +6,7 @@ let canvasWidth = 1200;
 let mainCharacter;
 let mainCharacterImage;
 let plataformImg;
+let SuperJumpImg;
 
 let totalPlataforms = 0;
 
@@ -15,21 +16,24 @@ const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30
 function loadAssets(onAssetsLoaded) {
     mainCharacterImage = new Image();
     plataformImg = new Image();
+    SuperJumpImg = new Image();
 
     let imagesLoaded = 0;
 
     function checkLoaded() {
         imagesLoaded++;
-        if (imagesLoaded === 2) {
+        if (imagesLoaded === 3) {
             onAssetsLoaded();
         }
     }
 
     mainCharacterImage.onload = checkLoaded;
     plataformImg.onload = checkLoaded;
+    SuperJumpImg.onload = checkLoaded;
 
     mainCharacterImage.src = "../Assets/Jump1.PNG";
     plataformImg.src = "../Assets/Plataforma1.png";
+    SuperJumpImg.src = "../Assets/JumpPowerUp.png";
 }
 
 
@@ -94,6 +98,10 @@ function update() {
             mainCharacter.bounce();
         }
 
+        if (p instanceof PowerUp && p.detectCollision(mainCharacter)) {
+            p.applyEffect(mainCharacter);
+        }
+
         if (p instanceof PlataformCambio) {
             p.checkCollision(mainCharacter);
         }
@@ -101,7 +109,7 @@ function update() {
 
     }
 
-    PlataformManager.list = PlataformManager.list.filter(p => p.y < canvasHeight);
+    PlataformManager.list = PlataformManager.list.filter(p => p.y < canvasHeight && !p.active);
 
     // Generar nuevas plataformas si es necesario
     let last = PlataformManager.list[PlataformManager.list.length - 1];
@@ -126,10 +134,11 @@ function drawScene() {
     
 }
 
-
+// configuracion de este nivel en particular 
 const level1Config = {
     probMov: 10,
     probStatic: 90,
+    probPowerUp:5,
     PListLevel1: [],
 };
 
