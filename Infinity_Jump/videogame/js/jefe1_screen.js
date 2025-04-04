@@ -12,6 +12,7 @@ let mainCharacterImage;
 
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
+
 const barreraIzq = new Limite(0, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 const barreraDer = new Limite(canvasWidth -10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 // const jefe1 = new Jefe1(canvasWidth/2,canvasHeight/2,100,100)

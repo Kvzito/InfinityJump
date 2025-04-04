@@ -11,6 +11,7 @@ let totalPlataforms = 0;
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
+
 // esta funcion asegura que las imagnes que se van a usar esten cargadas antes de empezar el juego
 function loadAssets(onAssetsLoaded) {
     mainCharacterImage = new Image();
@@ -123,7 +124,6 @@ function drawScene() {
     mainCharacter.draw(ctx); 
 
     textVida.draw(ctx, `Vida: ${mainCharacter.vida} %`);
-    
 }
 
 
