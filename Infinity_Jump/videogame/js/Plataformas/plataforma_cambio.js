@@ -11,6 +11,7 @@ class PlataformCambio extends Plataform {
             player.y < this.y + this.height &&
             player.y + player.height > this.y
         ) {
+            // cuando hace contacto cambia de pagina
             window.location.href = this.targetPage;
         }
     }

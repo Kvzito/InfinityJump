@@ -24,6 +24,7 @@ class MainCharacter {
         this.invTimer = 0;
     }
 
+    // controles del maincharacter
     listenControls() {
         document.addEventListener("keydown", (e) => {
             if (e.key === "ArrowRight" || e.key === "d") {
@@ -40,12 +41,13 @@ class MainCharacter {
         });
     }
 
+    // fisicas que tendra el main character 
     applyPhysics() {
         this.velocityY += this.gravedad;
         this.y += this.velocityY;
         this.x += this.velocityX;
 
-        // Invulnerabilidad: cuenta regresiva
+        // Invulnerabilidad para que no reciba tanto daño en un solo contacto 
         if (this.invulnerable) {
             this.invTimer--;
             if (this.invTimer <= 0) {
@@ -54,6 +56,7 @@ class MainCharacter {
         }
     }
 
+    // rebote en plataformas
     bounce() {
         this.velocityY = this.inicialVelY;
     }
@@ -61,7 +64,8 @@ class MainCharacter {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
-        ctx.strokeStyle = "red"; // Hitbox del jugador
+        // Hitbox del jugador
+        ctx.strokeStyle = "red"; 
         ctx.lineWidth = 1;
         ctx.strokeRect(
             this.x + this.hitboxOffsetX,
@@ -71,6 +75,7 @@ class MainCharacter {
         );
     }
 
+    // colicion con plataformas y jefes
     detectCollision(plataform) {
         let hitboxX = this.x + this.hitboxOffsetX;
         let hitboxY = this.y + this.hitboxOffsetY;
@@ -83,8 +88,8 @@ class MainCharacter {
         return isFalling && isInsideX && isTouchingTop && isAbove;
     }
 
-    activarInvulnerabilidad(duracion = 90) {
+    activarInvulnerabilidad(duracion = 100) {
         this.invulnerable = true;
-        this.invTimer = duracion; //  ~0.5 segundos (a 60fps)
+        this.invTimer = duracion; 
     }
 }
