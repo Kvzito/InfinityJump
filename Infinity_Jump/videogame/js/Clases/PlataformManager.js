@@ -49,7 +49,7 @@ class PM {
 
         totalPlataforms++;
 
-        if (totalPlataforms >= 1 && !this.cPlataform) {
+        if (totalPlataforms >= 50 && !this.cPlataform) {
             let portal = new PlataformCambio(-250, newY - 150, 1500, 100, this.img, "../html/jefe_1_screen.html");
             this.list.push(portal);
             this.cPlataform = true;
