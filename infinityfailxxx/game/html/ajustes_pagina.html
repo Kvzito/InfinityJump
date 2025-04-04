@@ -13,18 +13,19 @@
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
 
-        <button id="inicioButton" onclick="irAPrincipal()">Inicio</button>
+        <button id="ajustesButton" onclick="openAjustes()">Abrir Ajustes</button>
 
-        <div class="grid-container">
-            <div class="grid-item" id="grid-item-color">
+        <div id="ajustes" class="ajustes">
+            <div class="ajustes-content">
+                <span class="close" onclick="closeAjustes()">&times;</span>
                 <p>Música</p>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" id="musicCheckbox">
                     <span class="slider round"></span>
                 </label>
                 <p>Efectos de sonido</p>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" id="soundEffectsCheckbox">
                     <span class="slider round"></span>
                 </label>
             </div>

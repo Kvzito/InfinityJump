@@ -14,7 +14,7 @@ let jefe;
 let LevelList = [];
 
 const TextVidaJefe = new TextLabel(20 , 35, "30px Ubuntu Mono", "black");
-const textVida = new TextLabel(canvasWidth - 175 , 35, "30px Ubuntu Mono", "black");
+
 const barreraIzq = new Limite(0, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 const barreraDer = new Limite(canvasWidth -10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 
