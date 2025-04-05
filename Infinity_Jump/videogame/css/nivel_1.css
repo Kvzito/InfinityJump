@@ -1,7 +1,7 @@
 
 body {
     margin: 0;
-    
+    background-color: lightblue;
 }
 #headerContainer {
     grid-area: header;
@@ -14,6 +14,7 @@ body {
     justify-content: center; 
     align-items: center;
     text-decoration: wavy;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 1.5rem;
   }
 
@@ -26,7 +27,6 @@ body {
     width: 1000px;  /* Establece el tamaño del contenedor */
     height: 600px;  /* Establece el tamaño del contenedor */
     margin: 0 auto; /* Centra el contenedor */
-    border: 10px solid black; /* Añade un borde al contenedor */
     font-family: cursive;
 }
 

@@ -1,7 +1,7 @@
 body {
-    margin: 0;
-    
-  }
+  margin: 0;
+  background-color: lightblue;
+}
 
 #headerContainer{
     grid-area: header;
@@ -26,7 +26,6 @@ body {
     width: 1000px;  /* Establece el tamaño del contenedor */
     height: 600px;  /* Establece el tamaño del contenedor */
     margin: 0 auto; /* Centra el contenedor */
-    border: 10px solid black; /* Añade un borde al contenedor */
 }
 
 #canvas {
@@ -35,6 +34,7 @@ body {
   background-image: url('../Assets/Fondo\ Nivel\ 1.webp');
   background-size: cover;
   background-position: center;
+}
 
 #gameOverScreen {
     display: none;
