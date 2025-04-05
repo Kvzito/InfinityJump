@@ -1,7 +1,7 @@
 
 let canvas, ctx;
-let canvasHeight = 667;
-let canvasWidth = 1200;
+let canvasHeight = 650;
+let canvasWidth = 1150;
 
 let mainCharacter;
 let mainCharacterImage;

@@ -1,5 +1,5 @@
-const canvasWidth = 1000;
-const canvasHeight = 600;
+let canvasHeight = 650;
+let canvasWidth = 1150;
 
 function login() {
     const username = document.getElementById("username").value;

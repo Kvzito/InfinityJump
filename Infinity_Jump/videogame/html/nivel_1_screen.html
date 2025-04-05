@@ -22,25 +22,25 @@
         <h1>INFINITY JUMP</h1>
     </div>
     <div id="canvasContainer">
-        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
         <canvas id="canvas"></canvas>
-
-        <div id="ajustes" class="ajustes">
-            <div class="ajustes-content">
-                <span class="close" onclick="closeAjustes()">&times;</span>
-                <p>Música</p>
-                <label class="switch">
-                    <input type="checkbox" id="musicCheckbox">
-                    <span class="slider round"></span>
-                </label>
-                <p>Efectos de sonido</p>
-                <label class="switch">
-                    <input type="checkbox" id="soundEffectsCheckbox">
-                    <span class="slider round"></span>
-                </label>
-            </div>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+    </div>
+    
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox">
+                <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox">
+                <span class="slider round"></span>
+            </label>
         </div>
-</div>  
+    </div>
     <script> main(); </script>
 </body>
 </html>
