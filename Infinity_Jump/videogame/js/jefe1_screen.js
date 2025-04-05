@@ -1,7 +1,7 @@
 // Variables principales del canvas
 let canvas, ctx;
-let canvasHeight = 667;
-let canvasWidth = 1200;
+let canvasHeight = 650;
+let canvasWidth = 1150;
 
 // Variables del personaje principal y del jefe
 let mainCharacter;
@@ -15,9 +15,9 @@ let LevelList = [];
 
 // textos y barreras 
 const TextVidaJefe = new TextLabel(20 , 35, "30px Ubuntu Mono", "black");
-
-const barreraIzq = new Limite(0, 0, 10, canvasHeight, "rgb(111, 62, 67)");
-const barreraDer = new Limite(canvasWidth -10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
+const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
+const barreraIzq = new Limite(-10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
+const barreraDer = new Limite(canvasWidth +10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 
 // carga los assets 
 function loadAssets(onAssetsLoaded) {

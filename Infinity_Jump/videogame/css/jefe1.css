@@ -1,39 +1,23 @@
-body {
-  margin: 0;
-  background-color: lightblue;
+body{
+    text-align: center;
+    background-color: lightblue;
 }
-
-#headerContainer{
+#headerContainer {
     grid-area: header;
     background-color: lightblue;
     width: 100%;
-    height: 100%;
-    margin: 0;
+    height: 50px; 
     display: flex;
     flex-direction: row;
     justify-content: center; 
     align-items: center;
     text-decoration: wavy;
     font-size: 1.5rem;
-  }
-
-  h1{ 
-    margin: 0px;
-  }
-  
-  #canvasContainer {
-    position: relative;
-    width: 1000px;  /* Establece el tamaño del contenedor */
-    height: 600px;  /* Establece el tamaño del contenedor */
-    margin: 0 auto; /* Centra el contenedor */
+    font-family: cursive;
 }
 
 #canvas {
-  width: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
-  height: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
-  background-image: url('../Assets/Fondo\ Nivel\ 1.webp');
-  background-size: cover;
-  background-position: center;
+    background-image: url(../Assets/Fondo\ Nivel\ 1.webp);
 }
 
 #gameOverScreen {
@@ -59,4 +43,3 @@ body {
     font-size: 18px;
     cursor: pointer;
 }
-
