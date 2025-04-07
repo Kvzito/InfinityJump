@@ -1,77 +1,64 @@
 body {
-    margin: 0;
-    background-color: lightblue;
-  }
-  
-  
-  #headerContainer{
-    grid-area: header;
-    background-color: lightblue;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center; 
-    align-items: center;
-    text-decoration: wavy;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1.5rem;
-  }
-  
-    h1{ 
-      margin: 0px;
-    }
-  
-    #canvasContainer {
-      position: relative;
-      width: 1000px;  /* Establece el tamaño del contenedor */
-      height: 600px;  /* Establece el tamaño del contenedor */
-      margin: 0 auto; /* Centra el contenedor */
-      border: 10px solid black; /* Añade un borde al contenedor */
-  }
-  
-  #canvas {
-    width: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
-    height: 100%; /* Hace que el canvas ocupe todo el tamaño del contenedor */
-    background-image: url('../Assets/mainFondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  #botonTienda {
-    position: absolute;
-    top: 10px; /* Mantiene la distancia desde arriba */
-    left: 10px; /* Ajusta para que no esté pegado completamente a la izquierda */
-    padding: 10px 15px;
-    background-color: #db8d1c;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+  text-align: center;
+  background-color: lightblue;
+}
+
+#headerContainer {
+  grid-area: header;
+  background-color: lightblue;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: center;
+  text-decoration: wavy;
+  font-size: 1.5rem;
+  font-family: cursive;
+}
 
   
-.botonTienda:hover {
+  #canvasContainer {
+    position: relative;
+    display: inline-block;
+    width: 1150px;
+    height: 650px;
+    margin: 0 auto;
+}
+
+#canvas {
+  width: 100%;
+  height: 100%;
+  background-image: url('../Assets/mainFondo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+#menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#menu button {
+  width: 270px;
+  padding: 10px;
+  background-color: lightblue;
+  color: black;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#menu button:hover {
   background-color: #45a049;
 }
-  
-  #botonAjustes {
-    position: absolute;
-    top: 10px; /* Mantiene la distancia desde arriba */
-    left: 100px; /* Ajusta para que no esté pegado completamente a la izquierda */
-    padding: 10px 15px;
-    background-color: #db8d1c;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-  
-  }
-
-  .botonAjustes:hover {
-    background-color: #45a049;
-  }

@@ -4,8 +4,8 @@
     <!-- <script src="../js/PaginaPrincipal/funciones/ir_a_tienda.js"></script> -->
     
     <link rel="stylesheet" href="../css/mainPage.css">
-    <script src="../js/PaginaPrincipal/funciones/ir_a_tienda.js"></script>
     <script src="../js/PaginaPrincipal/funciones/textoPantalla.js"></script>
+    <script src="../js/paginaLogin/login.js"></script>
   
     <title>Infinity Jump</title>
 </head>
@@ -16,11 +16,14 @@
 
     <!-- Contenedor que tiene adentro el canvas -->
     <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+
         <div id="menu">
-            <button onclick="login()">Start</button>
-            <button onclick="login()">Tienda</button>
-            <button onclick="login()">Ajustes</button>
+            <button onclick= "openGame()">Jugar</button>
+            <p>      </p>
+            <button onclick ="openEstadisticas()">Estadisticas</button>
         </div>
+
     </div>
     
     <script> main(); </script>

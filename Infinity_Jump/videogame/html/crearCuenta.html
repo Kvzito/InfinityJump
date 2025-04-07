@@ -13,7 +13,6 @@
     </div>
 
     <div id="canvasContainer">
-        <!-- Canvas -->
         <canvas id="canvas"></canvas>
 
         <!-- Formulario de registro: usuario, contraseña y confirmar -->
@@ -33,6 +32,25 @@
                 <button type="submit" class="boton-register">Registrar</button>
             </div>
         </form>
+
+        <script>
+            const form = document.getElementById("registerForm");
+            form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const usuario = document.getElementById("usuario").value.trim();
+            const contrasena = document.getElementById("contrasena").value.trim();
+            const confirmaContrasena = document.getElementById("confirmar").value.trim();
+            const error = document.getElementById("mensajeError");
+    
+            if (!usuario || !contrasena || !confirmaContrasena) {
+                error.textContent = "Por favor llena todos los campos";
+            } else if (contrasena !== confirmaContrasena) {
+                error.textContent = "Las contraseñas son diferentes";
+            } else {
+                window.location.href = "loginPagina.html";
+            }
+            });
+        </script>
     </div>
 </body>
 </html>
