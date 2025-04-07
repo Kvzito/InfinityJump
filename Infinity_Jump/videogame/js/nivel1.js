@@ -117,6 +117,12 @@ function update() {
         if (last && last.y > 0 && !PlataformManager.cPlataform) {
             PlataformManager.newPlataform();
         }
+
+    if (mainCharacter.y > canvasHeight) {
+        mostrarGameOver();
+        return;
+    }
+
     drawScene();
 }
 
@@ -143,7 +149,12 @@ const level1Config = {
 };
 
 
-
-
+// funcion para el pop up cuando muere
+function mostrarGameOver() {
+        document.getElementById("gameOverScreen").style.display = "block";
+    }
+    function reiniciarJuego() {
+        location.reload();
+    }
 
 window.onload = main;
