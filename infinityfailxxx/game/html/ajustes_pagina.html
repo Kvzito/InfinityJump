@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/ajustes_pagina.css">
+    <script src="../js/tienda/tienda.js"></script> 
+    <title>Infinity Drive</title>
+</head>
+<body>
+    <div id="headerContainer">
+        <h1>INFINITY DRIVE</h1>
+    </div>
+
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+
+        <button id="ajustesButton" onclick="openAjustes()">Abrir Ajustes</button>
+
+        <div id="ajustes" class="ajustes">
+            <div class="ajustes-content">
+                <span class="close" onclick="closeAjustes()">&times;</span>
+                <p>Música</p>
+                <label class="switch">
+                    <input type="checkbox" id="musicCheckbox">
+                    <span class="slider round"></span>
+                </label>
+                <p>Efectos de sonido</p>
+                <label class="switch">
+                    <input type="checkbox" id="soundEffectsCheckbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        
+    </div>
+    <script> main(); </script>
+</body>
+</html>

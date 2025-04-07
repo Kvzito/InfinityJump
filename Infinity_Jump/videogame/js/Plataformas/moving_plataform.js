@@ -1,4 +1,4 @@
-class MovingPlataform extends Plataform {
+class MovingPlataform extends Plataform{
     constructor(x, y, width, height, img, range, speed) {
         super(x, y, width, height, img);
         this.originX = x;

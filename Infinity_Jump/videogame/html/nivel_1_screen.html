@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="stylesheet" href="../css/nivel_1.css">
+    <script src="../js/Clases/text_label.js"></script>
     <script src="../js/Plataformas/plataforma.js"></script>
+    <script src="../js/Plataformas/plataforma_cambio.js"></script>
     <script src="../js/Plataformas/moving_plataform.js"></script>
-    <script src="../js/personaje_principal/main_character.js"></script>
+    <script src="../js/Clases/powerUp.js"></script>
+    <script src="../js/PowerUps/super_jump.js"></script>
+    <script src="../js/Clases/PlataformManager.js"></script>
+    <script src="../js/personajes/main_character.js"></script>
     <script src="../js/nivel1.js"></script>
+    <script src="../js/ajustes.js"></script>
     <title>Infinity Jump</title>
 </head>
 <body>
@@ -15,9 +21,26 @@
     <div id="headerContainer">
         <h1>INFINITY JUMP</h1>
     </div>
-
-    <canvas id="canvas"></canvas>
-
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+    </div>
+    
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox">
+                <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
     <script> main(); </script>
 </body>
 </html>

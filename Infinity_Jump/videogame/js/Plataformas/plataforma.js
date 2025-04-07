@@ -1,4 +1,4 @@
-class Plataform {
+class Plataform{
     constructor(x, y, width, height, img) {
         this.x = x;
         this.y = y;

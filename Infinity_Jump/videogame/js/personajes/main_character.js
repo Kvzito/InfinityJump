@@ -14,8 +14,17 @@ class MainCharacter {
         this.hitboxHeight = 40;
         this.hitboxOffsetX = 10;
         this.hitboxOffsetY = 10;
+
+        this.vida = 100;
+        this.strength = 50
+        this.money = 0;
+
+        // Variables para controlar invulnerabilidad
+        this.invulnerable = false;
+        this.invTimer = 0;
     }
 
+    // controles del maincharacter
     listenControls() {
         document.addEventListener("keydown", (e) => {
             if (e.key === "ArrowRight" || e.key === "d") {
@@ -32,16 +41,22 @@ class MainCharacter {
         });
     }
 
+    // fisicas que tendra el main character 
     applyPhysics() {
         this.velocityY += this.gravedad;
-        
         this.y += this.velocityY;
         this.x += this.velocityX;
 
-        if (this.x > canvasWidth) this.x = 0;
-        else if (this.x + this.width < 0) this.x = canvasWidth;
+        // Invulnerabilidad para que no reciba tanto daño en un solo contacto 
+        if (this.invulnerable) {
+            this.invTimer--;
+            if (this.invTimer <= 0) {
+                this.invulnerable = false; // Ya puede recibir daño de nuevo
+            }
+        }
     }
 
+    // rebote en plataformas
     bounce() {
         this.velocityY = this.inicialVelY;
     }
@@ -49,7 +64,8 @@ class MainCharacter {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
-        ctx.strokeStyle = "red"; // Color del borde
+        // Hitbox del jugador
+        ctx.strokeStyle = "red"; 
         ctx.lineWidth = 1;
         ctx.strokeRect(
             this.x + this.hitboxOffsetX,
@@ -59,15 +75,21 @@ class MainCharacter {
         );
     }
 
+    // colicion con plataformas y jefes
     detectCollision(plataform) {
         let hitboxX = this.x + this.hitboxOffsetX;
         let hitboxY = this.y + this.hitboxOffsetY;
         let isFalling = this.velocityY >= 0;
-    
+
         let isInsideX = hitboxX + this.hitboxWidth > plataform.x && hitboxX < plataform.x + plataform.width;
         let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 10;
-    
+
         let isAbove = this.y + this.height <= plataform.y + 10;
         return isFalling && isInsideX && isTouchingTop && isAbove;
+    }
+
+    activarInvulnerabilidad(duracion = 100) {
+        this.invulnerable = true;
+        this.invTimer = duracion; 
     }
 }

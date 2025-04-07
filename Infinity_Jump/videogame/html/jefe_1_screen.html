@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="../css/jefe1.css">
+    <script src="../js/Clases/text_label.js"></script>
+    <script src="../js/Plataformas/plataforma.js"></script>
+    <script src="../js/Clases/clase_jefe.js"></script>
+    <script src="../js/personajes/jefe1.js"></script>
+    <script src="../js/Plataformas/barrera.js"></script>
+    <script src="../js/personajes/main_character.js"></script>
+    <script src="../js/jefe1_screen.js"></script>
+    <title>Infinity Jump</title>
+</head>
+<body>
+
+    <div id="headerContainer">
+        <h1>INFINITY JUMP</h1>
+    </div>
+
+    <div id="gameOverScreen">
+        <h2>¡Has perdido!</h2>
+        <button onclick="reiniciarJuego()">Reiniciar</button>
+    </div>
+
+    <!-- <script>
+        if (performance.navigation.type === 1) { // Si es recarga (F5 o Ctrl+R)
+            window.location.href = "../html/nivel_1_screen.html"; // o la ruta correcta a tu nivel 1
+        }
+    </script> -->
+    <div id="canvasContainer">
+    <canvas id="canvas"></canvas>
+</div>
+
+    <script> main(); </script>
+</body>
+</html>
