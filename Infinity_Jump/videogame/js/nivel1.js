@@ -7,6 +7,7 @@ let mainCharacter;
 let mainCharacterImage;
 let plataformImg;
 let SuperJumpImg;
+let EscudoImg;
 
 let totalPlataforms = 0;
 
@@ -18,6 +19,7 @@ function loadAssets(onAssetsLoaded) {
     mainCharacterImage = new Image();
     plataformImg = new Image();
     SuperJumpImg = new Image();
+    EscudoImg = new Image();
 
     let imagesLoaded = 0;
 
@@ -31,10 +33,13 @@ function loadAssets(onAssetsLoaded) {
     mainCharacterImage.onload = checkLoaded;
     plataformImg.onload = checkLoaded;
     SuperJumpImg.onload = checkLoaded;
+    EscudoImg.onload = checkLoaded;
 
     mainCharacterImage.src = "../Assets/Jump1.PNG";
     plataformImg.src = "../Assets/Plataforma1.png";
     SuperJumpImg.src = "../Assets/JumpPowerUp.png";
+    EscudoImg.src = "../Assets/EscudoPowerUp.png";
+
 }
 
 
@@ -59,7 +64,7 @@ function startGame() {
     );
     mainCharacter.listenControls();
 
-    PlataformManager = new PM(level1Config); // ← usa config para este nivel
+    PlataformManager = new PM(level1Config); // usa config para este nivel
     PlataformManager.img = plataformImg;
     PlataformManager.placePlataforms();
 
@@ -123,6 +128,8 @@ function update() {
         return;
     }
 
+    console.log(totalPlataforms);
+
     drawScene();
 }
 
@@ -144,7 +151,8 @@ function drawScene() {
 const level1Config = {
     probMov: 10,
     probStatic: 90,
-    probPowerUp:5,
+    probSuperJump:7,
+    probEscudo: 7,
     PListLevel1: [],
 };
 
@@ -152,9 +160,11 @@ const level1Config = {
 // funcion para el pop up cuando muere
 function mostrarGameOver() {
         document.getElementById("gameOverScreen").style.display = "block";
-    }
-    function reiniciarJuego() {
-        location.reload();
-    }
+
+}
+
+function reiniciarJuego() {
+    location.reload();
+}
 
 window.onload = main;

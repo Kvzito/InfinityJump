@@ -22,6 +22,10 @@ class MainCharacter {
         // Variables para controlar invulnerabilidad
         this.invulnerable = false;
         this.invTimer = 0;
+
+        // condiciones para e power up de escudo
+        this.escudoActivo = false;
+        this.imgEscudo = EscudoImg; 
     }
 
     // controles del maincharacter
@@ -62,7 +66,7 @@ class MainCharacter {
     }
 
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        
 
         // Hitbox del jugador
         ctx.strokeStyle = "red"; 
@@ -73,6 +77,18 @@ class MainCharacter {
             this.hitboxWidth,
             this.hitboxHeight
         );
+
+        //dibuja la imagen del escudo que se pone al rededor del personaje
+        if (this.escudoActivo && this.imgEscudo) {
+            ctx.drawImage(
+                this.imgEscudo,
+                this.x - 25, this.y - 25,
+                this.width + 50, this.height + 50
+            );
+        }
+
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        
     }
 
     // colicion con plataformas y jefes
