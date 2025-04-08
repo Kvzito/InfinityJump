@@ -37,7 +37,39 @@
             <p>Efectos de sonido</p>
             <label class="switch">
                 <input type="checkbox" id="soundEffectsCheckbox">
+                <span class="slider round"></s<body>
+
+    <div id="headerContainer">
+        <h1>INFINITY JUMP</h1>
+    </div>
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+    </div>
+
+    <div id="gameOverScreen" class="popup">
+        <h2>¡Has perdido!</h2>
+        <button onclick="reiniciarJuego()">Reiniciar</button>
+    </div>
+    
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox">
                 <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+    <script> main(); </script>
+</body>
+</html>pan>
             </label>
         </div>
     </div>

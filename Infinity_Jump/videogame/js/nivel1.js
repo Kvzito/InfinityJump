@@ -120,9 +120,9 @@ function update() {
         }
 
     if (mainCharacter.y > canvasHeight) {
-        mostrarGameOver();
         enviarStats();
-        intentoPlayer++;
+        // intentoPlayer++;
+        mostrarGameOver();
         return;
     }
 
@@ -152,18 +152,10 @@ const level1Config = {
 };
 
 
-// funcion para el pop up cuando muere
-function mostrarGameOver() {
-    document.getElementById("gameOverScreen").style.display = "block";
-    
-}function reiniciarJuego() {
-    location.reload();
-    }
+
 
 async function enviarStats()
 {
-    e.preventDefault();
-
     let response = await fetch('http://localhost:5000/api/Partidas',
     {
         method: 'POST',
@@ -190,5 +182,11 @@ async function enviarStats()
         console.log("Error al enviar los datos")
     }
 }
-
+// funcion para el pop up cuando muere
+function mostrarGameOver() {
+    document.getElementById("gameOverScreen").style.display = "block";   
+}
+function reiniciarJuego() {
+    location.reload();
+}
 window.onload = main;
