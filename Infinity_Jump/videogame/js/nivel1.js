@@ -119,12 +119,10 @@ function update() {
             PlataformManager.newPlataform();
         }
 
+    // Verificar si se muere el jugador
     if (mainCharacter.y > canvasHeight) {
-<<<<<<< HEAD
-        enviarStats();
+        // enviarStats();
         // intentoPlayer++;
-=======
->>>>>>> main
         mostrarGameOver();
         return;
     }
@@ -155,7 +153,6 @@ const level1Config = {
 };
 
 
-<<<<<<< HEAD
 
 
 async function enviarStats()
@@ -175,15 +172,6 @@ async function enviarStats()
             "plataformas_alcanzadas": totalPlataforms
         })
     })
-=======
-// funcion para el pop up cuando muere
-function mostrarGameOver() {
-        document.getElementById("gameOverScreen").style.display = "block";
-    }
-    function reiniciarJuego() {
-        location.reload();
-    }
->>>>>>> main
 
     if(response.ok)
     {
