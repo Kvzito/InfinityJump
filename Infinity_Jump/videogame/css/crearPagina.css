@@ -12,6 +12,7 @@
     align-items: center;
     text-decoration: wavy;
     font-size: 1.5rem;
+    font-family: cursive;
   }
 
   h1{ 
@@ -23,7 +24,6 @@
     width: 1000px;  /* Establece el tamaño del contenedor */
     height: 600px;  /* Establece el tamaño del contenedor */
     margin: 0 auto; /* Centra el contenedor */
-    border: 10px solid black; /* Añade un borde al contenedor */
 }
 
 #canvas {
