@@ -9,6 +9,7 @@ let plataformImg;
 let SuperJumpImg;
 
 let totalPlataforms = 0;
+let intentoPlayer = 1;
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
@@ -117,6 +118,14 @@ function update() {
         if (last && last.y > 0 && !PlataformManager.cPlataform) {
             PlataformManager.newPlataform();
         }
+
+    if (mainCharacter.y > canvasHeight) {
+        mostrarGameOver();
+        enviarStats();
+        intentoPlayer++;
+        return;
+    }
+
     drawScene();
 }
 
@@ -143,7 +152,43 @@ const level1Config = {
 };
 
 
+// funcion para el pop up cuando muere
+function mostrarGameOver() {
+    document.getElementById("gameOverScreen").style.display = "block";
+    
+}function reiniciarJuego() {
+    location.reload();
+    }
 
+async function enviarStats()
+{
+    e.preventDefault();
 
+    let response = await fetch('http://localhost:5000/api/Partidas',
+    {
+        method: 'POST',
+        headers:
+        {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify
+        ({
+            "id_usuario": 1,
+            "intento": intentoPlayer,
+            "nivel": 1,
+            "plataformas_alcanzadas": totalPlataforms
+        })
+    })
+
+    if(response.ok)
+    {
+        let results = await response.json()
+        console.log(results)
+    }
+    else
+    {
+        console.log("Error al enviar los datos")
+    }
+}
 
 window.onload = main;
