@@ -16,6 +16,9 @@
     <script src="../js/ajustes.js"></script>
     <title>Infinity Jump</title>
 </head>
+
+
+
 <body>
 
     <div id="headerContainer">
@@ -24,6 +27,16 @@
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
         <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+    </div>
+
+    <div id="gameOverScreen" class="popup">
+        <h2>¡Has perdido!</h2>
+        <button onclick="reiniciarJuego()">Reiniciar</button>
+    </div>
+
+    <div id="gameOverScreen">
+        <h2>¡Has perdido!</h2>
+        <button onclick="reiniciarJuego()">Reiniciar</button>
     </div>
     
     <div id="ajustes" class="ajustes">

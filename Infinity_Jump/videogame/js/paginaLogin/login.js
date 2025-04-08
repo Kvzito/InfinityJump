@@ -8,7 +8,7 @@ function login() {
         // Por ahora solo puedes hacer el log in con el usuario "hola" y la contraseña "1234"
         if (username === "hola" && password === "1234") {
             // Si los datos son correctos, redirige a la página principal
-            window.location.href = 'nivel_1_screen.html';
+            window.location.href = 'mainPage.html';
         } else {
             // manda una notificacion para que el usuario sepa que hacer
             alert("Usuario o contraseña incorrectos.");
@@ -16,4 +16,8 @@ function login() {
     } else {
         alert("Por favor, ingresa un usuario y contraseña.");
     }
+}
+
+function openGame(){
+    window.location.href = 'nivel_1_screen.html';
 }
