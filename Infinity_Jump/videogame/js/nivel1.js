@@ -4,38 +4,19 @@ let canvasHeight = 650;
 let canvasWidth = 1150;
 
 let mainCharacter;
-let mainCharacterImage;
-let plataformImg;
-let SuperJumpImg;
+let mainCharacterImage = new Image();
+mainCharacterImage.src = "../Assets/Jump1.PNG";
+let plataformImg = new Image();
+plataformImg.src = "../Assets/Plataforma1.png";
+let SuperJumpImg = new Image();
+SuperJumpImg.src = "../Assets/JumpPowerUp.png";
+let EscudoImg = new Image()
+EscudoImg.src = "../Assets/EscudoPowerUp.png"
 
 let totalPlataforms = 0;
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
-
-// esta funcion asegura que las imagnes que se van a usar esten cargadas antes de empezar el juego
-function loadAssets(onAssetsLoaded) {
-    mainCharacterImage = new Image();
-    plataformImg = new Image();
-    SuperJumpImg = new Image();
-
-    let imagesLoaded = 0;
-
-    function checkLoaded() {
-        imagesLoaded++;
-        if (imagesLoaded === 3) {
-            onAssetsLoaded();
-        }
-    }
-
-    mainCharacterImage.onload = checkLoaded;
-    plataformImg.onload = checkLoaded;
-    SuperJumpImg.onload = checkLoaded;
-
-    mainCharacterImage.src = "../Assets/Jump1.PNG";
-    plataformImg.src = "../Assets/Plataforma1.png";
-    SuperJumpImg.src = "../Assets/JumpPowerUp.png";
-}
 
 
 function main() {
@@ -44,7 +25,7 @@ function main() {
     canvas.height = canvasHeight;
     ctx = canvas.getContext('2d');
 
-    loadAssets(startGame);
+    startGame()
     
 }
 
@@ -59,7 +40,7 @@ function startGame() {
     );
     mainCharacter.listenControls();
 
-    PlataformManager = new PM(level1Config); // ← usa config para este nivel
+    PlataformManager = new PM(level1Config); // usa config para este nivel
     PlataformManager.img = plataformImg;
     PlataformManager.placePlataforms();
 
@@ -126,6 +107,8 @@ function update() {
         return;
     }
 
+    console.log(totalPlataforms);
+
     drawScene();
 }
 
@@ -147,17 +130,20 @@ function drawScene() {
 const level1Config = {
     probMov: 10,
     probStatic: 90,
-    probPowerUp:5,
+    probSuperJump:7,
+    probEscudo: 7,
     PListLevel1: [],
 };
 
 
 function mostrarGameOver() {
         document.getElementById("gameOverScreen").style.display = "block";
-    }
-    function reiniciarJuego() {
-        location.reload();
-    }
+
+}
+
+function reiniciarJuego() {
+    location.reload();
+}
 
 
 window.onload = main;
