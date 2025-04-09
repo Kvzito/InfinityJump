@@ -68,67 +68,98 @@ app.get('/nivel_1_screen.html', (request,response)=>
     })
 })
 
-app.post('/login', async (request, response) => {
-    const { username, password } = request.body;
+// app.post('/login', async (request, response) => {
+//     const { username, password } = request.body;
 
-    if (!username || !password) {
-        return response.status(400).send('Faltan datos de inicio de sesión.');
-    }
+//     if (!username || !password) {
+//         return response.status(400).send('Faltan datos de inicio de sesión.');
+//     }
 
-    try {
-        const connection = await connectToDB();
-        const [rows] = await connection.execute(
-            'SELECT * FROM users WHERE username = ? AND password = ?',
-            [username, password]
-        );
+//     try {
+//         const connection = await connectToDB();
+//         const [rows] = await connection.execute(
+//             'SELECT * FROM users WHERE username = ? AND password = ?',
+//             [username, password]
+//         );
 
-        if (rows.length > 0) {
-            response.status(200).send('Inicio de sesión exitoso.');
-        } else {
-            response.status(401).send('Credenciales incorrectas.');
-        }
+//         if (rows.length > 0) {
+//             response.status(200).send('Inicio de sesión exitoso.');
+//         } else {
+//             response.status(401).send('Credenciales incorrectas.');
+//         }
 
-        await connection.end();
-    } catch (error) {
-        console.error('Error al verificar el inicio de sesión:', error);
-        response.status(500).send('Error interno del servidor.');
-    }
-});
+//         await connection.end();
+//     } catch (error) {
+//         console.error('Error al verificar el inicio de sesión:', error);
+//         response.status(500).send('Error interno del servidor.');
+//     }
+// });
 
 // POST para insertar las estadísticas de una nueva partida por jugador
 
-app.post('/api/Partidas', async (request, response)=>{
+// app.post('/api/Partidas', async (request, response)=>{
 
-    let connection = null
+//     let connection = null
 
-    try
-    {    
-        connection = await connectToDB()
+//     try
+//     {    
+//         connection = await connectToDB()
 
-        const [results, fields] = await connection.query('insert into Partidas set ?', request.body)
+//         const [results, fields] = await connection.query('insert into Partidas set ?', request.body)
         
-        console.log(`${results.affectedRows} row inserted`)
-        response.status(201).json({'message': "Data inserted correctly."})
+//         console.log(`${results.affectedRows} row inserted`)
+//         response.status(201).json({'message': "Data inserted correctly."})
+//     }
+//     catch(error)
+//     {
+//         response.status(500)
+//         response.json(error)
+//         console.log(error)
+//     }
+//     finally
+//     {
+//         if(connection!==null) 
+//         {
+//             connection.end()
+//             console.log("Connection closed succesfully!")
+//         }
+//     }
+// })
+
+// Nuevo endpoint en el backend
+app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
+    let connection = null;
+    const { id_usuario, nivel, plataformas_alcanzadas } = request.body;
+
+    try {
+        connection = await connectToDB();
+
+        // Obten el max intento + 1 en una sola transacción
+        const [rows] = await connection.query(
+            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
+            [id_usuario]
+        );
+        const nuevo_intento = (rows[0].ultimo_intento || 0) + 1;
+
+        const [results] = await connection.query(
+            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES (?, ?, ?, ?)',
+            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas]
+        );
+
+        response.status(201).json({ message: "Insertado correctamente", intento: nuevo_intento });
+    } catch (error) {
+        console.error(error);
+        response.status(500).json(error);
+    } finally {
+        if (connection) connection.end();
     }
-    catch(error)
-    {
-        response.status(500)
-        response.json(error)
-        console.log(error)
-    }
-    finally
-    {
-        if(connection!==null) 
-        {
-            connection.end()
-            console.log("Connection closed succesfully!")
-        }
-    }
-})
+});
+
 
 // GET que sirve para verificar cual fue el último intento por ID de usuario y así evitar que se duplique
 
 app.get('/api/Partidas/ultimo-intento', async (request, response) => {
+
     const { id_usuario } = request.query;
     let connection = null;
 
@@ -143,6 +174,7 @@ app.get('/api/Partidas/ultimo-intento', async (request, response) => {
     } catch (error) {
         console.error(error);
         response.status(500).json({ error: "Error obteniendo el último intento" });
+        console.log("No se pudo obtener el último intento");
     } finally {
         if (connection !== null) connection.end();
     }

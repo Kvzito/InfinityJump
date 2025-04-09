@@ -10,6 +10,7 @@ let SuperJumpImg;
 
 let totalPlataforms = 0;
 let intentoPlayer = 1;
+let usuarioID = 1;
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
@@ -150,44 +151,73 @@ const level1Config = {
     PListLevel1: [],
 };
 
-async function enviarStats()
-{
-    // 1. Obtener el último intento desde el servidor
-    const usuarioID = 1;
-    let intentoPlayer = 1; // valor por defecto
+// async function obtenerIntento() {
+//     try {
+//         const responseIntento = await 
+//         fetch(`http://localhost:5000/api/Partidas/ultimo-intento?id_usuario=${usuarioID}`);
+//         if (responseIntento.ok){
+//             const data = await responseIntento.json();
+//             intentoPlayer = data.ultimo_intento + 1;
+//             console.log("Intento del jugador:", intentoPlayer);
+//         }
+//     } catch (error) {
+//         console.error("No se pudo obtener el último intento, asignando 1:", error);
+//         intentoPlayer = 1;
+//     }
+// }
 
+// async function enviarStats()
+// {
+//     // await obtenerIntento();
+    
+
+//     const response = await fetch('http://localhost:5000/api/Partidas', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             "id_usuario": usuarioID,
+//             "intento": intentoPlayer,
+//             "nivel": 1,
+//             "plataformas_alcanzadas": totalPlataforms
+//         })
+//     });
+
+//     if (response.ok) {
+//         const results = await response.json();
+//         console.log("Insertado correctamente:", results);
+//     } else {
+//         console.log("Error al enviar los datos");
+//     }
+// }
+
+async function enviarStats() {
     try {
-        const responseIntento = await fetch(`http://localhost:5000/api/Partidas/ultimo-intento?id_usuario=${usuarioID}`);
-        if (responseIntento.ok) {
-            const data = await responseIntento.json();
-            intentoPlayer = data.ultimo_intento + 1;  // sumamos 1
+        const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: usuarioID,
+                nivel: 1,
+                plataformas_alcanzadas: totalPlataforms
+            })
+        });
+
+        if (response.ok) {
+            const results = await response.json();
+            console.log("Insertado correctamente, intento:", results.intento);
+        } else {
+            const error = await response.json();
+            console.log("Error al enviar los datos:", error);
         }
     } catch (error) {
-        console.error("No se pudo obtener el último intento:", error);
-        return;
-    }
-
-    // 2. Enviar el POST con el intento correcto
-    const response = await fetch('http://localhost:5000/api/Partidas', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "id_usuario": usuarioID,
-            "intento": intentoPlayer,
-            "nivel": 1,
-            "plataformas_alcanzadas": totalPlataforms
-        })
-    });
-
-    if (response.ok) {
-        const results = await response.json();
-        console.log("Insertado correctamente:", results);
-    } else {
-        console.log("Error al enviar los datos");
+        console.error("Error en enviarStats:", error);
     }
 }
+
 
 // funcion para el pop up cuando muere
 function mostrarGameOver() {
@@ -195,7 +225,6 @@ function mostrarGameOver() {
 }
 
 function reiniciarJuego() {
-    intentoPlayer++;
     location.reload();
 }
 
