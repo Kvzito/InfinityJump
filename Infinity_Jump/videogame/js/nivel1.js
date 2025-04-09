@@ -120,6 +120,12 @@ function update() {
         if (last && last.y > 0 && !PlataformManager.cPlataform) {
             PlataformManager.newPlataform();
         }
+
+    if (mainCharacter.y > canvasHeight) {
+        mostrarGameOver();
+        return;
+    }
+
     drawScene();
 }
 
@@ -146,12 +152,20 @@ const level1Config = {
 };
 
 
+function mostrarGameOver() {
+        document.getElementById("gameOverScreen").style.display = "block";
+    }
+    function reiniciarJuego() {
+        location.reload();
+    }
+
 
 window.onload = main;
 
 // Música de nivel (se reproduce con primer clic si el checkbox está activado)
 document.addEventListener("DOMContentLoaded", () => {
     const musicCheckbox = document.getElementById("musicCheckbox");
+
 
     const iniciarMusicaNivel = () => {
         if (musicCheckbox && musicCheckbox.checked) {
