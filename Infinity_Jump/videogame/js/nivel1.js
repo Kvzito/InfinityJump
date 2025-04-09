@@ -121,8 +121,6 @@ function update() {
 
     // Verificar si se muere el jugador
     if (mainCharacter.y > canvasHeight) {
-        // enviarStats();
-        // intentoPlayer++;
         mostrarGameOver();
         return;
     }
@@ -152,42 +150,53 @@ const level1Config = {
     PListLevel1: [],
 };
 
-
-
-
 async function enviarStats()
 {
-    let response = await fetch('http://localhost:5000/api/Partidas',
-    {
+    // 1. Obtener el último intento desde el servidor
+    const usuarioID = 1;
+    let intentoPlayer = 1; // valor por defecto
+
+    try {
+        const responseIntento = await fetch(`http://localhost:5000/api/Partidas/ultimo-intento?id_usuario=${usuarioID}`);
+        if (responseIntento.ok) {
+            const data = await responseIntento.json();
+            intentoPlayer = data.ultimo_intento + 1;  // sumamos 1
+        }
+    } catch (error) {
+        console.error("No se pudo obtener el último intento:", error);
+        return;
+    }
+
+    // 2. Enviar el POST con el intento correcto
+    const response = await fetch('http://localhost:5000/api/Partidas', {
         method: 'POST',
-        headers:
-        {
+        headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify
-        ({
-            "id_usuario": 1,
+        body: JSON.stringify({
+            "id_usuario": usuarioID,
             "intento": intentoPlayer,
             "nivel": 1,
             "plataformas_alcanzadas": totalPlataforms
         })
-    })
+    });
 
-    if(response.ok)
-    {
-        let results = await response.json()
-        console.log(results)
-    }
-    else
-    {
-        console.log("Error al enviar los datos")
+    if (response.ok) {
+        const results = await response.json();
+        console.log("Insertado correctamente:", results);
+    } else {
+        console.log("Error al enviar los datos");
     }
 }
+
 // funcion para el pop up cuando muere
 function mostrarGameOver() {
-    document.getElementById("gameOverScreen").style.display = "block";   
+    document.getElementById("gameOverScreen").style.display = "block";
 }
+
 function reiniciarJuego() {
+    intentoPlayer++;
     location.reload();
 }
+
 window.onload = main;

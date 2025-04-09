@@ -95,6 +95,8 @@ app.post('/login', async (request, response) => {
     }
 });
 
+// POST para insertar las estadísticas de una nueva partida por jugador
+
 app.post('/api/Partidas', async (request, response)=>{
 
     let connection = null
@@ -124,36 +126,58 @@ app.post('/api/Partidas', async (request, response)=>{
     }
 })
 
-app.post('/register', async (request, response) => {
-    const { username, password } = request.body;
+// GET que sirve para verificar cual fue el último intento por ID de usuario y así evitar que se duplique
 
-    if (!username || !password) {
-        return response.status(400).send('Faltan datos para crear la cuenta.');
-    }
+app.get('/api/Partidas/ultimo-intento', async (request, response) => {
+    const { id_usuario } = request.query;
+    let connection = null;
 
     try {
-        const connection = await connectToDB();
-        const [existingUser] = await connection.execute(
-            'SELECT * FROM users WHERE username = ?',
-            [username]
+        connection = await connectToDB();
+        const [rows] = await connection.query(
+            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
+            [id_usuario]
         );
-
-        if (existingUser.length > 0) {
-            return response.status(409).send('El nombre de usuario ya está en uso.');
-        }
-
-        await connection.execute(
-            'INSERT INTO users (username, password) VALUES (?, ?)',
-            [username, password]
-        );
-
-        response.status(201).send('Cuenta creada exitosamente.');
-        await connection.end();
+        const ultimo_intento = rows[0].ultimo_intento || 0;
+        response.json({ ultimo_intento });
     } catch (error) {
-        console.error('Error al crear la cuenta:', error);
-        response.status(500).send('Error interno del servidor.');
+        console.error(error);
+        response.status(500).json({ error: "Error obteniendo el último intento" });
+    } finally {
+        if (connection !== null) connection.end();
     }
 });
+
+// app.post('/register', async (request, response) => {
+//     const { username, password } = request.body;
+
+//     if (!username || !password) {
+//         return response.status(400).send('Faltan datos para crear la cuenta.');
+//     }
+
+//     try {
+//         const connection = await connectToDB();
+//         const [existingUser] = await connection.execute(
+//             'SELECT * FROM users WHERE username = ?',
+//             [username]
+//         );
+
+//         if (existingUser.length > 0) {
+//             return response.status(409).send('El nombre de usuario ya está en uso.');
+//         }
+
+//         await connection.execute(
+//             'INSERT INTO users (username, password) VALUES (?, ?)',
+//             [username, password]
+//         );
+
+//         response.status(201).send('Cuenta creada exitosamente.');
+//         await connection.end();
+//     } catch (error) {
+//         console.error('Error al crear la cuenta:', error);
+//         response.status(500).send('Error interno del servidor.');
+//     }
+// });
 
 app.listen(port, ()=>
     {
