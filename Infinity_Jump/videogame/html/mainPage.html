@@ -4,11 +4,26 @@
     <!-- <script src="../js/PaginaPrincipal/funciones/ir_a_tienda.js"></script> -->
     
     <link rel="stylesheet" href="../css/mainPage.css">
-    <script src="../js/PaginaPrincipal/funciones/textoPantalla.js"></script>
     <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/ajustes.js"></script>
+    <script src="../js/sound.js"></script>
   
     <title>Infinity Jump</title>
 </head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const musicCheckbox = document.getElementById("musicCheckbox");
+    
+        const iniciarMusicaIntro = () => {
+            if (musicCheckbox && musicCheckbox.checked) {
+                enableMusic = true; // sincroniza por si acaso
+                reproducirMusica("menu");
+            }
+        };
+    
+        document.body.addEventListener("click", iniciarMusicaIntro);
+    });
+    </script>
 <body>
     <div id="headerContainer">
         <h1>INFINITY JUMP</h1>
@@ -17,15 +32,30 @@
     <!-- Contenedor que tiene adentro el canvas -->
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
-
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
         <div id="menu">
             <button onclick= "openGame()">Jugar</button>
             <p>      </p>
             <button onclick ="openEstadisticas()">Estadisticas</button>
         </div>
-
     </div>
-    
+
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
     <script> main(); </script>
 </body>
 </html>
