@@ -97,17 +97,20 @@ function update() {
         if (mainCharacter.detectCollision(p)) {
             mainCharacter.y = p.y - mainCharacter.height;
             mainCharacter.bounce();
+            // audio de plataformas
+            playSound("plataforma");
         }
 
         if (p instanceof PowerUp && p.detectCollision(mainCharacter)) {
             p.applyEffect(mainCharacter);
+            playSound("power");
         }
 
         if (p instanceof PlataformCambio) {
             p.checkCollision(mainCharacter);
         }
 
-
+        
     }
 
     PlataformManager.list = PlataformManager.list.filter(p => p.y < canvasHeight && !p.active);
@@ -144,6 +147,18 @@ const level1Config = {
 
 
 
-
-
 window.onload = main;
+
+// Música de nivel (se reproduce con primer clic si el checkbox está activado)
+document.addEventListener("DOMContentLoaded", () => {
+    const musicCheckbox = document.getElementById("musicCheckbox");
+
+    const iniciarMusicaNivel = () => {
+        if (musicCheckbox && musicCheckbox.checked) {
+            enableMusic = true;
+            reproducirMusica("bosque"); 
+        }
+    };
+
+    document.body.addEventListener("click", iniciarMusicaNivel);
+});
