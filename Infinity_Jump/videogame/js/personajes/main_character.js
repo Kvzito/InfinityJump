@@ -24,8 +24,8 @@ class MainCharacter {
         this.invTimer = 0;
 
         // condiciones para e power up de escudo
-        this.escudoActivo = false;
-        this.imgEscudo = EscudoImg; 
+        // this.escudoActivo = false;
+        // this.imgEscudo = EscudoImg; 
     }
 
     // controles del maincharacter
