@@ -10,7 +10,7 @@ class Jefe1 extends Jefe {
         this.topHitboxHeight = 10; 
         this.angle = 0; 
         this.direction = 1; 
-        this.speedX = 2; 
+        this.speedX = 4.3; 
         this.visible = true;    
     }
 
@@ -49,7 +49,7 @@ class Jefe1 extends Jefe {
         ctx.strokeRect(
             this.x,
             this.y,
-            this.width,
+            this.width - 5,
             this.topHitboxHeight
         );
     }
@@ -66,7 +66,7 @@ class Jefe1 extends Jefe {
 
         const golpeaCabeza = estaCayendo &&
             dentroX &&
-            jugadorBottom <= this.y + this.topHitboxHeight &&
+            jugadorBottom <= this.y + this.topHitboxHeight + 10&&
             jugadorBottom >= this.y;
 
         const golpeNormal = dentroX &&

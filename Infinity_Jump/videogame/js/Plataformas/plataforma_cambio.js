@@ -1,7 +1,6 @@
 class PlataformCambio extends Plataform {
-    constructor(x, y, width, height, img, targetPage) {
+    constructor(x, y, width, height, img) {
         super(x, y, width, height, img);
-        this.targetPage = targetPage;
     }
 
     checkCollision(player) {
@@ -11,9 +10,9 @@ class PlataformCambio extends Plataform {
             player.y < this.y + this.height &&
             player.y + player.height > this.y
         ) {
-            // cuando hace contacto cambia de pagina
-            window.location.href = this.targetPage;
+            return true; 
         }
+        return false;
     }
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);

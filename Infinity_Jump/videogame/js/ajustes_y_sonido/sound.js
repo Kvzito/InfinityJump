@@ -2,7 +2,7 @@
 const soundEffects = {
     plataforma : new Audio("../Assets/sounds/plataforma.mp3"),
     caida : new Audio("../Assets/sounds/caida.mp3"),
-    power : new Audio("../Assets/sounds/powerUp.mp3")
+    power : new Audio("../Assets/sounds/powerUp.ogg")
 };
 
 soundEffects.plataforma.volume = 0.4;
