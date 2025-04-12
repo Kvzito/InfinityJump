@@ -1,3 +1,10 @@
+/*
+*/
+
+//
+
+
+
 
 let canvas, ctx;
 let canvasHeight = 650;
@@ -10,7 +17,7 @@ let SuperJumpImg;
 
 let totalPlataforms = 0;
 let intentoPlayer = 1;
-let usuarioID = 1;
+let userID = localStorage.getItem('userID');
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
@@ -47,6 +54,12 @@ function main() {
     ctx = canvas.getContext('2d');
 
     loadAssets(startGame);
+
+    console.log("Main con usuario ID:", userID); // Verifica que el ID de usuario se haya cargado correctamente
+
+    // Obtenemos el ID del usuario
+
+    // userID = localStorage.getItem('userID');
     
 }
 
@@ -193,6 +206,9 @@ const level1Config = {
 // }
 
 async function enviarStats() {
+
+    console.log("Registrando cambios de USER ID:", userID);
+
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
             method: 'POST',
@@ -200,7 +216,7 @@ async function enviarStats() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id_usuario: usuarioID,
+                id_usuario: userID,
                 nivel: 1,
                 plataformas_alcanzadas: totalPlataforms
             })
