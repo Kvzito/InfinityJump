@@ -14,8 +14,8 @@ let jefe;
 let LevelList = [];
 
 // textos y barreras 
-const TextVidaJefe = new TextLabel(20 , 35, "30px Ubuntu Mono", "black");
-const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
+const TextVidaJefe = new TextLabel(20 , 85, "30px Ubuntu Mono", "black");
+const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 275 , "30px Ubuntu Mono",  "black");
 const barreraIzq = new Limite(-10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 const barreraDer = new Limite(canvasWidth +10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 
@@ -111,6 +111,7 @@ function update() {
         if (mainCharacter.detectCollision && mainCharacter.detectCollision(p)) {
             mainCharacter.y = p.y - mainCharacter.height;
             mainCharacter.bounce();
+            playSound("plataforma");
         }
     }
 
@@ -163,6 +164,7 @@ function drawScene() {
 
 function mostrarGameOver() {
     document.getElementById("gameOverScreen").style.display = "block";
+    stopSound("plataforma");
 }
 
 function reiniciarJuego() {
@@ -171,3 +173,17 @@ function reiniciarJuego() {
 
 // Ejecutar la función principal cuando cargue la página
 window.onload = main;
+
+// Música de nivel (se reproduce con primer clic si el checkbox está activado)
+document.addEventListener("DOMContentLoaded", () => {
+    const musicCheckbox = document.getElementById("musicCheckbox");
+
+    const iniciarMusicaNivel = () => {
+        if (musicCheckbox && musicCheckbox.checked) {
+            enableMusic = true;
+            reproducirMusica("enemy"); 
+        }
+    };
+
+    document.body.addEventListener("click", iniciarMusicaNivel);
+});
