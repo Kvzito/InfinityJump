@@ -89,6 +89,7 @@ function update() {
 
         if (p instanceof PlataformCambio) {
             p.checkCollision(mainCharacter);
+            playSound("portal");
         }
 
         
@@ -103,6 +104,7 @@ function update() {
         }
 
     if (mainCharacter.y > canvasHeight) {
+        playSound("caida");
         mostrarGameOver();
         return;
     }

@@ -164,6 +164,7 @@ function drawScene() {
 
 function mostrarGameOver() {
     document.getElementById("gameOverScreen").style.display = "block";
+    stopSound("plataforma");
 }
 
 function reiniciarJuego() {
@@ -180,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const iniciarMusicaNivel = () => {
         if (musicCheckbox && musicCheckbox.checked) {
             enableMusic = true;
-            reproducirMusica("bosque"); 
+            reproducirMusica("enemy"); 
         }
     };
 
