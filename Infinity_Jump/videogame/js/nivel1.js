@@ -1,3 +1,10 @@
+/*
+*/
+
+//
+
+
+
 
 let canvas, ctx;
 let canvasHeight = 650;
@@ -14,6 +21,8 @@ let EscudoImg = new Image()
 EscudoImg.src = "../Assets/EscudoPowerUp.png"
 
 let totalPlataforms = 0;
+let intentoPlayer = 1;
+let userID = localStorage.getItem('userID');
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
@@ -25,8 +34,10 @@ function main() {
     canvas.height = canvasHeight;
     ctx = canvas.getContext('2d');
 
+
     startGame()
-    
+    console.log("Main con usuario ID:", userID); // Verifica que el ID de usuario se haya cargado correctamente
+  
 }
 
 // Esta funcion crea el personaje principal junto con la funcion que le permite ser controlado por botones.
@@ -103,6 +114,7 @@ function update() {
             PlataformManager.newPlataform();
         }
 
+    // Verificar si se muere el jugador
     if (mainCharacter.y > canvasHeight) {
         playSound("caida");
         mostrarGameOver();
@@ -137,16 +149,84 @@ const level1Config = {
     PListLevel1: [],
 };
 
+// async function obtenerIntento() {
+//     try {
+//         const responseIntento = await 
+//         fetch(`http://localhost:5000/api/Partidas/ultimo-intento?id_usuario=${usuarioID}`);
+//         if (responseIntento.ok){
+//             const data = await responseIntento.json();
+//             intentoPlayer = data.ultimo_intento + 1;
+//             console.log("Intento del jugador:", intentoPlayer);
+//         }
+//     } catch (error) {
+//         console.error("No se pudo obtener el último intento, asignando 1:", error);
+//         intentoPlayer = 1;
+//     }
+// }
+
+// async function enviarStats()
+// {
+//     // await obtenerIntento();
+    
+
+//     const response = await fetch('http://localhost:5000/api/Partidas', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             "id_usuario": usuarioID,
+//             "intento": intentoPlayer,
+//             "nivel": 1,
+//             "plataformas_alcanzadas": totalPlataforms
+//         })
+//     });
+
+//     if (response.ok) {
+//         const results = await response.json();
+//         console.log("Insertado correctamente:", results);
+//     } else {
+//         console.log("Error al enviar los datos");
+//     }
+// }
+
+async function enviarStats() {
+
+    console.log("Registrando cambios de USER ID:", userID);
+
+    try {
+        const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: userID,
+                nivel: 1,
+                plataformas_alcanzadas: totalPlataforms
+            })
+        });
+
+        if (response.ok) {
+            const results = await response.json();
+            console.log("Insertado correctamente, intento:", results.intento);
+        } else {
+            const error = await response.json();
+            console.log("Error al enviar los datos:", error);
+        }
+    } catch (error) {
+        console.error("Error en enviarStats:", error);
+    }
+}
+
 
 function mostrarGameOver() {
-        document.getElementById("gameOverScreen").style.display = "block";
-
+    document.getElementById("gameOverScreen").style.display = "block";
 }
 
 function reiniciarJuego() {
     location.reload();
 }
-
 
 window.onload = main;
 
