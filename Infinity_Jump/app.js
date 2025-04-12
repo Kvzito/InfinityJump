@@ -68,32 +68,35 @@ app.get('/nivel_1_screen.html', (request,response)=>
     })
 })
 
-// app.post('/login', async (request, response) => {
-//     const { username, password } = request.body;
+app.post('/api/buscarUser', async (request, response) => {
 
-//     if (!username || !password) {
-//         return response.status(400).send('Faltan datos de inicio de sesión.');
-//     }
+    const { username, password } = request.body;
 
-//     try {
-//         const connection = await connectToDB();
-//         const [rows] = await connection.execute(
-//             'SELECT * FROM users WHERE username = ? AND password = ?',
-//             [username, password]
-//         );
+    if (!username || !password) {
+        return response.status(400).send('Faltan datos de inicio de sesión.');
+    }
 
-//         if (rows.length > 0) {
-//             response.status(200).send('Inicio de sesión exitoso.');
-//         } else {
-//             response.status(401).send('Credenciales incorrectas.');
-//         }
+    try {
+        const connection = await connectToDB();
 
-//         await connection.end();
-//     } catch (error) {
-//         console.error('Error al verificar el inicio de sesión:', error);
-//         response.status(500).send('Error interno del servidor.');
-//     }
-// });
+        const [rows] = await connection.query(
+            'SELECT * FROM MostrarJugadores WHERE usuario = ? AND contrasena = ?',
+            [username, password]
+        );
+
+        if (rows.length > 0) {
+            response.status(200).json({ message: "Inicio de sesión exitoso.", userID: rows[0].id_usuario });
+            console.log("Inicio de sesión exitoso, id del usuario: ", rows[0].id_usuario);
+        } else {
+            response.status(401).send('Credenciales incorrectas.');
+        }
+
+        await connection.end();
+    } catch (error) {
+        console.error('Error al verificar el inicio de sesión:', error);
+        response.status(500).send('Error interno del servidor.');
+    }
+});
 
 // POST para insertar las estadísticas de una nueva partida por jugador
 
@@ -126,7 +129,8 @@ app.get('/nivel_1_screen.html', (request,response)=>
 //     }
 // })
 
-// Nuevo endpoint en el backend
+// End point para insertar estadísticas de una nueva partida, pero con el intento correspondiente
+
 app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
     let connection = null;
     const { id_usuario, nivel, plataformas_alcanzadas } = request.body;
