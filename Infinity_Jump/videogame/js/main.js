@@ -3,6 +3,10 @@ let canvasHeight = 650;
 let canvasWidth = 1150;
 let gameRunning = false;
 
+// fondos
+let fondoCieloImg = new Image();
+fondoCieloImg.src = "../Assets/FondoCielo.png";
+
 // personaje principal y texto de vida global
 let mainCharacter;
 const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
@@ -27,7 +31,7 @@ jefeImgDer.src = "../Assets/JefePlantaDer.png";
 
 //imagenes nivel 2
 plataformImg2 = new Image();
-plataformImg2.src = ""
+plataformImg2.src = "../Assets/PlataformaNube.png"
 
 // imagenes power ups
 let SuperJumpImg = new Image();

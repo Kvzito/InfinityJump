@@ -3,6 +3,7 @@ function levelJefe1() {
     // Variables del personaje principal y del jefe
     let jefe;
     let LevelList = [];
+    let plataformasExtraAgregadas = false;
 
     // textos y barreras 
     const textVidaJefe = new TextLabel(canvasWidth / 2 - 80, 50, "30px Ubuntu Mono", "black");
@@ -44,6 +45,11 @@ function levelJefe1() {
                     mainCharacter.bounce();
                     playSound("plataforma");
                 }
+
+                if (p instanceof PlataformCambio && p.checkCollision(mainCharacter)) {
+                    nextLevel(); // Avanza al siguiente nivel
+                    return; 
+                }
             }
 
             // Detener movimiento si toca las barreras laterales
@@ -66,6 +72,17 @@ function levelJefe1() {
             if (jefe.vida <= 0) {
                 jefe.visible = false;
                 // puedes usar nextLevel(); si quieres continuar después
+
+                if (!plataformasExtraAgregadas) {
+                    plataformasExtraAgregadas = true;
+            
+                    LevelList.push(
+                        new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg1),
+                        new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg1),
+                        new PlataformCambio(-250, -5,1500, 100, plataformImg1)
+
+                    );
+                }
             }
         };
 

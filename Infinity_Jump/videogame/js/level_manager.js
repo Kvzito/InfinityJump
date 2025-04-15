@@ -4,7 +4,7 @@ let currentUpdate = null;
 let currentDraw = null;
 
 function loadLevels() {
-    levels = [level1, levelJefe1];
+    levels = [level1, levelJefe1, level2];
     currentLevelIndex = 0;
     levels[currentLevelIndex]();
 }
