@@ -27,3 +27,25 @@ async function login() {
         return;
     }
 }
+
+
+function openGame(){
+    window.location.href = 'loginPagina.html';
+}
+
+function openMain(){
+    window.location.href = 'mainPage.html';
+}
+
+function openManual(){
+    window.location.href = 'manual.html';
+}
+
+function openHistoria(){
+    window.location.href = 'historia.html';
+}
+
+function openEstadisticas(){
+    window.location.href = 'estadisiticas.html';
+}
+
