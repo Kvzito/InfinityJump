@@ -22,7 +22,6 @@
 
 
 <body>
-
     <div id="headerContainer">
         <h1>INFINITY JUMP</h1>
     </div>
@@ -30,13 +29,11 @@
         <canvas id="canvas"></canvas>
         <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     </div>
-
+    
     <div id="gameOverScreen" class="popup">
         <h2>¡Has perdido!</h2>
-        <button onclick="reiniciarJuego()">Reiniciar</button>
+        <button onclick="enviarStats(); reiniciarJuego(); console.log('Usuario:', userID)">Reiniciar</button>
     </div>
-
-    
     <div id="ajustes" class="ajustes">
         <div class="ajustes-content">
             <span class="close" onclick="closeAjustes()">&times;</span>
