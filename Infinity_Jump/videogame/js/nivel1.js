@@ -1,42 +1,31 @@
+/*
+*/
+
+//
+
+
+
 
 let canvas, ctx;
 let canvasHeight = 650;
 let canvasWidth = 1150;
 
 let mainCharacter;
-let mainCharacterImage;
-let plataformImg;
-let SuperJumpImg;
+let mainCharacterImage = new Image();
+mainCharacterImage.src = "../Assets/Jump1.PNG";
+let plataformImg = new Image();
+plataformImg.src = "../Assets/Plataforma1.png";
+let SuperJumpImg = new Image();
+SuperJumpImg.src = "../Assets/JumpPowerUp.png";
+let EscudoImg = new Image()
+EscudoImg.src = "../Assets/EscudoPowerUp.png"
 
 let totalPlataforms = 0;
 let intentoPlayer = 1;
+let userID = localStorage.getItem('userID');
 
 const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
 
-
-// esta funcion asegura que las imagnes que se van a usar esten cargadas antes de empezar el juego
-function loadAssets(onAssetsLoaded) {
-    mainCharacterImage = new Image();
-    plataformImg = new Image();
-    SuperJumpImg = new Image();
-
-    let imagesLoaded = 0;
-
-    function checkLoaded() {
-        imagesLoaded++;
-        if (imagesLoaded === 3) {
-            onAssetsLoaded();
-        }
-    }
-
-    mainCharacterImage.onload = checkLoaded;
-    plataformImg.onload = checkLoaded;
-    SuperJumpImg.onload = checkLoaded;
-
-    mainCharacterImage.src = "../Assets/Jump1.PNG";
-    plataformImg.src = "../Assets/Plataforma1.png";
-    SuperJumpImg.src = "../Assets/JumpPowerUp.png";
-}
 
 
 function main() {
@@ -45,8 +34,10 @@ function main() {
     canvas.height = canvasHeight;
     ctx = canvas.getContext('2d');
 
-    loadAssets(startGame);
-    
+
+    startGame()
+    console.log("Main con usuario ID:", userID); // Verifica que el ID de usuario se haya cargado correctamente
+  
 }
 
 // Esta funcion crea el personaje principal junto con la funcion que le permite ser controlado por botones.
@@ -60,7 +51,7 @@ function startGame() {
     );
     mainCharacter.listenControls();
 
-    PlataformManager = new PM(level1Config); // ← usa config para este nivel
+    PlataformManager = new PM(level1Config); // usa config para este nivel
     PlataformManager.img = plataformImg;
     PlataformManager.placePlataforms();
 
@@ -98,17 +89,21 @@ function update() {
         if (mainCharacter.detectCollision(p)) {
             mainCharacter.y = p.y - mainCharacter.height;
             mainCharacter.bounce();
+            // audio de plataformas
+            playSound("plataforma");
         }
 
         if (p instanceof PowerUp && p.detectCollision(mainCharacter)) {
             p.applyEffect(mainCharacter);
+            playSound("power");
         }
 
         if (p instanceof PlataformCambio) {
             p.checkCollision(mainCharacter);
+            playSound("portal");
         }
 
-
+        
     }
 
     PlataformManager.list = PlataformManager.list.filter(p => p.y < canvasHeight && !p.active);
@@ -121,11 +116,12 @@ function update() {
 
     // Verificar si se muere el jugador
     if (mainCharacter.y > canvasHeight) {
-        // enviarStats();
-        // intentoPlayer++;
+        playSound("caida");
         mostrarGameOver();
         return;
     }
+
+    console.log(totalPlataforms);
 
     drawScene();
 }
@@ -148,46 +144,103 @@ function drawScene() {
 const level1Config = {
     probMov: 10,
     probStatic: 90,
-    probPowerUp:5,
+    probSuperJump:7,
+    probEscudo: 7,
     PListLevel1: [],
 };
 
+// async function obtenerIntento() {
+//     try {
+//         const responseIntento = await 
+//         fetch(`http://localhost:5000/api/Partidas/ultimo-intento?id_usuario=${usuarioID}`);
+//         if (responseIntento.ok){
+//             const data = await responseIntento.json();
+//             intentoPlayer = data.ultimo_intento + 1;
+//             console.log("Intento del jugador:", intentoPlayer);
+//         }
+//     } catch (error) {
+//         console.error("No se pudo obtener el último intento, asignando 1:", error);
+//         intentoPlayer = 1;
+//     }
+// }
 
+// async function enviarStats()
+// {
+//     // await obtenerIntento();
+    
 
+//     const response = await fetch('http://localhost:5000/api/Partidas', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             "id_usuario": usuarioID,
+//             "intento": intentoPlayer,
+//             "nivel": 1,
+//             "plataformas_alcanzadas": totalPlataforms
+//         })
+//     });
 
-async function enviarStats()
-{
-    let response = await fetch('http://localhost:5000/api/Partidas',
-    {
-        method: 'POST',
-        headers:
-        {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify
-        ({
-            "id_usuario": 1,
-            "intento": intentoPlayer,
-            "nivel": 1,
-            "plataformas_alcanzadas": totalPlataforms
-        })
-    })
+//     if (response.ok) {
+//         const results = await response.json();
+//         console.log("Insertado correctamente:", results);
+//     } else {
+//         console.log("Error al enviar los datos");
+//     }
+// }
 
-    if(response.ok)
-    {
-        let results = await response.json()
-        console.log(results)
-    }
-    else
-    {
-        console.log("Error al enviar los datos")
+async function enviarStats() {
+
+    console.log("Registrando cambios de USER ID:", userID);
+
+    try {
+        const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: userID,
+                nivel: 1,
+                plataformas_alcanzadas: totalPlataforms
+            })
+        });
+
+        if (response.ok) {
+            const results = await response.json();
+            console.log("Insertado correctamente, intento:", results.intento);
+        } else {
+            const error = await response.json();
+            console.log("Error al enviar los datos:", error);
+        }
+    } catch (error) {
+        console.error("Error en enviarStats:", error);
     }
 }
-// funcion para el pop up cuando muere
+
+
 function mostrarGameOver() {
-    document.getElementById("gameOverScreen").style.display = "block";   
+    document.getElementById("gameOverScreen").style.display = "block";
 }
+
 function reiniciarJuego() {
     location.reload();
 }
+
 window.onload = main;
+
+// Música de nivel (se reproduce con primer clic si el checkbox está activado)
+document.addEventListener("DOMContentLoaded", () => {
+    const musicCheckbox = document.getElementById("musicCheckbox");
+
+
+    const iniciarMusicaNivel = () => {
+        if (musicCheckbox && musicCheckbox.checked) {
+            enableMusic = true;
+            reproducirMusica("bosque"); 
+        }
+    };
+
+    document.body.addEventListener("click", iniciarMusicaNivel);
+});

@@ -73,13 +73,18 @@ class Jefe1 extends Jefe {
             jugadorBottom > this.y + this.hitboxOffsetY &&
             jugadorTop < this.y + this.hitboxOffsetY + this.hitboxHeight;
 
-        if (golpeaCabeza) {
-            this.vida -= jugador.strength; // quítale vida al jefe
-            jugador.bounce(); // el jugador rebota
-        } else if (golpeNormal && !jugador.invulnerable) {
-            jugador.vida -= this.strength;
-            jugador.activarInvulnerabilidad();
-        }
+            if (golpeaCabeza) {
+                this.vida -= jugador.strength; // quítale vida al jefe
+                jugador.bounce(); // el jugador rebota
+            } else if (golpeNormal && !jugador.invulnerable) {
+                if (jugador.escudoActivo) {
+                    jugador.escudoActivo = false;
+                } else {
+                    jugador.vida -= this.strength;
+                }
+                jugador.activarInvulnerabilidad();
+            }
+            
         
     }
 }

@@ -4,28 +4,87 @@
     <!-- <script src="../js/PaginaPrincipal/funciones/ir_a_tienda.js"></script> -->
     
     <link rel="stylesheet" href="../css/mainPage.css">
-    <script src="../js/PaginaPrincipal/funciones/textoPantalla.js"></script>
     <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/ajustes.js"></script>
+    <script src="../js/sound.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
   
     <title>Infinity Jump</title>
 </head>
 <body>
-    <div id="headerContainer">
+    <header>
         <h1>INFINITY JUMP</h1>
+        <nav>
+            <div class="buttonNav">
+                <a href="loginPagina.html" class="boton-header">Jugar</a>
+            </div>
+            <div class="buttonNav">
+                <a href="creditos.html" class="boton-header">Créditos</a>
+            </div>
+        </nav>
+    </header>
     </div>
 
     <!-- Contenedor que tiene adentro el canvas -->
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+
+        <h1>Bienvenidos a Infinity Jump</h1>
+
+        <div id="intro">
+            <p>Malvin necesita llegar a la luna para conquistar a el amor de su vida.</p>
+            <p>Necesita subir en las plataformas y enfrentar un enemigo diferente. </p>
+            <p>¡Acompaña a Malvin en esta aventura!</p>
+        </div>
 
         <div id="menu">
             <button onclick= "openGame()">Jugar</button>
+            <p>       </p>
+            <button onclick ="openManual()">Instrucciones</button>
+            <p>      </p>
+            <button onclick ="openHistoria()">Historia</button>
             <p>      </p>
             <button onclick ="openEstadisticas()">Estadisticas</button>
-        </div>
 
+        </div>
     </div>
-    
-    <script> main(); </script>
+
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+
 </body>
+<footer>
+    <p>Silver Way Studios &copy; 2025</p>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const musicCheckbox = document.getElementById("musicCheckbox");
+    
+        const iniciarMusicaIntro = () => {
+            if (musicCheckbox && musicCheckbox.checked) {
+                reproducirMusica("menu");
+            }
+        };
+    
+        document.body.addEventListener("click", iniciarMusicaIntro);
+    });
+</script>
+
 </html>
