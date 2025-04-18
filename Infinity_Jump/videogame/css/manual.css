@@ -1,0 +1,132 @@
+@font-face {
+    font-family: 'Pixelify Sans';
+    src: url('../Assets/pixelFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  header, button, body{
+    font-family: 'Pixelify Sans', sans-serif;
+  }
+  body {
+    text-align: center;
+    background-color: lightblue;
+  }
+
+
+  header {
+    background-color: lightblue;
+    width: 1150px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+  
+    
+    #canvasContainer {
+      position: relative;
+      display: inline-block;
+      width: 1150px;
+      height: 650px;
+      margin: 0 auto;
+  }
+  
+  #canvas {
+    width: 100%;
+    height: 100%;
+    background-image: url('../Assets/mainFondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+  }
+  
+  #ajustesButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 15px;
+    background-color: lightblue;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 2;
+  } 
+  
+  #ajustesButton:hover {
+    background-color: #45a049;
+  }
+
+  #canvasContainer h1{
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+  }
+
+#texto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  text-align: left;
+}
+
+h2{
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+#seccion p {
+    font-size: small;
+}
+
+.lista {
+  padding-left: 20px;
+}  
+
+
+#gameButton {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    padding: 10px 20px;
+    background-color: lightblue;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  #gameButton:hover {
+    background-color: #45a049;
+  }
+
+footer {
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 20px;
+}
+  
