@@ -10,17 +10,18 @@
     <script src="../js/Plataformas/moving_plataform.js"></script>
     <script src="../js/Clases/powerUp.js"></script>
     <script src="../js/PowerUps/super_jump.js"></script>
+    <script src="../js/PowerUps/escudo.js"></script>
     <script src="../js/Clases/PlataformManager.js"></script>
     <script src="../js/personajes/main_character.js"></script>
     <script src="../js/nivel1.js"></script>
     <script src="../js/ajustes.js"></script>
+    <script src="../js/sound.js"></script>
     <title>Infinity Jump</title>
 </head>
 
 
 
 <body>
-
     <div id="headerContainer">
         <h1>INFINITY JUMP</h1>
     </div>
@@ -28,64 +29,27 @@
         <canvas id="canvas"></canvas>
         <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     </div>
-
+    
     <div id="gameOverScreen" class="popup">
         <h2>¡Has perdido!</h2>
-        <button onclick="reiniciarJuego()">Reiniciar</button>
+        <button onclick="enviarStats(); reiniciarJuego(); console.log('Usuario:', userID)">Reiniciar</button>
     </div>
-
-    <div id="gameOverScreen">
-        <h2>¡Has perdido!</h2>
-        <button onclick="reiniciarJuego()">Reiniciar</button>
-    </div>
-    
     <div id="ajustes" class="ajustes">
         <div class="ajustes-content">
             <span class="close" onclick="closeAjustes()">&times;</span>
             <p>Música</p>
             <label class="switch">
-                <input type="checkbox" id="musicCheckbox">
+                <input type="checkbox" id="musicCheckbox" checked>
                 <span class="slider round"></span>
             </label>
             <p>Efectos de sonido</p>
             <label class="switch">
-                <input type="checkbox" id="soundEffectsCheckbox">
-                <span class="slider round"></s<body>
-
-    <div id="headerContainer">
-        <h1>INFINITY JUMP</h1>
-    </div>
-    <div id="canvasContainer">
-        <canvas id="canvas"></canvas>
-        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
-    </div>
-
-    <div id="gameOverScreen" class="popup">
-        <h2>¡Has perdido!</h2>
-        <button onclick="reiniciarJuego()">Reiniciar</button>
-    </div>
-    
-    <div id="ajustes" class="ajustes">
-        <div class="ajustes-content">
-            <span class="close" onclick="closeAjustes()">&times;</span>
-            <p>Música</p>
-            <label class="switch">
-                <input type="checkbox" id="musicCheckbox">
-                <span class="slider round"></span>
-            </label>
-            <p>Efectos de sonido</p>
-            <label class="switch">
-                <input type="checkbox" id="soundEffectsCheckbox">
+                <input type="checkbox" id="soundEffectsCheckbox" checked>
                 <span class="slider round"></span>
             </label>
         </div>
     </div>
-    <script> main(); </script>
-</body>
-</html>pan>
-            </label>
-        </div>
-    </div>
+
     <script> main(); </script>
 </body>
 </html>

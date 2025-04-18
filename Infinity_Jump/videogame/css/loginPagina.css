@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('../Assets/pixelFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, button{
+  font-family: 'Pixelify Sans', sans-serif;
+}
 body {
   text-align: center;
   background-color: lightblue;
@@ -14,7 +24,6 @@ body {
   align-items: center;
   text-decoration: wavy;
   font-size: 1.5rem;
-  font-family: cursive;
 }
 
   
@@ -35,6 +44,25 @@ body {
   background-repeat: no-repeat;
   display: block;
 }
+
+#ajustesButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px 15px;
+  background-color: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 2;
+} 
+
+#ajustesButton:hover {
+  background-color: #45a049;
+}
+
 
   #login-form {
     position: absolute;
