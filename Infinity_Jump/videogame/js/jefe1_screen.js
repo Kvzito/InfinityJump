@@ -14,8 +14,8 @@ let jefe;
 let LevelList = [];
 
 // textos y barreras 
-const TextVidaJefe = new TextLabel(20 , 85, "30px Ubuntu Mono", "black");
-const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 275 , "30px Ubuntu Mono",  "black");
+const TextVidaJefe = new TextLabel(canvasWidth - 225 , 130, "30px Pixelify Sans", "black");
+const textVida = new TextLabel (canvasWidth - 175 , 90 , "30px Pixelify Sans",  "black");
 const barreraIzq = new Limite(-10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 const barreraDer = new Limite(canvasWidth +10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 
