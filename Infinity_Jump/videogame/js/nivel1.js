@@ -15,7 +15,7 @@ EscudoImg.src = "../Assets/EscudoPowerUp.png"
 
 let totalPlataforms = 0;
 
-const textVida = new TextLabel (canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
+const textVida = new TextLabel (canvasWidth - 175 , 90 , "30px Pixelify Sans",  "black");
 
 
 

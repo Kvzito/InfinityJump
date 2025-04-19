@@ -35,5 +35,5 @@ function openHistoria(){
 }
 
 function openEstadisticas(){
-    window.location.href = 'estadisiticas.html';
+    window.location.href = 'estadisticas.html';
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/historia.css">
     <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/ajustes.js"></script>
     <script src="../js/sound.js"></script>
     <title>Inifnity Jump </title>
 </head>
@@ -13,7 +14,8 @@
     </header>    
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
-        <button id="ajustesButton" onclick="openMain()">Home</button>
+        <button id="homeButton" onclick="openMain()">Home</button>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
         <h1>Como empezo</h1>
         <div id="texto">
             <p>Malvin ama las estrellas. Ve su telescopio todas las noches. Un día algo estaba diferente.</p>
@@ -23,6 +25,22 @@
             <p>Unete a esta historia de amor.</p>
         </div>
         <button id="gameButton" onclick="openGame()">Jugar</button>
+        <div id="ajustes" class="ajustes">
+            <div class="ajustes-content">
+                <span class="close" onclick="closeAjustes()">&times;</span>
+                <p>Música</p>
+                <label class="switch">
+                    <input type="checkbox" id="musicCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <p>Efectos de sonido</p>
+                <label class="switch">
+                    <input type="checkbox" id="soundEffectsCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    
     </div>
     </div>
       
