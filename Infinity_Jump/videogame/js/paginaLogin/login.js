@@ -1,22 +1,33 @@
-function login() {
+var userID;
+
+function openGame(){
+    window.location.href = 'nivel_1_screen.html';
+}
+
+async function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    if (username && password) {
-        console.log("Usuario:", username, "Contraseña:", password);
+    // Simula una búsqueda en la base de datos
+    const response = await fetch('http://localhost:5000/api/buscarUser/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
 
-        // Por ahora solo puedes hacer el log in con el usuario "hola" y la contraseña "1234"
-        if (username === "hola" && password === "1234") {
-            // Si los datos son correctos, redirige a la página principal
-            window.location.href = 'nivel_1_screen.html';
-        } else {
-            // manda una notificacion para que el usuario sepa que hacer
-            alert("Usuario o contraseña incorrectos.");
-        }
+    if (response.ok) {
+        openGame();
+        const results = await response.json();
+        userID = results.userID;
+        localStorage.setItem('userID', userID);
     } else {
-        alert("Por favor, ingresa un usuario y contraseña.");
+        alert("Usuario o contraseña incorrectos.");
+        return;
     }
 }
+
 
 function openGame(){
     window.location.href = 'loginPagina.html';
@@ -37,3 +48,4 @@ function openHistoria(){
 function openEstadisticas(){
     window.location.href = 'estadisticas.html';
 }
+
