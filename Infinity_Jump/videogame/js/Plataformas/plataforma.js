@@ -1,10 +1,11 @@
 class Plataform{
-    constructor(x, y, width, height, img) {
+    constructor(x, y, width, height, img, name) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.img = img;
+        this.name = name || "plataforma"
     }
 
     move(dy) {
