@@ -31,7 +31,13 @@ jefeImgDer.src = "../Assets/JefePlantaDer.png";
 
 //imagenes nivel 2
 plataformImg2 = new Image();
-plataformImg2.src = "../Assets/PlataformaNube.png"
+plataformImg2.src = "../Assets/PlataformaNube.png";
+
+// imagenes jefe2
+proyectilImg = new Image();
+proyectilImg.src = "../Assets/ProyectilJefe2.png";
+jefe2Img = new Image();
+jefe2Img.src = "../Assets/Jefe2.png";
 
 // imagenes power ups
 let SuperJumpImg = new Image();
@@ -63,6 +69,8 @@ function update() {
 
     requestAnimationFrame(update);
 
+    
+
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
 
@@ -70,6 +78,7 @@ function update() {
     if (mainCharacter) {
         mainCharacter.draw(ctx);
         textVida.draw(ctx, `Vida: ${mainCharacter.vida} %`);
+        mainCharacter.executeMoves();
 
         if (mainCharacter.y > canvasHeight || mainCharacter.vida <= 0) {
             mostrarGameOver();

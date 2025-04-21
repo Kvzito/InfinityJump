@@ -10,7 +10,7 @@ class Jefe1 extends Jefe {
         this.topHitboxHeight = 10; 
         this.angle = 0; 
         this.direction = 1; 
-        this.speedX = 4.3; 
+        this.speedX = 4.18; 
         this.visible = true;    
     }
 
