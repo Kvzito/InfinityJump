@@ -74,9 +74,9 @@ app.get('/crearCuenta.html', (request,response)=>
     })
 })
 
-app.get('/nivel_1_screen.html', (request,response)=>
+app.get('/game_screen.html', (request,response)=>
 {
-    fs.readFile('./videogame/html/nivel_1_screen.html', 'utf8', (err, html)=>
+    fs.readFile('./videogame/html/game_screen.html', 'utf8', (err, html)=>
     {
         if(err) response.status(500).send('Ha habido un error: ' + err)
         console.log('Cargando Infinity Jump...')
