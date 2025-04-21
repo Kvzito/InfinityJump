@@ -84,6 +84,16 @@ app.get('/nivel_1_screen.html', (request,response)=>
     })
 })
 
+app.get('/historia.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/historia.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando historia...')
+        response.send(html)
+    })
+})
+
 app.post('/api/buscarUser', async (request, response) => {
 
     const { username, password } = request.body;
@@ -127,7 +137,7 @@ app.post('/api/crearUsuario', async (request, response) => {
 
     if (contrasena !== confContrasena) {
         console.log("Las contraseñas no coinciden.");
-        return response.status(403).json({ message: "Las contraseñas no coinciden." });
+        return response.status(400).json({ message: "Las contraseñas no coinciden." });
     }
 
     if (contrasena.length < 8 || contrasena.length > 20) {
@@ -147,7 +157,7 @@ app.post('/api/crearUsuario', async (request, response) => {
         if (UsuarioExistente.length > 0) 
         {
             console.log("El nombre de usuario ya está en uso.");
-            return response.status(409).json({ message: "El nombre de usuario ya está en uso. Prueba con uno diferente." });
+            return response.status(400).json({ message: "El nombre de usuario ya está en uso. Prueba con uno diferente." });
         } 
         else 
         {

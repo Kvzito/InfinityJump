@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/crearPagina.css">
     <script src="../js/paginaLogin/inicioSesion.js"></script>
-    <script src="../js/paginaLogin/crear.js"></script>
+    <script defer src="../js/paginaLogin/crear.js"></script>
     <title>Infinity Jump</title>
 </head>
 <body>
@@ -29,8 +29,10 @@
             </div>
 
             <div class="botones-register">
-                <button onclick="crear()">Registrar</button>
+                <button id="crear">Registrar</button>
             </div>
+
+            <p id="message" style="color:red"></p>
         </form>
     </div>
 </body>
