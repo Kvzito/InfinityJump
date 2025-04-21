@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Infinity Jump</title>
-    <link rel="stylesheet" href="../css/nivel_1.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="../css/nivel_1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 
-    <!-- Cargar primero clases y componentes base -->
+    
     <script src="../js/Clases/text_label.js"></script>
     <script src="../js/Plataformas/plataforma.js"></script>
     <script src="../js/Plataformas/plataforma_cambio.js"></script>
@@ -50,12 +50,13 @@
 
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
+        <button id="homeButton" onclick="openMain()">Home</button>
         <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     </div>
 
     <div id="gameOverScreen" class="popup" style="display: none;">
         <h2>¡Has perdido!</h2>
-        <button onclick="reiniciarJuego()">Reiniciar</button>
+        <button onclick="enviarStats(); reiniciarJuego(); console.log('Usuario:', userID)">Reiniciar</button>
     </div>
 
     <div id="ajustes" class="ajustes">
@@ -80,4 +81,7 @@
         };
     </script>
 </body>
+<footer>
+    <p>Silver Way Studios &copy; 2025</p>
+</footer>
 </html>

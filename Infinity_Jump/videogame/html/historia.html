@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/historia.css">
+    <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/ajustes.js"></script>
+    <script src="../js/sound.js"></script>
+    <title>Inifnity Jump </title>
+</head>
+<body>  
+    <header>
+        <h1>INFINITY JUMP</h1>
+    </header>    
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+        <button id="homeButton" onclick="openMain()">Home</button>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+        <h1>Como empezo</h1>
+        <div id="texto">
+            <p>Malvin ama las estrellas. Ve su telescopio todas las noches. Un día algo estaba diferente.</p>
+            <p>La luna tenia una mancha que nunca habia visto antes. Tenia que descubrir que era.</p>
+            <p>¡Alguien estaba en la luna! Una hermosa malvadisca, al instante sabia que ella era la adecuada para el.</p>
+            <p>Tenia que llegar a ella, sin importar los desafios. Nunca iba a poder descansar hasta estar con ella y conquistarla.</p>    
+            <p>Unete a esta historia de amor.</p>
+        </div>
+        <button id="gameButton" onclick="openGame()">Jugar</button>
+        <div id="ajustes" class="ajustes">
+            <div class="ajustes-content">
+                <span class="close" onclick="closeAjustes()">&times;</span>
+                <p>Música</p>
+                <label class="switch">
+                    <input type="checkbox" id="musicCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <p>Efectos de sonido</p>
+                <label class="switch">
+                    <input type="checkbox" id="soundEffectsCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+      
+    <footer>
+        <p>Silver Way Studios &copy; 2025</p>
+    </footer>
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const musicCheckbox = document.getElementById("musicCheckbox");
+        
+            const iniciarMusicaIntro = () => {
+                if (musicCheckbox && musicCheckbox.checked) {
+                    reproducirMusica("menu");
+                }
+            };
+        
+            document.body.addEventListener("click", iniciarMusicaIntro);
+        });
+    </script>
+</html>

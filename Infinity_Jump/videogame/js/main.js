@@ -3,6 +3,10 @@ let canvasHeight = 650;
 let canvasWidth = 1150;
 let gameRunning = false;
 
+let totalPlataforms = 0;
+let intentoPlayer = 1;
+let userID = localStorage.getItem('userID');
+
 // fondos
 let fondoCieloImg = new Image();
 fondoCieloImg.src = "../Assets/FondoCielo.png";
@@ -13,7 +17,6 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 let mainCharacter;
 const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
 
-let totalPlataforms = 0;
 
 // imágenes globales para todos los niveles
 // imagen main character
@@ -64,6 +67,8 @@ function main() {
         40, 54, mainCharacterImage
     );
 
+    console.log("Main con usuario ID:", userID); 
+
     loadLevels();
     gameRunning = true;
     requestAnimationFrame(update);
@@ -93,6 +98,35 @@ function update() {
     }
 }
 
+async function enviarStats() {
+
+    console.log("Registrando cambios de USER ID:", userID);
+
+    try {
+        const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: userID,
+                nivel: 1,
+                plataformas_alcanzadas: totalPlataforms
+            })
+        });
+
+        if (response.ok) {
+            const results = await response.json();
+            console.log("Insertado correctamente, intento:", results.intento);
+        } else {
+            const error = await response.json();
+            console.log("Error al enviar los datos:", error);
+        }
+    } catch (error) {
+        console.error("Error en enviarStats:", error);
+    }
+}
+
 function mostrarGameOver() {
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
@@ -104,3 +138,17 @@ function reiniciarJuego() {
     
 
 window.onload = main;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const musicCheckbox = document.getElementById("musicCheckbox");
+
+
+    const iniciarMusicaNivel = () => {
+        if (musicCheckbox && musicCheckbox.checked) {
+            enableMusic = true;
+            reproducirMusica("bosque"); 
+        }
+    };
+
+    document.body.addEventListener("click", iniciarMusicaNivel);
+});

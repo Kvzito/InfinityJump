@@ -2,17 +2,20 @@
 const soundEffects = {
     plataforma : new Audio("../Assets/sounds/plataforma.mp3"),
     caida : new Audio("../Assets/sounds/caida.mp3"),
-    power : new Audio("../Assets/sounds/powerUp.ogg")
+    power : new Audio("../Assets/sounds/powerUp.ogg"),
 };
 
 soundEffects.plataforma.volume = 0.4;
-// soundEffects.power.volume = 0.6;
+
 
 const music  = {
     menu : new Audio("../Assets/sounds/intro.ogg"),
     bosque : new Audio("../Assets/sounds/forest.mp3"),
     cielo : new Audio("../Assets/sounds/cielo.ogg"),
+    enemy : new Audio("../Assets/sounds/enemy.mp3"),
 };
+
+music.enemy.volume = 0.5;
 
 let enableMusic = true;
 let enableSound = true;
@@ -37,8 +40,19 @@ function playMusic(track) {
 
 function playSound(track) {
     if (enableSound && soundEffects[track]) {
+        for (let key in soundEffects) {
+            if (soundEffects[key] !== soundEffects[track]) {
+                soundEffects[key].pause();
+                soundEffects[key].currentTime = 0;
+            }
+        }
+
         soundEffects[track].play();
     }
+}
+
+function stopSound(track){
+    soundEffects[track].pause();
 }
 
 function reproducirMusica(track) {
