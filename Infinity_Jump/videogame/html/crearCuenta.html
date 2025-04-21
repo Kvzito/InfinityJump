@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/crearPagina.css">
     <script src="../js/paginaLogin/inicioSesion.js"></script>
-    <script src="../js/paginaLogin/crear.js"></script>
+    <script defer src="../js/paginaLogin/crear.js"></script>
     <title>Infinity Jump</title>
 </head>
 <body>
@@ -29,28 +29,11 @@
             </div>
 
             <div class="botones-register">
-                <button type="submit" class="boton-register">Registrar</button>
+                <button id="crear">Registrar</button>
             </div>
-        </form>
 
-        <script>
-            const form = document.getElementById("registerForm");
-            form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const usuario = document.getElementById("usuario").value.trim();
-            const contrasena = document.getElementById("contrasena").value.trim();
-            const confirmaContrasena = document.getElementById("confirmar").value.trim();
-            const error = document.getElementById("mensajeError");
-    
-            if (!usuario || !contrasena || !confirmaContrasena) {
-                error.textContent = "Por favor llena todos los campos";
-            } else if (contrasena !== confirmaContrasena) {
-                error.textContent = "Las contraseñas son diferentes";
-            } else {
-                window.location.href = "loginPagina.html";
-            }
-            });
-        </script>
+            <p id="message" style="color:red"></p>
+        </form>
     </div>
 </body>
 </html>

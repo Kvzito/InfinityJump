@@ -16,13 +16,13 @@ async function login() {
         },
         body: JSON.stringify({ username, password })
     })
-
+        
     if (response.ok) {
         openGame();
         const results = await response.json();
         userID = results.userID;
         localStorage.setItem('userID', userID);
-    } else {
+    } else if (response.status === 401) {
         alert("Usuario o contraseña incorrectos.");
         return;
     }
@@ -30,11 +30,15 @@ async function login() {
 
 
 function openGame(){
-    window.location.href = 'loginPagina.html';
+    window.location.href = 'game_screen.html';
 }
 
 function openMain(){
     window.location.href = 'mainPage.html';
+}
+
+function openLogin(){
+    window.location.href = 'loginPagina.html';
 }
 
 function openManual(){

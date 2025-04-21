@@ -5,55 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="stylesheet" href="../css/nivel_1.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    
     <script src="../js/Clases/text_label.js"></script>
     <script src="../js/Plataformas/plataforma.js"></script>
     <script src="../js/Plataformas/plataforma_cambio.js"></script>
+    <script src="../js/Plataformas/barrera.js"></script>
     <script src="../js/Plataformas/moving_plataform.js"></script>
     <script src="../js/Clases/powerUp.js"></script>
     <script src="../js/PowerUps/super_jump.js"></script>
     <script src="../js/PowerUps/escudo.js"></script>
     <script src="../js/Clases/PlataformManager.js"></script>
+
+    <!-- Personaje principal -->
     <script src="../js/personajes/main_character.js"></script>
-    <script src="../js/nivel1.js"></script>
-    <script src="../js/ajustes.js"></script>
-    <script src="../js/paginaLogin/login.js"></script>
-    <script src="../js/sound.js"></script>
-    <title>Infinity Jump</title>
+
+    <!-- Jefes -->
+    <script src="../js/Clases/clase_jefe.js"></script>
+    <script src="../js/personajes/jefe1.js"></script>
+    <script src="../js/personajes/jefe2.js"></script>
+    <script src="../js/Clases/calssProyectil.js"></script>
+    <script src="../js/niveles/jefe2_screen.js"></script>
+
+
+    <!-- Sistema de niveles -->
+    <script src="../js/niveles/nivel1.js"></script>
+    <script src="../js/level_manager.js"></script>
+    <script src="../js/niveles/jefe1_screen.js"></script>
+    <script src="../js/niveles/nivel2.js"></script>
+    <script src="../js/niveles/nivel3.js"></script>
+
+    <!-- Otros ajustes y utilidades -->
+    <script src="../js/ajustes_y_sonido/ajustes.js"></script>
+    <script src="../js/ajustes_y_sonido/sound.js"></script>
+
+    <!-- Main con update y canvas -->
+    <script src="../js/main.js"></script>
 </head>
-
-
 
 <body>
     <div id="headerContainer">
         <h1>INFINITY JUMP</h1>
     </div>
+
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
         <button id="homeButton" onclick="openMain()">Inicio</button>
         <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     </div>
-    
-    <div id="gameOverScreen" class="popup">
+
+    <div id="gameOverScreen" class="popup" style="display: none;">
         <h2>¡Has perdido!</h2>
         <button onclick="enviarStats(); reiniciarJuego(); console.log('Usuario:', userID)">Reiniciar</button>
     </div>
+
     <div id="ajustes" class="ajustes">
         <div class="ajustes-content">
             <span class="close" onclick="closeAjustes()">&times;</span>
             <p>Música</p>
             <label class="switch">
-                <input type="checkbox" id="musicCheckbox" checked>
+                <input type="checkbox" id="musicCheckbox" checked />
                 <span class="slider round"></span>
             </label>
             <p>Efectos de sonido</p>
             <label class="switch">
-                <input type="checkbox" id="soundEffectsCheckbox" checked>
+                <input type="checkbox" id="soundEffectsCheckbox" checked />
                 <span class="slider round"></span>
             </label>
         </div>
     </div>
 
-    <script> main(); </script>
+    <script>
+        window.onload = () => {
+            main(); // inicia el juego al cargar
+        };
+    </script>
 </body>
 <footer>
     <p>Silver Way Studios &copy; 2025</p>

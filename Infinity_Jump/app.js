@@ -29,24 +29,40 @@ async function connectToDB()
 }
 
 app.get('/', (request,response)=>
-{
-    fs.readFile('./videogame/html/loginPagina.html', 'utf8', (err, html)=>
-    {
-        if(err) response.status(500).send('Ha habido un error: ' + err)
-        console.log('Cargando Infinity Jump...')
-        response.send(html)
-    })
-})
-
-app.get('/mainPage.html', (request,response)=>
-{
     fs.readFile('./videogame/html/mainPage.html', 'utf8', (err, html)=>
     {
         if(err) response.status(500).send('Ha habido un error: ' + err)
         console.log('Cargando Infinity Jump...')
         response.send(html)
     })
+)
+
+app.get('/mainPage.html', (request,response)=>
+    fs.readFile('./videogame/html/mainPage.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando Infinity Jump...')
+        response.send(html)
+    }))
+
+
+app.get('/loginPagina.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/loginPagina.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando log in página...')
+        response.send(html)
+    })
 })
+
+app.get('/manual.html', (request,response)=>
+    fs.readFile('./videogame/html/manual.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando manual...')
+        response.send(html)
+    }))
 
 app.get('/crearCuenta.html', (request,response)=>
 {
@@ -58,12 +74,22 @@ app.get('/crearCuenta.html', (request,response)=>
     })
 })
 
-app.get('/nivel_1_screen.html', (request,response)=>
+app.get('/game_screen.html', (request,response)=>
 {
-    fs.readFile('./videogame/html/nivel_1_screen.html', 'utf8', (err, html)=>
+    fs.readFile('./videogame/html/game_screen.html', 'utf8', (err, html)=>
     {
         if(err) response.status(500).send('Ha habido un error: ' + err)
         console.log('Cargando Infinity Jump...')
+        response.send(html)
+    })
+})
+
+app.get('/historia.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/historia.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando historia...')
         response.send(html)
     })
 })
@@ -98,36 +124,57 @@ app.post('/api/buscarUser', async (request, response) => {
     }
 });
 
-// POST para insertar las estadísticas de una nueva partida por jugador
+// End point para crear un nuevo usuario
 
-// app.post('/api/Partidas', async (request, response)=>{
+app.post('/api/crearUsuario', async (request, response) => {
 
-//     let connection = null
+    const { usuario, contrasena, confContrasena } = request.body;
 
-//     try
-//     {    
-//         connection = await connectToDB()
+    if (!usuario || !contrasena) {
+        console.log("Faltan datos para crear la cuenta.");
+        return response.status(400).json({ message: "Faltan datos para crear la cuenta." });
+    }
 
-//         const [results, fields] = await connection.query('insert into Partidas set ?', request.body)
-        
-//         console.log(`${results.affectedRows} row inserted`)
-//         response.status(201).json({'message': "Data inserted correctly."})
-//     }
-//     catch(error)
-//     {
-//         response.status(500)
-//         response.json(error)
-//         console.log(error)
-//     }
-//     finally
-//     {
-//         if(connection!==null) 
-//         {
-//             connection.end()
-//             console.log("Connection closed succesfully!")
-//         }
-//     }
-// })
+    if (contrasena !== confContrasena) {
+        console.log("Las contraseñas no coinciden.");
+        return response.status(400).json({ message: "Las contraseñas no coinciden." });
+    }
+
+    if (contrasena.length < 8 || contrasena.length > 20) {
+        console.log("La contraseña debe tener entre 8 y 20 caracteres.");
+        return response.status(400).json({ message: "La contraseña debe tener entre 8 y 20 caracteres." });
+    }
+
+    try {
+        const connection = await connectToDB();
+
+        // Verificar si el nombre de usuario ya existe
+        const [UsuarioExistente] = await connection.query(
+            'SELECT * FROM usuarios WHERE usuario = ?',
+            [usuario]
+        );
+
+        if (UsuarioExistente.length > 0) 
+        {
+            console.log("El nombre de usuario ya está en uso.");
+            return response.status(400).json({ message: "El nombre de usuario ya está en uso. Prueba con uno diferente." });
+        } 
+        else 
+        {
+            await connection.query
+            (
+                'INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?)',
+                [usuario, contrasena]
+            );
+            console.log('Cuenta creada exitosamente.');
+            response.status(201).json({ message: "Cuenta creada exitosamente." });
+        }
+
+    } catch (error) {
+        console.error('Error al crear la cuenta:', error);
+        response.status(500).json({ message: "Error interno del servidor." });
+    }
+});
 
 // End point para insertar estadísticas de una nueva partida, pero con el intento correspondiente
 
