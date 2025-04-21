@@ -30,7 +30,7 @@ async function login() {
 
 
 function openGame(){
-    window.location.href = 'nivel_1_screen.html';
+    window.location.href = 'game_screen.html';
 }
 
 function openMain(){
@@ -50,6 +50,6 @@ function openHistoria(){
 }
 
 function openEstadisticas(){
-    window.location.href = 'estadisiticas.html';
+    window.location.href = 'estadisticas.html';
 }
 

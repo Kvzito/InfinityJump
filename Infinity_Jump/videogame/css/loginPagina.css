@@ -45,10 +45,29 @@ body {
   display: block;
 }
 
-#ajustesButton {
+#homeButton {
   position: absolute;
   top: 10px;
   left: 10px;
+  padding: 10px 15px;
+  background-color: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 2;
+} 
+
+#homeButton:hover {
+  background-color: #45a049;
+}
+
+
+#ajustesButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   padding: 10px 15px;
   background-color: lightblue;
   color: black;

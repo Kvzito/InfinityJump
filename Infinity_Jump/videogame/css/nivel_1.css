@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Pixelify Sans';
+    src: url('../Assets/pixelFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body, h1, button {
+    font-family: 'Pixelify Sans', sans-serif;
+  }
+
 body {
     text-align: center;
     background-color: lightblue;
@@ -12,9 +23,7 @@ body {
     flex-direction: row;
     justify-content: center; 
     align-items: center;
-    text-decoration: wavy;
     font-size: 1.5rem;
-    font-family: cursive;
 }
 
 #canvasContainer {
@@ -30,7 +39,7 @@ body {
 #ajustesButton {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
@@ -68,6 +77,24 @@ body {
     font-size: 18px;
     cursor: pointer;
 }
+
+#homeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 15px;
+    background-color: lightblue;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 2;
+  } 
+  
+  #homeButton:hover {
+    background-color: #45a049;
+  }
 
 
 #gameOverScreen {
@@ -174,4 +201,8 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(14px);
+}
+
+footer {
+    font-family: 'Times New Roman', Times, serif;
 }
