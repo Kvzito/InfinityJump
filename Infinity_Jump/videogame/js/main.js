@@ -6,10 +6,12 @@ let gameRunning = false;
 // fondos
 let fondoCieloImg = new Image();
 fondoCieloImg.src = "../Assets/FondoCielo.png";
+let fondoEspacioImg = new Image();
+fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
-const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "black");
+const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
 
 let totalPlataforms = 0;
 
@@ -38,6 +40,10 @@ proyectilImg = new Image();
 proyectilImg.src = "../Assets/ProyectilJefe2.png";
 jefe2Img = new Image();
 jefe2Img.src = "../Assets/Jefe2.png";
+
+// imagenes nivel3
+let plataformImg3 = new Image();
+plataformImg3.src = "../Assets/PlataformaEspacioUno.png";
 
 // imagenes power ups
 let SuperJumpImg = new Image();

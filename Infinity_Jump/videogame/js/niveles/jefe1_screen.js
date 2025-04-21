@@ -67,23 +67,34 @@ function levelJefe1() {
             if (jefe.visible) {
                 jefe.update();
                 jefe.detectarColisionConJugador(mainCharacter);
-            }
 
-            if (jefe.vida <= 0) {
-                jefe.visible = false;
-                // puedes usar nextLevel(); si quieres continuar después
-
-                if (!plataformasExtraAgregadas) {
-                    plataformasExtraAgregadas = true;
-            
-                    LevelList.push(
-                        new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg1),
-                        new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg1),
-                        new PlataformCambio(-250, -5,1500, 100, plataformImg1)
-
-                    );
+                if (jefe.vida <= 0) {
+                    jefe.visible = false;
+                    // puedes usar nextLevel(); si quieres continuar después
+    
+                    mainCharacter.x = canvasWidth / 2 - 47;
+                    mainCharacter.y = canvasHeight / 2 + 200;
+                    mainCharacter.velocityX = 0;
+                    mainCharacter.velocityY = 0;
+                    mainCharacter.listenControls();
+                    
+                    if (!plataformasExtraAgregadas) {
+                        plataformasExtraAgregadas = true;
+                
+                        LevelList.push(
+                            new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg1),
+                            new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg1),
+                            new PlataformCambio(-250, -5,1500, 100, plataformImg1)
+    
+                        );
+                    }
+    
+    
+                    
                 }
             }
+
+            
         };
 
         // Dibuja todos los objetos del nivel
