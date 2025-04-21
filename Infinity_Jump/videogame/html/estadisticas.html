@@ -5,104 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Jump</title>
   <link rel="stylesheet" href="../css/estadisticas.css"> 
+  <script src="../js/ajustes.js"></script>
+    <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/sound.js"></script>
+    <script src="../js/estadisticas.js"></script>
   <script type="module" defer src="../app.js"></script>
+
   <title>Infinity Jump: Stats</title>
 </head>
 <body>
-  <div class="leaderboard-section">
-    <div class="formInput">
-      <h1>Información de Login</h1>
-      <div class="formInput">
-        <h1>Mostrar usuarios</h1>
-        <form id="formSelectUser">
-          <input type="text" name="id_jugador" placeholder="Escribe el ID del jugador, o déjalo vacío para ver todos los usuarios">
-          <input type="submit" value="Mostrar usuarios">
-        </form>
-      </div>
-    </div>
-    <div class="resultDisplay">
-        <h1>Resultado</h1>
-        <p id="postResults">When the request ends, the result will be displayed here.</p>
-    </div>
+  <header>
+    <h1>INFINITY JUMP</h1>
+  </header>
+  <div id="canvasContainer">
+    <canvas id="canvas"></canvas>
+    <h1>Estadisticas</h1>
+    <button id="homeButton" onclick="openMain()">Inicio</button>
+    <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+    <div id = "insideCanva">
+      <nav>
+        <button onclick= "openMine()">Mis estadisticas</button>
+        <button onclick ="openLeaderboard()">Marcador</button>
+      </nav>
 
-    <div class="leaderboard-section">
-      <div class="formInput">
-        <h1>Agregar usuario</h1>
-        <form id="formInsert">
-          <input type="text" name="username" placeholder="Escribe el nombre de usuario">
-          <input type="text" name="contrasena" placeholder="Escribe la contraseña">
-          <input type="submit" value="Agregar usuario">
-        </form>
-      </div>
+      <div class="statsContainter">
+        <div class="leaderboard-section">
+          <div id = "misPartidas">
+            <div class="formInput">
+              <h2>Mis partidas</h2>
+              <form id="formPartidas">
+                  <input type="text" name="player_id" placeholder="Escribe el ID del jugador">
+                  <input type="submit" value="Mostrar partidas">
+              </form>
+            </div>
+            <div class="resultDisplay">
+                <h2>Resultado</h2>
+                <div id="getResultsPartida"></div>
+            </div>
+          </div>
       
-      <div class="resultDisplay">
-        <h1>Resultado</h1>
-        <p id="postResults">When the request ends, the result will be displayed here.</p>
-      </div>
+          <div id = "leaderboard">
+            <div class="formInput">
+              <h2>Marcador</h2>
+              <form id="topFive"></form>
+            </div>
+            <div class="resultDisplay">
+              <h2>Top 5</h2>
+              <div id="getResultsTop"></div>
+            </div>
+          </div>
+        </div>
     </div>
+    <div id="ajustes" class="ajustes">
+      <div class="ajustes-content">
+          <span class="close" onclick="closeAjustes()">&times;</span>
+          <p>Música</p>
+          <label class="switch">
+              <input type="checkbox" id="musicCheckbox" checked>
+              <span class="slider round"></span>
+          </label>
+          <p>Efectos de sonido</p>
+          <label class="switch">
+              <input type="checkbox" id="soundEffectsCheckbox" checked>
+              <span class="slider round"></span>
+          </label>
+      </div>
+  </div>
   
 
-    <div class="leaderboard-section">
-        <div class="formInput">
-            <h1>Borrar usuario</h1>
-            <form id="formDelete" method="delete">
-                <input type="text" name="player_id" placeholder="Type your userID">
-                <input type="submit" value="Delete User">
-            </form>
-        </div>
-        <div class="resultDisplay">
-            <h1>Resultado</h1>
-            <p id="deleteResults"></p>
-        </div>
-    </div>
-  </div>
+  </div>  
 
-  <div class="leaderboard-section">
-    <div class="formInput">
-    <h1>Estadísticas de los jugadores</h1>
-    <div class="formInput">
-      <h1>Mostrar estadísticas</h1>
-        <form id="formSelectEstadisticas">
-        <input type="text" name="id_jugador" placeholder="Escribe el ID del jugador, o déjalo vacío para ver todas las estadísticas">
-        <input type="submit" value="Mostrar estadísticas">
-        </form>
-    </div>
-    <div class="resultDisplay">
-      <h1>Resultado</h1>
-      <div id="getEstadisticasResults"></div>
-    </div>
-  </div>
-
-  <div class="leaderboard-section">
-    <div class="formInput">
-      <h1>Agregar estadísticas</h1>
-      <form id="formInsertEstadisticas">
-        <input type="text" name="id_jugador" placeholder="Escribe el ID del jugador">
-        <input type="number" name="intento" placeholder="Número de intento">
-        <input type="number" name="nivel" placeholder="Número de nivel">
-        <input type="time" name="tiempo" placeholder="Tiempo">
-        <input type="number" name="plataformas" placeholder="Plataformas alcanzadas">
-        <input type="submit" value="Agregar estadísticas">
-      </form>
-    </div>
-    <div class="resultDisplay">
-      <h1>Resultado</h1>
-      <p id="postEstadisticasResults"></p>
-    </div>
-  </div>
-
-  <div class="leaderboard-section">
-    <div class="formInput">
-      <h1>Eliminar estadísticas</h1>
-      <form id="formDeleteEstadisticas" method="delete">
-        <input type="text" name="id_jugador" placeholder="Escribe el ID del jugador">
-        <input type="submit" value="Eliminar estadísticas">
-      </form>
-    </div>
-    <div class="resultDisplay">
-      <h1>Resultado</h1>
-      <p id="deleteEstadisticasResults"></p>
-    </div>
-  </div>
 </body>
+<footer>
+  <p>Silver Way Studios &copy; 2025</p>
+</footer>
 </html>
