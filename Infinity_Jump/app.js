@@ -29,24 +29,40 @@ async function connectToDB()
 }
 
 app.get('/', (request,response)=>
-{
-    fs.readFile('./videogame/html/loginPagina.html', 'utf8', (err, html)=>
-    {
-        if(err) response.status(500).send('Ha habido un error: ' + err)
-        console.log('Cargando Infinity Jump...')
-        response.send(html)
-    })
-})
-
-app.get('/mainPage.html', (request,response)=>
-{
     fs.readFile('./videogame/html/mainPage.html', 'utf8', (err, html)=>
     {
         if(err) response.status(500).send('Ha habido un error: ' + err)
         console.log('Cargando Infinity Jump...')
         response.send(html)
     })
+)
+
+app.get('/mainPage.html', (request,response)=>
+    fs.readFile('./videogame/html/mainPage.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando Infinity Jump...')
+        response.send(html)
+    }))
+
+
+app.get('/loginPagina.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/loginPagina.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando log in página...')
+        response.send(html)
+    })
 })
+
+app.get('/manual.html', (request,response)=>
+    fs.readFile('./videogame/html/manual.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando manual...')
+        response.send(html)
+    }))
 
 app.get('/crearCuenta.html', (request,response)=>
 {
@@ -58,9 +74,9 @@ app.get('/crearCuenta.html', (request,response)=>
     })
 })
 
-app.get('/nivel_1_screen.html', (request,response)=>
+app.get('/game_screen.html', (request,response)=>
 {
-    fs.readFile('./videogame/html/nivel_1_screen.html', 'utf8', (err, html)=>
+    fs.readFile('./videogame/html/game_screen.html', 'utf8', (err, html)=>
     {
         if(err) response.status(500).send('Ha habido un error: ' + err)
         console.log('Cargando Infinity Jump...')
@@ -68,7 +84,18 @@ app.get('/nivel_1_screen.html', (request,response)=>
     })
 })
 
-app.post('/login', async (request, response) => {
+app.get('/historia.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/historia.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando historia...')
+        response.send(html)
+    })
+})
+
+app.post('/api/buscarUser', async (request, response) => {
+
     const { username, password } = request.body;
 
     if (!username || !password) {
@@ -77,13 +104,15 @@ app.post('/login', async (request, response) => {
 
     try {
         const connection = await connectToDB();
-        const [rows] = await connection.execute(
-            'SELECT * FROM users WHERE username = ? AND password = ?',
+
+        const [rows] = await connection.query(
+            'SELECT * FROM MostrarJugadores WHERE usuario = ? AND contrasena = ?',
             [username, password]
         );
 
         if (rows.length > 0) {
-            response.status(200).send('Inicio de sesión exitoso.');
+            response.status(200).json({ message: "Inicio de sesión exitoso.", userID: rows[0].id_usuario });
+            console.log("Inicio de sesión exitoso, id del usuario: ", rows[0].id_usuario);
         } else {
             response.status(401).send('Credenciales incorrectas.');
         }
@@ -95,65 +124,143 @@ app.post('/login', async (request, response) => {
     }
 });
 
-app.post('/api/Partidas', async (request, response)=>{
+// End point para crear un nuevo usuario
 
-    let connection = null
+app.post('/api/crearUsuario', async (request, response) => {
 
-    try
-    {    
-        connection = await connectToDB()
+    const { usuario, contrasena, confContrasena } = request.body;
 
-        const [results, fields] = await connection.query('insert into Partidas set ?', request.body)
-        
-        console.log(`${results.affectedRows} row inserted`)
-        response.status(201).json({'message': "Data inserted correctly."})
+    if (!usuario || !contrasena) {
+        console.log("Faltan datos para crear la cuenta.");
+        return response.status(400).json({ message: "Faltan datos para crear la cuenta." });
     }
-    catch(error)
-    {
-        response.status(500)
-        response.json(error)
-        console.log(error)
-    }
-    finally
-    {
-        if(connection!==null) 
-        {
-            connection.end()
-            console.log("Connection closed succesfully!")
-        }
-    }
-})
 
-app.post('/register', async (request, response) => {
-    const { username, password } = request.body;
+    if (contrasena !== confContrasena) {
+        console.log("Las contraseñas no coinciden.");
+        return response.status(400).json({ message: "Las contraseñas no coinciden." });
+    }
 
-    if (!username || !password) {
-        return response.status(400).send('Faltan datos para crear la cuenta.');
+    if (contrasena.length < 8 || contrasena.length > 20) {
+        console.log("La contraseña debe tener entre 8 y 20 caracteres.");
+        return response.status(400).json({ message: "La contraseña debe tener entre 8 y 20 caracteres." });
     }
 
     try {
         const connection = await connectToDB();
-        const [existingUser] = await connection.execute(
-            'SELECT * FROM users WHERE username = ?',
-            [username]
+
+        // Verificar si el nombre de usuario ya existe
+        const [UsuarioExistente] = await connection.query(
+            'SELECT * FROM usuarios WHERE usuario = ?',
+            [usuario]
         );
 
-        if (existingUser.length > 0) {
-            return response.status(409).send('El nombre de usuario ya está en uso.');
+        if (UsuarioExistente.length > 0) 
+        {
+            console.log("El nombre de usuario ya está en uso.");
+            return response.status(400).json({ message: "El nombre de usuario ya está en uso. Prueba con uno diferente." });
+        } 
+        else 
+        {
+            await connection.query
+            (
+                'INSERT INTO usuarios (usuario, contrasena) VALUES (?, ?)',
+                [usuario, contrasena]
+            );
+            console.log('Cuenta creada exitosamente.');
+            response.status(201).json({ message: "Cuenta creada exitosamente." });
         }
 
-        await connection.execute(
-            'INSERT INTO users (username, password) VALUES (?, ?)',
-            [username, password]
-        );
-
-        response.status(201).send('Cuenta creada exitosamente.');
-        await connection.end();
     } catch (error) {
         console.error('Error al crear la cuenta:', error);
-        response.status(500).send('Error interno del servidor.');
+        response.status(500).json({ message: "Error interno del servidor." });
     }
 });
+
+// End point para insertar estadísticas de una nueva partida, pero con el intento correspondiente
+
+app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
+    let connection = null;
+    const { id_usuario, nivel, plataformas_alcanzadas } = request.body;
+
+    try {
+        connection = await connectToDB();
+
+        // Obten el max intento + 1 en una sola transacción
+        const [rows] = await connection.query(
+            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
+            [id_usuario]
+        );
+        const nuevo_intento = (rows[0].ultimo_intento || 0) + 1;
+
+        const [results] = await connection.query(
+            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES (?, ?, ?, ?)',
+            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas]
+        );
+
+        response.status(201).json({ message: "Insertado correctamente", intento: nuevo_intento });
+    } catch (error) {
+        console.error(error);
+        response.status(500).json(error);
+    } finally {
+        if (connection) connection.end();
+    }
+});
+
+
+// GET que sirve para verificar cual fue el último intento por ID de usuario y así evitar que se duplique
+
+app.get('/api/Partidas/ultimo-intento', async (request, response) => {
+
+    const { id_usuario } = request.query;
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [rows] = await connection.query(
+            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
+            [id_usuario]
+        );
+        const ultimo_intento = rows[0].ultimo_intento || 0;
+        response.json({ ultimo_intento });
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ error: "Error obteniendo el último intento" });
+        console.log("No se pudo obtener el último intento");
+    } finally {
+        if (connection !== null) connection.end();
+    }
+});
+
+// app.post('/register', async (request, response) => {
+//     const { username, password } = request.body;
+
+//     if (!username || !password) {
+//         return response.status(400).send('Faltan datos para crear la cuenta.');
+//     }
+
+//     try {
+//         const connection = await connectToDB();
+//         const [existingUser] = await connection.execute(
+//             'SELECT * FROM users WHERE username = ?',
+//             [username]
+//         );
+
+//         if (existingUser.length > 0) {
+//             return response.status(409).send('El nombre de usuario ya está en uso.');
+//         }
+
+//         await connection.execute(
+//             'INSERT INTO users (username, password) VALUES (?, ?)',
+//             [username, password]
+//         );
+
+//         response.status(201).send('Cuenta creada exitosamente.');
+//         await connection.end();
+//     } catch (error) {
+//         console.error('Error al crear la cuenta:', error);
+//         response.status(500).send('Error interno del servidor.');
+//     }
+// });
 
 app.listen(port, ()=>
     {

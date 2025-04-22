@@ -6,9 +6,9 @@ class MainCharacter {
         this.height = height;
         this.img = img;
         this.velocityX = 0;
-        this.velocityY = -3.5;
-        this.inicialVelY = -3.5;
-        this.gravedad = 0.05;
+        this.velocityY = -6;
+        this.inicialVelY = -6;
+        this.gravedad = 0.12;
 
         this.hitboxWidth = 20;
         this.hitboxHeight = 40;
@@ -16,29 +16,56 @@ class MainCharacter {
         this.hitboxOffsetY = 10;
 
         this.vida = 100;
-        this.strength = 50
+        this.strength = 500;
         this.money = 0;
 
         // Variables para controlar invulnerabilidad
         this.invulnerable = false;
         this.invTimer = 0;
+
+        // condiciones para e power up de escudo
+        this.escudoActivo = false;
+        this.imgEscudo = EscudoImg; 
+
+        this.pressingRight = false;
+        this.pressingLeft = false;
+    }
+
+    setVelocityX(velocity){
+        this.velocityX = velocity;
     }
 
     // controles del maincharacter
     listenControls() {
         document.addEventListener("keydown", (e) => {
             if (e.key === "ArrowRight" || e.key === "d") {
-                this.velocityX = 1.5;
+                this.pressingRight = true;
             } else if (e.key === "ArrowLeft" || e.key === "a") {
-                this.velocityX = -1.5;
+                this.pressingLeft = true;
             }
         });
 
         document.addEventListener("keyup", (e) => {
-            if (["ArrowRight", "ArrowLeft", "d", "a"].includes(e.key)) {
-                this.velocityX = 0;
+            if (e.key === "ArrowRight" || e.key === "d") {
+                this.pressingRight = false;
+                this.setVelocityX(0);
+            } else if (e.key === "ArrowLeft" || e.key === "a") {
+                this.pressingLeft = false;
+                this.setVelocityX(0);
             }
         });
+    }
+
+    executeMoves () {
+        if (this.pressingLeft && this.pressingRight) {
+            this.velocityX = 0; 
+        } else if (this.pressingLeft) {
+            this.velocityX = -2;
+        } else if (this.pressingRight) {
+            this.velocityX = 2;
+        } else {
+            this.velocityX = 0;
+        }
     }
 
     // fisicas que tendra el main character 
@@ -62,7 +89,7 @@ class MainCharacter {
     }
 
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        
 
         // Hitbox del jugador
         ctx.strokeStyle = "red"; 
@@ -73,10 +100,29 @@ class MainCharacter {
             this.hitboxWidth,
             this.hitboxHeight
         );
+
+        //dibuja la imagen del escudo que se pone al rededor del personaje
+        if (this.escudoActivo && this.imgEscudo) {
+            ctx.drawImage(
+                this.imgEscudo,
+                this.x - 25, this.y - 25,
+                this.width + 50, this.height + 50
+            );
+        }
+
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        
     }
 
     // colicion con plataformas y jefes
     detectCollision(plataform) {
+if ( plataform.name == "plataformaPiso"){
+    // console.log(this.velocityY, this.hitboxHeight, this.hitboxWidth, this.x, this.y );
+    // console.log(plataform.x, plataform.y, plataform.height, plataform.width);
+    
+    
+}
+
         let hitboxX = this.x + this.hitboxOffsetX;
         let hitboxY = this.y + this.hitboxOffsetY;
         let isFalling = this.velocityY >= 0;
@@ -84,11 +130,11 @@ class MainCharacter {
         let isInsideX = hitboxX + this.hitboxWidth > plataform.x && hitboxX < plataform.x + plataform.width;
         let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 10;
 
-        let isAbove = this.y + this.height <= plataform.y + 10;
+        let isAbove = (this.y + this.height) <= (plataform.y+15);
         return isFalling && isInsideX && isTouchingTop && isAbove;
     }
 
-    activarInvulnerabilidad(duracion = 100) {
+    activarInvulnerabilidad(duracion = 75) {
         this.invulnerable = true;
         this.invTimer = duracion; 
     }

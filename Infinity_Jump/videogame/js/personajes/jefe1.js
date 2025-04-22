@@ -10,7 +10,7 @@ class Jefe1 extends Jefe {
         this.topHitboxHeight = 10; 
         this.angle = 0; 
         this.direction = 1; 
-        this.speedX = 2; 
+        this.speedX = 4.18; 
         this.visible = true;    
     }
 
@@ -49,7 +49,7 @@ class Jefe1 extends Jefe {
         ctx.strokeRect(
             this.x,
             this.y,
-            this.width,
+            this.width - 5,
             this.topHitboxHeight
         );
     }
@@ -66,20 +66,27 @@ class Jefe1 extends Jefe {
 
         const golpeaCabeza = estaCayendo &&
             dentroX &&
-            jugadorBottom <= this.y + this.topHitboxHeight &&
+            jugadorBottom <= this.y + this.topHitboxHeight + 10&&
             jugadorBottom >= this.y;
 
         const golpeNormal = dentroX &&
             jugadorBottom > this.y + this.hitboxOffsetY &&
             jugadorTop < this.y + this.hitboxOffsetY + this.hitboxHeight;
 
-        if (golpeaCabeza) {
-            this.vida -= jugador.strength; // quítale vida al jefe
-            jugador.bounce(); // el jugador rebota
-        } else if (golpeNormal && !jugador.invulnerable) {
-            jugador.vida -= this.strength;
-            jugador.activarInvulnerabilidad();
-        }
+            if (golpeaCabeza) {
+                this.vida -= jugador.strength; // quítale vida al jefe
+                jugador.bounce(); // el jugador rebota
+                playSound("hitEnemy");
+            } else if (golpeNormal && !jugador.invulnerable) {
+                if (jugador.escudoActivo) {
+                    jugador.escudoActivo = false;
+                } else {
+                    jugador.vida -= this.strength;
+                    playSound("attack");
+                }
+                jugador.activarInvulnerabilidad();
+            }
+            
         
     }
 }

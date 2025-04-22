@@ -1,9 +1,10 @@
 class PM {
     constructor(config) {
         this.probMov = config.probMov;
-        this.probPowerUp = config.probPowerUp
+        this.probSuperJump = config.probSuperJump;
+        this.probEscudo = config.probEscudo;
         this.probStatic = config.probStatic;
-        this.list = config.PListLevel1;
+        this.list = config.LevelList;
         this.img = null;
         this.cPlataform = false;
     }
@@ -51,11 +52,20 @@ class PM {
         this.list.push(p);
 
         // agrega el power up a la lista
-        if (Math.random() < this.probPowerUp / 100) {
+        if (Math.random() < this.probSuperJump / 100) {
             let powerUp = new SuperJump(
-                p.x + (p.width / 2)-15,   // centrar sobre la plataforma
-                p.y - 40,                   // justo arriba
+                p.x + (p.width / 2) - 15,
+                p.y - 40,
                 SuperJumpImg,
+            );
+            this.list.push(powerUp);
+        }
+        
+        if (Math.random() < this.probEscudo / 100) {
+            let powerUp = new escudo(
+                p.x + (p.width / 2) - 15,
+                p.y - 40,
+                EscudoImg,
             );
             this.list.push(powerUp);
         }
@@ -64,8 +74,8 @@ class PM {
         totalPlataforms++;
 
         // cuadno el contador llega a la cantidas indicada pone la plataforma de cambio en la lista para qeu salga en la pantalla 
-        if (totalPlataforms >= 75 && !this.cPlataform) {
-            let portal = new PlataformCambio(-250, newY - 150, 1500, 100, this.img, "../html/jefe_1_screen.html");
+        if (totalPlataforms >= 5 && !this.cPlataform) {
+            let portal = new PlataformCambio(-250, newY - 150, 1500, 100, this.img);
             this.list.push(portal);
             this.cPlataform = true;
         }

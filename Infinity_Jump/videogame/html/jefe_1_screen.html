@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="stylesheet" href="../css/jefe1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <script src="../js/Clases/text_label.js"></script>
     <script src="../js/Plataformas/plataforma.js"></script>
     <script src="../js/Clases/clase_jefe.js"></script>
@@ -11,6 +12,9 @@
     <script src="../js/Plataformas/barrera.js"></script>
     <script src="../js/personajes/main_character.js"></script>
     <script src="../js/jefe1_screen.js"></script>
+    <script src="../js/ajustes.js"></script>
+    <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/sound.js"></script>
     <title>Infinity Jump</title>
 </head>
 <body>
@@ -30,9 +34,30 @@
         }
     </script> -->
     <div id="canvasContainer">
-    <canvas id="canvas"></canvas>
-</div>
+        <canvas id="canvas"></canvas>
+        <button id="homeButton" onclick="openMain()">Inicio</button>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+    </div>
+
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
 
     <script> main(); </script>
 </body>
+<footer>
+    <p>Silver Way Studios &copy; 2025</p>
+</footer>
 </html>

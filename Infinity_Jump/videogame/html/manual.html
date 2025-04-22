@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/manual.css">
+    <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/ajustes_y_sonido/ajustes.js"></script>
+    <script src="../js/ajustes_y_sonido/sound.js"></script>
+    <title>Inifnity Jump </title>
+</head>
+<body>  
+    <header>
+        <h1>INFINITY JUMP</h1>
+    </header>    
+    <div id="canvasContainer">
+        <canvas id="canvas"></canvas>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
+
+    <h1>Antes de empezar...</h1>    
+    <div id="texto">
+        <div class="seccion">
+            <h2>Controles</h2>
+            <p>Durante todo el juego, Malvin va a estar saltando por automático. Tienes que lograr subir moviéndote a la izquierda o derecha a la siguiente plataforma.</p>
+            <p>Para moverse a la izquierda:</p>
+            <ul class="lista">
+                <li>Flecha izquierda</li>
+                <li>Letra A</li>
+            </ul>
+            <p>Para moverse a la derecha:</p>
+            <ul class="lista">
+                <li>Flecha derecha</li>
+                <li>Letra D</li>
+            </ul>
+        </div>
+
+        <div class="seccion">
+            <h2>Power Ups</h2>
+            <p>Durante el juego hay power ups que puedes recoger. Te ayudan a avanzar más rápido o derrotar enemigos.</p>
+            <ul class="lista">
+                <li>Salto: salto poderoso que sube muchas plataformas.</li>
+                <img src="../Assets/JumpPowerUp.png" alt="Jump Power Up" style="width:50px;height:50px;">
+                <li>Escudo: te da defensa extra contra enemigos.</li>
+                <img src="../Assets/EscudoPowerUp.png" alt="Escudo Power Up" style="width:50px;height:50px;">
+            </ul>
+        </div>
+
+        <div class="seccion">
+            <h2>Enemigos</h2>
+            <p>Al final de cada nivel, te enfrentas a un enemigo. Pierden vida al caerles encima.</p>
+            <ol class="lista">
+                <li>Se mueve de forma lineal.</li>
+                <img src="../Assets/JefePlantaIzq.png" alt="Planta" style="width:50px;height:50px;">
+                <li>Lanza proyectiles detrás de Malvin.</li>
+                <img src="../Assets/mago.png" alt="Mago" style="width:50px;height:50px;">
+                <li>Persigue a Malvin y lanza proyectiles.</li>
+                <img src="../Assets/enemigoTres1.png" alt="Alien" style="width:50px;height:50px;">
+            </ol>
+        </div>
+    </div>
+
+
+        <button id="gameButton" onclick="openGame()">Jugar</button>
+        <div id="ajustes" class="ajustes">
+            <div class="ajustes-content">
+                <span class="close" onclick="closeAjustes()">&times;</span>
+                <p>Música</p>
+                <label class="switch">
+                    <input type="checkbox" id="musicCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <p>Efectos de sonido</p>
+                <label class="switch">
+                    <input type="checkbox" id="soundEffectsCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <p>   </p>
+                <button id="homeButton" onclick="openMain()">Inicio</button>
+            </div>
+        </div>
+    
+
+      
+    <footer>
+        <p>Silver Way Studios &copy; 2025</p>
+    </footer>
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const musicCheckbox = document.getElementById("musicCheckbox");
+        
+            const iniciarMusicaIntro = () => {
+                if (musicCheckbox && musicCheckbox.checked) {
+                    reproducirMusica("menu");
+                }
+            };
+        
+            document.body.addEventListener("click", iniciarMusicaIntro);
+        });
+    </script>
+</html>
