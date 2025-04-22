@@ -15,7 +15,7 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
-const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
+const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 290 , "30px Pixelify Sans",  "white");
 
 
 // imágenes globales para todos los niveles
@@ -53,6 +53,8 @@ let SuperJumpImg = new Image();
 SuperJumpImg.src = "../Assets/JumpPowerUp.png";
 let EscudoImg = new Image();
 EscudoImg.src = "../Assets/EscudoPowerUp.png";
+
+
 
 
 function main() {
@@ -152,3 +154,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
+

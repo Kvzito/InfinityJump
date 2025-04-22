@@ -44,6 +44,7 @@ class Jefe2 extends Jefe {
                         jugador.escudoActivo = false;
                     } else {
                         jugador.vida -= 7; // daño al jugador
+                        playSound("throw")
                     }
                     jugador.activarInvulnerabilidad();
                 }
@@ -111,6 +112,7 @@ class Jefe2 extends Jefe {
         if (golpeaCabeza) {
             this.recibirDaño(jugador.strength);
             jugador.bounce();
+            playSound("hitEnemy");
             this.x = 50 + Math.random() * (canvasWidth - 100);
 
             // Se empuja al jefe en X según la dirección del jugador
@@ -120,6 +122,7 @@ class Jefe2 extends Jefe {
                 jugador.escudoActivo = false;
             } else {
                 jugador.vida -= this.strength;
+                playSound("attack");
             }
             jugador.activarInvulnerabilidad();
         }

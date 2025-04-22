@@ -6,7 +6,7 @@ function levelJefe1() {
     let plataformasExtraAgregadas = false;
 
     // textos y barreras 
-    const textVidaJefe = new TextLabel(canvasWidth / 2 - 80, 50, "30px Ubuntu Mono", "black");
+    const textVidaJefe = new TextLabel(canvasWidth / 2 - 80, 50, "30px Pixelify Sans", "black");
     const barreraIzq = new Limite(-10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
     const barreraDer = new Limite(canvasWidth + 10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 
@@ -70,6 +70,7 @@ function levelJefe1() {
 
                 if (jefe.vida <= 0) {
                     jefe.visible = false;
+                    playSound("dead");
                     // puedes usar nextLevel(); si quieres continuar después
     
                     mainCharacter.x = canvasWidth / 2 - 47;
