@@ -3,6 +3,10 @@ const soundEffects = {
     plataforma : new Audio("../Assets/sounds/plataforma.mp3"),
     caida : new Audio("../Assets/sounds/caida.mp3"),
     power : new Audio("../Assets/sounds/powerUp.ogg"),
+    hitEnemy : new Audio("../Assets/sounds/hitEnemy.wav"),
+    attack : new Audio("../Assets/sounds/attack.ogg"),
+    dead : new Audio ("../Assets/sounds/dead.wav"),
+    throw : new Audio ("../Assets/sounds/throw.wav")
 };
 
 soundEffects.plataforma.volume = 0.4;

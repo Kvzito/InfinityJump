@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Jump</title>
   <link rel="stylesheet" href="../css/estadisticas.css"> 
-  <script src="../js/ajustes.js"></script>
+  <script src="../js/ajustes_y_sonido/ajustes.js"></script>
     <script src="../js/paginaLogin/login.js"></script>
-    <script src="../js/sound.js"></script>
+    <script src="../js/ajustes_y_sonido/sound.js"></script>
     <script src="../js/estadisticas.js"></script>
   <script type="module" defer src="../app.js"></script>
 
@@ -20,7 +20,6 @@
   <div id="canvasContainer">
     <canvas id="canvas"></canvas>
     <h1>Estadisticas</h1>
-    <button id="homeButton" onclick="openMain()">Inicio</button>
     <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     <div id = "insideCanva">
       <nav>
@@ -69,6 +68,8 @@
               <input type="checkbox" id="soundEffectsCheckbox" checked>
               <span class="slider round"></span>
           </label>
+          <p>   </p>
+          <button id="homeButton" onclick="openMain()">Inicio</button>
       </div>
   </div>
   

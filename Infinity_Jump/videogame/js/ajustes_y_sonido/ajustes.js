@@ -8,6 +8,10 @@ function closeAjustes() {
     document.getElementById("ajustes").style.display = "none";
 }
 
+function openMain(){
+    window.location.href = 'mainPage.html';
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     const musicCheckbox = document.getElementById('musicCheckbox');
     const soundEffectsCheckbox = document.getElementById('soundEffectsCheckbox');

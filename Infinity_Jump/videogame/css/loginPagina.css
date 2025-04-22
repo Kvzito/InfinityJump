@@ -45,23 +45,6 @@ body {
   display: block;
 }
 
-#homeButton {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 10px 15px;
-  background-color: lightblue;
-  color: black;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  z-index: 2;
-} 
-
-#homeButton:hover {
-  background-color: #45a049;
-}
 
 
 #ajustesButton {
@@ -79,6 +62,21 @@ body {
 } 
 
 #ajustesButton:hover {
+  background-color: #45a049;
+}
+
+#homeButton {
+  padding: 10px 15px;
+  background-color: lightblue;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 2;
+} 
+
+#homeButton:hover {
   background-color: #45a049;
 }
 

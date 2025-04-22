@@ -1,4 +1,4 @@
-var userID;
+let userID;
 
 function openGame(){
     window.location.href = 'nivel_1_screen.html';
