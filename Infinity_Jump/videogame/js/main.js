@@ -15,7 +15,10 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
-const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 290 , "30px Pixelify Sans",  "white");
+
+const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
+const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
+
 
 
 // imágenes globales para todos los niveles
@@ -90,7 +93,8 @@ function update() {
     // dibuja el personaje y la vida siempre, sin importar el nivel
     if (mainCharacter) {
         mainCharacter.draw(ctx);
-        textVida.draw(ctx, `Vida: ${mainCharacter.vida} %`);
+        textVida.draw(ctx, `Vida: ${mainCharacter.vida} `);
+        textPower.draw(ctx, `Poder: ${mainCharacter.strength} `);
         mainCharacter.executeMoves();
 
         if (mainCharacter.y > canvasHeight || mainCharacter.vida <= 0) {
@@ -154,4 +158,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
+
+
+function seleccionarMejora(tipo) {
+    if (tipo === "salto") {
+        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
+    } else if (tipo === "danio") {
+        mainCharacter.strength += 20;
+    } else if (tipo === "vida") {
+        mainCharacter.vida += 20;
+    }
+    document.getElementById("mejorasPopup").style.display = "none";
+    gameRunning = true; // Reanudar juego si pausaste
+    mainCharacter.listenControls();
+    requestAnimationFrame(update);
+}
 
