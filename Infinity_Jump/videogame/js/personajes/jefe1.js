@@ -76,11 +76,13 @@ class Jefe1 extends Jefe {
             if (golpeaCabeza) {
                 this.vida -= jugador.strength; // quítale vida al jefe
                 jugador.bounce(); // el jugador rebota
+                playSound("hitEnemy");
             } else if (golpeNormal && !jugador.invulnerable) {
                 if (jugador.escudoActivo) {
                     jugador.escudoActivo = false;
                 } else {
                     jugador.vida -= this.strength;
+                    playSound("attack");
                 }
                 jugador.activarInvulnerabilidad();
             }
