@@ -28,6 +28,7 @@ async function connectToDB()
     })
 }
 
+// Endpoint con la que abrimos el servidor, desde la main page del juego.
 app.get('/', (request,response)=>
     fs.readFile('./videogame/html/mainPage.html', 'utf8', (err, html)=>
     {
@@ -37,6 +38,7 @@ app.get('/', (request,response)=>
     })
 )
 
+// Endpoint para cargar la página principal del juego, en caso de ser necesario llamarla
 app.get('/mainPage.html', (request,response)=>
     fs.readFile('./videogame/html/mainPage.html', 'utf8', (err, html)=>
     {
@@ -45,7 +47,7 @@ app.get('/mainPage.html', (request,response)=>
         response.send(html)
     }))
 
-
+// Endpoint para cargar la página de login.
 app.get('/loginPagina.html', (request,response)=>
 {
     fs.readFile('./videogame/html/loginPagina.html', 'utf8', (err, html)=>
@@ -56,6 +58,7 @@ app.get('/loginPagina.html', (request,response)=>
     })
 })
 
+// Endpoint para cargar la página con el manual.
 app.get('/manual.html', (request,response)=>
     fs.readFile('./videogame/html/manual.html', 'utf8', (err, html)=>
     {
@@ -64,6 +67,7 @@ app.get('/manual.html', (request,response)=>
         response.send(html)
     }))
 
+// Endpoint para cargar la página de crear cuenta.
 app.get('/crearCuenta.html', (request,response)=>
 {
     fs.readFile('./videogame/html/crearCuenta.html', 'utf8', (err, html)=>
@@ -74,6 +78,7 @@ app.get('/crearCuenta.html', (request,response)=>
     })
 })
 
+// Endpoint para cargar la página que contiene al juego en sí.
 app.get('/game_screen.html', (request,response)=>
 {
     fs.readFile('./videogame/html/game_screen.html', 'utf8', (err, html)=>
@@ -84,6 +89,18 @@ app.get('/game_screen.html', (request,response)=>
     })
 })
 
+// Endpoint para cargar la página de estadísticas.
+app.get('/estadisticas.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/estadisticas.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando estadísticas...')
+        response.send(html)
+    })
+})
+
+// Endpoint para cargar la página de historia.
 app.get('/historia.html', (request,response)=>
 {
     fs.readFile('./videogame/html/historia.html', 'utf8', (err, html)=>
@@ -106,7 +123,7 @@ app.post('/api/buscarUser', async (request, response) => {
         const connection = await connectToDB();
 
         const [rows] = await connection.query(
-            'SELECT * FROM MostrarJugadores WHERE usuario = ? AND contrasena = ?',
+            'SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?',
             [username, password]
         );
 
@@ -145,12 +162,17 @@ app.post('/api/crearUsuario', async (request, response) => {
         return response.status(400).json({ message: "La contraseña debe tener entre 8 y 20 caracteres." });
     }
 
+    if (usuario.length < 4 || usuario.length > 20) {
+        console.log("El nombre de usuario debe tener entre 4 y 20 caracteres.");
+        return response.status(400).json({ message: "El nombre de usuario debe tener entre 4 y 20 caracteres." });
+    }
+
     try {
         const connection = await connectToDB();
 
         // Verificar si el nombre de usuario ya existe
         const [UsuarioExistente] = await connection.query(
-            'SELECT * FROM usuarios WHERE usuario = ?',
+            'SELECT * FROM usuariosregistrados WHERE usuario = ?',
             [usuario]
         );
 
@@ -231,36 +253,35 @@ app.get('/api/Partidas/ultimo-intento', async (request, response) => {
     }
 });
 
-// app.post('/register', async (request, response) => {
-//     const { username, password } = request.body;
+// Get para obtener todas las estadísticas de un usuario en específico
+app.get('/api/stats/:id', async (request, response)=>
+{
+    let connection = null
 
-//     if (!username || !password) {
-//         return response.status(400).send('Faltan datos para crear la cuenta.');
-//     }
+    try
+    {
+        connection = await connectToDB()
 
-//     try {
-//         const connection = await connectToDB();
-//         const [existingUser] = await connection.execute(
-//             'SELECT * FROM users WHERE username = ?',
-//             [username]
-//         );
-
-//         if (existingUser.length > 0) {
-//             return response.status(409).send('El nombre de usuario ya está en uso.');
-//         }
-
-//         await connection.execute(
-//             'INSERT INTO users (username, password) VALUES (?, ?)',
-//             [username, password]
-//         );
-
-//         response.status(201).send('Cuenta creada exitosamente.');
-//         await connection.end();
-//     } catch (error) {
-//         console.error('Error al crear la cuenta:', error);
-//         response.status(500).send('Error interno del servidor.');
-//     }
-// });
+        const [results_user, _] = await connection.query('select * from historialintentos where Jugador= ?', [request.params.usuario])
+        
+        console.log(`${results_user.length} rows returned`)
+        response.json(results_user)
+    }
+    catch(error)
+    {
+        response.status(500)
+        response.json(error)
+        console.log(error)
+    }
+    finally
+    {
+        if(connection!==null) 
+        {
+            connection.end()
+            console.log("Connection closed succesfully!")
+        }
+    }
+});
 
 app.listen(port, ()=>
     {
