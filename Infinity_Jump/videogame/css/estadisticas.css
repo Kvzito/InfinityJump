@@ -108,7 +108,7 @@ body {
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 10px;
     font-weight: bold;
 }
 
@@ -190,7 +190,7 @@ nav button {
   padding: 10px;
   background-color: lightblue;
   color: black;
-  font-size: 16px;
+  font-size: 19px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -203,13 +203,14 @@ nav button:hover {
 
 .leaderboard-section{
     position: absolute;
-    top: 60%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
+    font-size: 10px;
 }
 
 footer {
