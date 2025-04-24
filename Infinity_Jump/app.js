@@ -254,12 +254,13 @@ app.get('/api/Partidas/ultimo-intento', async (request, response) => {
 });
 
 // Get para obtener todas las estadísticas de un usuario en específico
-app.get('/api/stats/:id', async (request, response)=>
+app.get('/api/stats/:usuario', async (request, response)=>
 {
     let connection = null
 
     try
     {
+        console.log(request.params.id)
         connection = await connectToDB()
 
         const [results_user, _] = await connection.query('select * from historialintentos where Jugador= ?', [request.params.usuario])
@@ -282,6 +283,34 @@ app.get('/api/stats/:id', async (request, response)=>
         }
     }
 });
+
+// Get para obtener el ranking de los mejores 10 jugadores
+app.get('/api/ranking', async (request, response)=>
+{
+    let connection = null
+    try
+    {
+        connection = await connectToDB()
+
+        const [results_global, _] = await connection.query('select * from globalranking')
+        console.log(`${results_global.length} rows returned`)
+        response.json(results_global)
+    }
+    catch(error)
+    {
+        response.status(500)
+        response.json(error)
+        console.log(error)
+    }
+    finally
+    {
+        if(connection!==null) 
+        {
+            connection.end()
+            console.log("Connection closed succesfully!")
+        }
+    }
+})
 
 app.listen(port, ()=>
     {
