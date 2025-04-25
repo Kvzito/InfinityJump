@@ -2,10 +2,17 @@ let canvas, ctx;
 let canvasHeight = 650;
 let canvasWidth = 1150;
 let gameRunning = false;
+let lastTime = 0; // New variable to track the last frame time
+let deltaTime = 0; // New variable to store time between frames
 
 let totalPlataforms = 0;
 let intentoPlayer = 1;
 let userID = localStorage.getItem('userID');
+
+let PowerUpVidaCont = 0;
+let PowerUpSaltoCont = 0;
+let PowerUpFuerzaCont = 0;
+
 
 // fondos
 let fondoCieloImg = new Image();
@@ -72,16 +79,19 @@ function main() {
 
     loadLevels();
     gameRunning = true;
+    lastTime = performance.now(); // Initialize lastTime
     requestAnimationFrame(update);
-
 }
 
-function update() {
+function update(currentTime) {
     if (!gameRunning) return;
 
-    requestAnimationFrame(update);
-
     
+    deltaTime = (currentTime - lastTime) / 1000; 
+    deltaTime = Math.min(deltaTime, 0.1);
+    lastTime = currentTime;
+
+    requestAnimationFrame(update);
 
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
@@ -101,7 +111,6 @@ function update() {
 }
 
 async function enviarStats() {
-
     console.log("Registrando cambios de USER ID:", userID);
 
     try {
@@ -157,11 +166,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {
-        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
-    } else if (tipo === "danio") {
+        mainCharacter.inicialVelY += mainCharacter.inicialVelY * 0.09; 
+        PowerUpSaltoCont ++;
+    } else if (tipo === "daño") {
         mainCharacter.strength += 20;
+        PowerUpFuerzaCont ++;
     } else if (tipo === "vida") {
         mainCharacter.vida += 20;
+        PowerUpVidaCont ++;
     }
     document.getElementById("mejorasPopup").style.display = "none";
     gameRunning = true; // Reanudar juego si pausaste

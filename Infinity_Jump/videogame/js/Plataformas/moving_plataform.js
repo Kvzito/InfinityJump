@@ -12,7 +12,7 @@ class MovingPlataform extends Plataform{
     }
 
     moveX() {
-        this.x += this.speed * this.direction;
+        this.x += this.speed * this.direction * deltaTime * 60;
         if (this.x > this.originX + this.range || this.x < this.originX - this.range) {
             this.direction *= -1;
         }

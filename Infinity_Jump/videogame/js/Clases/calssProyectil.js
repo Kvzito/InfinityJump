@@ -5,18 +5,22 @@ class Proyectil {
         this.size = 10;
         this.target = target;
         this.tiempoVida = tiempoVida;
-        this.velocidad = 2;
+        this.velocidad = 1.7;
         this.img = img;
     }
 
     update() {
         if (this.tiempoVida > 0) {
-            const dx = this.target.x + this.target.width / 2 - this.x;
-            const dy = this.target.y + this.target.height / 2 - this.y;
+            const dx = (this.target.x + this.target.width / 2) - this.x;
+            const dy = (this.target.y + this.target.height / 2) - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            this.x += (dx / dist) * this.velocidad;
-            this.y += (dy / dist) * this.velocidad;
-            this.tiempoVida--;
+    
+            if (dist !== 0) {
+                this.x += (dx / dist) * this.velocidad * deltaTime * 60;
+                this.y += (dy / dist) * this.velocidad * deltaTime * 60;
+            }
+    
+            this.tiempoVida -= deltaTime * 60;
         }
     }
 
