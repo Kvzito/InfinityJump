@@ -22,8 +22,10 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
+
 const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
 const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
+
 
 
 // imágenes globales para todos los niveles
@@ -61,6 +63,8 @@ let SuperJumpImg = new Image();
 SuperJumpImg.src = "../Assets/JumpPowerUp.png";
 let EscudoImg = new Image();
 EscudoImg.src = "../Assets/EscudoPowerUp.png";
+
+
 
 
 function main() {
@@ -164,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
 
+
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {
         mainCharacter.inicialVelY += mainCharacter.inicialVelY * 0.09; 
@@ -180,3 +185,4 @@ function seleccionarMejora(tipo) {
     mainCharacter.listenControls();
     requestAnimationFrame(update);
 }
+

@@ -2,7 +2,7 @@ function levelJefe2() {
     let LevelList = [];
 
     jefe = new Jefe2(400, 200, 120, 120, jefe2Img);
-    const textVidaJefe = new TextLabel(canvasWidth / 2 - 80, 50, "30px Ubuntu Mono", "white");
+    const textVidaJefe = new TextLabel(canvasWidth / 2 - 80, 50, "30px Pixelify Sans", "white");
     const barreraIzq = new Limite(-10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
     const barreraDer = new Limite(canvasWidth + 10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
 
