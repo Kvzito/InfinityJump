@@ -20,7 +20,6 @@ const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30p
 const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
 
 
-
 // imágenes globales para todos los niveles
 // imagen main character
 let mainCharacterImage = new Image();
@@ -158,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
-
 
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {
