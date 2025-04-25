@@ -47,6 +47,7 @@ app.get('/mainPage.html', (request,response)=>
         response.send(html)
     }))
 
+
 // Endpoint para cargar la página de login.
 app.get('/loginPagina.html', (request,response)=>
 {
@@ -58,7 +59,9 @@ app.get('/loginPagina.html', (request,response)=>
     })
 })
 
+
 // Endpoint para cargar la página con el manual.
+
 app.get('/manual.html', (request,response)=>
     fs.readFile('./videogame/html/manual.html', 'utf8', (err, html)=>
     {
@@ -68,6 +71,7 @@ app.get('/manual.html', (request,response)=>
     }))
 
 // Endpoint para cargar la página de crear cuenta.
+
 app.get('/crearCuenta.html', (request,response)=>
 {
     fs.readFile('./videogame/html/crearCuenta.html', 'utf8', (err, html)=>
@@ -79,6 +83,7 @@ app.get('/crearCuenta.html', (request,response)=>
 })
 
 // Endpoint para cargar la página que contiene al juego en sí.
+
 app.get('/game_screen.html', (request,response)=>
 {
     fs.readFile('./videogame/html/game_screen.html', 'utf8', (err, html)=>
@@ -88,6 +93,7 @@ app.get('/game_screen.html', (request,response)=>
         response.send(html)
     })
 })
+
 
 // Endpoint para cargar la página de estadísticas.
 app.get('/estadisticas.html', (request,response)=>
@@ -101,6 +107,7 @@ app.get('/estadisticas.html', (request,response)=>
 })
 
 // Endpoint para cargar la página de historia.
+
 app.get('/historia.html', (request,response)=>
 {
     fs.readFile('./videogame/html/historia.html', 'utf8', (err, html)=>
@@ -142,6 +149,7 @@ app.post('/api/buscarUser', async (request, response) => {
 });
 
 // End point para crear un nuevo usuario
+
 
 app.post('/api/crearUsuario', async (request, response) => {
 
@@ -309,8 +317,33 @@ app.get('/api/ranking', async (request, response)=>
             connection.end()
             console.log("Connection closed succesfully!")
         }
-    }
+ }
 })
+
+
+// GET que sirve para verificar cual fue el último intento por ID de usuario y así evitar que se duplique
+
+app.get('/api/Partidas/ultimo-intento', async (request, response) => {
+
+    const { id_usuario } = request.query;
+    let connection = null;
+
+    try {
+        connection = await connectToDB();
+        const [rows] = await connection.query(
+            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
+            [id_usuario]
+        );
+        const ultimo_intento = rows[0].ultimo_intento || 0;
+        response.json({ ultimo_intento });
+    } catch (error) {
+        console.error(error);
+        response.status(500).json({ error: "Error obteniendo el último intento" });
+        console.log("No se pudo obtener el último intento");
+    } finally {
+        if (connection !== null) connection.end();
+    }
+});
 
 app.listen(port, ()=>
     {

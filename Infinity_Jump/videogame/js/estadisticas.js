@@ -122,5 +122,4 @@ function openMine() {
 function openLeaderboard() {
   leaderboard.style.display = "block";
   misPartidas.style.display = "none";
-  
 }
