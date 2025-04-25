@@ -4,6 +4,8 @@ class PM {
         this.probSuperJump = config.probSuperJump;
         this.probEscudo = config.probEscudo;
         this.probStatic = config.probStatic;
+        this.probOne = config.probOne;
+        //this.probOff = config.probOff;
         this.list = config.LevelList;
         this.img = null;
         this.cPlataform = false;
@@ -22,12 +24,23 @@ class PM {
             let randomX = Math.floor(Math.random() * (maxX - minX) + minX);
 
             let isMoving = Math.random() < (this.probMov / 100); // usa la probabilidad para saes que plataforma agregar a la lista
+            let SinglePlataform = Math.random() < (this.probOne / 100);
+            let quitarPlataform =  Math.random() < (this.proboff / 100);
             let nPlataform;
             if (isMoving) {
                 nPlataform = new MovingPlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img, 100, 0.5);
-            } else {
+            }
+            else if(SinglePlataform){
+                nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformSingle1);
+            }
+            else if(quitarPlataform){
+                nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformImg2);
+            }
+            else {
                 nPlataform = new Plataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);
             }
+        
+            
             this.list.push(nPlataform);
         }
     }

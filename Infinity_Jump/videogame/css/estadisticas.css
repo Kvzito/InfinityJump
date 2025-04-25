@@ -167,7 +167,7 @@ input:checked + .slider:before {
 
 #canvasContainer h1{
     position: absolute;
-  top: 10%;
+  top: 5%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -177,16 +177,18 @@ input:checked + .slider:before {
 
 nav {
     position: absolute;
-    top: 25%;
-    left: 25%;
+    top: 17%;
+    left: 10px;
     display: flex;
-    gap: 50px;
+   flex-direction: column;
+   gap: 20px;
+   z-index: 3;
 }
 
 nav button {
     top:50%;
     left: 50%;
-  width: 270px;
+  width: 150px;
   padding: 10px;
   background-color: lightblue;
   color: black;
@@ -200,17 +202,31 @@ nav button:hover {
     background-color: #45a049;
 }
 
-
-.leaderboard-section{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
+.tabla-container {
+  position: absolute;
+  top: 55%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 35%;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
 }
+
+.grafica-container {
+  position: absolute;
+  top: 55%;
+  left: 77%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 35%;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+}
+
+
 
 footer {
     font-family: 'Times New Roman', Times, serif;
@@ -221,5 +237,9 @@ footer {
   }
 
   #leaderboard{
+    display: none;
+  }
+
+  #graficas {
     display: none;
   }
