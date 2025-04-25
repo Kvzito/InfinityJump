@@ -72,13 +72,11 @@ function levelJefe1() {
                     jefe.visible = false;
                     playSound("dead");
                     // puedes usar nextLevel(); si quieres continuar después
-    
                 
                     setTimeout(() => {
                         document.getElementById("mejorasPopup").style.display = "block";
                         gameRunning = false; // pausa el juego mientras eliges
                     }, 500);
-                    
                     mainCharacter.x = canvasWidth / 2 - 47;
                     mainCharacter.y = canvasHeight / 2 + 200;
                     mainCharacter.velocityX = 0;

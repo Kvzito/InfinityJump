@@ -23,17 +23,17 @@
     <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     <div id = "insideCanva">
       <nav>
-        <button onclick= "openMine()">Mis estadisticas</button>
-        <button onclick ="openLeaderboard()">Marcador</button>
+        <button onclick= "openMine()">Buscar estadísticas por jugador</button>
+        <button onclick ="openLeaderboard()">Ranking global</button>
       </nav>
 
       <div class="statsContainter">
         <div class="leaderboard-section">
           <div id = "misPartidas">
             <div class="formInput">
-              <h2>Mis partidas</h2>
+              <h2>Partidas</h2>
               <form id="formPartidas">
-                  <input type="text" name="player_id" placeholder="Escribe el ID del jugador">
+                  <input type="text" name="usuario" placeholder="Escribe el usuario.">
                   <input type="submit" value="Mostrar partidas">
               </form>
             </div>
@@ -45,11 +45,13 @@
       
           <div id = "leaderboard">
             <div class="formInput">
-              <h2>Marcador</h2>
-              <form id="topFive"></form>
+              <h2>Mejores jugadores</h2>
+              <form id = "formLeaderboard">
+                <input type="submit" value="Mostrar ranking">
+              </form>
             </div>
             <div class="resultDisplay">
-              <h2>Top 5</h2>
+              <h2>Top 10 intentos globalmente</h2>
               <div id="getResultsTop"></div>
             </div>
           </div>
