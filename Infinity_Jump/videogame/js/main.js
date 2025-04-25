@@ -29,6 +29,8 @@ mainCharacterImage.src = "../Assets/Jump1.PNG";
 // imagenes paltaformas nivel 1
 let plataformImg1 = new Image();
 plataformImg1.src = "../Assets/Plataforma1.png";
+let plataformSingle1 = new Image();
+plataformSingle1.src = "../Assets/bush.png";
 
 // imagenes jefe 1
 jefeImgIzq = new Image();
@@ -101,6 +103,7 @@ function update() {
             gameRunning = false;
         }
     }
+
 }
 
 async function enviarStats() {

@@ -23,39 +23,52 @@
     <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     <div id = "insideCanva">
       <nav>
-        <button onclick= "openMine()">Buscar estadísticas por jugador</button>
-        <button onclick ="openLeaderboard()">Ranking global</button>
+        <button onclick= "openMine()">Mis estadisticas</button>
+        <button onclick ="openLeaderboard()">Marcador</button>
+        <button onclick = "openGraphs()">Graficas</button>
       </nav>
 
-      <div class="statsContainter">
-        <div class="leaderboard-section">
-          <div id = "misPartidas">
-            <div class="formInput">
-              <h2>Partidas</h2>
-              <form id="formPartidas">
-                  <input type="text" name="usuario" placeholder="Escribe el usuario.">
-                  <input type="submit" value="Mostrar partidas">
-              </form>
-            </div>
-            <div class="resultDisplay">
-                <h2>Resultado</h2>
-                <div id="getResultsPartida"></div>
-            </div>
-          </div>
-      
-          <div id = "leaderboard">
-            <div class="formInput">
-              <h2>Mejores jugadores</h2>
-              <form id = "formLeaderboard">
-                <input type="submit" value="Mostrar ranking">
-              </form>
-            </div>
-            <div class="resultDisplay">
-              <h2>Top 10 intentos globalmente</h2>
-              <div id="getResultsTop"></div>
-            </div>
-          </div>
+        <!-- Mis Estadísticas -->
+        <div id="misPartidasTabla" class="tabla-container">
+          <h2>Mis partidas</h2>
+          <form id="formPartidas">
+              <input type="text" name="player_id" placeholder="ID del jugador" />
+              <input type="submit" value="Buscar" />
+          </form>
+          <div id="getResultsPartida"></div>
         </div>
+
+        <div id="misPartidasGrafica" class="grafica-container">
+          <h2>Gráfica de mis partidas</h2>
+          <div id="graficaPartida"></div>
+        </div>
+      
+      
+        <!-- Leaderboard -->
+        <div id="leaderboardTabla" class="tabla-container">
+          <h2>Marcador</h2>
+          <form id="topFive"></form>
+          <div id="getResultsTop"></div>
+        </div>
+
+        <div id="leaderboardGrafica" class="grafica-container">
+          <h2>Gráfica del marcador</h2>
+          <div id="graficaTop"></div>
+        </div>
+
+        <!-- Gráficas -->
+        <div id="graficasTabla" class="tabla-container">
+          <h2>Mejoras más usadas</h2>
+          <form id="formMejoras"></form>
+          <div id="getResultsMejoras"></div>
+        </div>
+
+        <div id="graficasGrafica" class="grafica-container">
+          <h2>Gráfica de mejoras</h2>
+          <div id="graficaMejoras"></div>
+        </div>
+
+     </div>
     </div>
     <div id="ajustes" class="ajustes">
       <div class="ajustes-content">
