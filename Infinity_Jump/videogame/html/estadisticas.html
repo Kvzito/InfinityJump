@@ -28,11 +28,11 @@
         <button onclick = "openGraphs()">Graficas</button>
       </nav>
 
-        <!-- Mis Estadísticas -->
+        <!-- Estadísticas por usuario -->
         <div id="misPartidasTabla" class="tabla-container">
-          <h2>Mis partidas</h2>
+          <h2>Últimas 25 partidas</h2>
           <form id="formPartidas">
-              <input type="text" name="player_id" placeholder="ID del jugador" />
+              <input type="text" name="usuario" placeholder="Usuario por buscar" />
               <input type="submit" value="Buscar" />
           </form>
           <div id="getResultsPartida"></div>
@@ -46,19 +46,21 @@
       
         <!-- Leaderboard -->
         <div id="leaderboardTabla" class="tabla-container">
-          <h2>Marcador</h2>
-          <form id="topFive"></form>
+          <h2>Rank global</h2>
+            <form id="formLeaderboard">
+              <input type="submit" value="Mostrar Ranking">
+            </form>
           <div id="getResultsTop"></div>
         </div>
 
         <div id="leaderboardGrafica" class="grafica-container">
-          <h2>Gráfica del marcador</h2>
+          <h2>Gráfica del ranking global</h2>
           <div id="graficaTop"></div>
         </div>
 
         <!-- Gráficas -->
         <div id="graficasTabla" class="tabla-container">
-          <h2>Mejoras más usadas</h2>
+          <h2>Mejoras más usadas globalmente</h2>
           <form id="formMejoras"></form>
           <div id="getResultsMejoras"></div>
         </div>
