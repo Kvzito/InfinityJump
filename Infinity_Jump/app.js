@@ -9,6 +9,7 @@ María Rivera
 import express from 'express'
 import mysql from 'mysql2/promise'
 import fs from 'fs'
+import { request } from 'http'
 
 const app = express()
 const port = 5000
@@ -283,7 +284,7 @@ app.get('/api/stats/:usuario', async (request, response)=>
         console.log(request.params.id)
         connection = await connectToDB()
 
-        const [results_user, _] = await connection.query('select * from historialintentos where Jugador= ?', [request.params.usuario])
+        const [results_user, _] = await connection.query('select * from historialintentos where Jugador= ? ORDER BY Intento DESC LIMIT 25', [request.params.usuario])
         
         console.log(`${results_user.length} rows returned`)
         response.json(results_user)
@@ -315,6 +316,62 @@ app.get('/api/ranking', async (request, response)=>
         const [results_global, _] = await connection.query('select * from globalranking')
         console.log(`${results_global.length} rows returned`)
         response.json(results_global)
+    }
+    catch(error)
+    {
+        response.status(500)
+        response.json(error)
+        console.log(error)
+    }
+    finally
+    {
+        if(connection!==null) 
+        {
+            connection.end()
+            console.log("Connection closed succesfully!")
+        }
+ }
+})
+
+// GET para obtener el uso de las mejoras del juego globalmente
+app.get('/api/usomejoras', async (request, response)=>
+{
+    let connection = null
+    try
+    {
+        connection = await connectToDB()
+
+        const [results_mejoras, _] = await connection.query('select * from usomejoras')
+        console.log(`${results_mejoras.length} rows returned`)
+        response.json(results_mejoras)
+    }
+    catch(error)
+    {
+        response.status(500)
+        response.json(error)
+        console.log(error)
+    }
+    finally
+    {
+        if(connection!==null) 
+        {
+            connection.end()
+            console.log("Connection closed succesfully!")
+        }
+ }
+})
+
+// Get para obtener cuales son los niveles máximos alcanzados por cada jugador
+app.get('/api/nivelesComunes', async (request, response)=>
+{
+    let connection = null
+    try
+    {
+        connection = await connectToDB()
+
+        const [results_niveles, _] = await connection.query('select * from nivelesmascomunes')
+        console.log(`${results_niveles.length} rows returned`)
+        response.json(results_niveles)
     }
     catch(error)
     {

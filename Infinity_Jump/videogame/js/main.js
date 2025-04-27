@@ -76,6 +76,8 @@ function main() {
     console.log("Main con usuario ID:", userID); 
 
     loadLevels();
+    resetTimer();
+    startTimer();
     gameRunning = true;
     requestAnimationFrame(update);
 
@@ -136,6 +138,8 @@ async function enviarStats() {
 }
 
 function mostrarGameOver() {
+    stopTimer();
+
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
 }

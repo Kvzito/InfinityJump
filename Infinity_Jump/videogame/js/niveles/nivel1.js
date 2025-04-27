@@ -1,5 +1,7 @@
 // esto crea el nivel 1 para usarlo desde level_manager
 function level1() {
+    cambiarMusicaNivel("bosque");
+
     // variables del nivel
     const level1Config = {
         probMov: 10,
@@ -107,5 +109,8 @@ function level1() {
         for (let i = 0; i < PlataformManager.list.length; i++) {
             PlataformManager.list[i].draw(ctx);
         }
-    };
+    };    
+    
 }
+
+
