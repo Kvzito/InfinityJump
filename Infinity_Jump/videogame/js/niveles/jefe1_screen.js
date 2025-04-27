@@ -1,5 +1,7 @@
 // esto crea el nivel del jefe para usarlo desde level_manager
 function levelJefe1() {
+    cambiarMusicaNivel("enemy");
+
     // Variables del personaje principal y del jefe
     let jefe;
     let LevelList = [];
@@ -114,4 +116,7 @@ function levelJefe1() {
 
             textVidaJefe.draw(ctx, `Vida Jefe: ${jefe.vida}`);
         };
+
+
 };
+
