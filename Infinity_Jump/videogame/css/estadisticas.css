@@ -215,11 +215,15 @@ nav button:hover {
   display: none;
 }
 
+#misPartidasTabla{
+  font-size: 12px;
+}
+
 
 .grafica-container {
   position: absolute;
   top: 55%;
-  left: 80%;
+  left: 79%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
   width: 35%;
@@ -227,6 +231,14 @@ nav button:hover {
   border-radius: 10px;
   font-size: 10px;
   display: none;
+}
+
+#graficaMejora {
+  left: 37%;
+}
+
+#graficaGeneral {
+  left: 78%;
 }
 
 

@@ -47,10 +47,7 @@
       
         <!-- Leaderboard -->
         <div id="leaderboardTabla" class="tabla-container">
-          <h2>Rank global</h2>
-            <!-- <form id="formLeaderboard">
-              <input type="submit" value="Mostrar Ranking">
-            </form> -->
+          <h2>Rank global (Top 10 intentos)</h2>
           <div id="getResultsTop"></div>
         </div>
 
@@ -60,15 +57,14 @@
         </div>
 
         <!-- Gráficas -->
-        <div id="graficasTabla" class="tabla-container">
+        <div id="graficaMejora" class="grafica-container">
           <h2>Mejoras más usadas globalmente</h2>
-          <form id="formMejoras"></form>
-          <div id="getResultsMejoras"></div>
+          <canvas id="graficaMejoras" style="max-width: 100%; max-height: 400px;"></canvas>
         </div>
 
-        <div id="graficasGrafica" class="grafica-container">
-          <h2>Gráfica de mejoras</h2>
-          <canvas id="graficasGenerales" style="max-width: 100%; max-height: 400px;"></canvas>
+        <div id="graficaNiveles" class="grafica-container">
+          <h2>Nivel más común de alcanzar</h2>
+          <canvas id="graficaNivelesComunes" style="max-width: 100%; max-height: 400px;"></canvas>
         </div>
 
      </div>
