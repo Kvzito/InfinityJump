@@ -211,3 +211,53 @@ input:checked + .slider:before {
 footer {
     font-family: 'Times New Roman', Times, serif;
 }
+
+#mejorasPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(20, 20, 20, 0.95);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    z-index: 1000;
+    text-align: center;
+    box-shadow: 0 0 15px #000;
+}
+
+.opciones-mejora {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.opcion {
+    background-color: #1f1f1f;
+    padding: 15px;
+    border-radius: 10px;
+    width: 120px;
+    transition: transform 0.2s ease;
+}
+
+.opcion:hover {
+    transform: scale(1.1);
+    background-color: #333;
+}
+
+.opcion img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+}
+
+.opcion button {
+    background-color: #45a049;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
