@@ -9,6 +9,10 @@ function loadLevels() {
     levels[currentLevelIndex]();
 }
 
+function getCurrentLevelIndex() {
+    return currentLevelIndex;
+}
+
 function nextLevel() {
     currentLevelIndex++;
     if (currentLevelIndex < levels.length) {

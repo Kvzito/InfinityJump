@@ -14,6 +14,9 @@ CREATE TABLE Partidas (
     intento INT NOT NULL,
     nivel INT NOT NULL,
     plataformas_alcanzadas INT NOT NULL,
+    mejora_1 INT NOT NULL DEFAULT 0,
+    mejora_2 INT NOT NULL DEFAULT 0,
+    mejora_3 INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
     UNIQUE (id_usuario, intento)  -- Evita que se repita el número de intento y usuario.
 ) ENGINE=InnoDB;
@@ -26,6 +29,10 @@ CREATE TABLE Inventario (
     cantidad_mejora_3 INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 ) ENGINE=InnoDB;
+
+ALTER TABLE Inventario ADD CONSTRAINT unq_inventario_usuario UNIQUE (id_usuario);
+
+
 
 -- Insertar usuarios dummie
 INSERT INTO Usuarios (usuario, contrasena) VALUES
@@ -40,50 +47,58 @@ INSERT INTO Usuarios (usuario, contrasena) VALUES
 ('jugador9', 'secure555'),
 ('jugador10', 'mypass777');
 
+
 -- Insertar partidas dummie
-INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES
-(1, 1, 1, 5),
-(1, 2, 2, 79),
-(2, 1, 1, 8),
-(3, 1, 1, 10),
-(3, 2, 2, 12),
-(4, 1, 2, 13),
-(5, 1, 2, 85),
-(5, 2, 1, 16),
-(6, 1, 1, 18),
-(7, 1, 1, 19),
-(8, 1, 1, 20),
-(9, 1, 1, 22),
-(10, 1, 1, 24);
+INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_1, mejora_2, mejora_3) VALUES
+(1, 1, 1, 5, 2, 5, 1),
+(1, 2, 2, 79, 2, 5, 1),
+(2, 1, 1, 8, 2, 5, 1),
+(2, 2, 1, 5, 2, 5, 0),
+(2, 3, 1, 10, 2, 5, 1),
+(2, 4, 1, 20, 2, 5, 1),
+(2, 5, 1, 40, 2, 5, 1),
+(2, 6, 1, 80, 2, 5, 1),
+(2, 7, 1, 160, 2, 0, 1),
+(2, 8, 1, 320, 2, 5, 1),
+(2, 9, 1, 640, 2, 5, 1),
+(3, 1, 1, 10, 2, 0, 1),
+(3, 2, 2, 12, 2, 5, 1),
+(4, 1, 2, 13, 2, 5, 1),
+(5, 1, 2, 85, 0, 5, 1),
+(5, 2, 1, 16, 2, 5, 1),
+(6, 1, 1, 18, 2, 5, 1),
+(7, 1, 1, 19, 2, 5, 1),
+(8, 1, 1, 20, 0, 5, 1),
+(9, 1, 1, 22, 2, 0, 0),
+(10, 1, 1, 24, 2, 5, 1);
 
 -- Insertar inventarios dummie
 INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3) VALUES
-(1, 0, 1, 0),
-(2, 0, 0, 0),
-(3, 0, 0, 0),
-(4, 0, 0, 0),
+(1, 3, 1, 0),
+(2, 1, 0, 5),
+(3, 1, 1, 1),
+(4, 0, 0, 3),
 (5, 0, 0, 1),
-(6, 0, 0, 0),
-(7, 0, 0, 0),
+(6, 4, 0, 3),
+(7, 1, 0, 0),
 (8, 0, 0, 0),
-(9, 0, 0, 0),
-(10, 0, 0, 0);
+(9, 0, 3, 0),
+(10, 5, 0, 0);
+
+
 
 
 -- VISTAS NECESARIAS PARA APARTADO DE ESTADÍSTICAS EN LA PÁGINA WEB --
 
 
 -- Vista a llamar cada que alguien busque los últimos 100 intentos de cierto usuario.
-CREATE VIEW HistorialIntentos AS
-SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Saltos_completados, i.cantidad_mejora_1 AS Mejora_1, i.cantidad_mejora_2 AS Mejora_2, i.cantidad_mejora_3 AS Mejora_3
+CREATE OR REPLACE VIEW HistorialIntentos AS
+SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Saltos_completados, p.mejora_1 AS Mejora_1, p.mejora_2 AS Mejora_2, p.mejora_3 AS Mejora_3
 FROM Partidas p
-JOIN Usuarios u ON p.id_usuario = u.id_usuario
-JOIN Inventario i ON p.id_usuario = i.id_usuario
-ORDER BY u.usuario, p.intento
-LIMIT 100;
+JOIN Usuarios u ON p.id_usuario = u.id_usuario;
 
 -- Vista útil para graficar cual es la mejora permanente que más suelen escoger los usuarios.
-CREATE VIEW UsoMejoras AS
+CREATE OR REPLACE VIEW UsoMejoras AS
 SELECT
     SUM(cantidad_mejora_1) AS Total_Mejora_1,
     SUM(cantidad_mejora_2) AS Total_Mejora_2,
@@ -92,16 +107,15 @@ FROM Inventario;
 
 
 -- Vista para establecer un leaderboard en base a diferentes estadísticas.
-CREATE VIEW GlobalRanking AS
+CREATE OR REPLACE VIEW GlobalRanking AS
 SELECT
     u.usuario AS Jugador,
     p.intento AS Mejor_Intento,
     p.plataformas_alcanzadas AS Saltos_Completados,
     p.nivel AS Nivel_Alcanzado,
-    i.cantidad_mejora_1 AS Mejora_1,
-    i.cantidad_mejora_2 AS Mejora_2,
-    i.cantidad_mejora_3 AS Mejora_3
-
+    p.mejora_1 AS Mejora_1,
+    p.mejora_2 AS Mejora_2,
+    p.mejora_3 AS Mejora_3
 FROM Partidas p
 JOIN (
     -- Subconsulta que selecciona la mejor partida por usuario
@@ -119,47 +133,6 @@ JOIN (
     WHERE rn = 1
 ) mejores ON p.id_partida = mejores.id_partida
 JOIN Usuarios u ON p.id_usuario = u.id_usuario
-JOIN Inventario i ON p.id_usuario = i.id_usuario
-ORDER BY u.usuario, p.intento
-LIMIT 100;
-
--- Vista útil para graficar cual es la mejora permanente que más suelen escoger los usuarios.
-CREATE VIEW UsoMejoras AS
-SELECT
-    SUM(cantidad_mejora_1) AS Total_Mejora_1,
-    SUM(cantidad_mejora_2) AS Total_Mejora_2,
-    SUM(cantidad_mejora_3) AS Total_Mejora_3
-FROM Inventario;
-
-
--- Vista para establecer un leaderboard en base a diferentes estadísticas.
-CREATE VIEW GlobalRanking AS
-SELECT
-    u.usuario AS Jugador,
-    p.intento AS Mejor_Intento,
-    p.plataformas_alcanzadas AS Saltos_Completados,
-    p.nivel AS Nivel_Alcanzado,
-    i.cantidad_mejora_1 AS Mejora_1,
-    i.cantidad_mejora_2 AS Mejora_2,
-    i.cantidad_mejora_3 AS Mejora_3
-FROM Partidas p
-JOIN (
-    -- Subconsulta que selecciona la mejor partida por usuario
-    SELECT id_usuario, id_partida
-    FROM (
-        SELECT 
-            id_usuario,
-            id_partida,
-            ROW_NUMBER() OVER (
-                PARTITION BY id_usuario
-                ORDER BY plataformas_alcanzadas DESC, nivel DESC, intento ASC
-            ) AS rn
-        FROM Partidas
-    ) sub
-    WHERE rn = 1
-) mejores ON p.id_partida = mejores.id_partida
-JOIN Usuarios u ON p.id_usuario = u.id_usuario
-JOIN Inventario i ON p.id_usuario = i.id_usuario
 ORDER BY p.plataformas_alcanzadas DESC, p.nivel DESC, p.intento ASC
 LIMIT 10;
 
@@ -170,6 +143,33 @@ SELECT
     u.usuario
 FROM usuarios u
 ORDER BY u.id_usuario DESC;
+
+
+-- Vista para obtener los niveles más comunes en orden
+
+CREATE OR REPLACE VIEW NivelesMasComunes AS
+WITH MejorPartidaPorJugador AS (
+  SELECT 
+    p.id_usuario,
+    p.nivel,
+    ROW_NUMBER() OVER (
+      PARTITION BY p.id_usuario
+      ORDER BY p.plataformas_alcanzadas DESC, p.nivel DESC, p.intento ASC
+    ) as rn
+  FROM Partidas p
+)
+SELECT 
+  nivel, 
+  COUNT(*) as veces
+FROM (
+  SELECT nivel
+  FROM MejorPartidaPorJugador
+  WHERE rn = 1
+) mejores_niveles
+GROUP BY nivel
+ORDER BY veces DESC
+LIMIT 3;
+
 
 -- TRIGGERS NECESARIOS --
 
@@ -186,6 +186,7 @@ END$$
 DELIMITER ;
 
 
+
 -- REVISIÓN DE VISTAS -- 
 
 SELECT * FROM globalranking;
@@ -196,4 +197,14 @@ SELECT * FROM usuariosregistrados;
 
 SELECT * FROM usomejoras;
 
-SELECT * FROM historialintentos WHERE Jugador="kvzito";
+SELECT * FROM historialintentos WHERE Jugador="jugador1";
+
+SELECT * FROM historialintentos WHERE Jugador="jugador2";
+
+SELECT * FROM partidas;
+
+SELECT * FROM inventario;
+
+SELECT * FROM nivelesmascomunes;
+
+
