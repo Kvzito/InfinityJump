@@ -177,7 +177,7 @@ input:checked + .slider:before {
 
 nav {
     position: absolute;
-    top: 17%;
+    top: 38%;
     left: 10px;
     display: flex;
    flex-direction: column;
@@ -205,26 +205,40 @@ nav button:hover {
 .tabla-container {
   position: absolute;
   top: 55%;
-  left: 35%;
+  left: 37%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
-  width: 35%;
+  width: 40%;
   padding: 20px;
   border-radius: 10px;
+  font-size: 10px;
   display: none;
+}
+
+#misPartidasTabla{
+  font-size: 12px;
 }
 
 
 .grafica-container {
   position: absolute;
   top: 55%;
-  left: 77%;
+  left: 79%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0.9);
   width: 35%;
   padding: 20px;
   border-radius: 10px;
+  font-size: 10px;
   display: none;
+}
+
+#graficaMejora {
+  left: 37%;
+}
+
+#graficaGeneral {
+  left: 78%;
 }
 
 
