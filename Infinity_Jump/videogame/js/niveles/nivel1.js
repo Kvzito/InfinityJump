@@ -13,7 +13,7 @@ function level1() {
     // usamos las imágenes ya cargadas en main.js (globales)
     // reposicionamos al personaje global y activamos sus controles
     mainCharacter.x = canvasWidth / 2 - 47;
-    mainCharacter.y = canvasHeight * 7 / 8 - 100;
+    mainCharacter.y = (canvasHeight/2) + 70;
     mainCharacter.velocityX = 0;
     mainCharacter.velocityY = -3.5;
     mainCharacter.listenControls();

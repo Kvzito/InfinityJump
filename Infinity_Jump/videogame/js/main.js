@@ -13,6 +13,74 @@ let PowerUpVidaCont = 0;
 let PowerUpSaltoCont = 0;
 let PowerUpFuerzaCont = 0;
 
+// imagenes para el registro de mejoras
+let mejoraPSalto = new Image();
+mejoraPSalto.src = "../Assets/MejoraPermanenteAlas.png";
+let mejoraPVida = new Image();
+mejoraPVida.src = "../Assets/MejoraPermanenteVida.png";
+let mejoraPDano = new Image();
+mejoraPDano.src = "../Assets/MejoraPermanenteBotas.png";
+let cuadroVacio = new Image();
+cuadroVacio.src = "../Assets/CuadroRegistroPoderVacio.png"
+let cuadroRojo = new Image();
+cuadroRojo.src = "../Assets/CuadroRegistroPoderRojo.png"
+let cuadroVerde = new Image();
+cuadroVerde.src = "../Assets/CuadroRegistroPoderVerde.png"
+let cuadroAzul = new Image();
+cuadroAzul.src = "../Assets/CuadroRegistroPoderAzul.png"
+
+let imagesLoaded = {
+    mejoraPSalto: false,
+    mejoraPVida: false,
+    mejoraPDano: false,
+    cuadroVacio: false,
+    cuadroRojo: false,
+    cuadroVerde: false,
+    cuadroAzul: false
+};
+
+
+mejoraPSalto.onload = () => { imagesLoaded.mejoraPSalto = true; console.log("Imagen mejoraPSalto cargada"); };
+mejoraPVida.onload = () => { imagesLoaded.mejoraPVida = true; console.log("Imagen mejoraPVida cargada"); };
+mejoraPDano.onload = () => { imagesLoaded.mejoraPDano = true; console.log("Imagen mejoraPDano cargada"); };
+cuadroVacio.onload = () => { imagesLoaded.cuadroVacio = true; console.log("Imagen cuadroVacio cargada"); };
+cuadroRojo.onload = () => { imagesLoaded.cuadroRojo = true; console.log("Imagen cuadroRojo cargada"); };
+cuadroVerde.onload = () => { imagesLoaded.cuadroVerde = true; console.log("Imagen cuadroVerde cargada"); };
+cuadroAzul.onload = () => { imagesLoaded.cuadroAzul = true; console.log("Imagen cuadroAzul cargada"); };
+
+
+let powerUpList = [];
+
+function initializePowerUpList() {
+    powerUpList = []; // Limpiamos la lista para evitar duplicados
+    
+    // Añadimos los íconos de mejora
+    powerUpList.push({ img: mejoraPVida, x: 10, y: 55, width: 30, height: 30 });
+    powerUpList.push({ img: mejoraPDano, x: 10, y: 95, width: 30, height: 30 });
+    powerUpList.push({ img: mejoraPSalto, x: 10, y: 135, width: 30, height: 30 });
+    
+      
+    let x = 50; // Aumentamos un poco para separar mejor
+    for (let i = 0; i < 6; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 55, width: 30, height: 30, type: "vida" });
+        x += 35;
+    }
+    
+    
+    x = 50;
+    for (let i = 0; i < 6; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 95, width: 30, height: 30, type: "daño" });
+        x += 35;
+    }
+    
+    x = 50;
+    for (let i = 0; i < 6; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 135, width: 30, height: 30, type: "salto" });
+        x += 35;
+    }
+}
+
+
 
 // fondos
 let fondoCieloImg = new Image();
@@ -75,11 +143,13 @@ function main() {
 
     mainCharacter = new MainCharacter(
         canvasWidth / 2 - 47,
-        canvasHeight * 7 / 8 - 100,
+        canvasHeight/ 2 + 50,
         40, 54, mainCharacterImage
     );
 
     console.log("Main con usuario ID:", userID); 
+
+    initializePowerUpList();
 
     loadLevels();
     gameRunning = true;
@@ -105,6 +175,16 @@ function update(currentTime) {
         mainCharacter.draw(ctx);
         textVida.draw(ctx, `Vida: ${mainCharacter.vida} `);
         textPower.draw(ctx, `Poder: ${mainCharacter.strength} `);
+        
+            for (let i = 0; i < powerUpList.length; i++) {
+                let p = powerUpList[i];
+                if (p && p.img) {
+                    ctx.drawImage(p.img, p.x, p.y, p.width, p.height);
+                }
+            }
+        
+    
+        
         mainCharacter.executeMoves();
 
         if (mainCharacter.y > canvasHeight || mainCharacter.vida <= 0) {
