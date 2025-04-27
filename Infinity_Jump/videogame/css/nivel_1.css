@@ -201,6 +201,13 @@ input:checked + .slider:before {
   }
 
 
+  #gameTimer{
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    font-size: large;
+  }
+
 footer {
     font-family: 'Times New Roman', Times, serif;
 }

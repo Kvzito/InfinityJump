@@ -74,6 +74,8 @@ function main() {
     console.log("Main con usuario ID:", userID); 
 
     loadLevels();
+    resetTimer();
+    startTimer();
     gameRunning = true;
     requestAnimationFrame(update);
 
@@ -133,6 +135,8 @@ async function enviarStats() {
 }
 
 function mostrarGameOver() {
+    stopTimer();
+
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
 }
@@ -144,17 +148,5 @@ function reiniciarJuego() {
 
 window.onload = main;
 
-document.addEventListener("DOMContentLoaded", () => {
-    const musicCheckbox = document.getElementById("musicCheckbox");
 
-
-    const iniciarMusicaNivel = () => {
-        if (musicCheckbox && musicCheckbox.checked) {
-            enableMusic = true;
-            reproducirMusica("bosque"); 
-        }
-    };
-
-    document.body.addEventListener("click", iniciarMusicaNivel);
-});
 

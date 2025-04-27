@@ -67,3 +67,18 @@ function reproducirMusica(track) {
 
     playMusic(track);
 }
+
+
+function cambiarMusicaNivel(trackNuevo) {
+    for (let track in music) {
+        music[track].pause();
+        music[track].currentTime = 0;
+    }
+
+    if (enableMusic && music[trackNuevo]) {
+        music[trackNuevo].loop = true;
+        music[trackNuevo].play().catch(err => {
+            console.warn("Error al reproducir la música de nivel:", err);
+        });
+    }
+}
