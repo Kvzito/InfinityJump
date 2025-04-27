@@ -45,6 +45,14 @@ INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES
 (1, 1, 1, 5),
 (1, 2, 2, 79),
 (2, 1, 1, 8),
+(2, 2, 1, 5),
+(2, 3, 1, 10),
+(2, 4, 1, 20),
+(2, 5, 1, 40),
+(2, 6, 1, 80),
+(2, 7, 1, 160),
+(2, 8, 1, 320),
+(2, 9, 1, 640),
 (3, 1, 1, 10),
 (3, 2, 2, 12),
 (4, 1, 2, 13),
@@ -55,6 +63,7 @@ INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES
 (8, 1, 1, 20),
 (9, 1, 1, 22),
 (10, 1, 1, 24);
+
 
 -- Insertar inventarios dummie
 INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3) VALUES
@@ -70,58 +79,17 @@ INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantid
 (10, 0, 0, 0);
 
 
+
+
 -- VISTAS NECESARIAS PARA APARTADO DE ESTADÍSTICAS EN LA PÁGINA WEB --
 
 
 -- Vista a llamar cada que alguien busque los últimos 100 intentos de cierto usuario.
-CREATE VIEW HistorialIntentos AS
+CREATE OR REPLACE VIEW HistorialIntentos AS
 SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Saltos_completados, i.cantidad_mejora_1 AS Mejora_1, i.cantidad_mejora_2 AS Mejora_2, i.cantidad_mejora_3 AS Mejora_3
 FROM Partidas p
 JOIN Usuarios u ON p.id_usuario = u.id_usuario
-JOIN Inventario i ON p.id_usuario = i.id_usuario
-ORDER BY u.usuario, p.intento
-LIMIT 100;
-
--- Vista útil para graficar cual es la mejora permanente que más suelen escoger los usuarios.
-CREATE VIEW UsoMejoras AS
-SELECT
-    SUM(cantidad_mejora_1) AS Total_Mejora_1,
-    SUM(cantidad_mejora_2) AS Total_Mejora_2,
-    SUM(cantidad_mejora_3) AS Total_Mejora_3
-FROM Inventario;
-
-
--- Vista para establecer un leaderboard en base a diferentes estadísticas.
-CREATE VIEW GlobalRanking AS
-SELECT
-    u.usuario AS Jugador,
-    p.intento AS Mejor_Intento,
-    p.plataformas_alcanzadas AS Saltos_Completados,
-    p.nivel AS Nivel_Alcanzado,
-    i.cantidad_mejora_1 AS Mejora_1,
-    i.cantidad_mejora_2 AS Mejora_2,
-    i.cantidad_mejora_3 AS Mejora_3
-
-FROM Partidas p
-JOIN (
-    -- Subconsulta que selecciona la mejor partida por usuario
-    SELECT id_usuario, id_partida
-    FROM (
-        SELECT 
-            id_usuario,
-            id_partida,
-            ROW_NUMBER() OVER (
-                PARTITION BY id_usuario
-                ORDER BY plataformas_alcanzadas DESC, nivel DESC, intento ASC
-            ) AS rn
-        FROM Partidas
-    ) sub
-    WHERE rn = 1
-) mejores ON p.id_partida = mejores.id_partida
-JOIN Usuarios u ON p.id_usuario = u.id_usuario
-JOIN Inventario i ON p.id_usuario = i.id_usuario
-ORDER BY u.usuario, p.intento
-LIMIT 100;
+JOIN Inventario i ON p.id_usuario = i.id_usuario;
 
 -- Vista útil para graficar cual es la mejora permanente que más suelen escoger los usuarios.
 CREATE VIEW UsoMejoras AS
@@ -186,6 +154,7 @@ END$$
 DELIMITER ;
 
 
+
 -- REVISIÓN DE VISTAS -- 
 
 SELECT * FROM globalranking;
@@ -196,4 +165,13 @@ SELECT * FROM usuariosregistrados;
 
 SELECT * FROM usomejoras;
 
-SELECT * FROM historialintentos WHERE Jugador="kvzito";
+SELECT * FROM historialintentos WHERE Jugador="jugador1";
+
+SELECT * FROM historialintentos WHERE Jugador="jugador2";
+
+SELECT * FROM partidas;
+
+SELECT * FROM inventario;
+
+
+

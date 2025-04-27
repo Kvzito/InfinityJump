@@ -271,7 +271,7 @@ app.get('/api/stats/:usuario', async (request, response)=>
         console.log(request.params.id)
         connection = await connectToDB()
 
-        const [results_user, _] = await connection.query('select * from historialintentos where Jugador= ?', [request.params.usuario])
+        const [results_user, _] = await connection.query('select * from historialintentos where Jugador= ? ORDER BY Intento DESC LIMIT 25', [request.params.usuario])
         
         console.log(`${results_user.length} rows returned`)
         response.json(results_user)
