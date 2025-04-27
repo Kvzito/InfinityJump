@@ -118,6 +118,18 @@ app.get('/historia.html', (request,response)=>
     })
 })
 
+// Endpoint para cargar la página de créditos.
+
+app.get('/creditos.html', (request,response)=>
+{
+    fs.readFile('./videogame/html/creditos.html', 'utf8', (err, html)=>
+    {
+        if(err) response.status(500).send('Ha habido un error: ' + err)
+        console.log('Cargando créditos...')
+        response.send(html)
+    })
+})
+
 app.post('/api/buscarUser', async (request, response) => {
 
     const { username, password } = request.body;
