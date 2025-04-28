@@ -95,7 +95,6 @@ const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30p
 const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
 
 
-
 // imágenes globales para todos los niveles
 // imagen main character
 let mainCharacterImage = new Image();
@@ -105,6 +104,8 @@ mainCharacterImage.src = "../Assets/Jump1.PNG";
 // imagenes paltaformas nivel 1
 let plataformImg1 = new Image();
 plataformImg1.src = "../Assets/Plataforma1.png";
+let plataformSingle1 = new Image();
+plataformSingle1.src = "../Assets/bush.png";
 
 // imagenes jefe 1
 jefeImgIzq = new Image();
@@ -152,6 +153,8 @@ function main() {
     initializePowerUpList();
 
     loadLevels();
+    resetTimer();
+    startTimer();
     gameRunning = true;
     lastTime = performance.now(); // Initialize lastTime
     requestAnimationFrame(update);
@@ -192,6 +195,7 @@ function update(currentTime) {
             gameRunning = false;
         }
     }
+
 }
 
 async function enviarStats() {
@@ -223,6 +227,8 @@ async function enviarStats() {
 }
 
 function mostrarGameOver() {
+    stopTimer();
+
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
 }
@@ -247,7 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
-
 
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {

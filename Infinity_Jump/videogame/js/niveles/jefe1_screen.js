@@ -1,5 +1,7 @@
 // esto crea el nivel del jefe para usarlo desde level_manager
 function levelJefe1() {
+    cambiarMusicaNivel("enemy");
+
     // Variables del personaje principal y del jefe
     let jefe;
     let LevelList = [];
@@ -72,13 +74,11 @@ function levelJefe1() {
                     jefe.visible = false;
                     playSound("dead");
                     // puedes usar nextLevel(); si quieres continuar después
-    
                 
                     setTimeout(() => {
                         document.getElementById("mejorasPopup").style.display = "block";
                         gameRunning = false; // pausa el juego mientras eliges
                     }, 500);
-                    
                     mainCharacter.x = canvasWidth / 2 - 47;
                     mainCharacter.y = canvasHeight / 2 + 200;
                     mainCharacter.velocityX = 0;
@@ -116,4 +116,7 @@ function levelJefe1() {
 
             textVidaJefe.draw(ctx, `Vida Jefe: ${jefe.vida}`);
         };
+
+
 };
+

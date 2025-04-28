@@ -8,6 +8,7 @@
   <script src="../js/ajustes_y_sonido/ajustes.js"></script>
     <script src="../js/paginaLogin/login.js"></script>
     <script src="../js/ajustes_y_sonido/sound.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/estadisticas.js"></script>
   <script type="module" defer src="../app.js"></script>
 
@@ -23,37 +24,50 @@
     <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
     <div id = "insideCanva">
       <nav>
-        <button onclick= "openMine()">Mis estadisticas</button>
-        <button onclick ="openLeaderboard()">Marcador</button>
+        <button onclick= "openMine()">Estadisticas por usuario</button>
+        <button onclick ="openLeaderboard()">Ranking global</button>
+        <button onclick = "openGraphs()">Datos extras</button>
       </nav>
 
-      <div class="statsContainter">
-        <div class="leaderboard-section">
-          <div id = "misPartidas">
-            <div class="formInput">
-              <h2>Mis partidas</h2>
-              <form id="formPartidas">
-                  <input type="text" name="player_id" placeholder="Escribe el ID del jugador">
-                  <input type="submit" value="Mostrar partidas">
-              </form>
-            </div>
-            <div class="resultDisplay">
-                <h2>Resultado</h2>
-                <div id="getResultsPartida"></div>
-            </div>
-          </div>
-      
-          <div id = "leaderboard">
-            <div class="formInput">
-              <h2>Marcador</h2>
-              <form id="topFive"></form>
-            </div>
-            <div class="resultDisplay">
-              <h2>Top 5</h2>
-              <div id="getResultsTop"></div>
-            </div>
-          </div>
+        <!-- Estadísticas por usuario -->
+        <div id="misPartidasTabla" class="tabla-container">
+          <h2>Últimos 25 intentos</h2>
+          <form id="formPartidas">
+              <input type="text" name="usuario" placeholder="Usuario por buscar" />
+              <input type="submit" value="Buscar" />
+          </form>
+          <div id="getResultsPartida"></div>
         </div>
+
+        <div id="misPartidasGrafica" class="grafica-container">
+          <h2>Progreso</h2>
+          <canvas id="graficaUsuario" style="max-width: 100%; max-height: 400px;"></canvas>
+        </div>
+      
+      
+        <!-- Leaderboard -->
+        <div id="leaderboardTabla" class="tabla-container">
+          <h2>Rank global (Top 10 intentos)</h2>
+          <div id="getResultsTop"></div>
+        </div>
+
+        <div id="leaderboardGrafica" class="grafica-container">
+          <h2>Mejoras más usadas en el ranking</h2>
+          <canvas id="graficaRank" style="max-width: 100%; max-height: 400px;"></canvas>
+        </div>
+
+        <!-- Gráficas -->
+        <div id="graficaMejora" class="grafica-container">
+          <h2>Mejoras más usadas globalmente</h2>
+          <canvas id="graficaMejoras" style="max-width: 100%; max-height: 400px;"></canvas>
+        </div>
+
+        <div id="graficaNiveles" class="grafica-container">
+          <h2>Nivel más común de alcanzar</h2>
+          <canvas id="graficaNivelesComunes" style="max-width: 100%; max-height: 400px;"></canvas>
+        </div>
+
+     </div>
     </div>
     <div id="ajustes" class="ajustes">
       <div class="ajustes-content">
