@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // Ahora generamos la gráfica basados en el intento y plataformas
             const intentos = results.map(row => row.Intento);
             intentos.reverse();
-            const plataformas = results.map(row => row.Saltos_completados);
+            const plataformas = results.map(row => row.Plataformas);
             plataformas.reverse();
 
             const canvasPartida = document.getElementById('graficaUsuario');

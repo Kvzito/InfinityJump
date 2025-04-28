@@ -12,7 +12,7 @@ CREATE TABLE Partidas (
     id_partida INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
     intento INT NOT NULL,
-    nivel INT NOT NULL,
+    nivel VARCHAR(30) NOT NULL,
     plataformas_alcanzadas INT NOT NULL,
     mejora_1 INT NOT NULL DEFAULT 0,
     mejora_2 INT NOT NULL DEFAULT 0,
@@ -50,27 +50,27 @@ INSERT INTO Usuarios (usuario, contrasena) VALUES
 
 -- Insertar partidas dummie
 INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_1, mejora_2, mejora_3) VALUES
-(1, 1, 1, 5, 2, 5, 1),
-(1, 2, 2, 79, 2, 5, 1),
-(2, 1, 1, 8, 2, 5, 1),
-(2, 2, 1, 5, 2, 5, 0),
-(2, 3, 1, 10, 2, 5, 1),
-(2, 4, 1, 20, 2, 5, 1),
-(2, 5, 1, 40, 2, 5, 1),
-(2, 6, 1, 80, 2, 5, 1),
-(2, 7, 1, 160, 2, 0, 1),
-(2, 8, 1, 320, 2, 5, 1),
-(2, 9, 1, 640, 2, 5, 1),
-(3, 1, 1, 10, 2, 0, 1),
-(3, 2, 2, 12, 2, 5, 1),
-(4, 1, 2, 13, 2, 5, 1),
-(5, 1, 2, 85, 0, 5, 1),
-(5, 2, 1, 16, 2, 5, 1),
-(6, 1, 1, 18, 2, 5, 1),
-(7, 1, 1, 19, 2, 5, 1),
-(8, 1, 1, 20, 0, 5, 1),
-(9, 1, 1, 22, 2, 0, 0),
-(10, 1, 1, 24, 2, 5, 1);
+(1, 1, "Bosque", 5, 2, 5, 1),
+(1, 2, "Carny", 79, 2, 5, 1),
+(2, 1, "Bosque", 8, 2, 5, 1),
+(2, 2, "Bosque", 5, 2, 5, 0),
+(2, 3, "Bosque", 10, 2, 5, 1),
+(2, 4, "Bosque", 20, 2, 5, 1),
+(2, 5, "Bosque", 40, 2, 5, 1),
+(2, 6, "Bosque", 80, 2, 5, 1),
+(2, 7, "Bosque", 160, 2, 0, 1),
+(2, 8, "Bosque", 320, 2, 5, 1),
+(2, 9, "Espacio", 640, 2, 5, 1),
+(3, 1, "Bosque", 10, 2, 0, 1),
+(3, 2, "Bosque", 12, 2, 5, 1),
+(4, 1, "Bosque", 13, 2, 5, 1),
+(5, 1, "Bosque", 85, 0, 5, 1),
+(5, 2, "Bosque", 16, 2, 5, 1),
+(6, 1, "Bosque", 18, 0, 0, 0),
+(7, 1, "Bosque", 19, 2, 5, 1),
+(8, 1, "Magik", 20, 0, 5, 1),
+(9, 1, "Bosque", 22, 2, 0, 0),
+(10, 1, "Bosque", 24, 2, 5, 1);
 
 -- Insertar inventarios dummie
 INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3) VALUES
@@ -93,7 +93,7 @@ INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantid
 
 -- Vista a llamar cada que alguien busque los últimos 100 intentos de cierto usuario.
 CREATE OR REPLACE VIEW HistorialIntentos AS
-SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Saltos_completados, p.mejora_1 AS Mejora_1, p.mejora_2 AS Mejora_2, p.mejora_3 AS Mejora_3
+SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Plataformas, p.mejora_1 AS Mejora_1, p.mejora_2 AS Mejora_2, p.mejora_3 AS Mejora_3
 FROM Partidas p
 JOIN Usuarios u ON p.id_usuario = u.id_usuario;
 

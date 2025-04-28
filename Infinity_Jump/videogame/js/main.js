@@ -3,9 +3,13 @@ let canvasHeight = 650;
 let canvasWidth = 1150;
 let gameRunning = false;
 
-let totalPlataforms = 0;
+window.totalPlataforms = 0;
+window.plataformasAcumuladas = 0;
+
 let intentoPlayer = 1;
 let userID = localStorage.getItem('userID');
+let nombreNivel = ""; // Declare nombreNivel as a global variable
+
 
 // fondos
 let fondoCieloImg = new Image();
@@ -74,6 +78,7 @@ function main() {
     );
 
     console.log("Main con usuario ID:", userID); 
+    console.log("Current level:", currentLevelIndex);
 
     loadLevels();
     resetTimer();
@@ -112,6 +117,9 @@ async function enviarStats() {
 
     console.log("Registrando cambios de USER ID:", userID);
 
+    plataformasAcumuladas += totalPlataforms;
+    totalPlataforms = 0;
+
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
             method: 'POST',
@@ -120,8 +128,8 @@ async function enviarStats() {
             },
             body: JSON.stringify({
                 id_usuario: userID,
-                nivel: 1,
-                plataformas_alcanzadas: totalPlataforms
+                nivel: nombreNivel,
+                plataformas_alcanzadas: plataformasAcumuladas,
             })
         });
 
@@ -140,9 +148,27 @@ async function enviarStats() {
 function mostrarGameOver() {
     stopTimer();
 
+    // Usa currentLevelIndex directamente
+    if (currentLevelIndex == 0) {
+        nombreNivel = "Bosque";
+    } else if (currentLevelIndex == 1) {
+        nombreNivel = "Carny";
+    } else if (currentLevelIndex == 2) {
+        nombreNivel = "Nubes";
+    } else if (currentLevelIndex == 3) {
+        nombreNivel = "Magik";
+    } else if (currentLevelIndex == 4) {
+        nombreNivel = "Espacio";
+    } else if (currentLevelIndex == 5) {
+        nombreNivel = "UFO";
+    }
+
+    console.log("Nivel alcanzado:", nombreNivel);
+
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
 }
+
 
 function reiniciarJuego() {
     location.reload();

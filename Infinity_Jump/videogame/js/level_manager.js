@@ -9,14 +9,13 @@ function loadLevels() {
     levels[currentLevelIndex]();
 }
 
-function getCurrentLevelIndex() {
-    return currentLevelIndex;
-}
-
 function nextLevel() {
+    plataformasAcumuladas += totalPlataforms;
+    totalPlataforms = 0;
     currentLevelIndex++;
     if (currentLevelIndex < levels.length) {
         levels[currentLevelIndex]();
+        localStorage.setItem('currentLevelIndex', currentLevelIndex);
     } else {
         console.log("Juego completado");
     }
