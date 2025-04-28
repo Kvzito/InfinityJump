@@ -10,6 +10,36 @@ let intentoPlayer = 1;
 let userID = localStorage.getItem('userID');
 let nombreNivel = ""; // Declare nombreNivel as a global variable
 
+// Función para cargar las mejoras del inventario del jugador
+async function obtenerMejorasPermanentes() {
+    try {
+        const response = await fetch(`http://localhost:5000/mejoras/${userID}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const mejoras = await response.json();
+            console.log("Mejoras permanentes obtenidas:", mejoras);
+
+            // Asignar las mejoras al personaje principal
+            if (mainCharacter) {
+                mainCharacter.inicialVelY -= mainCharacter.inicialVelY * mejoras.cantidadSalto; // Mejora de salto
+                mainCharacter.strength = 100 + (20 * mejoras.cantidadDanio); // Mejora de daño
+                mainCharacter.vida = 100 + (20 * mejoras.cantidadVida); // Mejora de vida
+            }
+        } else {
+            const error = await response.json();
+            console.log("Error al obtener las mejoras permanentes:", error);
+        }
+    } catch (error) {
+        console.error("Error en obtenerMejorasPermanentes:", error);
+    }
+}
+
+
 
 // fondos
 let fondoCieloImg = new Image();
@@ -19,7 +49,6 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
-
 const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
 const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
 
@@ -77,8 +106,12 @@ function main() {
         40, 54, mainCharacterImage
     );
 
+    obtenerMejorasPermanentes();
+
     console.log("Main con usuario ID:", userID); 
     console.log("Current level:", currentLevelIndex);
+    console.log("Vida del jugador: ", mainCharacter.vida);
+    console.log("Poder del jugador: ", mainCharacter.strength);
 
     loadLevels();
     resetTimer();

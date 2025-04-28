@@ -271,10 +271,12 @@ app.get('/api/mejoras/:usuario', async (request, response) => {
         // Si el usuario existe y tiene mejoras, devolver los datos
         response.status(200).json({
             usuario: rows[0].usuario,
-            cantidad_mejora_1: rows[0].cantidad_mejora_1,
-            cantidad_mejora_2: rows[0].cantidad_mejora_2,
-            cantidad_mejora_3: rows[0].cantidad_mejora_3
+            cantidadSalto: rows[0].cantidad_salto,
+            cantidadDanio: rows[0].cantidad_danio,
+            cantidadVida: rows[0].cantidad_vida
         });
+
+        console.log('Mejoras obtenidas:', rows[0]);
 
     } catch (error) {
         console.error('Error al obtener las mejoras:', error); // Mostrar el error completo
