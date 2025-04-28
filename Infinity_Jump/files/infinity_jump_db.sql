@@ -170,6 +170,16 @@ GROUP BY nivel
 ORDER BY veces DESC
 LIMIT 3;
 
+-- Vista con la que puedes buscar el inventario de un jugador por su puro usuario, sin necesidad de ID
+CREATE OR REPLACE VIEW VistaInventario AS
+SELECT 
+    i.id_usuario,
+    i.cantidad_mejora_1,
+    i.cantidad_mejora_2,
+    i.cantidad_mejora_3
+FROM iNVENTARIO i;
+
+
 
 -- TRIGGERS NECESARIOS --
 
@@ -205,6 +215,11 @@ SELECT * FROM partidas;
 
 SELECT * FROM inventario;
 
+SELECT * FROM usuarios;
+
 SELECT * FROM nivelesmascomunes;
 
+SELECT cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3 FROM Inventario WHERE id_usuario = 1;
+
+SELECT * FROM vistainventario WHERE id_usuario = 2;
 
