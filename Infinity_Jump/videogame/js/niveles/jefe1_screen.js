@@ -74,7 +74,7 @@ function levelJefe1() {
                     jefe.visible = false;
                     playSound("dead");
                     // puedes usar nextLevel(); si quieres continuar después
-                
+                    
                     setTimeout(() => {
                         document.getElementById("mejorasPopup").style.display = "block";
                         gameRunning = false; // pausa el juego mientras eliges

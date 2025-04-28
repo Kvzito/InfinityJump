@@ -151,6 +151,7 @@ function reiniciarJuego() {
 
 window.onload = main;
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const musicCheckbox = document.getElementById("musicCheckbox");
 
@@ -165,8 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
 
+
 function seleccionarMejora(tipo) {
-    if (tipo === "salto") {
+    if (tipo === "salto") 
+        {
         mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
     } else if (tipo === "danio") {
         mainCharacter.strength += 20;

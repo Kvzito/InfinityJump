@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="../css/crearPagina.css">
     <script src="../js/paginaLogin/inicioSesion.js"></script>
     <script defer src="../js/paginaLogin/crear.js"></script>
+    <script defer src="../js/ajustes_y_sonido/ajustes.js"></script>
+    <script defer src="../js/ajustes_y_sonido/sound.js"></script>
     <title>Infinity Jump</title>
 </head>
 <body>
@@ -14,6 +16,7 @@
 
     <div id="canvasContainer">
         <canvas id="canvas"></canvas>
+        <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
 
         <!-- Formulario de registro: usuario, contraseña y confirmar -->
         <form id="registerForm">
@@ -28,12 +31,34 @@
                 </div>
             </div>
 
-            <div class="botones-register">
-                <button id="crear">Registrar</button>
+            <div>
+                <button id="crearButton">Registrar</button>
             </div>
 
             <p id="message" style="color:red"></p>
         </form>
+
+        <div id="ajustes" class="ajustes">
+            <div class="ajustes-content">
+                <span class="close" onclick="closeAjustes()">&times;</span>
+                <p>Música</p>
+                <label class="switch">
+                    <input type="checkbox" id="musicCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <p>Efectos de sonido</p>
+                <label class="switch">
+                    <input type="checkbox" id="soundEffectsCheckbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <p>   </p>
+                <button id="homeButton" onclick="openMain()">Inicio</button>
+            </div>
+        </div>
+
     </div>
 </body>
+<footer>
+    <p>Silver Way Studios &copy; 2025</p>
+</footer>
 </html>

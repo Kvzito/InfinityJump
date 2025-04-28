@@ -1,5 +1,6 @@
 // esto crea el nivel 1 para usarlo desde level_manager
 function level2() {
+    cambiarMusicaNivel("cielo");
     // variables del nivel
     const level2Config = {
         probMov: 20,

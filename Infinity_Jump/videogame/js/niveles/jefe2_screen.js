@@ -1,4 +1,5 @@
 function levelJefe2() {
+    cambiarMusicaNivel("enemy");
     let LevelList = [];
 
     jefe = new Jefe2(400, 200, 120, 120, jefe2Img);

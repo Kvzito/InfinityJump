@@ -17,6 +17,7 @@ const music  = {
     bosque : new Audio("../Assets/sounds/forest.mp3"),
     cielo : new Audio("../Assets/sounds/cielo.ogg"),
     enemy : new Audio("../Assets/sounds/enemy.mp3"),
+    espacio : new Audio("../Assets/sounds/Space.mp3")
 };
 
 music.enemy.volume = 0.5;

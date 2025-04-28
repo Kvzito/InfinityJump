@@ -5,7 +5,7 @@ class PM {
         this.probEscudo = config.probEscudo;
         this.probStatic = config.probStatic;
         this.probOne = config.probOne;
-        //this.probOff = config.probOff;
+        this.probOff = config.probOff;
         this.list = config.LevelList;
         this.img = null;
         this.cPlataform = false;
@@ -34,7 +34,7 @@ class PM {
                 nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformSingle1);
             }
             else if(quitarPlataform){
-                nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformImg2);
+                nPlataform = new PlataformaOff(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformImg2);
             }
             else {
                 nPlataform = new Plataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);

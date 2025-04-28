@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="../css/loginPagina.css">
     <script src="../js/paginaLogin/inicioSesion.js"></script>
     <script src="../js/paginaLogin/login.js"></script>
+    <script src="../js/ajustes_y_sonido/ajustes.js"></script>
+    <script src="../js/ajustes_y_sonido/sound.js"></script>
     <title>Infinity Jump</title>
 </head>
 <body>
@@ -13,7 +15,6 @@
 
     <div id="canvasContainer">
     <canvas id="canvas"></canvas>
-    <button id="homeButton" onclick="openMain()">Inicio</button>
     <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
 
     <div id="login-form">
@@ -22,6 +23,24 @@
         <button onclick="login()">Iniciar sesión</button>
         <p>¿Todavía no tienes usuario? <a href="crearCuenta.html">Registrate aquí</a></p>
     </div>
+    </div>
+
+    <div id="ajustes" class="ajustes">
+        <div class="ajustes-content">
+            <span class="close" onclick="closeAjustes()">&times;</span>
+            <p>Música</p>
+            <label class="switch">
+                <input type="checkbox" id="musicCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <p>Efectos de sonido</p>
+            <label class="switch">
+                <input type="checkbox" id="soundEffectsCheckbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <p>   </p>
+            <button id="homeButton" onclick="openMain()">Inicio</button>
+        </div>
     </div>
 
 </body>
