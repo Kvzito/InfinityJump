@@ -6,7 +6,7 @@ function level1() {
     const level1Config = {
         probMov: 10,
         probStatic: 90,
-        probSuperJump: 7,
+        probSuperJump: 15,
         probEscudo: 7,
         probOne: 10,
         probOff: 80,
@@ -17,7 +17,7 @@ function level1() {
     // usamos las imágenes ya cargadas en main.js (globales)
     // reposicionamos al personaje global y activamos sus controles
     mainCharacter.x = canvasWidth / 2 - 47;
-    mainCharacter.y = canvasHeight * 7 / 8 - 100;
+    mainCharacter.y = (canvasHeight/2) + 70;
     mainCharacter.velocityX = 0;
     mainCharacter.velocityY = -3.5;
     mainCharacter.listenControls();
@@ -30,7 +30,7 @@ function level1() {
     // esta funcion se actualiza en cada frame
     currentUpdate = function () {
         // aplicas las fisicas que creaste en la clase del personaje principal al objeto de personaje principal
-        mainCharacter.applyPhysics();
+        
 
         // hace que se bajen las plataformas si el personaje pasa mas de la mitad del canvas 
         if (mainCharacter.y < canvasHeight / 2) {
@@ -38,7 +38,7 @@ function level1() {
             mainCharacter.y = canvasHeight / 2;
 
             for (let j = 0; j < PlataformManager.list.length; j++) {
-                PlataformManager.list[j].move(dy); // Baja todas las plataformas
+                PlataformManager.list[j].move(dy * deltaTime * 125); // Baja todas las plataformas
             }
         }
 
@@ -85,6 +85,8 @@ function level1() {
                 }
             }
         }
+
+        mainCharacter.applyPhysics();
 
         // eliminamos las plataformas que ya no se ven
         PlataformManager.list = PlataformManager.list.filter(p => p.y < canvasHeight && !p.active);
