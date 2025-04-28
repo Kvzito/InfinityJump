@@ -10,13 +10,13 @@ class Jefe1 extends Jefe {
         this.topHitboxHeight = 10; 
         this.angle = 0; 
         this.direction = 1; 
-        this.speedX = 4.18; 
+        this.speedX = 8; 
         this.visible = true;    
     }
 
     update() {
-        // Movimiento horizontal con rebote en bordes
-        this.x += this.speedX * this.direction;
+        // Movimiento horizontal con rebote en bordes usando deltaTime
+        this.x += this.speedX * this.direction * deltaTime * 60;
         if (this.x <= 0 || this.x + this.width >= canvasWidth) {
             this.direction *= -1;
         }
@@ -27,9 +27,9 @@ class Jefe1 extends Jefe {
             this.img = jefeImgIzq; // Imagen mirando a la izquierda
         }
 
-        // Movimiento vertical tipo onda seno
-        this.angle += 0.02;
-        this.y += Math.sin(this.angle) * 2;
+        // Movimiento vertical tipo onda seno con deltaTime
+        this.angle += 0.02 * deltaTime * 60;
+        this.y += Math.sin(this.angle) * 2 * deltaTime * 60;
     }
 
     draw(ctx) {
@@ -86,7 +86,5 @@ class Jefe1 extends Jefe {
                 }
                 jugador.activarInvulnerabilidad();
             }
-            
-        
     }
 }

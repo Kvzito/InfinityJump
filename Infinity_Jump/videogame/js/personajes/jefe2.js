@@ -5,6 +5,7 @@ class Jefe2 extends Jefe {
         // Parámetros internos
         this.proyectiles = [];
         this.cooldown = 0;
+        this.maxCooldown = 100; 
 
         // Hitboxes
         this.hitboxOffsetX = 10;
@@ -15,24 +16,25 @@ class Jefe2 extends Jefe {
 
         // Movimiento
         this.direccion = 1;
-        this.velocidadX = 2.5;
+        this.velocidadX = 4.5;
 
         this.visible = true;
     }
 
     update(jugador) {
-        // Movimiento horizontal con rebote
-        this.x += this.velocidadX * this.direccion;
+        // Movimiento horizontal con rebote usando deltaTime
+        this.x += this.velocidadX * this.direccion * deltaTime * 60;
+        this.x = Math.max(0, Math.min(this.x, canvasWidth - this.width));
         if (this.x <= 0 || this.x + this.width >= canvasWidth) {
             this.direccion *= -1;
         }
 
-        // Disparo con cooldown
+        // Disparo con cooldown usando deltaTime
         if (this.cooldown <= 0) {
             this.disparar(jugador);
-            this.cooldown = 175;
+            this.cooldown = this.maxCooldown;
         } else {
-            this.cooldown--;
+            this.cooldown -= deltaTime * 60;
         }
 
         this.proyectiles = this.proyectiles.filter(p => {
@@ -60,7 +62,7 @@ class Jefe2 extends Jefe {
             this.x + this.width / 2,
             this.y + this.height / 2,
             jugador,
-            200,
+            125,
             proyectilImg // ← imagen global definida fuera
         );
         this.proyectiles.push(proyectil);
