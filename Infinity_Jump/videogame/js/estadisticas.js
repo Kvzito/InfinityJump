@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // Ahora generamos la gráfica basados en el intento y plataformas
             const intentos = results.map(row => row.Intento);
             intentos.reverse();
-            const plataformas = results.map(row => row.Saltos_completados);
+            const plataformas = results.map(row => row.Plataformas);
             plataformas.reverse();
 
             const canvasPartida = document.getElementById('graficaUsuario');
@@ -115,12 +115,10 @@ function openMine() {
 }
 
 async function openLeaderboard() {
-  // Hide all containers
   document.querySelectorAll('.tabla-container, .grafica-container').forEach(el => {
-      el.style.display = 'none';
+    el.style.display = 'none';
   });
-  
-  // Show only the relevant containers
+
   document.getElementById('leaderboardTabla').style.display = 'block';
   document.getElementById('leaderboardGrafica').style.display = 'block';
 
@@ -129,28 +127,39 @@ async function openLeaderboard() {
       method: "GET",
     });
 
-    if (response.ok){
+    if (response.ok) {
       const results = await response.json();
       console.log(results);
 
-      if (results.length > 0){
-        const headers = Object.keys(results[0]);
-        const values = Object.values(results);
-
+      if (results.length > 0) {
         let table = document.createElement("table");
 
+        // Crear encabezados
         let tr = table.insertRow(-1);
+        const headers = Object.keys(results[0]).filter(header => !['Mejora_1', 'Mejora_2', 'Mejora_3'].includes(header));
+        headers.push('Mejoras Usadas'); // agregamos la nueva columna
         for (const header of headers) {
           let th = document.createElement("th");
           th.innerHTML = header;
           tr.appendChild(th);
         }
 
-        for (const row of values) {
+        // Crear filas
+        for (const row of results) {
           let tr = table.insertRow(-1);
-          for (const key of Object.keys(row)) {
+          for (const key of headers) {
             let tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = row[key];
+            if (key === 'Mejoras Usadas') {
+              // Combinar Mejora_1, Mejora_2 y Mejora_3
+              const mejoras = [
+                row.Mejora_1 > 0 ? '<img src="../Assets/MejoraPermanenteAlas.png" alt="Mayor Salto" style="width:20px; height:20px;">' : '',
+                row.Mejora_2 > 0 ? '<img src="../Assets/MejoraPermanenteBotas.png" alt="Mayor Daño" style="width:20px; height:20px;">' : '',
+                row.Mejora_3 > 0 ? '<img src="../Assets/MejoraPermanenteVida.png" alt="Mayor Vida" style="width:20px; height:20px;">' : ''
+              ].filter(m => m).join(' ');
+              tabCell.innerHTML = mejoras;
+            } else {
+              tabCell.innerHTML = row[key];
+            }
           }
         }
 
@@ -158,7 +167,7 @@ async function openLeaderboard() {
         container.innerHTML = '';
         container.appendChild(table);
 
-        // Ahora generamos la gráfica basados en el número de mejoras agarradas entre los 10 mejores intentos
+        // Ahora generamos la gráfica basada en las mejoras
         let totalMejora1 = 0;
         let totalMejora2 = 0;
         let totalMejora3 = 0;
@@ -219,6 +228,7 @@ async function openLeaderboard() {
     console.error('Error al obtener ranking:', error);
   }
 }
+
 
 function openGraphs() {
   // Hide all containers

@@ -10,9 +10,12 @@ function loadLevels() {
 }
 
 function nextLevel() {
+    plataformasAcumuladas += totalPlataforms;
+    totalPlataforms = 0;
     currentLevelIndex++;
     if (currentLevelIndex < levels.length) {
         levels[currentLevelIndex]();
+        localStorage.setItem('currentLevelIndex', currentLevelIndex);
     } else {
         console.log("Juego completado");
     }

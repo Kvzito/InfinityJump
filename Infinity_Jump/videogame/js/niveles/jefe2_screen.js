@@ -1,4 +1,5 @@
 function levelJefe2() {
+    cambiarMusicaNivel("wizard");
     let LevelList = [];
 
     jefe = new Jefe2(400, 200, 120, 120, jefe2Img);
@@ -62,6 +63,7 @@ function levelJefe2() {
                 jefe.visible = false;
 
                 setTimeout(() => {
+                    actualizarOpcionesMejora();
                     document.getElementById("mejorasPopup").style.display = "block";
                     gameRunning = false; // pausa el juego mientras eliges
                 }, 500);
@@ -74,7 +76,7 @@ function levelJefe2() {
 
                 LevelList.push(new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg2)),
                 LevelList.push(new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg2)),
-                LevelList.push(new PlataformCambio(-250, -5,1500, 50, plataformImg2));
+                LevelList.push(new PlataformCambio(-250, -5,1500, 50, portalImg));
                 
             }
         }
