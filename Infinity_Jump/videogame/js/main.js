@@ -5,13 +5,48 @@ let gameRunning = false;
 let lastTime = 0; // New variable to track the last frame time
 let deltaTime = 0; // New variable to store time between frames
 
-let totalPlataforms = 0;
+window.totalPlataforms = 0;
+window.plataformasAcumuladas = 0;
+
 let intentoPlayer = 1;
 let userID = localStorage.getItem('userID');
+let nombreNivel = ""; // Declare nombreNivel as a global variable
 
-let PowerUpVidaCont = 0;
-let PowerUpSaltoCont = 0;
-let PowerUpFuerzaCont = 0;
+let mejoraSalto = 0;
+let mejoraDanio = 0;
+let mejoraVida = 0;
+
+// Función para cargar las mejoras del inventario del jugador
+async function obtenerMejorasPermanentes() {
+try 
+    {
+        const response = await fetch(`http://localhost:5000/api/mejoras/${userID}`,{
+            method: 'GET',
+        });
+
+        if (response.ok) {
+            const mejoras = await response.json();
+            console.log("Mejoras permanentes obtenidas:", mejoras);
+            mejoraSalto = mejoras.cantidadSalto; // Mejora de salto
+            mejoraDanio = mejoras.cantidadDanio; // Mejora de daño
+            mejoraVida = mejoras.cantidadVida; // Mejora de vida
+        }
+        else {
+            console.error("Error al obtener mejoras permanentes:", response.statusText);
+        }
+        
+    } catch (error) {
+        console.error("Error en obtenerMejorasPermanentes:", error);
+    }
+}
+
+obtenerMejorasPermanentes();
+
+function actualizarMejoras() {
+    // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
+    mainCharacter.strength = 500 + ( 20 * mejoraDanio);
+    mainCharacter.vida = 100 +  (20 * mejoraVida);
+}
 
 // imagenes para el registro de mejoras
 let mejoraPSalto = new Image();
@@ -61,19 +96,19 @@ function initializePowerUpList() {
     
       
     let x = 50;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 55, width: 30, height: 30, type: "vida" });
         x += 35;
     }
     
     x = 50;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 95, width: 30, height: 30, type: "daño" });
         x += 35;
     }
     
     x = 50;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 135, width: 30, height: 30, type: "salto" });
         x += 35;
     }
@@ -81,21 +116,21 @@ function initializePowerUpList() {
     // Ahora añadimos los cuadros coloreados encima de los vacíos para simular el efecto de que se lleno de color 
     // Cuadros verdes (vida)
     x = 50;
-    for (let i = 0; i < PowerUpVidaCont; i++) {
+    for (let i = 0; i < mejoraVida; i++) {
         powerUpList.push({ img: cuadroVerde, x: x, y: 55, width: 30, height: 30, type: "vida" });
         x += 35;
     }
     
     // Cuadros rojos (daño)
     x = 50;
-    for (let i = 0; i < PowerUpFuerzaCont; i++) {
+    for (let i = 0; i < mejoraDanio; i++) {
         powerUpList.push({ img: cuadroRojo, x: x, y: 95, width: 30, height: 30, type: "daño" });
         x += 35;
     }
     
     // Cuadros azules (salto)
     x = 50;
-    for (let i = 0; i < PowerUpSaltoCont; i++) {
+    for (let i = 0; i < mejoraSalto; i++) {
         powerUpList.push({ img: cuadroAzul, x: x, y: 135, width: 30, height: 30, type: "salto" });
         x += 35;
     }
@@ -111,7 +146,6 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
-
 const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
 const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
 
@@ -169,7 +203,16 @@ function main() {
         40, 54, mainCharacterImage
     );
 
+    console.log("Mejora de salto:", mejoraSalto);
+    console.log("Mejora de daño:", mejoraDanio);
+    console.log("Mejora de vida:", mejoraVida);
+ 
+    actualizarMejoras();
+
     console.log("Main con usuario ID:", userID); 
+    console.log("Current level:", currentLevelIndex);
+    console.log("Vida del jugador: ", mainCharacter.vida);
+    console.log("Poder del jugador: ", mainCharacter.strength);
 
     initializePowerUpList();
 
@@ -223,6 +266,9 @@ function update(currentTime) {
 async function enviarStats() {
     console.log("Registrando cambios de USER ID:", userID);
 
+    plataformasAcumuladas += totalPlataforms;
+    totalPlataforms = 0;
+
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
             method: 'POST',
@@ -231,8 +277,11 @@ async function enviarStats() {
             },
             body: JSON.stringify({
                 id_usuario: userID,
-                nivel: 1,
-                plataformas_alcanzadas: totalPlataforms
+                nivel: nombreNivel,
+                plataformas_alcanzadas: plataformasAcumuladas,
+                mejoraSalto: mejoraSalto,
+                mejoraDanio: mejoraDanio,
+                mejoraVida: mejoraVida,
             })
         });
 
@@ -251,9 +300,27 @@ async function enviarStats() {
 function mostrarGameOver() {
     stopTimer();
 
+    // Usa currentLevelIndex directamente
+    if (currentLevelIndex == 0) {
+        nombreNivel = "Bosque";
+    } else if (currentLevelIndex == 1) {
+        nombreNivel = "Carny";
+    } else if (currentLevelIndex == 2) {
+        nombreNivel = "Nubes";
+    } else if (currentLevelIndex == 3) {
+        nombreNivel = "Magik";
+    } else if (currentLevelIndex == 4) {
+        nombreNivel = "Espacio";
+    } else if (currentLevelIndex == 5) {
+        nombreNivel = "UFO";
+    }
+
+    console.log("Nivel alcanzado:", nombreNivel);
+
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
 }
+
 
 function reiniciarJuego() {
     location.reload();
@@ -278,14 +345,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {
-        mainCharacter.inicialVelY += mainCharacter.inicialVelY * 0.09; 
-        PowerUpSaltoCont ++;
-    } else if (tipo === "daño") {
-        mainCharacter.strength += 20;
-        PowerUpFuerzaCont ++;
+        mejoraSalto += 1; // aumenta el salto
+    } else if (tipo === "danio") {
+        mejoraDanio += 1; // aumenta el daño
+        mainCharacter.strength += 20; // aumenta el daño
     } else if (tipo === "vida") {
-        mainCharacter.vida += 20;
-        PowerUpVidaCont ++;
+        mejoraVida += 1; // aumenta la vida
+        mainCharacter.vida += 20; // aumenta la vida
+
     }
 
     initializePowerUpList();
@@ -296,3 +363,85 @@ function seleccionarMejora(tipo) {
     requestAnimationFrame(update);
 }
 
+async function actualizarInventario(tipoM) {
+    let mejora;
+
+    if (tipoM === "salto") {
+        mejora = "salto";
+    } else if (tipoM === "danio") {
+        mejora = "danio";
+    } else if (tipoM === "vida") {
+        mejora = "vida";
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/seleccionarMejora`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: userID,
+                mejora: mejora
+            })
+        });
+
+        if (response.ok) {
+            console.log("Inventario actualizado correctamente.");
+        } else {
+            console.error("Error al actualizar el inventario:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error en actualizarInventario:", error);
+    }
+}
+
+function actualizarOpcionesMejora() {
+    const maxNivel = 5; // Nivel máximo para las mejoras
+
+    // Asignamos los textos de las mejoras para poder mostrar sus niveles en el popup
+    const textoSalto = document.getElementById('nivel-salto');
+    const textoDanio = document.getElementById('nivel-danio');
+    const textoVida = document.getElementById('nivel-vida');
+
+    // Aplicamos lógica para mostrar el nivel actual de cada mejora
+    textoSalto.innerText = (mejoraSalto >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraSalto}`;
+    textoDanio.innerText = (mejoraDanio >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraDanio}`;
+    textoVida.innerText = (mejoraVida >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraVida}`;
+
+    // Salto
+    const botonSalto = document.querySelector("button[onclick*='salto']");
+    if (mejoraSalto >= maxNivel) { // Si la mejora de salto es mayor o igual al nivel máximo desabilitamos el botón
+        botonSalto.disabled = true;
+        botonSalto.style.backgroundColor = 'gray';
+        botonSalto.style.cursor = 'not-allowed';
+    } else {
+        botonSalto.disabled = false;
+        botonSalto.style.backgroundColor = 'green';
+        botonSalto.style.cursor = 'pointer';
+    }
+
+    // Daño
+    const botonDanio = document.querySelector("button[onclick*='danio']");
+    if (mejoraDanio >= maxNivel) { // Si la mejora de daño es mayor o igual al nivel máximo desabilitamos el botón
+        botonDanio.disabled = true;
+        botonDanio.style.backgroundColor = 'gray';
+        botonDanio.style.cursor = 'not-allowed';
+    } else {
+        botonDanio.disabled = false;
+        botonDanio.style.backgroundColor = 'green';
+        botonDanio.style.cursor = 'pointer';
+    }
+
+    // Vida
+    const botonVida = document.querySelector("button[onclick*='vida']");
+    if (mejoraVida >= maxNivel) { // Si la mejora de vida es mayor o igual al nivel máximo desabilitamos el botón
+        botonVida.disabled = true;
+        botonVida.style.backgroundColor = 'gray';
+        botonVida.style.cursor = 'not-allowed';
+    } else {
+        botonVida.disabled = false;
+        botonVida.style.backgroundColor = 'green';
+        botonVida.style.cursor = 'pointer';
+    }
+}

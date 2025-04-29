@@ -76,6 +76,7 @@ function levelJefe1() {
                     // puedes usar nextLevel(); si quieres continuar después
                 
                     setTimeout(() => {
+                        actualizarOpcionesMejora();
                         document.getElementById("mejorasPopup").style.display = "block";
                         gameRunning = false; // pausa el juego mientras eliges
                     }, 500);

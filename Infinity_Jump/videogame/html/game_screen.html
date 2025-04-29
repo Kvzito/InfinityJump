@@ -82,23 +82,29 @@
     </div>
 
     <div id="mejorasPopup" class="popup" style="display: none;">
-        <h2>¡Elige tu mejora!</h2>
+        <h2>¡Elige tu mejora permanente!</h2>
         <div class="opciones-mejora">
             <div class="opcion">
                 <img src="../Assets/MejoraPermanenteAlas.png" alt="Salto alto">
                 <p>Salta más alto</p>
-                <button onclick="seleccionarMejora('salto')">Seleccionar</button>
+                <p id="nivel-salto">Nivel actual: </p>
+                <button onclick="seleccionarMejora('salto'), actualizarInventario('salto')">Seleccionar</button>
             </div>
+            
             <div class="opcion">
                 <img src="../Assets/MejoraPermanenteBotas.png" alt="Más daño">
                 <p>Aumenta tu daño</p>
-                <button onclick="seleccionarMejora('daño')">Seleccionar</button>
+                <p id="nivel-danio">Nivel actual: </p>
+                <button onclick="seleccionarMejora('danio'), actualizarInventario('danio')">Seleccionar</button>
             </div>
+            
             <div class="opcion">
                 <img src="../Assets/MejoraPermanenteVida.png" alt="Más vida">
                 <p>Recupera vida</p>
-                <button onclick="seleccionarMejora('vida')">Seleccionar</button>
+                <p id="nivel-vida">Nivel actual: </p>
+                <button onclick="seleccionarMejora('vida'), actualizarInventario('vida')">Seleccionar</button>
             </div>
+            
         </div>
     </div>
     
