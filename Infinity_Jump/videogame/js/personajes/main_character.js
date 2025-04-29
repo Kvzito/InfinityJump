@@ -17,8 +17,10 @@ class MainCharacter {
         this.hitboxOffsetY = 10;
 
 
+
         this.vida;
         this.strength;
+
 
         this.money = 0;
 
