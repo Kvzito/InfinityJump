@@ -2,10 +2,141 @@ let canvas, ctx;
 let canvasHeight = 650;
 let canvasWidth = 1150;
 let gameRunning = false;
+let lastTime = 0; // New variable to track the last frame time
+let deltaTime = 0; // New variable to store time between frames
 
-let totalPlataforms = 0;
+window.totalPlataforms = 0;
+window.plataformasAcumuladas = 0;
+
 let intentoPlayer = 1;
 let userID = localStorage.getItem('userID');
+let nombreNivel = ""; // Declare nombreNivel as a global variable
+
+let mejoraSalto = 0;
+let mejoraDanio = 0;
+let mejoraVida = 0;
+
+// Función para cargar las mejoras del inventario del jugador
+async function obtenerMejorasPermanentes() {
+try 
+    {
+        const response = await fetch(`http://localhost:5000/api/mejoras/${userID}`,{
+            method: 'GET',
+        });
+
+        if (response.ok) {
+            const mejoras = await response.json();
+            console.log("Mejoras permanentes obtenidas:", mejoras);
+            mejoraSalto = mejoras.cantidadSalto; // Mejora de salto
+            mejoraDanio = mejoras.cantidadDanio; // Mejora de daño
+            mejoraVida = mejoras.cantidadVida; // Mejora de vida
+        }
+        else {
+            console.error("Error al obtener mejoras permanentes:", response.statusText);
+        }
+        
+    } catch (error) {
+        console.error("Error en obtenerMejorasPermanentes:", error);
+    }
+}
+
+obtenerMejorasPermanentes();
+
+function actualizarMejoras() {
+    // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
+    mainCharacter.strength = 500 + ( 20 * mejoraDanio);
+    mainCharacter.vida = 100 +  (20 * mejoraVida);
+}
+
+// imagenes para el registro de mejoras
+let mejoraPSalto = new Image();
+mejoraPSalto.src = "../Assets/MejoraPermanenteAlas.png";
+let mejoraPVida = new Image();
+mejoraPVida.src = "../Assets/MejoraPermanenteVida.png";
+let mejoraPDano = new Image();
+mejoraPDano.src = "../Assets/MejoraPermanenteBotas.png";
+let cuadroVacio = new Image();
+cuadroVacio.src = "../Assets/CuadroRegistroPoderVacio.png"
+let cuadroRojo = new Image();
+cuadroRojo.src = "../Assets/CuadroRegistroPoderRojo.png"
+let cuadroVerde = new Image();
+cuadroVerde.src = "../Assets/CuadroRegistroPoderVerde.png"
+let cuadroAzul = new Image();
+cuadroAzul.src = "../Assets/CuadroRegistroPoderAzul.png"
+
+let imagesLoaded = {
+    mejoraPSalto: false,
+    mejoraPVida: false,
+    mejoraPDano: false,
+    cuadroVacio: false,
+    cuadroRojo: false,
+    cuadroVerde: false,
+    cuadroAzul: false
+};
+
+
+mejoraPSalto.onload = () => { imagesLoaded.mejoraPSalto = true; console.log("Imagen mejoraPSalto cargada"); };
+mejoraPVida.onload = () => { imagesLoaded.mejoraPVida = true; console.log("Imagen mejoraPVida cargada"); };
+mejoraPDano.onload = () => { imagesLoaded.mejoraPDano = true; console.log("Imagen mejoraPDano cargada"); };
+cuadroVacio.onload = () => { imagesLoaded.cuadroVacio = true; console.log("Imagen cuadroVacio cargada"); };
+cuadroRojo.onload = () => { imagesLoaded.cuadroRojo = true; console.log("Imagen cuadroRojo cargada"); };
+cuadroVerde.onload = () => { imagesLoaded.cuadroVerde = true; console.log("Imagen cuadroVerde cargada"); };
+cuadroAzul.onload = () => { imagesLoaded.cuadroAzul = true; console.log("Imagen cuadroAzul cargada"); };
+
+
+let powerUpList = [];
+
+function initializePowerUpList() {
+    powerUpList = []; // Limpiamos la lista para evitar duplicados
+    
+    // Añadimos los íconos de mejora
+    powerUpList.push({ img: mejoraPVida, x: 10, y: 55, width: 30, height: 30 });
+    powerUpList.push({ img: mejoraPDano, x: 10, y: 95, width: 30, height: 30 });
+    powerUpList.push({ img: mejoraPSalto, x: 10, y: 135, width: 30, height: 30 });
+    
+      
+    let x = 50;
+    for (let i = 0; i < 5; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 55, width: 30, height: 30, type: "vida" });
+        x += 35;
+    }
+    
+    x = 50;
+    for (let i = 0; i < 5; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 95, width: 30, height: 30, type: "daño" });
+        x += 35;
+    }
+    
+    x = 50;
+    for (let i = 0; i < 5; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 135, width: 30, height: 30, type: "salto" });
+        x += 35;
+    }
+    
+    // Ahora añadimos los cuadros coloreados encima de los vacíos para simular el efecto de que se lleno de color 
+    // Cuadros verdes (vida)
+    x = 50;
+    for (let i = 0; i < mejoraVida; i++) {
+        powerUpList.push({ img: cuadroVerde, x: x, y: 55, width: 30, height: 30, type: "vida" });
+        x += 35;
+    }
+    
+    // Cuadros rojos (daño)
+    x = 50;
+    for (let i = 0; i < mejoraDanio; i++) {
+        powerUpList.push({ img: cuadroRojo, x: x, y: 95, width: 30, height: 30, type: "daño" });
+        x += 35;
+    }
+    
+    // Cuadros azules (salto)
+    x = 50;
+    for (let i = 0; i < mejoraSalto; i++) {
+        powerUpList.push({ img: cuadroAzul, x: x, y: 135, width: 30, height: 30, type: "salto" });
+        x += 35;
+    }
+}
+
+
 
 // fondos
 let fondoCieloImg = new Image();
@@ -16,8 +147,10 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 // personaje principal y texto de vida global
 let mainCharacter;
 
+
 const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 280 , "30px Pixelify Sans",  "white");
 const textPower = new TextLabel(canvasWidth - 200 , canvasHeight / 2 - 250 , "30px Pixelify Sans",  "white");
+
 
 
 // imágenes globales para todos los niveles
@@ -75,26 +208,40 @@ function main() {
 
     mainCharacter = new MainCharacter(
         canvasWidth / 2 - 47,
-        canvasHeight * 7 / 8 - 100,
+        canvasHeight/ 2 + 50,
         40, 54, mainCharacterImage
     );
 
+    console.log("Mejora de salto:", mejoraSalto);
+    console.log("Mejora de daño:", mejoraDanio);
+    console.log("Mejora de vida:", mejoraVida);
+ 
+    actualizarMejoras();
+
     console.log("Main con usuario ID:", userID); 
+    console.log("Current level:", currentLevelIndex);
+    console.log("Vida del jugador: ", mainCharacter.vida);
+    console.log("Poder del jugador: ", mainCharacter.strength);
+
+    initializePowerUpList();
 
     loadLevels();
     resetTimer();
     startTimer();
     gameRunning = true;
+    lastTime = performance.now(); // Initialize lastTime
     requestAnimationFrame(update);
-
 }
 
-function update() {
+function update(currentTime) {
     if (!gameRunning) return;
 
-    requestAnimationFrame(update);
-
     
+    deltaTime = (currentTime - lastTime) / 1000; 
+    deltaTime = Math.min(deltaTime, 0.1);
+    lastTime = currentTime;
+
+    requestAnimationFrame(update);
 
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
@@ -104,6 +251,16 @@ function update() {
         mainCharacter.draw(ctx);
         textVida.draw(ctx, `Vida: ${mainCharacter.vida} `);
         textPower.draw(ctx, `Poder: ${mainCharacter.strength} `);
+        
+            for (let i = 0; i < powerUpList.length; i++) {
+                let p = powerUpList[i];
+                if (p && p.img) {
+                    ctx.drawImage(p.img, p.x, p.y, p.width, p.height);
+                }
+            }
+        
+    
+        
         mainCharacter.executeMoves();
 
         if (mainCharacter.y > canvasHeight || mainCharacter.vida <= 0) {
@@ -112,11 +269,14 @@ function update() {
         }
     }
 
+
 }
 
 async function enviarStats() {
-
     console.log("Registrando cambios de USER ID:", userID);
+
+    plataformasAcumuladas += totalPlataforms;
+    totalPlataforms = 0;
 
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
@@ -126,8 +286,11 @@ async function enviarStats() {
             },
             body: JSON.stringify({
                 id_usuario: userID,
-                nivel: 1,
-                plataformas_alcanzadas: totalPlataforms
+                nivel: nombreNivel,
+                plataformas_alcanzadas: plataformasAcumuladas,
+                mejoraSalto: mejoraSalto,
+                mejoraDanio: mejoraDanio,
+                mejoraVida: mejoraVida,
             })
         });
 
@@ -146,9 +309,27 @@ async function enviarStats() {
 function mostrarGameOver() {
     stopTimer();
 
+    // Usa currentLevelIndex directamente
+    if (currentLevelIndex == 0) {
+        nombreNivel = "Bosque";
+    } else if (currentLevelIndex == 1) {
+        nombreNivel = "Carny";
+    } else if (currentLevelIndex == 2) {
+        nombreNivel = "Nubes";
+    } else if (currentLevelIndex == 3) {
+        nombreNivel = "Magik";
+    } else if (currentLevelIndex == 4) {
+        nombreNivel = "Espacio";
+    } else if (currentLevelIndex == 5) {
+        nombreNivel = "UFO";
+    }
+
+    console.log("Nivel alcanzado:", nombreNivel);
+
     const screen = document.getElementById("gameOverScreen");
     if (screen) screen.style.display = "block";
 }
+
 
 function reiniciarJuego() {
     location.reload();
@@ -174,17 +355,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function seleccionarMejora(tipo) {
-    if (tipo === "salto") 
-        {
+
+    if (tipo === "salto") {
         mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
     } else if (tipo === "danio") {
-        mainCharacter.strength += 20;
+        mejoraDanio += 1; // aumenta el daño
+        mainCharacter.strength += 20; // aumenta el daño
     } else if (tipo === "vida") {
-        mainCharacter.vida += 20;
+        mejoraVida += 1; // aumenta la vida
+        mainCharacter.vida += 20; // aumenta la vida
+
     }
+
+    initializePowerUpList();
+
     document.getElementById("mejorasPopup").style.display = "none";
     gameRunning = true; // Reanudar juego si pausaste
     mainCharacter.listenControls();
     requestAnimationFrame(update);
 }
 
+async function actualizarInventario(tipoM) {
+    let mejora;
+
+    if (tipoM === "salto") {
+        mejora = "salto";
+    } else if (tipoM === "danio") {
+        mejora = "danio";
+    } else if (tipoM === "vida") {
+        mejora = "vida";
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/seleccionarMejora`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: userID,
+                mejora: mejora
+            })
+        });
+
+        if (response.ok) {
+            console.log("Inventario actualizado correctamente.");
+        } else {
+            console.error("Error al actualizar el inventario:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error en actualizarInventario:", error);
+    }
+}
+
+function actualizarOpcionesMejora() {
+    const maxNivel = 5; // Nivel máximo para las mejoras
+
+    // Asignamos los textos de las mejoras para poder mostrar sus niveles en el popup
+    const textoSalto = document.getElementById('nivel-salto');
+    const textoDanio = document.getElementById('nivel-danio');
+    const textoVida = document.getElementById('nivel-vida');
+
+    // Aplicamos lógica para mostrar el nivel actual de cada mejora
+    textoSalto.innerText = (mejoraSalto >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraSalto}`;
+    textoDanio.innerText = (mejoraDanio >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraDanio}`;
+    textoVida.innerText = (mejoraVida >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraVida}`;
+
+    // Salto
+    const botonSalto = document.querySelector("button[onclick*='salto']");
+    if (mejoraSalto >= maxNivel) { // Si la mejora de salto es mayor o igual al nivel máximo desabilitamos el botón
+        botonSalto.disabled = true;
+        botonSalto.style.backgroundColor = 'gray';
+        botonSalto.style.cursor = 'not-allowed';
+    } else {
+        botonSalto.disabled = false;
+        botonSalto.style.backgroundColor = 'green';
+        botonSalto.style.cursor = 'pointer';
+    }
+
+    // Daño
+    const botonDanio = document.querySelector("button[onclick*='danio']");
+    if (mejoraDanio >= maxNivel) { // Si la mejora de daño es mayor o igual al nivel máximo desabilitamos el botón
+        botonDanio.disabled = true;
+        botonDanio.style.backgroundColor = 'gray';
+        botonDanio.style.cursor = 'not-allowed';
+    } else {
+        botonDanio.disabled = false;
+        botonDanio.style.backgroundColor = 'green';
+        botonDanio.style.cursor = 'pointer';
+    }
+
+    // Vida
+    const botonVida = document.querySelector("button[onclick*='vida']");
+    if (mejoraVida >= maxNivel) { // Si la mejora de vida es mayor o igual al nivel máximo desabilitamos el botón
+        botonVida.disabled = true;
+        botonVida.style.backgroundColor = 'gray';
+        botonVida.style.cursor = 'not-allowed';
+    } else {
+        botonVida.disabled = false;
+        botonVida.style.backgroundColor = 'green';
+        botonVida.style.cursor = 'pointer';
+    }
+}

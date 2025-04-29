@@ -15,7 +15,7 @@ function levelJefe1() {
     
         // reposicionamos al personaje global y activamos sus controles
         mainCharacter.x = canvasWidth / 2 - 47;
-        mainCharacter.y = canvasHeight / 2 + 275;
+        mainCharacter.y = canvasHeight / 2 + 240;
         mainCharacter.velocityX = 0;
         mainCharacter.velocityY = -3.5;
         mainCharacter.listenControls();
@@ -76,6 +76,7 @@ function levelJefe1() {
                     // puedes usar nextLevel(); si quieres continuar después
                     
                     setTimeout(() => {
+                        actualizarOpcionesMejora();
                         document.getElementById("mejorasPopup").style.display = "block";
                         gameRunning = false; // pausa el juego mientras eliges
                     }, 500);

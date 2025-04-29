@@ -6,17 +6,20 @@ class MainCharacter {
         this.height = height;
         this.img = img;
         this.velocityX = 0;
-        this.velocityY = -6;
-        this.inicialVelY = -6;
-        this.gravedad = 0.12;
+        this.velocityY = -7.5;
+        this.inicialVelY = -7.5;
+        this.gravedad = 0.21;
+        this.speed = 4; 
 
         this.hitboxWidth = 20;
         this.hitboxHeight = 40;
         this.hitboxOffsetX = 10;
         this.hitboxOffsetY = 10;
 
-        this.vida = 100;
-        this.strength = 500;
+
+        this.vida;
+        this.strength;
+
         this.money = 0;
 
         // Variables para controlar invulnerabilidad
@@ -29,6 +32,12 @@ class MainCharacter {
 
         this.pressingRight = false;
         this.pressingLeft = false;
+
+        this.parpadeo = false;         // Si está actualmente parpadeando
+        this.timerParpadeo = 0;        // Temporizador para alternar visibilidad
+        this.parpadeoIntervalo = 8;     // Qué tan rápido parpadea (en frames)
+        this.parpadeoVisible = true;   // Si se debe mostrar en este frame
+        this.parpadeoDuracion = 75;    // Duración total del parpadeo
     }
 
     setVelocityX(velocity){
@@ -56,13 +65,13 @@ class MainCharacter {
         });
     }
 
-    executeMoves () {
+    executeMoves() {
         if (this.pressingLeft && this.pressingRight) {
             this.velocityX = 0; 
         } else if (this.pressingLeft) {
-            this.velocityX = -2;
+            this.velocityX = -this.speed;
         } else if (this.pressingRight) {
-            this.velocityX = 2;
+            this.velocityX = this.speed;
         } else {
             this.velocityX = 0;
         }
@@ -70,16 +79,33 @@ class MainCharacter {
 
     // fisicas que tendra el main character 
     applyPhysics() {
-        this.velocityY += this.gravedad;
-        this.y += this.velocityY;
-        this.x += this.velocityX;
+        // Apply gravity with deltaTime
+        this.velocityY += this.gravedad * deltaTime * 60;
+        
+        // Move character with deltaTime
+        this.y += this.velocityY * deltaTime * 60;
+        this.x += this.velocityX * deltaTime * 60;
 
         // Invulnerabilidad para que no reciba tanto daño en un solo contacto 
         if (this.invulnerable) {
-            this.invTimer--;
+            // Reduce timer based on real time not frames
+            this.invTimer -= deltaTime * 60;
             if (this.invTimer <= 0) {
-                this.invulnerable = false; // Ya puede recibir daño de nuevo
+                this.invulnerable = false;
+                this.parpadeo = false;
             }
+        }
+
+        if (this.parpadeo) {
+            this.timerParpadeo -= deltaTime * 60;
+            
+            // Cambiar la visibilidad cada cierto número de frames
+            if (this.timerParpadeo <= 0) {
+                this.parpadeoVisible = !this.parpadeoVisible; // Alternar visibilidad
+                this.timerParpadeo = this.parpadeoIntervalo; // Reiniciar temporizador
+            }
+        } else {
+            this.parpadeoVisible = true; // Siempre visible si no está parpadeando
         }
     }
 
@@ -89,8 +115,6 @@ class MainCharacter {
     }
 
     draw(ctx) {
-        
-
         // Hitbox del jugador
         ctx.strokeStyle = "red"; 
         ctx.lineWidth = 1;
@@ -110,32 +134,36 @@ class MainCharacter {
             );
         }
 
+        if (this.parpadeo && !this.parpadeoVisible) {
+            return;
+        }
+
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        
     }
 
     // colicion con plataformas y jefes
     detectCollision(plataform) {
-if ( plataform.name == "plataformaPiso"){
-    // console.log(this.velocityY, this.hitboxHeight, this.hitboxWidth, this.x, this.y );
-    // console.log(plataform.x, plataform.y, plataform.height, plataform.width);
-    
-    
-}
+        if (plataform.name == "plataformaPiso") {
+            // console.log code...
+        }
 
         let hitboxX = this.x + this.hitboxOffsetX;
         let hitboxY = this.y + this.hitboxOffsetY;
         let isFalling = this.velocityY >= 0;
 
         let isInsideX = hitboxX + this.hitboxWidth > plataform.x && hitboxX < plataform.x + plataform.width;
-        let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 10;
+        let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 30;
 
         let isAbove = (this.y + this.height) <= (plataform.y+15);
         return isFalling && isInsideX && isTouchingTop && isAbove;
     }
 
-    activarInvulnerabilidad(duracion = 75) {
+    activarInvulnerabilidad(duracion = 100) {
         this.invulnerable = true;
-        this.invTimer = duracion; 
+        this.invTimer = duracion;
+
+        this.parpadeo = true;
+        this.timerParpadeo = this.parpadeoIntervalo;
+        this.parpadeoDuracion = duracion;
     }
 }
