@@ -52,6 +52,9 @@ body {
 }
 
 #homeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
@@ -69,7 +72,7 @@ body {
   #ajustesButton {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 90px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
