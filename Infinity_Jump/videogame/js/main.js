@@ -48,12 +48,6 @@ function actualizarMejoras() {
     mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
 
-
-
-let PowerUpVidaCont = 0;
-let PowerUpSaltoCont = 0;
-let PowerUpFuerzaCont = 0;
-
 // imagenes para el registro de mejoras
 let mejoraPSalto = new Image();
 mejoraPSalto.src = "../Assets/MejoraPermanenteAlas.png";
@@ -102,19 +96,19 @@ function initializePowerUpList() {
     
       
     let x = 50;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 55, width: 30, height: 30, type: "vida" });
         x += 35;
     }
     
     x = 50;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 95, width: 30, height: 30, type: "daño" });
         x += 35;
     }
     
     x = 50;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 135, width: 30, height: 30, type: "salto" });
         x += 35;
     }
@@ -122,21 +116,21 @@ function initializePowerUpList() {
     // Ahora añadimos los cuadros coloreados encima de los vacíos para simular el efecto de que se lleno de color 
     // Cuadros verdes (vida)
     x = 50;
-    for (let i = 0; i < PowerUpVidaCont; i++) {
+    for (let i = 0; i < mejoraVida; i++) {
         powerUpList.push({ img: cuadroVerde, x: x, y: 55, width: 30, height: 30, type: "vida" });
         x += 35;
     }
     
     // Cuadros rojos (daño)
     x = 50;
-    for (let i = 0; i < PowerUpFuerzaCont; i++) {
+    for (let i = 0; i < mejoraDanio; i++) {
         powerUpList.push({ img: cuadroRojo, x: x, y: 95, width: 30, height: 30, type: "daño" });
         x += 35;
     }
     
     // Cuadros azules (salto)
     x = 50;
-    for (let i = 0; i < PowerUpSaltoCont; i++) {
+    for (let i = 0; i < mejoraSalto; i++) {
         powerUpList.push({ img: cuadroAzul, x: x, y: 135, width: 30, height: 30, type: "salto" });
         x += 35;
     }
