@@ -4,6 +4,7 @@ let canvasWidth = 1150;
 let gameRunning = false;
 let lastTime = 0; // New variable to track the last frame time
 let deltaTime = 0; // New variable to store time between frames
+let pausa = false
 
 let totalPlataforms = 0;
 let intentoPlayer = 1;
@@ -129,24 +130,30 @@ let plataformSingle1 = new Image();
 plataformSingle1.src = "../Assets/bush.png";
 
 // imagenes jefe 1
-jefeImgIzq = new Image();
+let jefeImgIzq = new Image();
 jefeImgIzq.src = "../Assets/JefePlantaIzq.png";
-jefeImgDer = new Image();
+let jefeImgDer = new Image();
 jefeImgDer.src = "../Assets/JefePlantaDer.png";
 
 //imagenes nivel 2
-plataformImg2 = new Image();
+let plataformImg2 = new Image();
 plataformImg2.src = "../Assets/PlataformaNube.png";
 
 // imagenes jefe2
-proyectilImg = new Image();
+let proyectilImg = new Image();
 proyectilImg.src = "../Assets/ProyectilJefe2.png";
-jefe2Img = new Image();
+let jefe2Img = new Image();
 jefe2Img.src = "../Assets/Jefe2.png";
 
 // imagenes nivel3
 let plataformImg3 = new Image();
 plataformImg3.src = "../Assets/PlataformaEspacioUno.png";
+
+// imagenes jefe3
+let jefe3Img = new Image();
+jefe3Img.src = "../Assets/Jefe3.png"
+let proyectilJefe3 = new Image();
+proyectilJefe3.src = "../Assets/ProjectilJefe3.png"
 
 // imagenes power ups
 let SuperJumpImg = new Image();
@@ -178,11 +185,31 @@ function main() {
     startTimer();
     gameRunning = true;
     lastTime = performance.now(); // Initialize lastTime
+    
+
+    document.addEventListener("keydown", (e) => {
+        
+        if (e.key === "p" || e.key === "Escape"){
+            if (gameRunning === true){
+                openAjustes();
+                gameRunning = false;
+                
+            }
+            else if (gameRunning === false){
+                closeAjustes();
+                gameRunning = true;
+                mainCharacter.applyPhysics();
+                
+            }
+        }
+    });
+
     requestAnimationFrame(update);
+
+    
 }
 
 function update(currentTime) {
-    if (!gameRunning) return;
 
     
     deltaTime = (currentTime - lastTime) / 1000; 
@@ -190,6 +217,8 @@ function update(currentTime) {
     lastTime = currentTime;
 
     requestAnimationFrame(update);
+
+    if (!gameRunning) return;
 
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
@@ -216,7 +245,6 @@ function update(currentTime) {
             gameRunning = false;
         }
     }
-
 
 }
 

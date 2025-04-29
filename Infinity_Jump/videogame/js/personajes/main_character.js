@@ -17,7 +17,7 @@ class MainCharacter {
         this.hitboxOffsetY = 10;
 
         this.vida = 100;
-        this.strength = 50;
+        this.strength = 500;
         this.money = 0;
 
         // Variables para controlar invulnerabilidad
