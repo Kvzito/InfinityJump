@@ -39,7 +39,7 @@ body {
 #ajustesButton {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 90px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
@@ -186,6 +186,9 @@ input:checked + .slider:before {
 }
 
 #homeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
@@ -204,7 +207,7 @@ input:checked + .slider:before {
   #gameTimer{
     position: absolute;
     top: 17px;
-    left: 125px;
+    left: 200px;
     font-size: 20px;
     color: white;
   }
