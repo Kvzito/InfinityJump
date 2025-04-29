@@ -223,7 +223,9 @@ app.post('/api/crearUsuario', async (request, response) => {
 
 app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
     let connection = null;
-    const { id_usuario, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida } = request.body;
+    const { id_usuario, nivel, plataformas_alcanzadas, tiempo, mejoraSalto, mejoraDanio, mejoraVida } = request.body;
+
+    console.log("Datos recibidos para insertar partida:", request.body);
 
     try {
         connection = await connectToDB();
@@ -236,8 +238,8 @@ app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
         const nuevo_intento = (rows[0].ultimo_intento || 0) + 1;
 
         const [results] = await connection.query(
-            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_salto, mejora_danio, mejora_vida) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida]
+            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, tiempo, mejora_salto, mejora_danio, mejora_vida) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas, tiempo, mejoraSalto, mejoraDanio, mejoraVida]
         );
 
         response.status(201).json({ message: "Insertado correctamente", intento: nuevo_intento });

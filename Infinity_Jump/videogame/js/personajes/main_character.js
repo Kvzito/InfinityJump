@@ -152,7 +152,7 @@ class MainCharacter {
         let isFalling = this.velocityY >= 0;
 
         let isInsideX = hitboxX + this.hitboxWidth > plataform.x && hitboxX < plataform.x + plataform.width;
-        let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 30;
+        let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 70;
 
         let isAbove = (this.y + this.height) <= (plataform.y+15);
         return isFalling && isInsideX && isTouchingTop && isAbove;
