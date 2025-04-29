@@ -4,7 +4,7 @@ class SuperJump extends PowerUp {
     }
 
     applyEffect(player) {
-        player.velocityY = -30; 
+        player.velocityY = -23; 
         this.active = true;
     }
 }

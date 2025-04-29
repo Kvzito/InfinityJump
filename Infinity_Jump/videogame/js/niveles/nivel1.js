@@ -6,7 +6,7 @@ function level1() {
     const level1Config = {
         probMov: 10,
         probStatic: 90,
-        probSuperJump: 15,
+        probSuperJump: 15   ,
         probEscudo: 7,
         probOne: 10,
         probOff: 80,

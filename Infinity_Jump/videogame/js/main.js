@@ -60,12 +60,11 @@ function initializePowerUpList() {
     powerUpList.push({ img: mejoraPSalto, x: 10, y: 135, width: 30, height: 30 });
     
       
-    let x = 50; // Aumentamos un poco para separar mejor
+    let x = 50;
     for (let i = 0; i < 6; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 55, width: 30, height: 30, type: "vida" });
         x += 35;
     }
-    
     
     x = 50;
     for (let i = 0; i < 6; i++) {
@@ -76,6 +75,28 @@ function initializePowerUpList() {
     x = 50;
     for (let i = 0; i < 6; i++) {
         powerUpList.push({ img: cuadroVacio, x: x, y: 135, width: 30, height: 30, type: "salto" });
+        x += 35;
+    }
+    
+    // Ahora añadimos los cuadros coloreados encima de los vacíos para simular el efecto de que se lleno de color 
+    // Cuadros verdes (vida)
+    x = 50;
+    for (let i = 0; i < PowerUpVidaCont; i++) {
+        powerUpList.push({ img: cuadroVerde, x: x, y: 55, width: 30, height: 30, type: "vida" });
+        x += 35;
+    }
+    
+    // Cuadros rojos (daño)
+    x = 50;
+    for (let i = 0; i < PowerUpFuerzaCont; i++) {
+        powerUpList.push({ img: cuadroRojo, x: x, y: 95, width: 30, height: 30, type: "daño" });
+        x += 35;
+    }
+    
+    // Cuadros azules (salto)
+    x = 50;
+    for (let i = 0; i < PowerUpSaltoCont; i++) {
+        powerUpList.push({ img: cuadroAzul, x: x, y: 135, width: 30, height: 30, type: "salto" });
         x += 35;
     }
 }
@@ -196,6 +217,7 @@ function update(currentTime) {
         }
     }
 
+
 }
 
 async function enviarStats() {
@@ -265,6 +287,9 @@ function seleccionarMejora(tipo) {
         mainCharacter.vida += 20;
         PowerUpVidaCont ++;
     }
+
+    initializePowerUpList();
+
     document.getElementById("mejorasPopup").style.display = "none";
     gameRunning = true; // Reanudar juego si pausaste
     mainCharacter.listenControls();
