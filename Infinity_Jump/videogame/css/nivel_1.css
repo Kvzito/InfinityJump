@@ -203,9 +203,10 @@ input:checked + .slider:before {
 
   #gameTimer{
     position: absolute;
-    top: 50px;
-    left: 10px;
-    font-size: large;
+    top: 17px;
+    left: 125px;
+    font-size: 20px;
+    color: white;
   }
 
 footer {

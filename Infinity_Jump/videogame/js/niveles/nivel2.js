@@ -1,11 +1,14 @@
 // esto crea el nivel 1 para usarlo desde level_manager
 function level2() {
+    cambiarMusicaNivel("cielo");
     // variables del nivel
     const level2Config = {
         probMov: 20,
         probStatic: 80,
         probSuperJump: 5,
         probEscudo: 5,
+        probOne: 20,
+        probOff: 10,
         LevelList: [],
     };
     let PlataformManager;
@@ -21,6 +24,7 @@ function level2() {
     // creamos la lista de plataformas para este nivel con su configuración
     PlataformManager = new PM(level2Config); // usa config para este nivel
     PlataformManager.img = plataformImg2;
+    PlataformManager.imgOne = singleImg2;
     PlataformManager.placePlataforms();
 
     // esta funcion se actualiza en cada frame
@@ -48,7 +52,21 @@ function level2() {
             }
 
             // colicion de las plataformas
-            if (mainCharacter.detectCollision(p)) {
+            if (p instanceof OnePlataform) {
+                if (p.checkCollision(mainCharacter)) {
+                    PlataformManager.list.splice(i, 1); // Elimina la plataforma del array
+                    mainCharacter.y = p.y - mainCharacter.height;
+                    mainCharacter.bounce();
+                    playSound("plataforma");
+                    i--; 
+                }
+            } else if (p instanceof PlataformaOff) {
+                if (p.checkCollision(mainCharacter)) {
+                    mainCharacter.y = p.y - mainCharacter.height;
+                    mainCharacter.bounce();
+                    playSound("plataforma");
+                }
+            } else if (mainCharacter.detectCollision(p)) {
                 mainCharacter.y = p.y - mainCharacter.height;
                 mainCharacter.bounce();
                 playSound("plataforma");
