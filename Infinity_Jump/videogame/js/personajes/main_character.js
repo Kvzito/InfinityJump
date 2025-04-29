@@ -6,10 +6,10 @@ class MainCharacter {
         this.height = height;
         this.img = img;
         this.velocityX = 0;
-        this.velocityY = -12;
-        this.inicialVelY = -12;
-        this.gravedad = 0.45;
-        this.speed = 4; // Base speed for horizontal movement
+        this.velocityY = -7.5;
+        this.inicialVelY = -7.5;
+        this.gravedad = 0.21;
+        this.speed = 4; 
 
         this.hitboxWidth = 20;
         this.hitboxHeight = 40;
@@ -32,6 +32,12 @@ class MainCharacter {
 
         this.pressingRight = false;
         this.pressingLeft = false;
+
+        this.parpadeo = false;         // Si está actualmente parpadeando
+        this.timerParpadeo = 0;        // Temporizador para alternar visibilidad
+        this.parpadeoIntervalo = 8;     // Qué tan rápido parpadea (en frames)
+        this.parpadeoVisible = true;   // Si se debe mostrar en este frame
+        this.parpadeoDuracion = 75;    // Duración total del parpadeo
     }
 
     setVelocityX(velocity){
@@ -85,8 +91,21 @@ class MainCharacter {
             // Reduce timer based on real time not frames
             this.invTimer -= deltaTime * 60;
             if (this.invTimer <= 0) {
-                this.invulnerable = false; // Ya puede recibir daño de nuevo
+                this.invulnerable = false;
+                this.parpadeo = false;
             }
+        }
+
+        if (this.parpadeo) {
+            this.timerParpadeo -= deltaTime * 60;
+            
+            // Cambiar la visibilidad cada cierto número de frames
+            if (this.timerParpadeo <= 0) {
+                this.parpadeoVisible = !this.parpadeoVisible; // Alternar visibilidad
+                this.timerParpadeo = this.parpadeoIntervalo; // Reiniciar temporizador
+            }
+        } else {
+            this.parpadeoVisible = true; // Siempre visible si no está parpadeando
         }
     }
 
@@ -115,6 +134,10 @@ class MainCharacter {
             );
         }
 
+        if (this.parpadeo && !this.parpadeoVisible) {
+            return;
+        }
+
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
@@ -129,14 +152,18 @@ class MainCharacter {
         let isFalling = this.velocityY >= 0;
 
         let isInsideX = hitboxX + this.hitboxWidth > plataform.x && hitboxX < plataform.x + plataform.width;
-        let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 10;
+        let isTouchingTop = hitboxY + this.hitboxHeight >= plataform.y && hitboxY + this.hitboxHeight <= plataform.y + 30;
 
         let isAbove = (this.y + this.height) <= (plataform.y+15);
         return isFalling && isInsideX && isTouchingTop && isAbove;
     }
 
-    activarInvulnerabilidad(duracion = 75) {
+    activarInvulnerabilidad(duracion = 100) {
         this.invulnerable = true;
-        this.invTimer = duracion; 
+        this.invTimer = duracion;
+
+        this.parpadeo = true;
+        this.timerParpadeo = this.parpadeoIntervalo;
+        this.parpadeoDuracion = duracion;
     }
 }
