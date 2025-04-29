@@ -223,7 +223,7 @@ app.post('/api/crearUsuario', async (request, response) => {
 
 app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
     let connection = null;
-    const { id_usuario, nivel, plataformas_alcanzadas } = request.body;
+    const { id_usuario, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida } = request.body;
 
     try {
         connection = await connectToDB();
@@ -236,8 +236,8 @@ app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
         const nuevo_intento = (rows[0].ultimo_intento || 0) + 1;
 
         const [results] = await connection.query(
-            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES (?, ?, ?, ?)',
-            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas]
+            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_salto, mejora_danio, mejora_vida) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida]
         );
 
         response.status(201).json({ message: "Insertado correctamente", intento: nuevo_intento });
@@ -249,30 +249,93 @@ app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
     }
 });
 
+// End point para obtener el inventario de mejoras actual de un usuario
 
-// GET que sirve para verificar cual fue el último intento por ID de usuario y así evitar que se duplique
+app.get('/api/mejoras/:usuario', async (request, response) => {
+    let connection = null;
+    const { usuario } = request.params;
 
-app.get('/api/Partidas/ultimo-intento', async (request, response) => {
+    try {
+        connection = await connectToDB();
 
-    const { id_usuario } = request.query;
+        // Verificar si el usuario existe en la vista
+        const [rows] = await connection.query(
+            'SELECT * FROM VistaInventario WHERE id_usuario = ?',
+            [usuario]
+        );
+
+        if (rows.length === 0) {
+            return response.status(404).json({ message: 'Usuario no encontrado o sin mejoras asignadas.' });
+        }
+
+        // Si el usuario existe y tiene mejoras, devolver los datos
+        response.status(200).json({
+            usuario: rows[0].id_usuario, 
+            cantidadSalto: rows[0].cantidad_salto,
+            cantidadDanio: rows[0].cantidad_danio,
+            cantidadVida: rows[0].cantidad_vida
+        });
+
+        console.log('Mejoras obtenidas:', rows[0]);
+
+    } catch (error) {
+        console.error('Error al obtener las mejoras:', error); // Mostrar el error completo
+        response.status(500).json({ message: 'Error interno del servidor.', error: error.message });
+    } finally {
+        if (connection) connection.end();
+    }
+});
+
+// Endpoint para seleccionar una mejora y actualizar el nivel
+app.put('/api/seleccionarMejora', async (request, response) => {
+    const { id_usuario, mejora } = request.body;
+
+    if (!id_usuario || !mejora) {
+        return response.status(400).send('Faltan datos necesarios.');
+    }
+
     let connection = null;
 
     try {
         connection = await connectToDB();
-        const [rows] = await connection.query(
-            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
+
+        // Verificar el nivel máximo de la mejora
+        const [current] = await connection.query(
+            'SELECT * FROM VistaInventario WHERE id_usuario = ?',
             [id_usuario]
         );
-        const ultimo_intento = rows[0].ultimo_intento || 0;
-        response.json({ ultimo_intento });
+
+        if (current.length === 0) {
+            return response.status(404).send('Usuario no encontrado.');
+        }
+
+        // Asegurarse de que no se superen los límites de nivel de cada mejora (supongamos que el límite es 5)
+        let updated = false;
+        if (mejora === 'salto' && current[0].cantidad_salto < 5) {
+            await connection.query('UPDATE Inventario SET cantidad_mejora_1 = cantidad_mejora_1 + 1 WHERE id_usuario = ?', [id_usuario]);
+            updated = true;
+        } else if (mejora === 'danio' && current[0].cantidad_danio < 5) {
+            await connection.query('UPDATE Inventario SET cantidad_mejora_2 = cantidad_mejora_2 + 1 WHERE id_usuario = ?', [id_usuario]);
+            updated = true;
+        } else if (mejora === 'vida' && current[0].cantidad_vida < 5) {
+            await connection.query('UPDATE Inventario SET cantidad_mejora_3 = cantidad_mejora_3 + 1 WHERE id_usuario = ?', [id_usuario]);
+            updated = true;
+        }
+
+        if (updated) {
+            response.status(200).json({ message: `Mejora de ${mejora} actualizada correctamente.` });
+        } else {
+            response.status(400).json({ message: 'El nivel máximo de la mejora ya ha sido alcanzado o la mejora no es válida.' });
+        }
+
     } catch (error) {
-        console.error(error);
-        response.status(500).json({ error: "Error obteniendo el último intento" });
-        console.log("No se pudo obtener el último intento");
+        console.error('Error al seleccionar la mejora:', error);
+        response.status(500).json({ message: 'Error interno del servidor.' });
     } finally {
-        if (connection !== null) connection.end();
+        if (connection) connection.end();
     }
 });
+
 
 // Get para obtener todas las estadísticas de un usuario en específico
 app.get('/api/stats/:usuario', async (request, response)=>
@@ -388,31 +451,6 @@ app.get('/api/nivelesComunes', async (request, response)=>
         }
  }
 })
-
-
-// GET que sirve para verificar cual fue el último intento por ID de usuario y así evitar que se duplique
-
-app.get('/api/Partidas/ultimo-intento', async (request, response) => {
-
-    const { id_usuario } = request.query;
-    let connection = null;
-
-    try {
-        connection = await connectToDB();
-        const [rows] = await connection.query(
-            'SELECT MAX(intento) AS ultimo_intento FROM Partidas WHERE id_usuario = ?',
-            [id_usuario]
-        );
-        const ultimo_intento = rows[0].ultimo_intento || 0;
-        response.json({ ultimo_intento });
-    } catch (error) {
-        console.error(error);
-        response.status(500).json({ error: "Error obteniendo el último intento" });
-        console.log("No se pudo obtener el último intento");
-    } finally {
-        if (connection !== null) connection.end();
-    }
-});
 
 app.listen(port, ()=>
     {

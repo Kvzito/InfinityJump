@@ -62,6 +62,7 @@ function levelJefe2() {
                 jefe.visible = false;
 
                 setTimeout(() => {
+                    actualizarOpcionesMejora();
                     document.getElementById("mejorasPopup").style.display = "block";
                     gameRunning = false; // pausa el juego mientras eliges
                 }, 500);
