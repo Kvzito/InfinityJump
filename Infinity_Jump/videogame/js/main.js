@@ -10,33 +10,40 @@ let intentoPlayer = 1;
 let userID = localStorage.getItem('userID');
 let nombreNivel = ""; // Declare nombreNivel as a global variable
 
+let mejoraSalto = 0;
+let mejoraDanio = 0;
+let mejoraVida = 0;
+
 // Función para cargar las mejoras del inventario del jugador
 async function obtenerMejorasPermanentes() {
-    try {
-        const response = await fetch(`http://localhost:5000/mejoras/${userID}`, {
+try 
+    {
+        const response = await fetch(`http://localhost:5000/api/mejoras/${userID}`,{
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
         });
 
         if (response.ok) {
             const mejoras = await response.json();
             console.log("Mejoras permanentes obtenidas:", mejoras);
-
-            // Asignar las mejoras al personaje principal
-            if (mainCharacter) {
-                mainCharacter.inicialVelY -= mainCharacter.inicialVelY * mejoras.cantidadSalto; // Mejora de salto
-                mainCharacter.strength = 100 + (20 * mejoras.cantidadDanio); // Mejora de daño
-                mainCharacter.vida = 100 + (20 * mejoras.cantidadVida); // Mejora de vida
-            }
-        } else {
-            const error = await response.json();
-            console.log("Error al obtener las mejoras permanentes:", error);
+            mejoraSalto = mejoras.cantidadSalto; // Mejora de salto
+            mejoraDanio = mejoras.cantidadDanio; // Mejora de daño
+            mejoraVida = mejoras.cantidadVida; // Mejora de vida
         }
+        else {
+            console.error("Error al obtener mejoras permanentes:", response.statusText);
+        }
+        
     } catch (error) {
         console.error("Error en obtenerMejorasPermanentes:", error);
     }
+}
+
+obtenerMejorasPermanentes();
+
+function actualizarMejoras() {
+    mainCharacter.inicialVelY += mejoraSalto;
+    mainCharacter.strength = 500 + ( 20 * mejoraDanio);
+    mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
 
 
@@ -106,7 +113,11 @@ function main() {
         40, 54, mainCharacterImage
     );
 
-    obtenerMejorasPermanentes();
+    console.log("Mejora de salto:", mejoraSalto);
+    console.log("Mejora de daño:", mejoraDanio);
+    console.log("Mejora de vida:", mejoraVida);
+ 
+    actualizarMejoras();
 
     console.log("Main con usuario ID:", userID); 
     console.log("Current level:", currentLevelIndex);
@@ -226,11 +237,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {
-        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
+        mejoraSalto += 1; // aumenta el salto
+        actualizarMejoras();
     } else if (tipo === "danio") {
-        mainCharacter.strength += 20;
+        mejoraDanio += 1; // aumenta el daño
+        actualizarMejoras();
     } else if (tipo === "vida") {
-        mainCharacter.vida += 20;
+        mejoraVida += 1; // aumenta la vida
+        actualizarMejoras();
     }
     document.getElementById("mejorasPopup").style.display = "none";
     gameRunning = true; // Reanudar juego si pausaste

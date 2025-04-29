@@ -270,7 +270,7 @@ app.get('/api/mejoras/:usuario', async (request, response) => {
 
         // Si el usuario existe y tiene mejoras, devolver los datos
         response.status(200).json({
-            usuario: rows[0].usuario,
+            usuario: rows[0].id_usuario,
             cantidadSalto: rows[0].cantidad_salto,
             cantidadDanio: rows[0].cantidad_danio,
             cantidadVida: rows[0].cantidad_vida
