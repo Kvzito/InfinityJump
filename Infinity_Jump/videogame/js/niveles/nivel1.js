@@ -39,7 +39,7 @@ function level1() {
             mainCharacter.y = canvasHeight / 2;
 
             for (let j = 0; j < PlataformManager.list.length; j++) {
-                PlataformManager.list[j].move(dy * deltaTime * 125); // Baja todas las plataformas
+                PlataformManager.list[j].move(dy * deltaTime * 60); // Baja todas las plataformas
             }
         }
 

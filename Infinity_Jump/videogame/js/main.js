@@ -17,6 +17,25 @@ let mejoraSalto = 0;
 let mejoraDanio = 0;
 let mejoraVida = 0;
 
+
+// Formatear el tiempo en segundos
+function formatearTiempo(segundosTotales) {
+    if (typeof segundosTotales !== 'number' || isNaN(segundosTotales) || segundosTotales < 0) {
+        return "00:00:00"; // Valor por defecto si el input es inválido
+    }
+
+    const horas = Math.floor(segundosTotales / 3600);
+    const minutos = Math.floor((segundosTotales % 3600) / 60);
+    const segundos = Math.floor(segundosTotales % 60);
+
+    const formato = (num) => num.toString().padStart(2, '0');
+
+    return `${formato(horas)}:${formato(minutos)}:${formato(segundos)}`;
+}
+
+
+
+
 // Función para cargar las mejoras del inventario del jugador
 async function obtenerMejorasPermanentes() {
 try 
@@ -302,9 +321,24 @@ function update(currentTime) {
 
 async function enviarStats() {
     console.log("Registrando cambios de USER ID:", userID);
+    
 
     plataformasAcumuladas += totalPlataforms;
     totalPlataforms = 0;
+
+    const tiempo = formatearTiempo(getElapsedTimeInSeconds());
+
+    console.log("Tiempo total:", tiempo);
+
+    console.log(JSON.stringify({
+        id_usuario: userID,
+        nivel: nombreNivel,
+        plataformas_alcanzadas: plataformasAcumuladas,
+        tiempo: tiempo,
+        mejoraSalto: mejoraSalto,
+        mejoraDanio: mejoraDanio,
+        mejoraVida: mejoraVida,
+    }));
 
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
@@ -316,6 +350,7 @@ async function enviarStats() {
                 id_usuario: userID,
                 nivel: nombreNivel,
                 plataformas_alcanzadas: plataformasAcumuladas,
+                tiempo: tiempo,
                 mejoraSalto: mejoraSalto,
                 mejoraDanio: mejoraDanio,
                 mejoraVida: mejoraVida,
@@ -352,6 +387,9 @@ function mostrarGameOver() {
         nombreNivel = "UFO";
     }
 
+
+
+    
     console.log("Nivel alcanzado:", nombreNivel);
 
     const screen = document.getElementById("gameOverScreen");

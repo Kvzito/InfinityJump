@@ -211,12 +211,12 @@ nav button:hover {
   width: 40%;
   padding: 20px;
   border-radius: 10px;
-  font-size: 10px;
+  font-size: 12px;
   display: none;
 }
 
 #misPartidasTabla{
-  font-size: 12px;
+  font-size: 11px;
 }
 
 
