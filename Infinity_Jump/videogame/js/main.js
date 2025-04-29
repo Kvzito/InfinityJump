@@ -41,7 +41,7 @@ try
 obtenerMejorasPermanentes();
 
 function actualizarMejoras() {
-    mainCharacter.inicialVelY += mejoraSalto;
+    // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
     mainCharacter.strength = 500 + ( 20 * mejoraDanio);
     mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
@@ -174,6 +174,9 @@ async function enviarStats() {
                 id_usuario: userID,
                 nivel: nombreNivel,
                 plataformas_alcanzadas: plataformasAcumuladas,
+                mejoraSalto: mejoraSalto,
+                mejoraDanio: mejoraDanio,
+                mejoraVida: mejoraVida,
             })
         });
 
@@ -238,13 +241,12 @@ document.addEventListener("DOMContentLoaded", () => {
 function seleccionarMejora(tipo) {
     if (tipo === "salto") {
         mejoraSalto += 1; // aumenta el salto
-        actualizarMejoras();
     } else if (tipo === "danio") {
         mejoraDanio += 1; // aumenta el daño
-        actualizarMejoras();
+        mainCharacter.strength += 20; // aumenta el daño
     } else if (tipo === "vida") {
         mejoraVida += 1; // aumenta la vida
-        actualizarMejoras();
+        mainCharacter.vida += 20; // aumenta la vida
     }
     document.getElementById("mejorasPopup").style.display = "none";
     gameRunning = true; // Reanudar juego si pausaste
@@ -252,3 +254,85 @@ function seleccionarMejora(tipo) {
     requestAnimationFrame(update);
 }
 
+async function actualizarInventario(tipoM) {
+    let mejora;
+
+    if (tipoM === "salto") {
+        mejora = "salto";
+    } else if (tipoM === "danio") {
+        mejora = "danio";
+    } else if (tipoM === "vida") {
+        mejora = "vida";
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/seleccionarMejora`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_usuario: userID,
+                mejora: mejora
+            })
+        });
+
+        if (response.ok) {
+            console.log("Inventario actualizado correctamente.");
+        } else {
+            console.error("Error al actualizar el inventario:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error en actualizarInventario:", error);
+    }
+}
+
+function actualizarOpcionesMejora() {
+    const maxNivel = 5; // Nivel máximo para las mejoras
+
+    // Asignamos los textos de las mejoras para poder mostrar sus niveles en el popup
+    const textoSalto = document.getElementById('nivel-salto');
+    const textoDanio = document.getElementById('nivel-danio');
+    const textoVida = document.getElementById('nivel-vida');
+
+    // Aplicamos lógica para mostrar el nivel actual de cada mejora
+    textoSalto.innerText = (mejoraSalto >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraSalto}`;
+    textoDanio.innerText = (mejoraDanio >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraDanio}`;
+    textoVida.innerText = (mejoraVida >= maxNivel) ? "Máximo alcanzado" : `Nivel actual: ${mejoraVida}`;
+
+    // Salto
+    const botonSalto = document.querySelector("button[onclick*='salto']");
+    if (mejoraSalto >= maxNivel) { // Si la mejora de salto es mayor o igual al nivel máximo desabilitamos el botón
+        botonSalto.disabled = true;
+        botonSalto.style.backgroundColor = 'gray';
+        botonSalto.style.cursor = 'not-allowed';
+    } else {
+        botonSalto.disabled = false;
+        botonSalto.style.backgroundColor = 'green';
+        botonSalto.style.cursor = 'pointer';
+    }
+
+    // Daño
+    const botonDanio = document.querySelector("button[onclick*='danio']");
+    if (mejoraDanio >= maxNivel) { // Si la mejora de daño es mayor o igual al nivel máximo desabilitamos el botón
+        botonDanio.disabled = true;
+        botonDanio.style.backgroundColor = 'gray';
+        botonDanio.style.cursor = 'not-allowed';
+    } else {
+        botonDanio.disabled = false;
+        botonDanio.style.backgroundColor = 'green';
+        botonDanio.style.cursor = 'pointer';
+    }
+
+    // Vida
+    const botonVida = document.querySelector("button[onclick*='vida']");
+    if (mejoraVida >= maxNivel) { // Si la mejora de vida es mayor o igual al nivel máximo desabilitamos el botón
+        botonVida.disabled = true;
+        botonVida.style.backgroundColor = 'gray';
+        botonVida.style.cursor = 'not-allowed';
+    } else {
+        botonVida.disabled = false;
+        botonVida.style.backgroundColor = 'green';
+        botonVida.style.cursor = 'pointer';
+    }
+}

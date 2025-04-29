@@ -14,12 +14,13 @@ CREATE TABLE Partidas (
     intento INT NOT NULL,
     nivel VARCHAR(30) NOT NULL,
     plataformas_alcanzadas INT NOT NULL,
-    mejora_1 INT NOT NULL DEFAULT 0,
-    mejora_2 INT NOT NULL DEFAULT 0,
-    mejora_3 INT NOT NULL DEFAULT 0,
+    mejora_salto INT NOT NULL DEFAULT 0,
+    mejora_danio INT NOT NULL DEFAULT 0,
+    mejora_vida INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario),
     UNIQUE (id_usuario, intento)  -- Evita que se repita el número de intento y usuario.
 ) ENGINE=InnoDB;
+
 
 CREATE TABLE Inventario (
 	id_inventario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -93,7 +94,7 @@ INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantid
 
 -- Vista a llamar cada que alguien busque los últimos 100 intentos de cierto usuario.
 CREATE OR REPLACE VIEW HistorialIntentos AS
-SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Plataformas, p.mejora_1 AS Mejora_1, p.mejora_2 AS Mejora_2, p.mejora_3 AS Mejora_3
+SELECT u.usuario AS Jugador, p.intento AS Intento, p.nivel AS Nivel, p.plataformas_alcanzadas AS Plataformas, p.mejora_salto AS Mejora_Salto, p.mejora_danio AS Mejora_Danio, p.mejora_vida AS Mejora_Vida
 FROM Partidas p
 JOIN Usuarios u ON p.id_usuario = u.id_usuario;
 
@@ -113,9 +114,9 @@ SELECT
     p.intento AS Mejor_Intento,
     p.plataformas_alcanzadas AS Saltos_Completados,
     p.nivel AS Nivel_Alcanzado,
-    p.mejora_1 AS Mejora_1,
-    p.mejora_2 AS Mejora_2,
-    p.mejora_3 AS Mejora_3
+    p.mejora_salto AS Mejora_1,
+    p.mejora_danio AS Mejora_2,
+    p.mejora_vida AS Mejora_3
 FROM Partidas p
 JOIN (
     -- Subconsulta que selecciona la mejor partida por usuario
@@ -174,9 +175,9 @@ LIMIT 3;
 CREATE OR REPLACE VIEW VistaInventario AS
 SELECT 
     i.id_usuario,
-    i.cantidad_mejora_1,
-    i.cantidad_mejora_2,
-    i.cantidad_mejora_3
+    i.cantidad_mejora_1 AS cantidad_salto,
+    i.cantidad_mejora_2 AS cantidad_danio,
+    i.cantidad_mejora_3 AS cantidad_vida
 FROM iNVENTARIO i;
 
 
@@ -221,5 +222,5 @@ SELECT * FROM nivelesmascomunes;
 
 SELECT cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3 FROM Inventario WHERE id_usuario = 1;
 
-SELECT * FROM vistainventario WHERE id_usuario = 2;
+SELECT * FROM vistainventario WHERE id_usuario = 1;
 

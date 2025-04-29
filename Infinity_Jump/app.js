@@ -223,7 +223,7 @@ app.post('/api/crearUsuario', async (request, response) => {
 
 app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
     let connection = null;
-    const { id_usuario, nivel, plataformas_alcanzadas } = request.body;
+    const { id_usuario, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida } = request.body;
 
     try {
         connection = await connectToDB();
@@ -236,8 +236,8 @@ app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
         const nuevo_intento = (rows[0].ultimo_intento || 0) + 1;
 
         const [results] = await connection.query(
-            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas) VALUES (?, ?, ?, ?)',
-            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas]
+            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_salto, mejora_danio, mejora_vida) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida]
         );
 
         response.status(201).json({ message: "Insertado correctamente", intento: nuevo_intento });
@@ -270,7 +270,7 @@ app.get('/api/mejoras/:usuario', async (request, response) => {
 
         // Si el usuario existe y tiene mejoras, devolver los datos
         response.status(200).json({
-            usuario: rows[0].id_usuario,
+            usuario: rows[0].id_usuario, 
             cantidadSalto: rows[0].cantidad_salto,
             cantidadDanio: rows[0].cantidad_danio,
             cantidadVida: rows[0].cantidad_vida
@@ -287,7 +287,7 @@ app.get('/api/mejoras/:usuario', async (request, response) => {
 });
 
 // Endpoint para seleccionar una mejora y actualizar el nivel
-app.post('/api/seleccionarMejora', async (request, response) => {
+app.put('/api/seleccionarMejora', async (request, response) => {
     const { id_usuario, mejora } = request.body;
 
     if (!id_usuario || !mejora) {
@@ -311,13 +311,13 @@ app.post('/api/seleccionarMejora', async (request, response) => {
 
         // Asegurarse de que no se superen los límites de nivel de cada mejora (supongamos que el límite es 5)
         let updated = false;
-        if (mejora === 'salto' && current[0].cantidad_mejora_1 < 5) {
-            await connection.query('UPDATE Inventario SET cantidad_mejora_1 = cantidad_mejora_1 + 1 id_WHERE usuario = ?', [id_usuario]);
+        if (mejora === 'salto' && current[0].cantidad_salto < 5) {
+            await connection.query('UPDATE Inventario SET cantidad_mejora_1 = cantidad_mejora_1 + 1 WHERE id_usuario = ?', [id_usuario]);
             updated = true;
-        } else if (mejora === 'danio' && current[0].cantidad_mejora_2 < 5) {
+        } else if (mejora === 'danio' && current[0].cantidad_danio < 5) {
             await connection.query('UPDATE Inventario SET cantidad_mejora_2 = cantidad_mejora_2 + 1 WHERE id_usuario = ?', [id_usuario]);
             updated = true;
-        } else if (mejora === 'vida' && current[0].cantidad_mejora_3 < 5) {
+        } else if (mejora === 'vida' && current[0].cantidad_vida < 5) {
             await connection.query('UPDATE Inventario SET cantidad_mejora_3 = cantidad_mejora_3 + 1 WHERE id_usuario = ?', [id_usuario]);
             updated = true;
         }
