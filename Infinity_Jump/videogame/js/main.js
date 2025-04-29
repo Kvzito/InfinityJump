@@ -2,6 +2,8 @@ let canvas, ctx;
 let canvasHeight = 650;
 let canvasWidth = 1150;
 let gameRunning = false;
+let lastTime = 0; // New variable to track the last frame time
+let deltaTime = 0; // New variable to store time between frames
 
 window.totalPlataforms = 0;
 window.plataformasAcumuladas = 0;
@@ -44,6 +46,79 @@ function actualizarMejoras() {
     // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
     mainCharacter.strength = 500 + ( 20 * mejoraDanio);
     mainCharacter.vida = 100 +  (20 * mejoraVida);
+}
+
+
+
+let PowerUpVidaCont = 0;
+let PowerUpSaltoCont = 0;
+let PowerUpFuerzaCont = 0;
+
+// imagenes para el registro de mejoras
+let mejoraPSalto = new Image();
+mejoraPSalto.src = "../Assets/MejoraPermanenteAlas.png";
+let mejoraPVida = new Image();
+mejoraPVida.src = "../Assets/MejoraPermanenteVida.png";
+let mejoraPDano = new Image();
+mejoraPDano.src = "../Assets/MejoraPermanenteBotas.png";
+let cuadroVacio = new Image();
+cuadroVacio.src = "../Assets/CuadroRegistroPoderVacio.png"
+let cuadroRojo = new Image();
+cuadroRojo.src = "../Assets/CuadroRegistroPoderRojo.png"
+let cuadroVerde = new Image();
+cuadroVerde.src = "../Assets/CuadroRegistroPoderVerde.png"
+let cuadroAzul = new Image();
+cuadroAzul.src = "../Assets/CuadroRegistroPoderAzul.png"
+
+let imagesLoaded = {
+    mejoraPSalto: false,
+    mejoraPVida: false,
+    mejoraPDano: false,
+    cuadroVacio: false,
+    cuadroRojo: false,
+    cuadroVerde: false,
+    cuadroAzul: false
+};
+
+
+mejoraPSalto.onload = () => { imagesLoaded.mejoraPSalto = true; console.log("Imagen mejoraPSalto cargada"); };
+mejoraPVida.onload = () => { imagesLoaded.mejoraPVida = true; console.log("Imagen mejoraPVida cargada"); };
+mejoraPDano.onload = () => { imagesLoaded.mejoraPDano = true; console.log("Imagen mejoraPDano cargada"); };
+cuadroVacio.onload = () => { imagesLoaded.cuadroVacio = true; console.log("Imagen cuadroVacio cargada"); };
+cuadroRojo.onload = () => { imagesLoaded.cuadroRojo = true; console.log("Imagen cuadroRojo cargada"); };
+cuadroVerde.onload = () => { imagesLoaded.cuadroVerde = true; console.log("Imagen cuadroVerde cargada"); };
+cuadroAzul.onload = () => { imagesLoaded.cuadroAzul = true; console.log("Imagen cuadroAzul cargada"); };
+
+
+let powerUpList = [];
+
+function initializePowerUpList() {
+    powerUpList = []; // Limpiamos la lista para evitar duplicados
+    
+    // Añadimos los íconos de mejora
+    powerUpList.push({ img: mejoraPVida, x: 10, y: 55, width: 30, height: 30 });
+    powerUpList.push({ img: mejoraPDano, x: 10, y: 95, width: 30, height: 30 });
+    powerUpList.push({ img: mejoraPSalto, x: 10, y: 135, width: 30, height: 30 });
+    
+      
+    let x = 50; // Aumentamos un poco para separar mejor
+    for (let i = 0; i < 6; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 55, width: 30, height: 30, type: "vida" });
+        x += 35;
+    }
+    
+    
+    x = 50;
+    for (let i = 0; i < 6; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 95, width: 30, height: 30, type: "daño" });
+        x += 35;
+    }
+    
+    x = 50;
+    for (let i = 0; i < 6; i++) {
+        powerUpList.push({ img: cuadroVacio, x: x, y: 135, width: 30, height: 30, type: "salto" });
+        x += 35;
+    }
 }
 
 
@@ -109,7 +184,7 @@ function main() {
 
     mainCharacter = new MainCharacter(
         canvasWidth / 2 - 47,
-        canvasHeight * 7 / 8 - 100,
+        canvasHeight/ 2 + 50,
         40, 54, mainCharacterImage
     );
 
@@ -124,20 +199,25 @@ function main() {
     console.log("Vida del jugador: ", mainCharacter.vida);
     console.log("Poder del jugador: ", mainCharacter.strength);
 
+    initializePowerUpList();
+
     loadLevels();
     resetTimer();
     startTimer();
     gameRunning = true;
+    lastTime = performance.now(); // Initialize lastTime
     requestAnimationFrame(update);
-
 }
 
-function update() {
+function update(currentTime) {
     if (!gameRunning) return;
 
-    requestAnimationFrame(update);
-
     
+    deltaTime = (currentTime - lastTime) / 1000; 
+    deltaTime = Math.min(deltaTime, 0.1);
+    lastTime = currentTime;
+
+    requestAnimationFrame(update);
 
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
@@ -147,6 +227,16 @@ function update() {
         mainCharacter.draw(ctx);
         textVida.draw(ctx, `Vida: ${mainCharacter.vida} `);
         textPower.draw(ctx, `Poder: ${mainCharacter.strength} `);
+        
+            for (let i = 0; i < powerUpList.length; i++) {
+                let p = powerUpList[i];
+                if (p && p.img) {
+                    ctx.drawImage(p.img, p.x, p.y, p.width, p.height);
+                }
+            }
+        
+    
+        
         mainCharacter.executeMoves();
 
         if (mainCharacter.y > canvasHeight || mainCharacter.vida <= 0) {
@@ -158,7 +248,6 @@ function update() {
 }
 
 async function enviarStats() {
-
     console.log("Registrando cambios de USER ID:", userID);
 
     plataformasAcumuladas += totalPlataforms;
@@ -247,6 +336,7 @@ function seleccionarMejora(tipo) {
     } else if (tipo === "vida") {
         mejoraVida += 1; // aumenta la vida
         mainCharacter.vida += 20; // aumenta la vida
+
     }
     document.getElementById("mejorasPopup").style.display = "none";
     gameRunning = true; // Reanudar juego si pausaste

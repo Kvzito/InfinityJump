@@ -6,17 +6,20 @@ class MainCharacter {
         this.height = height;
         this.img = img;
         this.velocityX = 0;
-        this.velocityY = -6;
-        this.inicialVelY = -6;
-        this.gravedad = 0.12;
+        this.velocityY = -12;
+        this.inicialVelY = -12;
+        this.gravedad = 0.45;
+        this.speed = 4; // Base speed for horizontal movement
 
         this.hitboxWidth = 20;
         this.hitboxHeight = 40;
         this.hitboxOffsetX = 10;
         this.hitboxOffsetY = 10;
 
+
         this.vida;
         this.strength;
+
         this.money = 0;
 
         // Variables para controlar invulnerabilidad
@@ -56,13 +59,13 @@ class MainCharacter {
         });
     }
 
-    executeMoves () {
+    executeMoves() {
         if (this.pressingLeft && this.pressingRight) {
             this.velocityX = 0; 
         } else if (this.pressingLeft) {
-            this.velocityX = -2;
+            this.velocityX = -this.speed;
         } else if (this.pressingRight) {
-            this.velocityX = 2;
+            this.velocityX = this.speed;
         } else {
             this.velocityX = 0;
         }
@@ -70,13 +73,17 @@ class MainCharacter {
 
     // fisicas que tendra el main character 
     applyPhysics() {
-        this.velocityY += this.gravedad;
-        this.y += this.velocityY;
-        this.x += this.velocityX;
+        // Apply gravity with deltaTime
+        this.velocityY += this.gravedad * deltaTime * 60;
+        
+        // Move character with deltaTime
+        this.y += this.velocityY * deltaTime * 60;
+        this.x += this.velocityX * deltaTime * 60;
 
         // Invulnerabilidad para que no reciba tanto daño en un solo contacto 
         if (this.invulnerable) {
-            this.invTimer--;
+            // Reduce timer based on real time not frames
+            this.invTimer -= deltaTime * 60;
             if (this.invTimer <= 0) {
                 this.invulnerable = false; // Ya puede recibir daño de nuevo
             }
@@ -89,8 +96,6 @@ class MainCharacter {
     }
 
     draw(ctx) {
-        
-
         // Hitbox del jugador
         ctx.strokeStyle = "red"; 
         ctx.lineWidth = 1;
@@ -111,17 +116,13 @@ class MainCharacter {
         }
 
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        
     }
 
     // colicion con plataformas y jefes
     detectCollision(plataform) {
-if ( plataform.name == "plataformaPiso"){
-    // console.log(this.velocityY, this.hitboxHeight, this.hitboxWidth, this.x, this.y );
-    // console.log(plataform.x, plataform.y, plataform.height, plataform.width);
-    
-    
-}
+        if (plataform.name == "plataformaPiso") {
+            // console.log code...
+        }
 
         let hitboxX = this.x + this.hitboxOffsetX;
         let hitboxY = this.y + this.hitboxOffsetY;
