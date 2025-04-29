@@ -1,9 +1,5 @@
 let userID;
 
-function openGame(){
-    window.location.href = 'nivel_1_screen.html';
-}
-
 async function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
