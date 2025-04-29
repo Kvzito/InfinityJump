@@ -91,7 +91,7 @@ function levelJefe1() {
                         LevelList.push(
                             new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg1),
                             new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg1),
-                            new PlataformCambio(-250, -5,1500, 100, plataformImg1)
+                            new PlataformCambio(-250, -5,1500, 100, portalImg)
     
                         );
                     }

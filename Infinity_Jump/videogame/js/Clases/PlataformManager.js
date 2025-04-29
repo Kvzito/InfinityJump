@@ -8,6 +8,7 @@ class PM {
         this.probOff = config.probOff;
         this.list = config.LevelList;
         this.img = null;
+        this.imgOne = null;
         this.cPlataform = false;
     }
 
@@ -31,10 +32,10 @@ class PM {
                 nPlataform = new MovingPlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img, 100, 0.5);
             }
             else if(SinglePlataform){
-                nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformSingle1);
+                nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.imgOne);
             }
             else if(quitarPlataform){
-                nPlataform = new PlataformaOff(randomX, canvasHeight - 90 * i - 70, 60, 18, plataformImg2);
+                nPlataform = new PlataformaOff(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);
             }
             else {
                 nPlataform = new Plataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);
@@ -88,7 +89,7 @@ class PM {
 
         // cuadno el contador llega a la cantidas indicada pone la plataforma de cambio en la lista para qeu salga en la pantalla 
         if (totalPlataforms >= 5 && !this.cPlataform) {
-            let portal = new PlataformCambio(-250, newY - 150, 1500, 100, this.img);
+            let portal = new PlataformCambio(-250, newY - 150, 1500, 100, portalImg);
             this.list.push(portal);
             this.cPlataform = true;
         }

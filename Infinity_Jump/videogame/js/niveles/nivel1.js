@@ -9,7 +9,7 @@ function level1() {
         probSuperJump: 7,
         probEscudo: 7,
         probOne: 10,
-        probOff: 80,
+        probOff: 10,
         LevelList: [],
     };
     let PlataformManager;
@@ -25,6 +25,7 @@ function level1() {
     // creamos la lista de plataformas para este nivel con su configuración
     PlataformManager = new PM(level1Config); // usa config para este nivel
     PlataformManager.img = plataformImg1;
+    PlataformManager.imgOne = singleImg1;
     PlataformManager.placePlataforms();
 
     // esta funcion se actualiza en cada frame
