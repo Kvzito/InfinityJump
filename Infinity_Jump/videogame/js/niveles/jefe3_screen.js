@@ -1,8 +1,7 @@
-function levelJefe2() {
-    cambiarMusicaNivel("wizard");
+function levelJefe3() {
     let LevelList = [];
 
-    jefe = new Jefe2(400, 200, 120, 120, jefe2Img);
+    jefe = new Jefe3(400, 200, 120, 120, jefe3Img);
     const textVidaJefe = new TextLabel(canvasWidth / 2 - 80, 50, "30px Pixelify Sans", "white");
     const barreraIzq = new Limite(-10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
     const barreraDer = new Limite(canvasWidth + 10, 0, 10, canvasHeight, "rgb(111, 62, 67)");
@@ -15,16 +14,16 @@ function levelJefe2() {
 
     LevelList = [
         jefe,
-        new Plataform(-250, canvasHeight / 2 + 300, 1500, 75, plataformImg2, "plataformaPiso"),
+        new Plataform((canvasWidth/2) - 400, canvasHeight / 2 + 280, 800, 75, plataformImg3, "plataformaPiso"),
         barreraIzq,
         barreraDer,
-        new Plataform(275, canvasHeight / 2 + 200, 100, 25, plataformImg2),
-        new Plataform(675, canvasHeight / 2 + 200, 100, 25, plataformImg2),
-        new Plataform(75, canvasHeight / 2 + 100, 100, 25, plataformImg2),
-        new Plataform(475, canvasHeight / 2 + 100, 100, 25, plataformImg2),
-        new Plataform(875, canvasHeight / 2 + 100, 100, 25, plataformImg2),
-        new Plataform(275, canvasHeight / 2, 100, 25, plataformImg2),
-        new Plataform(675, canvasHeight / 2, 100, 25, plataformImg2)
+        new Plataform(275, canvasHeight / 2 + 200, 100, 25, plataformImg3),
+        new Plataform(675, canvasHeight / 2 + 200, 100, 25, plataformImg3),
+        new Plataform(75, canvasHeight / 2 + 100, 100, 25, plataformImg3),
+        new Plataform(475, canvasHeight / 2 + 100, 100, 25, plataformImg3),
+        new Plataform(875, canvasHeight / 2 + 100, 100, 25, plataformImg3),
+        new Plataform(275, canvasHeight / 2, 100, 25, plataformImg3),
+        new Plataform(675, canvasHeight / 2, 100, 25, plataformImg3)
     ];
 
     currentUpdate = function () {
@@ -74,9 +73,9 @@ function levelJefe2() {
                 mainCharacter.velocityY = 0;
                 mainCharacter.listenControls();
 
-                LevelList.push(new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg2)),
-                LevelList.push(new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg2)),
-                LevelList.push(new PlataformCambio(-250, -5,1500, 50, portalImg));
+                LevelList.push(new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg3)),
+                LevelList.push(new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg3)),
+                LevelList.push(new PlataformCambio(-250, -5,1500, 50, plataformImg3));
                 
             }
         }
@@ -86,7 +85,7 @@ function levelJefe2() {
 
     currentDraw = function (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(fondoCieloImg, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(fondoEspacioImg, 0, 0, canvas.width, canvas.height);
 
         for (let obj of LevelList) {
             if (obj instanceof Jefe2 && !obj.visible) continue;

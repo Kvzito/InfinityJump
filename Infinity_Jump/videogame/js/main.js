@@ -4,6 +4,7 @@ let canvasWidth = 1150;
 let gameRunning = false;
 let lastTime = 0; // New variable to track the last frame time
 let deltaTime = 0; // New variable to store time between frames
+let pausa = false
 
 window.totalPlataforms = 0;
 window.plataformasAcumuladas = 0;
@@ -165,8 +166,11 @@ fondoEspacioImg.src = "../Assets/FondoEspacio.webp";
 
 // personaje principal y texto de vida global
 let mainCharacter;
-const textVida = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 300 , "30px Ubuntu Mono",  "white");
-const textPower = new TextLabel(canvasWidth - 150 , canvasHeight / 2 - 265 , "30px Ubuntu Mono",  "white");
+
+
+const textVida = new TextLabel(canvasWidth - 175 , canvasHeight / 2 - 280 , "30px Pixelify Sans",  "white");
+const textPower = new TextLabel(canvasWidth - 200 , canvasHeight / 2 - 250 , "30px Pixelify Sans",  "white");
+
 
 
 // imágenes globales para todos los niveles
@@ -178,28 +182,38 @@ mainCharacterImage.src = "../Assets/Jump1.PNG";
 // imagenes paltaformas nivel 1
 let plataformImg1 = new Image();
 plataformImg1.src = "../Assets/Plataforma1.png";
-let plataformSingle1 = new Image();
-plataformSingle1.src = "../Assets/bush.png";
+let singleImg1 = new Image();
+singleImg1.src = "../Assets/bush.png";
 
 // imagenes jefe 1
-jefeImgIzq = new Image();
+let jefeImgIzq = new Image();
 jefeImgIzq.src = "../Assets/JefePlantaIzq.png";
-jefeImgDer = new Image();
+let jefeImgDer = new Image();
 jefeImgDer.src = "../Assets/JefePlantaDer.png";
 
 //imagenes nivel 2
-plataformImg2 = new Image();
+let plataformImg2 = new Image();
 plataformImg2.src = "../Assets/PlataformaNube.png";
+singleImg2 = new Image();
+singleImg2.src = "../Assets/pajaroRojo.png";
 
 // imagenes jefe2
-proyectilImg = new Image();
+let proyectilImg = new Image();
 proyectilImg.src = "../Assets/ProyectilJefe2.png";
-jefe2Img = new Image();
+let jefe2Img = new Image();
 jefe2Img.src = "../Assets/Jefe2.png";
 
 // imagenes nivel3
 let plataformImg3 = new Image();
 plataformImg3.src = "../Assets/PlataformaEspacioUno.png";
+singleImg3 = new Image();
+singleImg3.src = "../Assets/espacio.png";
+
+// imagenes jefe3
+let jefe3Img = new Image();
+jefe3Img.src = "../Assets/Jefe3.png"
+let proyectilJefe3 = new Image();
+proyectilJefe3.src = "../Assets/ProjectilJefe3.png"
 
 // imagenes power ups
 let SuperJumpImg = new Image();
@@ -207,7 +221,9 @@ SuperJumpImg.src = "../Assets/JumpPowerUp.png";
 let EscudoImg = new Image();
 EscudoImg.src = "../Assets/EscudoPowerUp.png";
 
-
+// imagen portal
+let portalImg = new Image();
+portalImg.src = "../Assets/portal.png";
 
 
 function main() {
@@ -240,11 +256,31 @@ function main() {
     startTimer();
     gameRunning = true;
     lastTime = performance.now(); // Initialize lastTime
+    
+
+    document.addEventListener("keydown", (e) => {
+        
+        if (e.key === "p" || e.key === "Escape"){
+            if (gameRunning === true){
+                openAjustes();
+                gameRunning = false;
+                
+            }
+            else if (gameRunning === false){
+                closeAjustes();
+                gameRunning = true;
+                mainCharacter.applyPhysics();
+                
+            }
+        }
+    });
+
     requestAnimationFrame(update);
+
+    
 }
 
 function update(currentTime) {
-    if (!gameRunning) return;
 
     
     deltaTime = (currentTime - lastTime) / 1000; 
@@ -252,6 +288,8 @@ function update(currentTime) {
     lastTime = currentTime;
 
     requestAnimationFrame(update);
+
+    if (!gameRunning) return;
 
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
@@ -278,7 +316,6 @@ function update(currentTime) {
             gameRunning = false;
         }
     }
-
 
 }
 
@@ -367,6 +404,7 @@ function reiniciarJuego() {
 
 window.onload = main;
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const musicCheckbox = document.getElementById("musicCheckbox");
 
@@ -381,9 +419,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
 
+
 function seleccionarMejora(tipo) {
+
     if (tipo === "salto") {
-        mejoraSalto += 1; // aumenta el salto
+        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
     } else if (tipo === "danio") {
         mejoraDanio += 1; // aumenta el daño
         mainCharacter.strength += 20; // aumenta el daño
