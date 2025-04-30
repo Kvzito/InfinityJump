@@ -13,7 +13,7 @@ class BolaPicos extends PowerUp {
             if (player.escudoActivo) {
                 player.escudoActivo = false;
             } else {
-                player.vida -= 20;
+                player.vida -= 5;
                 if (player.vida < 0) player.vida = 0;
                 playSound("attack"); // mismo sonido del jefe
             }

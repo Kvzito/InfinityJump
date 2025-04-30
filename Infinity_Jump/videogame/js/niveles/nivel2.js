@@ -17,7 +17,7 @@ function level2() {
         probEscudo: 5,
         probOne: 20,
         probOff: 10,
-        ProbBolaPicos: 30,
+        ProbBolaPicos: 10,
         LevelList: [],
     };
     let PlataformManager;
