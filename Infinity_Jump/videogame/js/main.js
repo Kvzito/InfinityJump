@@ -65,7 +65,7 @@ obtenerMejorasPermanentes();
 function actualizarMejoras() {
     const velMin = -15; // límite superior al salto
     mainCharacter.inicialVelY = Math.max(-7.5 + (-0.5 * mejoraSalto), velMin);
-    mainCharacter.strength = 500 + ( 20 * mejoraDanio);
+    mainCharacter.strength = 50 + ( 20 * mejoraDanio);
     mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
 

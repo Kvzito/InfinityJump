@@ -48,6 +48,34 @@
         <p>Silver Way Studios &copy; 2025</p>
     </footer>
     </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            const canvasWidth = canvas.width = 1150;
+            const canvasHeight = canvas.height = 650;
+
+            const video = document.createElement('video');
+            video.src = '../Assets/historiaFondo.mp4';
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+
+            video.addEventListener('canplay', () => {
+                video.play();
+                draw();
+            });
+
+            function draw() {
+                if (video.readyState >= 2) {
+                    ctx.drawImage(video, 0, 0, canvasWidth, canvasHeight);
+                }
+                requestAnimationFrame(draw);
+            }
+        });
+    </script>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const musicCheckbox = document.getElementById("musicCheckbox");

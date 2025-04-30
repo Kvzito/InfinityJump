@@ -1,4 +1,5 @@
 function levelJefe3() {
+    cambiarMusicaNivel("alien");
     let LevelList = [];
 
     jefe = new Jefe3(400, 200, 120, 120, jefe3Img);

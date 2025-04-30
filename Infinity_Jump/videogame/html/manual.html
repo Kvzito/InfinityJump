@@ -6,7 +6,7 @@
     <script src="../js/paginaLogin/login.js"></script>
     <script src="../js/ajustes_y_sonido/ajustes.js"></script>
     <script src="../js/ajustes_y_sonido/sound.js"></script>
-    <title>Inifnity Jump </title>
+    <title>Infinity Jump</title>
 </head>
 <body>  
     <header>
@@ -17,48 +17,70 @@
         <button id="homeButton" onclick="openMain()">Inicio</button>
         <button id="ajustesButton" onclick="openAjustes()">Ajustes</button>
 
-    <h1>Antes de empezar...</h1>    
-    <div id="texto">
-        <div class="seccion">
-            <h2>Controles</h2>
-            <p>Durante todo el juego, Malvin va a estar saltando por automático. Tienes que lograr subir moviéndote a la izquierda o derecha a la siguiente plataforma.</p>
-            <p>Para moverse a la izquierda:</p>
-            <ul class="lista">
-                <li>Flecha izquierda</li>
-                <li>Letra A</li>
-            </ul>
-            <p>Para moverse a la derecha:</p>
-            <ul class="lista">
-                <li>Flecha derecha</li>
-                <li>Letra D</li>
-            </ul>
-        </div>
-
-        <div class="seccion">
-            <h2>Power Ups</h2>
-            <p>Durante el juego hay power ups que puedes recoger. Te ayudan a avanzar más rápido o derrotar enemigos.</p>
-            <ul class="lista">
-                <li>Salto: salto poderoso que sube muchas plataformas.</li>
-                <img src="../Assets/JumpPowerUp.png" alt="Jump Power Up" style="width:50px;height:50px;">
-                <li>Escudo: te da defensa extra contra enemigos.</li>
-                <img src="../Assets/EscudoPowerUp.png" alt="Escudo Power Up" style="width:50px;height:50px;">
-            </ul>
-        </div>
-
-        <div class="seccion">
-            <h2>Enemigos</h2>
-            <p>Al final de cada nivel, te enfrentas a un enemigo. Pierden vida al caerles encima.</p>
-            <ol class="lista">
-                <li>Se mueve de forma lineal.</li>
+        <h1>Antes de empezar...</h1>    
+        <div id="infoSelector">
+            <button class="tabButton active" data-tab="controles">Controles</button>
+            <button class="tabButton" data-tab="powerups">Power Ups</button>
+            <button class="tabButton" data-tab="enemigos">Enemigos</button>
+          </div>
+          
+          <div id="infoContent">
+            <div class="tabContent" id="controles" style="display: block;">
+              <h2>Controles</h2>
+              <p>Malvin salta automáticamente durante todo el juego. Usa estas teclas para moverlo:</p>
+              <ul class="lista">
+                <li><strong>Izquierda:</strong> Flecha izquierda o letra A</li>
+                <li><strong>Derecha:</strong> Flecha derecha o letra D</li>
+              </ul>
+            </div>
+          
+            <div class="tabContent" id="powerups">
+                <div class="powerColumnGrid">
+                  <!-- Temporales -->
+                  <div class="powerColumn">
+                    <h2>Power Ups <i>temporales</i></h2>
+                    <p>Durante la partida podrás encontrar power ups que te otorgan ventajas por tiempo limitado. Recógelos para facilitar tu progreso.</p>
+                    <ul class="lista">
+                        <li><strong>Salto:</strong> Realiza un salto potente para subir varias plataformas de una vez.</li>
+                        <img src="../Assets/JumpPowerUp.png" alt="Jump Power Up" style="width:50px;height:50px;">
+                        <li><strong>Escudo:</strong> Te protege de los enemigos temporalmente.</li>
+                        <img src="../Assets/EscudoPowerUp.png" alt="Escudo Power Up" style="width:50px;height:50px;">
+                    </ul>
+                  </div>
+              
+                  <!-- Permanentes -->
+                  <div class="powerColumn">
+                    <h2>Power Ups <i>permanentes</i></h2>
+                    <p>Cada vez que derrotes a un enemigo, podrás elegir un power up permanente. Estos se irán acumulando y te darán mejoras a largo plazo. Puedes tener hasta 5 unidades de cada tipo.</p>
+                    <ul class="lista">
+                        <li><strong>+ Daño:</strong> Aumenta tu poder de ataque contra enemigos.</li>
+                        <img src="../Assets/MejoraPermanenteBotas.png" alt="Jump Power Up" style="width:50px;height:50px;">
+                        <li><strong>Recupera vida:</strong> Recupera vida perdida o guarda vida adicional para más adelante.</li>
+                        <img src="../Assets/MejoraPermanenteVida.png" alt="Escudo Power Up" style="width:50px;height:50px;">
+                        <li><strong>Salto más alto:</strong> Mejora la altura de tus saltos, lo que facilita avanzar entre plataformas.</li>
+                        <img src="../Assets/MejoraPermanenteAlas.png" alt="Escudo Power Up" style="width:50px;height:50px;">
+                    </ul>
+                  </div>
+                </div>
+            </div>
+              
+                
+          
+            <div class="tabContent" id="enemigos">
+              <h2>Enemigos</h2>
+              <p>Enfrenta a un jefe al final de cada nivel. Derrótalos cayéndoles encima:</p>
+              <ol class="lista">
+                <li><strong>Planta:</strong> Se mueve en línea recta.</li>
                 <img src="../Assets/JefePlantaIzq.png" alt="Planta" style="width:50px;height:50px;">
-                <li>Lanza proyectiles detrás de Malvin.</li>
+                <li><strong>Mago:</strong> Lanza proyectiles detrás de Malvin.</li>
                 <img src="../Assets/mago.png" alt="Mago" style="width:50px;height:50px;">
-                <li>Persigue a Malvin y lanza proyectiles.</li>
+                <li><strong>Alien:</strong> Persigue a Malvin y dispara proyectiles.</li>
                 <img src="../Assets/enemigoTres1.png" alt="Alien" style="width:50px;height:50px;">
-            </ol>
+              </ol>
+            </div>
         </div>
-    </div>
-
+          
+          
 
         <button id="gameButton" onclick="openLogin()">Jugar</button>
         <div id="ajustes" class="ajustes">
@@ -76,24 +98,42 @@
                 </label>
             </div>
         </div>
+    </div>
     
-
-      
     <footer>
         <p>Silver Way Studios &copy; 2025</p>
     </footer>
-    </body>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const musicCheckbox = document.getElementById("musicCheckbox");
-        
-            const iniciarMusicaIntro = () => {
-                if (musicCheckbox && musicCheckbox.checked) {
-                    reproducirMusica("menu");
-                }
-            };
-        
-            document.body.addEventListener("click", iniciarMusicaIntro);
-        });
-    </script>
+</body>
+
+<script>
+    document.querySelectorAll('.tabButton').forEach(button => {
+      button.addEventListener('click', () => {
+        // Quitar 'active' de todos los botones
+        document.querySelectorAll('.tabButton').forEach(btn => btn.classList.remove('active'));
+        // Ocultar todos los contenidos
+        document.querySelectorAll('.tabContent').forEach(tab => tab.style.display = 'none');
+  
+        // Activar el botón actual
+        button.classList.add('active');
+        // Mostrar el contenido correspondiente
+        const tabId = button.getAttribute('data-tab');
+        document.getElementById(tabId).style.display = 'block';
+      });
+    });
+  </script>
+  
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const musicCheckbox = document.getElementById("musicCheckbox");
+
+        const iniciarMusicaIntro = () => {
+            if (musicCheckbox && musicCheckbox.checked) {
+                reproducirMusica("menu");
+            }
+        };
+
+        document.body.addEventListener("click", iniciarMusicaIntro);
+    });
+</script>
 </html>
