@@ -39,6 +39,7 @@ function level1() {
     PlataformManager = new PM(level1Config); // usa config para este nivel
     PlataformManager.img = plataformImg1;
     PlataformManager.imgOne = singleImg1;
+    PlataformManager.imgOff = offImg1;
     PlataformManager.placePlataforms();
 
     // esta funcion se actualiza en cada frame
