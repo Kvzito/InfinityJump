@@ -75,22 +75,22 @@ class Jefe2 extends Jefe {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
         // Dibujar hitbox principal (rojo)
-        ctx.strokeStyle = "red";
-        ctx.strokeRect(
-            this.x + this.hitboxOffsetX,
-            this.y + this.hitboxOffsetY,
-            this.hitboxWidth,
-            this.hitboxHeight
-        );
+        // ctx.strokeStyle = "red";
+        // ctx.strokeRect(
+        //     this.x + this.hitboxOffsetX,
+        //     this.y + this.hitboxOffsetY,
+        //     this.hitboxWidth,
+        //     this.hitboxHeight
+        // );
 
         // Dibujar hitbox superior (verde)
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(
-            this.x,
-            this.y,
-            this.width - 5,
-            this.topHitboxHeight
-        );
+        // ctx.strokeStyle = "green";
+        // ctx.strokeRect(
+        //     this.x,
+        //     this.y,
+        //     this.width - 5,
+        //     this.topHitboxHeight
+        // );
 
         // Dibujar proyectiles
         for (let p of this.proyectiles) {

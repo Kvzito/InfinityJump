@@ -14,14 +14,14 @@ class PowerUp {
         }
 
          // Dibuja la hitbox más chica para depuración
-        ctx.strokeStyle = "purple";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(
-            this.x + 8, // offset X
-            this.y + 8, // offset Y
-            this.width - 16, // ancho reducido
-            this.height - 16 // alto reducido
-        );
+        // ctx.strokeStyle = "purple";
+        // ctx.lineWidth = 1;
+        // ctx.strokeRect(
+        //     this.x + 8, // offset X
+        //     this.y + 8, // offset Y
+        //     this.width - 16, // ancho reducido
+        //     this.height - 16 // alto reducido
+        // );
     }
 
     detectCollision(player) {

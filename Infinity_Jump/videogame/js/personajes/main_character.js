@@ -116,14 +116,14 @@ class MainCharacter {
 
     draw(ctx) {
         // Hitbox del jugador
-        ctx.strokeStyle = "red"; 
-        ctx.lineWidth = 1;
-        ctx.strokeRect(
-            this.x + this.hitboxOffsetX,
-            this.y + this.hitboxOffsetY,
-            this.hitboxWidth,
-            this.hitboxHeight
-        );
+        // ctx.strokeStyle = "red"; 
+        // ctx.lineWidth = 1;
+        // ctx.strokeRect(
+        //     this.x + this.hitboxOffsetX,
+        //     this.y + this.hitboxOffsetY,
+        //     this.hitboxWidth,
+        //     this.hitboxHeight
+        // );
 
         //dibuja la imagen del escudo que se pone al rededor del personaje
         if (this.escudoActivo && this.imgEscudo) {
