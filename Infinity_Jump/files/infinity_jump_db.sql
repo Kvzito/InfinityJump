@@ -26,68 +26,14 @@ CREATE TABLE Partidas (
 CREATE TABLE Inventario (
 	id_inventario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
-    cantidad_mejora_1 INT NOT NULL DEFAULT 0,
-    cantidad_mejora_2 INT NOT NULL DEFAULT 0,
-    cantidad_mejora_3 INT NOT NULL DEFAULT 0,
+    cantidad_mejora_salto INT NOT NULL DEFAULT 0,
+    cantidad_mejora_danio INT NOT NULL DEFAULT 0,
+    cantidad_mejora_vida INT NOT NULL DEFAULT 0,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 ) ENGINE=InnoDB;
 
+
 ALTER TABLE Inventario ADD CONSTRAINT unq_inventario_usuario UNIQUE (id_usuario);
-
-
-
--- Insertar usuarios dummie
-INSERT INTO Usuarios (usuario, contrasena) VALUES
-('jugador1', 'pass123'),
-('jugador2', 'clave456'),
-('jugador3', 'segura789'),
-('jugador4', 'password000'),
-('jugador5', 'xyz123'),
-('jugador6', 'abc456'),
-('jugador7', 'qwerty789'),
-('jugador8', 'pass999'),
-('jugador9', 'secure555'),
-('jugador10', 'mypass777');
-
-
--- Insertar partidas dummie
-INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_1, mejora_2, mejora_3) VALUES
-(1, 1, "Bosque", 5, 2, 5, 1),
-(1, 2, "Carny", 79, 2, 5, 1),
-(2, 1, "Bosque", 8, 2, 5, 1),
-(2, 2, "Bosque", 5, 2, 5, 0),
-(2, 3, "Bosque", 10, 2, 5, 1),
-(2, 4, "Bosque", 20, 2, 5, 1),
-(2, 5, "Bosque", 40, 2, 5, 1),
-(2, 6, "Bosque", 80, 2, 5, 1),
-(2, 7, "Bosque", 160, 2, 0, 1),
-(2, 8, "Bosque", 320, 2, 5, 1),
-(2, 9, "Espacio", 640, 2, 5, 1),
-(3, 1, "Bosque", 10, 2, 0, 1),
-(3, 2, "Bosque", 12, 2, 5, 1),
-(4, 1, "Bosque", 13, 2, 5, 1),
-(5, 1, "Bosque", 85, 0, 5, 1),
-(5, 2, "Bosque", 16, 2, 5, 1),
-(6, 1, "Bosque", 18, 0, 0, 0),
-(7, 1, "Bosque", 19, 2, 5, 1),
-(8, 1, "Magik", 20, 0, 5, 1),
-(9, 1, "Bosque", 22, 2, 0, 0),
-(10, 1, "Bosque", 24, 2, 5, 1);
-
--- Insertar inventarios dummie
-INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3) VALUES
-(1, 3, 1, 0),
-(2, 1, 0, 5),
-(3, 1, 1, 1),
-(4, 0, 0, 3),
-(5, 0, 0, 1),
-(6, 4, 0, 3),
-(7, 1, 0, 0),
-(8, 0, 0, 0),
-(9, 0, 3, 0),
-(10, 5, 0, 0);
-
-
 
 
 -- VISTAS NECESARIAS PARA APARTADO DE ESTADÍSTICAS EN LA PÁGINA WEB --
@@ -102,9 +48,9 @@ JOIN Usuarios u ON p.id_usuario = u.id_usuario;
 -- Vista útil para graficar cual es la mejora permanente que más suelen escoger los usuarios.
 CREATE OR REPLACE VIEW UsoMejoras AS
 SELECT
-    SUM(cantidad_mejora_1) AS Total_Mejora_1,
-    SUM(cantidad_mejora_2) AS Total_Mejora_2,
-    SUM(cantidad_mejora_3) AS Total_Mejora_3
+    SUM(cantidad_mejora_salto) AS Total_Mejora_Salto,
+    SUM(cantidad_mejora_danio) AS Total_Mejora_Danio,
+    SUM(cantidad_mejora_vida) AS Total_Mejora_Vida
 FROM Inventario;
 
 
@@ -115,6 +61,7 @@ SELECT
     p.intento AS Mejor_Intento,
     p.plataformas_alcanzadas AS Saltos_Completados,
     p.nivel AS Nivel_Alcanzado,
+    p.tiempo AS Tiempo,
     p.mejora_salto AS Mejora_salto,
     p.mejora_danio AS Mejora_danio,
     p.mejora_vida AS Mejora_vida
@@ -128,15 +75,17 @@ JOIN (
             id_partida,
             ROW_NUMBER() OVER (
                 PARTITION BY id_usuario
-                ORDER BY plataformas_alcanzadas DESC, nivel DESC, intento ASC
+                ORDER BY plataformas_alcanzadas DESC, nivel DESC, tiempo ASC, intento ASC
             ) AS rn
         FROM Partidas
     ) sub
     WHERE rn = 1
 ) mejores ON p.id_partida = mejores.id_partida
 JOIN Usuarios u ON p.id_usuario = u.id_usuario
-ORDER BY p.plataformas_alcanzadas DESC, p.nivel DESC, p.intento ASC
+ORDER BY p.plataformas_alcanzadas DESC, p.nivel DESC, p.tiempo ASC, p.intento ASC
 LIMIT 10;
+
+
 
 -- Vista para ver los diferentes usuarios registrados sin comprometer sus contraseñas
 CREATE VIEW UsuariosRegistrados AS
@@ -176,9 +125,9 @@ LIMIT 3;
 CREATE OR REPLACE VIEW VistaInventario AS
 SELECT 
     i.id_usuario,
-    i.cantidad_mejora_1 AS cantidad_salto,
-    i.cantidad_mejora_2 AS cantidad_danio,
-    i.cantidad_mejora_3 AS cantidad_vida
+    i.cantidad_mejora_salto AS cantidad_salto,
+    i.cantidad_mejora_danio AS cantidad_danio,
+    i.cantidad_mejora_vida AS cantidad_vida
 FROM iNVENTARIO i;
 
 
@@ -191,37 +140,10 @@ CREATE TRIGGER crear_inventario_usuario
 AFTER INSERT ON Usuarios
 FOR EACH ROW
 BEGIN
-    INSERT INTO Inventario (id_usuario, cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3)
+    INSERT INTO Inventario (id_usuario, cantidad_mejora_salto, cantidad_mejora_danio, cantidad_mejora_vida)
     VALUES (NEW.id_usuario, 0, 0, 0);
 END$$
 
 DELIMITER ;
 
-
-
--- REVISIÓN DE VISTAS -- 
-
-SELECT * FROM globalranking;
-
-SELECT * FROM historialintentos;
-
-SELECT * FROM usuariosregistrados;
-
-SELECT * FROM usomejoras;
-
-SELECT * FROM historialintentos WHERE Jugador="jugador1";
-
-SELECT * FROM historialintentos WHERE Jugador="jugador2";
-
-SELECT * FROM partidas;
-
-SELECT * FROM inventario;
-
-SELECT * FROM usuarios;
-
-SELECT * FROM nivelesmascomunes;
-
-SELECT cantidad_mejora_1, cantidad_mejora_2, cantidad_mejora_3 FROM Inventario WHERE id_usuario = 1;
-
-SELECT * FROM vistainventario WHERE id_usuario = 1;
 

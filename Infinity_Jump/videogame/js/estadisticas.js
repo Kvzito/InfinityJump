@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
           if (results.length > 0) {
             const headers = Object.keys(results[0])
-            .filter(header => !['Mejora_salto', 'Mejora_danio', 'Mejora_vida'].includes(header));
+            .filter(header => !['Jugador', 'Mejora_Salto', 'Mejora_Danio', 'Mejora_Vida'].includes(header));
             headers.push('Mejoras Usadas'); // añadimos la columna combinada
 
             let table = document.createElement("table");
@@ -67,7 +67,13 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            container.appendChild(table);
+            const scrollWrapper = document.createElement("div");
+            scrollWrapper.style.maxHeight = "200px"; 
+            scrollWrapper.style.overflowY = "auto"; 
+            scrollWrapper.style.marginTop = "10px"; 
+
+            scrollWrapper.appendChild(table);
+            container.appendChild(scrollWrapper);
 
             // Ahora generamos la gráfica basados en el intento y plataformas
             const intentos = results.map(row => row.Intento);
@@ -272,9 +278,9 @@ async function cargarGraficoMejoras(){
       const results = await response.json();
       console.log(results);
 
-      const total1 = results[0].Total_Mejora_1 || 0;
-      const total2 = results[0].Total_Mejora_2 || 0;
-      const total3 = results[0].Total_Mejora_3 || 0;
+      const total1 = results[0].Total_Mejora_Salto || 0;
+      const total2 = results[0].Total_Mejora_Danio || 0;
+      const total3 = results[0].Total_Mejora_Vida || 0;
 
       const canvasMejora = document.getElementById('graficaMejoras');
       const ctxMejoras = canvasMejora.getContext('2d');
@@ -286,7 +292,7 @@ async function cargarGraficoMejoras(){
 
       // Creamos la gráfica
       canvasMejora.chartInstance = new Chart(ctxMejoras, {
-        type: 'pie',
+        type: 'doughnut', // O 'pie', 'radar', como quieras
         data: {
           labels: ['Mayor Salto', 'Mayor Daño', 'Mayor Vida'],
           datasets: [{
