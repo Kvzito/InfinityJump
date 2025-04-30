@@ -60,11 +60,20 @@ class PM {
         let newY = lastY - 60;
 
         let isMoving = Math.random() < (this.probMov / 100);
+        let SinglePlataform = Math.random() < (this.probOne / 100);
+        let quitarPlataform =  Math.random() < (this.probOff / 100);
 
         let p;
         if (isMoving) {
-            p = new MovingPlataform(randomX, newY, 60, 18, this.img, 100, 0.5);
-        } else {
+            p = new MovingPlataform(randomX, newY, 60, 18, this.img, 100, 1);
+        }
+        else if(SinglePlataform){
+            p = new OnePlataform(randomX, newY, 60, 18, this.imgOne);
+        }
+        else if(quitarPlataform){
+            p = new PlataformaOff(randomX, newY, 60, 18, this.imgOff);
+        }
+        else {
             p = new Plataform(randomX, newY, 60, 18, this.img);
         }
         this.list.push(p);
