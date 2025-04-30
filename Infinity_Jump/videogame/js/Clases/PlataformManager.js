@@ -6,6 +6,7 @@ class PM {
         this.probStatic = config.probStatic;
         this.probOne = config.probOne;
         this.probOff = config.probOff;
+        this.ProbBolaPicos = config.ProbBolaPicos;
         this.list = config.LevelList;
         this.img = null;
         this.imgOne = null;
@@ -84,6 +85,14 @@ class PM {
             this.list.push(powerUp);
         }
 
+        if (Math.random() < this.ProbBolaPicos / 100) {
+            let powerUp = new BolaPicos(
+                p.x + (p.width / 2) - 20,
+                p.y - 40,
+                BolaPicosImg 
+            );
+            this.list.push(powerUp);
+        }
         // contador de plataformas
         totalPlataforms++;
 

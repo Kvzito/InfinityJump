@@ -221,6 +221,8 @@ let SuperJumpImg = new Image();
 SuperJumpImg.src = "../Assets/JumpPowerUp.png";
 let EscudoImg = new Image();
 EscudoImg.src = "../Assets/EscudoPowerUp.png";
+let BolaPicosImg = new Image();
+BolaPicosImg.src = "../Assets/BolaPicos.png"
 
 // imagen portal
 let portalImg = new Image();
