@@ -185,18 +185,24 @@ let plataformImg1 = new Image();
 plataformImg1.src = "../Assets/Plataforma1.png";
 let singleImg1 = new Image();
 singleImg1.src = "../Assets/bush.png";
+let offImg1 = new Image();
+offImg1.src = "../Assets/desaparece.png";
 
 // imagenes jefe 1
 let jefeImgIzq = new Image();
 jefeImgIzq.src = "../Assets/JefePlantaIzq.png";
 let jefeImgDer = new Image();
 jefeImgDer.src = "../Assets/JefePlantaDer.png";
+let cafe = new Image();
+cafe.src = "../Assets/cafe.png";
 
 //imagenes nivel 2
 let plataformImg2 = new Image();
 plataformImg2.src = "../Assets/PlataformaNube.png";
 singleImg2 = new Image();
 singleImg2.src = "../Assets/pajaroRojo.png";
+offImg2 = new Image();
+offImg2.src = "../Assets/aguila.png";
 
 // imagenes jefe2
 let proyectilImg = new Image();
@@ -209,12 +215,18 @@ let plataformImg3 = new Image();
 plataformImg3.src = "../Assets/PlataformaEspacioUno.png";
 singleImg3 = new Image();
 singleImg3.src = "../Assets/espacio.png";
+let offImg3 = new Image();
+offImg3.src = "../Assets/cohete.png";
 
 // imagenes jefe3
 let jefe3Img = new Image();
 jefe3Img.src = "../Assets/Jefe3.png"
 let proyectilJefe3 = new Image();
 proyectilJefe3.src = "../Assets/ProjectilJefe3.png"
+let luna = new Image();
+luna.src = "../Assets/luna.png";
+let naranja = new Image();
+luna.src = "../Assets/naranja.png";
 
 // imagenes power ups
 let SuperJumpImg = new Image();

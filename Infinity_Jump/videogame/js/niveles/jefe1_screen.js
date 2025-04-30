@@ -25,7 +25,7 @@ function levelJefe1() {
             mainCharacter,
             jefe = new Jefe1(canvasWidth / 2, canvasHeight / 2 - 200, 120, 120, jefeImgIzq),
             barreraIzq, barreraDer,
-            new Plataform(-250, canvasHeight / 2 + 300, 1500, 75, plataformImg1, "plataformaPiso"),
+            new Plataform(-250, canvasHeight / 2 + 300, 1500, 75, cafe, "plataformaPiso"),
             new Plataform(275, canvasHeight / 2 + 200, 150, 25, plataformImg1),
             new Plataform(675, canvasHeight / 2 + 200, 150, 25, plataformImg1),
             new Plataform(75, canvasHeight / 2 + 100, 150, 25, plataformImg1),
