@@ -3,12 +3,12 @@ function level3() {
     cambiarMusicaNivel("espacio");
     // variables del nivel
     const level2Config = {
-        probMov: 35,
-        probStatic: 65,
-        probSuperJump: 5,
-        probEscudo: 5,
-        probOne: 10,
-        probOff: 10,
+        probMov: 25,
+        probStatic: 25,
+        probSuperJump: 3,
+        probEscudo: 3,
+        probOne: 25,
+        probOff: 25,
         LevelList: [],
     };
     let PlataformManager;

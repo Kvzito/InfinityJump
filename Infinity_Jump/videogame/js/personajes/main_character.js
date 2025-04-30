@@ -20,8 +20,6 @@ class MainCharacter {
 
         this.vida;
         this.strength;
-
-
         this.money = 0;
 
         // Variables para controlar invulnerabilidad
