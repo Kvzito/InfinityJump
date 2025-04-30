@@ -88,7 +88,7 @@ class PM {
         totalPlataforms++;
 
         // cuadno el contador llega a la cantidas indicada pone la plataforma de cambio en la lista para qeu salga en la pantalla 
-        if (totalPlataforms >= 5 && !this.cPlataform) {
+        if (totalPlataforms >= 100 && !this.cPlataform) {
             let portal = new PlataformCambio(-250, newY - 150, 1500, 100, portalImg);
             this.list.push(portal);
             this.cPlataform = true;

@@ -1,6 +1,6 @@
 class Jefe2 extends Jefe {
     constructor(x, y, width, height, img) {
-        super(x, y, width, height, 750, 20, img);
+        super(x, y, width, height, 1000, 20, img);
         
         // Parámetros internos
         this.proyectiles = [];
