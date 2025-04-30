@@ -1,11 +1,6 @@
-class Jefe2 extends Jefe {
+class Jefe3 extends Jefe {
     constructor(x, y, width, height, img) {
         super(x, y, width, height, 750, 20, img);
-        
-        // Parámetros internos
-        this.proyectiles = [];
-        this.cooldown = 0;
-        this.maxCooldown = 100; 
 
         // Hitboxes
         this.hitboxOffsetX = 10;
@@ -15,24 +10,30 @@ class Jefe2 extends Jefe {
         this.topHitboxHeight = 10;
 
         // Movimiento
-        this.direccion = 1;
-        this.velocidadX = 4.5;
+        this.angle = 0;
+        this.direction = 1;
+        this.speedX = 8;
+
+        // Disparo
+        this.proyectiles = [];
+        this.cooldown = 0;
+        this.maxCooldown = 100;
 
         this.visible = true;
     }
 
     update(jugador) {
-        // Movimiento horizontal con rebote usando deltaTime
-        this.x += this.velocidadX * this.direccion * deltaTime * 60;
-
-        if (this.x <= 0) {
-            this.x = 0;
-            this.direccion = 1;
-        } else if (this.x + this.width >= canvasWidth) {
-            this.x = canvasWidth - this.width;
-            this.direccion = -1;
+        // Movimiento horizontal con rebote
+        this.x += this.speedX * this.direction * deltaTime * 60;
+        if (this.x <= 0 || this.x + this.width >= canvasWidth) {
+            this.direction *= -1;
         }
-        // Disparo con cooldown usando deltaTime
+
+        // Movimiento vertical en onda seno
+        this.angle += 0.02 * deltaTime * 60;
+        this.y += Math.sin(this.angle) * 2 * deltaTime * 60;
+
+        // Disparo con cooldown
         if (this.cooldown <= 0) {
             this.disparar(jugador);
             this.cooldown = this.maxCooldown;
@@ -40,23 +41,22 @@ class Jefe2 extends Jefe {
             this.cooldown -= deltaTime * 60;
         }
 
+        // Update proyectiles
         this.proyectiles = this.proyectiles.filter(p => {
             p.update();
-    
             if (p.colisionaCon(jugador)) {
                 if (!jugador.invulnerable) {
                     if (jugador.escudoActivo) {
                         jugador.escudoActivo = false;
                     } else {
-                        jugador.vida -= 7; // daño al jugador
-                        playSound("throw")
+                        jugador.vida -= 7;
+                        playSound("throw");
                     }
                     jugador.activarInvulnerabilidad();
                 }
-                return false; // Elimina el proyectil tras hacer daño
+                return false;
             }
-    
-            return p.tiempoVida > 0; // Mantiene proyectiles vivos
+            return p.tiempoVida > 0;
         });
     }
 
@@ -66,7 +66,7 @@ class Jefe2 extends Jefe {
             this.y + this.height / 2,
             jugador,
             125,
-            proyectilImg // ← imagen global definida fuera
+            proyectilJefe3
         );
         this.proyectiles.push(proyectil);
     }
@@ -74,7 +74,6 @@ class Jefe2 extends Jefe {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
-        // Dibujar hitbox principal (rojo)
         ctx.strokeStyle = "red";
         ctx.strokeRect(
             this.x + this.hitboxOffsetX,
@@ -83,7 +82,6 @@ class Jefe2 extends Jefe {
             this.hitboxHeight
         );
 
-        // Dibujar hitbox superior (verde)
         ctx.strokeStyle = "green";
         ctx.strokeRect(
             this.x,
@@ -92,7 +90,6 @@ class Jefe2 extends Jefe {
             this.topHitboxHeight
         );
 
-        // Dibujar proyectiles
         for (let p of this.proyectiles) {
             p.draw(ctx);
         }
@@ -115,13 +112,9 @@ class Jefe2 extends Jefe {
             jugadorTop < this.y + this.hitboxOffsetY + this.hitboxHeight;
 
         if (golpeaCabeza) {
-            this.recibirDaño(jugador.strength);
+            this.vida -= jugador.strength;
             jugador.bounce();
             playSound("hitEnemy");
-            this.x = 50 + Math.random() * (canvasWidth - 100);
-
-            // Se empuja al jefe en X según la dirección del jugador
-            this.x += 50 * (jugador.x < this.x ? 1 : -1);
         } else if (golpeNormal && !jugador.invulnerable) {
             if (jugador.escudoActivo) {
                 jugador.escudoActivo = false;

@@ -33,27 +33,47 @@ window.addEventListener('DOMContentLoaded', () => {
           container.innerHTML = '';
 
           if (results.length > 0) {
-            const headers = Object.keys(results[0]);
-            const values = Object.values(results);
+            const headers = Object.keys(results[0])
+            .filter(header => !['Jugador', 'Mejora_Salto', 'Mejora_Danio', 'Mejora_Vida'].includes(header));
+            headers.push('Mejoras Usadas'); // añadimos la columna combinada
 
             let table = document.createElement("table");
             let tr = table.insertRow(-1);
 
+            // Crear encabezados
             for (const header of headers) {
               let th = document.createElement("th");
-              th.innerHTML = header;
+              th.innerHTML = header.replace(/_/g, ' ');
               tr.appendChild(th);
             }
 
-            for (const row of values) {
+            // Crear filas
+            for (const row of results) {
+              console.log("Fila de datos:", row);
               let tr = table.insertRow(-1);
-              for (const key of Object.keys(row)) {
+              for (const key of headers) {
                 let tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = row[key];
+                if (key === 'Mejoras Usadas') {
+                  const mejoras = [
+                    row.Mejora_Salto > 0 ? '<img src="/Assets/MejoraPermanenteAlas.png" alt="Salto" style="width:20px; height:20px;">' : '',
+                    row.Mejora_Danio > 0 ? '<img src="/Assets/MejoraPermanenteBotas.png" alt="Daño" style="width:20px; height:20px;">' : '',
+                    row.Mejora_Vida > 0 ? '<img src="/Assets/MejoraPermanenteVida.png" alt="Vida" style="width:20px; height:20px;">' : ''
+                  ];
+                  tabCell.innerHTML = mejoras || '—';
+                } else {
+                  tabCell.textContent = row[key];
+                }
               }
             }
 
-            container.appendChild(table);
+
+            const scrollWrapper = document.createElement("div");
+            scrollWrapper.style.maxHeight = "200px"; 
+            scrollWrapper.style.overflowY = "auto"; 
+            scrollWrapper.style.marginTop = "10px"; 
+
+            scrollWrapper.appendChild(table);
+            container.appendChild(scrollWrapper);
 
             // Ahora generamos la gráfica basados en el intento y plataformas
             const intentos = results.map(row => row.Intento);
@@ -136,7 +156,7 @@ async function openLeaderboard() {
 
         // Crear encabezados
         let tr = table.insertRow(-1);
-        const headers = Object.keys(results[0]).filter(header => !['Mejora_1', 'Mejora_2', 'Mejora_3'].includes(header));
+        const headers = Object.keys(results[0]).filter(header => !['Mejora_salto', 'Mejora_danio', 'Mejora_vida'].includes(header));
         headers.push('Mejoras Usadas'); // agregamos la nueva columna
         for (const header of headers) {
           let th = document.createElement("th");
@@ -152,9 +172,9 @@ async function openLeaderboard() {
             if (key === 'Mejoras Usadas') {
               // Combinar Mejora_1, Mejora_2 y Mejora_3
               const mejoras = [
-                row.Mejora_1 > 0 ? '<img src="../Assets/MejoraPermanenteAlas.png" alt="Mayor Salto" style="width:20px; height:20px;">' : '',
-                row.Mejora_2 > 0 ? '<img src="../Assets/MejoraPermanenteBotas.png" alt="Mayor Daño" style="width:20px; height:20px;">' : '',
-                row.Mejora_3 > 0 ? '<img src="../Assets/MejoraPermanenteVida.png" alt="Mayor Vida" style="width:20px; height:20px;">' : ''
+                row.Mejora_salto > 0 ? '<img src="../Assets/MejoraPermanenteAlas.png" alt="Mayor Salto" style="width:20px; height:20px;">' : '',
+                row.Mejora_danio > 0 ? '<img src="../Assets/MejoraPermanenteBotas.png" alt="Mayor Daño" style="width:20px; height:20px;">' : '',
+                row.Mejora_vida > 0 ? '<img src="../Assets/MejoraPermanenteVida.png" alt="Mayor Vida" style="width:20px; height:20px;">' : ''
               ].filter(m => m).join(' ');
               tabCell.innerHTML = mejoras;
             } else {
@@ -173,9 +193,9 @@ async function openLeaderboard() {
         let totalMejora3 = 0;
 
         for (const row of results) {
-          totalMejora1 += row.Mejora_1;
-          totalMejora2 += row.Mejora_2;
-          totalMejora3 += row.Mejora_3;
+          totalMejora1 += row.Mejora_salto;
+          totalMejora2 += row.Mejora_danio;
+          totalMejora3 += row.Mejora_vida;
         }
 
         const canvasRank = document.getElementById('graficaRank');
@@ -258,9 +278,9 @@ async function cargarGraficoMejoras(){
       const results = await response.json();
       console.log(results);
 
-      const total1 = results[0].Total_Mejora_1 || 0;
-      const total2 = results[0].Total_Mejora_2 || 0;
-      const total3 = results[0].Total_Mejora_3 || 0;
+      const total1 = results[0].Total_Mejora_Salto || 0;
+      const total2 = results[0].Total_Mejora_Danio || 0;
+      const total3 = results[0].Total_Mejora_Vida || 0;
 
       const canvasMejora = document.getElementById('graficaMejoras');
       const ctxMejoras = canvasMejora.getContext('2d');
@@ -272,7 +292,7 @@ async function cargarGraficoMejoras(){
 
       // Creamos la gráfica
       canvasMejora.chartInstance = new Chart(ctxMejoras, {
-        type: 'pie',
+        type: 'doughnut', // O 'pie', 'radar', como quieras
         data: {
           labels: ['Mayor Salto', 'Mayor Daño', 'Mayor Vida'],
           datasets: [{

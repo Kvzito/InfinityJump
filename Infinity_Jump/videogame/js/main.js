@@ -4,6 +4,7 @@ let canvasWidth = 1150;
 let gameRunning = false;
 let lastTime = 0; // New variable to track the last frame time
 let deltaTime = 0; // New variable to store time between frames
+let pausa = false
 
 window.totalPlataforms = 0;
 window.plataformasAcumuladas = 0;
@@ -15,6 +16,25 @@ let nombreNivel = ""; // Declare nombreNivel as a global variable
 let mejoraSalto = 0;
 let mejoraDanio = 0;
 let mejoraVida = 0;
+
+
+// Formatear el tiempo en segundos
+function formatearTiempo(segundosTotales) {
+    if (typeof segundosTotales !== 'number' || isNaN(segundosTotales) || segundosTotales < 0) {
+        return "00:00:00"; // Valor por defecto si el input es inválido
+    }
+
+    const horas = Math.floor(segundosTotales / 3600);
+    const minutos = Math.floor((segundosTotales % 3600) / 60);
+    const segundos = Math.floor(segundosTotales % 60);
+
+    const formato = (num) => num.toString().padStart(2, '0');
+
+    return `${formato(horas)}:${formato(minutos)}:${formato(segundos)}`;
+}
+
+
+
 
 // Función para cargar las mejoras del inventario del jugador
 async function obtenerMejorasPermanentes() {
@@ -43,7 +63,8 @@ try
 obtenerMejorasPermanentes();
 
 function actualizarMejoras() {
-    // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
+    const velMin = -15; // límite superior al salto
+    mainCharacter.inicialVelY = Math.max(-7.5 + (-0.5 * mejoraSalto), velMin);
     mainCharacter.strength = 500 + ( 20 * mejoraDanio);
     mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
@@ -166,21 +187,21 @@ let singleImg1 = new Image();
 singleImg1.src = "../Assets/bush.png";
 
 // imagenes jefe 1
-jefeImgIzq = new Image();
+let jefeImgIzq = new Image();
 jefeImgIzq.src = "../Assets/JefePlantaIzq.png";
-jefeImgDer = new Image();
+let jefeImgDer = new Image();
 jefeImgDer.src = "../Assets/JefePlantaDer.png";
 
 //imagenes nivel 2
-plataformImg2 = new Image();
+let plataformImg2 = new Image();
 plataformImg2.src = "../Assets/PlataformaNube.png";
 singleImg2 = new Image();
 singleImg2.src = "../Assets/pajaroRojo.png";
 
 // imagenes jefe2
-proyectilImg = new Image();
+let proyectilImg = new Image();
 proyectilImg.src = "../Assets/ProyectilJefe2.png";
-jefe2Img = new Image();
+let jefe2Img = new Image();
 jefe2Img.src = "../Assets/Jefe2.png";
 
 // imagenes nivel3
@@ -188,6 +209,12 @@ let plataformImg3 = new Image();
 plataformImg3.src = "../Assets/PlataformaEspacioUno.png";
 singleImg3 = new Image();
 singleImg3.src = "../Assets/espacio.png";
+
+// imagenes jefe3
+let jefe3Img = new Image();
+jefe3Img.src = "../Assets/Jefe3.png"
+let proyectilJefe3 = new Image();
+proyectilJefe3.src = "../Assets/ProjectilJefe3.png"
 
 // imagenes power ups
 let SuperJumpImg = new Image();
@@ -230,11 +257,31 @@ function main() {
     startTimer();
     gameRunning = true;
     lastTime = performance.now(); // Initialize lastTime
+    
+
+    document.addEventListener("keydown", (e) => {
+        
+        if (e.key === "p" || e.key === "Escape"){
+            if (gameRunning === true){
+                openAjustes();
+                gameRunning = false;
+                
+            }
+            else if (gameRunning === false){
+                closeAjustes();
+                gameRunning = true;
+                mainCharacter.applyPhysics();
+                
+            }
+        }
+    });
+
     requestAnimationFrame(update);
+
+    
 }
 
 function update(currentTime) {
-    if (!gameRunning) return;
 
     
     deltaTime = (currentTime - lastTime) / 1000; 
@@ -242,6 +289,8 @@ function update(currentTime) {
     lastTime = currentTime;
 
     requestAnimationFrame(update);
+
+    if (!gameRunning) return;
 
     if (typeof currentUpdate === 'function') currentUpdate();
     if (typeof currentDraw === 'function') currentDraw(ctx);
@@ -269,14 +318,28 @@ function update(currentTime) {
         }
     }
 
-
 }
 
 async function enviarStats() {
     console.log("Registrando cambios de USER ID:", userID);
+    
 
     plataformasAcumuladas += totalPlataforms;
     totalPlataforms = 0;
+
+    const tiempo = formatearTiempo(getElapsedTimeInSeconds());
+
+    console.log("Tiempo total:", tiempo);
+
+    console.log(JSON.stringify({
+        id_usuario: userID,
+        nivel: nombreNivel,
+        plataformas_alcanzadas: plataformasAcumuladas,
+        tiempo: tiempo,
+        mejoraSalto: mejoraSalto,
+        mejoraDanio: mejoraDanio,
+        mejoraVida: mejoraVida,
+    }));
 
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
@@ -288,6 +351,7 @@ async function enviarStats() {
                 id_usuario: userID,
                 nivel: nombreNivel,
                 plataformas_alcanzadas: plataformasAcumuladas,
+                tiempo: tiempo,
                 mejoraSalto: mejoraSalto,
                 mejoraDanio: mejoraDanio,
                 mejoraVida: mejoraVida,
@@ -324,6 +388,9 @@ function mostrarGameOver() {
         nombreNivel = "UFO";
     }
 
+
+
+    
     console.log("Nivel alcanzado:", nombreNivel);
 
     const screen = document.getElementById("gameOverScreen");
@@ -357,7 +424,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function seleccionarMejora(tipo) {
 
     if (tipo === "salto") {
-        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
+        mejoraSalto += 1; // aumenta el salto
+        mainCharacter.inicialVelY = Math.max(mainCharacter.inicialVelY - 0.5, -15); // aumenta el salto
     } else if (tipo === "danio") {
         mejoraDanio += 1; // aumenta el daño
         mainCharacter.strength += 20; // aumenta el daño
@@ -456,4 +524,24 @@ function actualizarOpcionesMejora() {
         botonVida.style.backgroundColor = 'green';
         botonVida.style.cursor = 'pointer';
     }
+
+    // Botón para continuar en caso de todas las mejoras al máximo
+    const botonContinuar = document.getElementById('boton-continuar');
+
+    if (mejoraSalto >= maxNivel && mejoraDanio >= maxNivel && mejoraVida >= maxNivel) {
+        // Si todas las mejoras están al máximo, mostramos el botón para continuar
+        botonContinuar.style.display = 'block';
+    } else {
+        // Si aún hay mejoras disponibles, ocultamos el botón
+        botonContinuar.style.display = 'none';
+}
+
+}
+
+
+function cerrarPopup() {
+    document.getElementById("mejorasPopup").style.display = "none";
+    gameRunning = true; // Reanudar juego si pausaste
+    mainCharacter.listenControls();
+    requestAnimationFrame(update);
 }

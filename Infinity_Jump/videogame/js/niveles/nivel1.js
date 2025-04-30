@@ -8,12 +8,12 @@ function level1() {
 
     // variables del nivel
     const level1Config = {
-        probMov: 10,
-        probStatic: 90,
+        probMov: 5,
+        probStatic: 50,
         probSuperJump: 15   ,
         probEscudo: 7,
-        probOne: 10,
-        probOff: 10,
+        probOne: 5,
+        probOff: 40,
         LevelList: [],
     };
     let PlataformManager;
@@ -43,7 +43,7 @@ function level1() {
             mainCharacter.y = canvasHeight / 2;
 
             for (let j = 0; j < PlataformManager.list.length; j++) {
-                PlataformManager.list[j].move(dy * deltaTime * 125); // Baja todas las plataformas
+                PlataformManager.list[j].move(dy); // Baja todas las plataformas
             }
         }
 
