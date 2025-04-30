@@ -63,7 +63,8 @@ try
 obtenerMejorasPermanentes();
 
 function actualizarMejoras() {
-    // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
+    const velMin = -15; // límite superior al salto
+    mainCharacter.inicialVelY = Math.max(-7.5 + (-0.5 * mejoraSalto), velMin);
     mainCharacter.strength = 500 + ( 20 * mejoraDanio);
     mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
@@ -423,7 +424,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function seleccionarMejora(tipo) {
 
     if (tipo === "salto") {
-        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
+        mejoraSalto += 1; // aumenta el salto
+        mainCharacter.inicialVelY = Math.max(mainCharacter.inicialVelY - 0.5, -15); // aumenta el salto
     } else if (tipo === "danio") {
         mejoraDanio += 1; // aumenta el daño
         mainCharacter.strength += 20; // aumenta el daño
@@ -522,4 +524,24 @@ function actualizarOpcionesMejora() {
         botonVida.style.backgroundColor = 'green';
         botonVida.style.cursor = 'pointer';
     }
+
+    // Botón para continuar en caso de todas las mejoras al máximo
+    const botonContinuar = document.getElementById('boton-continuar');
+
+    if (mejoraSalto >= maxNivel && mejoraDanio >= maxNivel && mejoraVida >= maxNivel) {
+        // Si todas las mejoras están al máximo, mostramos el botón para continuar
+        botonContinuar.style.display = 'block';
+    } else {
+        // Si aún hay mejoras disponibles, ocultamos el botón
+        botonContinuar.style.display = 'none';
+}
+
+}
+
+
+function cerrarPopup() {
+    document.getElementById("mejorasPopup").style.display = "none";
+    gameRunning = true; // Reanudar juego si pausaste
+    mainCharacter.listenControls();
+    requestAnimationFrame(update);
 }
