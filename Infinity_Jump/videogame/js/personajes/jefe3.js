@@ -1,6 +1,6 @@
 class Jefe3 extends Jefe {
     constructor(x, y, width, height, img) {
-        super(x, y, width, height, 1300, 30, img);
+        super(x, y, width, height, 1300, 40, img);
 
         // Hitboxes
         this.hitboxOffsetX = 10;
