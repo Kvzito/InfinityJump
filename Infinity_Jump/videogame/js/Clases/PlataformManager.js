@@ -29,7 +29,7 @@ class PM {
             let quitarPlataform =  Math.random() < (this.proboff / 100);
             let nPlataform;
             if (isMoving) {
-                nPlataform = new MovingPlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img, 100, 0.5);
+                nPlataform = new MovingPlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img, 100, 1);
             }
             else if(SinglePlataform){
                 nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.imgOne);
