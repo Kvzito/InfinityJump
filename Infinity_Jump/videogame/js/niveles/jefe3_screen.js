@@ -76,7 +76,7 @@ function levelJefe3() {
 
                 LevelList.push(new Plataform(475, canvasHeight / 2 - 100, 150, 25, plataformImg3)),
                 LevelList.push(new Plataform(475, canvasHeight / 2 - 200, 150, 25, plataformImg3)),
-                LevelList.push(new PlataformCambio(-250, -5,1500, 50, plataformImg3));
+                LevelList.push(new PlataformCambio(-250, -5,1500, 50, portalImg));
                 
             }
         }
@@ -89,7 +89,7 @@ function levelJefe3() {
         ctx.drawImage(fondoEspacioImg, 0, 0, canvas.width, canvas.height);
 
         for (let obj of LevelList) {
-            if (obj instanceof Jefe2 && !obj.visible) continue;
+            if (obj instanceof Jefe3 && !obj.visible) continue;
             obj.draw(ctx);
         }
 
