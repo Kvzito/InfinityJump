@@ -24,11 +24,14 @@ class Jefe2 extends Jefe {
     update(jugador) {
         // Movimiento horizontal con rebote usando deltaTime
         this.x += this.velocidadX * this.direccion * deltaTime * 60;
-        this.x = Math.max(0, Math.min(this.x, canvasWidth - this.width));
-        if (this.x <= 0 || this.x + this.width >= canvasWidth) {
-            this.direccion *= -1;
-        }
 
+        if (this.x <= 0) {
+            this.x = 0;
+            this.direccion = 1;
+        } else if (this.x + this.width >= canvasWidth) {
+            this.x = canvasWidth - this.width;
+            this.direccion = -1;
+        }
         // Disparo con cooldown usando deltaTime
         if (this.cooldown <= 0) {
             this.disparar(jugador);
