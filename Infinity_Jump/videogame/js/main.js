@@ -404,7 +404,7 @@ function reiniciarJuego() {
 
 window.onload = main;
 
-
+/*
 document.addEventListener("DOMContentLoaded", () => {
     const musicCheckbox = document.getElementById("musicCheckbox");
 
@@ -418,7 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
-
+*/
 
 function seleccionarMejora(tipo) {
 

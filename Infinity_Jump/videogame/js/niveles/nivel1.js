@@ -1,6 +1,10 @@
 // esto crea el nivel 1 para usarlo desde level_manager
 function level1() {
-    cambiarMusicaNivel("bosque");
+    document.body.addEventListener("click", () => {
+        if (enableMusic) {
+            cambiarMusicaNivel("bosque");
+        }
+    }, { once: true });
 
     // variables del nivel
     const level1Config = {
