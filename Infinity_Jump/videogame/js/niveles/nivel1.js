@@ -1,3 +1,11 @@
+// funcion para la hit box de la bola con picos
+function boxOverlap(obj1, obj2) {
+    return obj1.x + obj1.width > obj2.x &&
+           obj1.x < obj2.x + obj2.width &&
+           obj1.y + obj1.height > obj2.y &&
+           obj1.y < obj2.y + obj2.height;
+}
+
 // esto crea el nivel 1 para usarlo desde level_manager
 function level1() {
     document.body.addEventListener("click", () => {
@@ -14,6 +22,7 @@ function level1() {
         probEscudo: 5,
         probOne: 10,
         probOff: 10,
+        ProbBolaPicos: 20,
         LevelList: [],
     };
     let PlataformManager;
@@ -45,6 +54,7 @@ function level1() {
             for (let j = 0; j < PlataformManager.list.length; j++) {
                 PlataformManager.list[j].move(dy); // Baja todas las plataformas
             }
+            
         }
 
         // revisa colisiones con cada elemento de la lista de plataformas
@@ -54,6 +64,12 @@ function level1() {
             // Movimiento de las plataformas
             if (p instanceof MovingPlataform) {
                 p.moveX();
+            }
+            if (p instanceof BolaPicos) {
+                p.moveX();
+                if (boxOverlap(mainCharacter, p)) {
+                    p.applyEffect(mainCharacter);
+                }
             }
 
             // colicion de las plataformas
@@ -80,7 +96,9 @@ function level1() {
             // si toca un power up, se activa su efecto
             if (p instanceof PowerUp && p.detectCollision(mainCharacter)) {
                 p.applyEffect(mainCharacter);
-                playSound("power");
+                if (!(p instanceof BolaPicos)) {
+                    playSound("power"); // solo si NO es BolaPicos
+                }
             }
 
             // cuando colisiona con una plataforma de cambio, avanza de nivel sin recargar
