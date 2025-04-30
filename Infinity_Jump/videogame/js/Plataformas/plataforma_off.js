@@ -24,5 +24,5 @@ class PlataformaOff extends Plataform {
         if (this.visible) {
             super.draw(ctx);
         }
-    }
+    } 
 }
