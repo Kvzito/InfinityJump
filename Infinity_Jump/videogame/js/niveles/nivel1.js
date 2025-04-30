@@ -18,11 +18,13 @@ function level1() {
     const level1Config = {
         probMov: 10,
         probStatic: 70,
-        probSuperJump: 5,
-        probEscudo: 5,
+        probSuperJump: 1.5,
+        probEscudo: 1.5,
         probOne: 10,
         probOff: 10,
         ProbBolaPicos: 5,
+        ProbVidaTemp: 0.5,
+        ProbFuerzaTemp: 0.5,
         LevelList: [],
     };
     let PlataformManager;

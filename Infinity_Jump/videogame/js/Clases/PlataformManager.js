@@ -7,6 +7,8 @@ class PM {
         this.probOne = config.probOne;
         this.probOff = config.probOff;
         this.ProbBolaPicos = config.ProbBolaPicos;
+        this.ProbVidaTemp = config.ProbVidaTemp;
+        this.ProbFuerzaTemp = config.ProbFuerzaTemp;
         this.list = config.LevelList;
         this.img = null;
         this.imgOne = null;
@@ -93,11 +95,30 @@ class PM {
             );
             this.list.push(powerUp);
         }
+
+        if (Math.random() < this.ProbVidaTemp / 100) {
+            let powerUp = new VidaTemp(
+                p.x + (p.width / 2) - 20,
+                p.y - 40,
+                mejoraPVida
+            );
+            this.list.push(powerUp);
+        }
+
+        if (Math.random() < this.ProbFuerzaTemp / 100) {
+            let powerUp = new FuerzaTemporal(
+                p.x + (p.width / 2) - 20,
+                p.y - 40,
+                mejoraPDano
+            );
+            this.list.push(powerUp);
+        }
+
         // contador de plataformas
         totalPlataforms++;
 
         // cuadno el contador llega a la cantidas indicada pone la plataforma de cambio en la lista para qeu salga en la pantalla 
-        if (totalPlataforms >= 100 && !this.cPlataform) {
+        if (totalPlataforms >= 200 && !this.cPlataform) {
             let portal = new PlataformCambio(-250, newY - 150, 1500, 100, portalImg);
             this.list.push(portal);
             this.cPlataform = true;
