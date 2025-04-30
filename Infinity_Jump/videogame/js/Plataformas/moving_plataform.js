@@ -13,8 +13,17 @@ class MovingPlataform extends Plataform{
 
     moveX() {
         this.x += this.speed * this.direction * deltaTime * 60;
-        if (this.x > this.originX + this.range || this.x < this.originX - this.range) {
-            this.direction *= -1;
+    
+        const max = this.originX + this.range;
+        const min = this.originX - this.range;
+    
+        if (this.x >= max) {
+            this.x = max;
+            this.direction = -1;
+        } else if (this.x <= min) {
+            this.x = min;
+            this.direction = 1;
         }
     }
+    
 }
