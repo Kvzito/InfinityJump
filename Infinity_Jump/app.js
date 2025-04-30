@@ -168,6 +168,8 @@ app.post('/api/crearUsuario', async (request, response) => {
 
     const { usuario, contrasena, confContrasena } = request.body;
 
+    console.log("Datos recibidos para crear cuenta:", request.body);
+
     if (!usuario || !contrasena) {
         console.log("Faltan datos para crear la cuenta.");
         return response.status(400).json({ message: "Faltan datos para crear la cuenta." });

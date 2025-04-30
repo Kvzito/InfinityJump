@@ -2,7 +2,7 @@ function openLogin(){
     window.location.href = 'loginPagina.html';
 }
 
-document.getElementById("crear").onclick = async (e) => {
+document.getElementById("crearButton").onclick = async (e) => {
 
     e.preventDefault(); // Evitar el envío del formulario
 
