@@ -12,6 +12,7 @@ class PM {
         this.list = config.LevelList;
         this.img = null;
         this.imgOne = null;
+        this.imgOff = null;
         this.cPlataform = false;
     }
 
@@ -38,7 +39,7 @@ class PM {
                 nPlataform = new OnePlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.imgOne);
             }
             else if(quitarPlataform){
-                nPlataform = new PlataformaOff(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);
+                nPlataform = new PlataformaOff(randomX, canvasHeight - 90 * i - 70, 60, 18, this.imgOff);
             }
             else {
                 nPlataform = new Plataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img);
