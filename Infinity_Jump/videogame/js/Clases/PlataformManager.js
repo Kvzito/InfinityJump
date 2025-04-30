@@ -26,7 +26,7 @@ class PM {
 
             let isMoving = Math.random() < (this.probMov / 100); // usa la probabilidad para saes que plataforma agregar a la lista
             let SinglePlataform = Math.random() < (this.probOne / 100);
-            let quitarPlataform =  Math.random() < (this.proboff / 100);
+            let quitarPlataform =  Math.random() < (this.probOff / 100);
             let nPlataform;
             if (isMoving) {
                 nPlataform = new MovingPlataform(randomX, canvasHeight - 90 * i - 70, 60, 18, this.img, 100, 1);

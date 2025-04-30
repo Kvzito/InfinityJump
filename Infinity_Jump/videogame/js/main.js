@@ -17,6 +17,25 @@ let mejoraSalto = 0;
 let mejoraDanio = 0;
 let mejoraVida = 0;
 
+
+// Formatear el tiempo en segundos
+function formatearTiempo(segundosTotales) {
+    if (typeof segundosTotales !== 'number' || isNaN(segundosTotales) || segundosTotales < 0) {
+        return "00:00:00"; // Valor por defecto si el input es inválido
+    }
+
+    const horas = Math.floor(segundosTotales / 3600);
+    const minutos = Math.floor((segundosTotales % 3600) / 60);
+    const segundos = Math.floor(segundosTotales % 60);
+
+    const formato = (num) => num.toString().padStart(2, '0');
+
+    return `${formato(horas)}:${formato(minutos)}:${formato(segundos)}`;
+}
+
+
+
+
 // Función para cargar las mejoras del inventario del jugador
 async function obtenerMejorasPermanentes() {
 try 
@@ -44,7 +63,8 @@ try
 obtenerMejorasPermanentes();
 
 function actualizarMejoras() {
-    // mainCharacter.inicialVelY += mejoraSalto; ESTÁ PENDIENTE
+    const velMin = -15; // límite superior al salto
+    mainCharacter.inicialVelY = Math.max(-7.5 + (-0.5 * mejoraSalto), velMin);
     mainCharacter.strength = 500 + ( 20 * mejoraDanio);
     mainCharacter.vida = 100 +  (20 * mejoraVida);
 }
@@ -302,9 +322,24 @@ function update(currentTime) {
 
 async function enviarStats() {
     console.log("Registrando cambios de USER ID:", userID);
+    
 
     plataformasAcumuladas += totalPlataforms;
     totalPlataforms = 0;
+
+    const tiempo = formatearTiempo(getElapsedTimeInSeconds());
+
+    console.log("Tiempo total:", tiempo);
+
+    console.log(JSON.stringify({
+        id_usuario: userID,
+        nivel: nombreNivel,
+        plataformas_alcanzadas: plataformasAcumuladas,
+        tiempo: tiempo,
+        mejoraSalto: mejoraSalto,
+        mejoraDanio: mejoraDanio,
+        mejoraVida: mejoraVida,
+    }));
 
     try {
         const response = await fetch('http://localhost:5000/api/Partidas/insertar-con-intento', {
@@ -316,6 +351,7 @@ async function enviarStats() {
                 id_usuario: userID,
                 nivel: nombreNivel,
                 plataformas_alcanzadas: plataformasAcumuladas,
+                tiempo: tiempo,
                 mejoraSalto: mejoraSalto,
                 mejoraDanio: mejoraDanio,
                 mejoraVida: mejoraVida,
@@ -352,6 +388,9 @@ function mostrarGameOver() {
         nombreNivel = "UFO";
     }
 
+
+
+    
     console.log("Nivel alcanzado:", nombreNivel);
 
     const screen = document.getElementById("gameOverScreen");
@@ -366,7 +405,7 @@ function reiniciarJuego() {
 
 window.onload = main;
 
-
+/*
 document.addEventListener("DOMContentLoaded", () => {
     const musicCheckbox = document.getElementById("musicCheckbox");
 
@@ -380,12 +419,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.addEventListener("click", iniciarMusicaNivel);
 });
-
+*/
 
 function seleccionarMejora(tipo) {
 
     if (tipo === "salto") {
-        mainCharacter.inicialVelY -= mainCharacter.inicialVelY * 1.2; // salto más potente
+        mejoraSalto += 1; // aumenta el salto
+        mainCharacter.inicialVelY = Math.max(mainCharacter.inicialVelY - 0.5, -15); // aumenta el salto
     } else if (tipo === "danio") {
         mejoraDanio += 1; // aumenta el daño
         mainCharacter.strength += 20; // aumenta el daño
@@ -484,4 +524,24 @@ function actualizarOpcionesMejora() {
         botonVida.style.backgroundColor = 'green';
         botonVida.style.cursor = 'pointer';
     }
+
+    // Botón para continuar en caso de todas las mejoras al máximo
+    const botonContinuar = document.getElementById('boton-continuar');
+
+    if (mejoraSalto >= maxNivel && mejoraDanio >= maxNivel && mejoraVida >= maxNivel) {
+        // Si todas las mejoras están al máximo, mostramos el botón para continuar
+        botonContinuar.style.display = 'block';
+    } else {
+        // Si aún hay mejoras disponibles, ocultamos el botón
+        botonContinuar.style.display = 'none';
+}
+
+}
+
+
+function cerrarPopup() {
+    document.getElementById("mejorasPopup").style.display = "none";
+    gameRunning = true; // Reanudar juego si pausaste
+    mainCharacter.listenControls();
+    requestAnimationFrame(update);
 }

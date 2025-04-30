@@ -223,7 +223,9 @@ app.post('/api/crearUsuario', async (request, response) => {
 
 app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
     let connection = null;
-    const { id_usuario, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida } = request.body;
+    const { id_usuario, nivel, plataformas_alcanzadas, tiempo, mejoraSalto, mejoraDanio, mejoraVida } = request.body;
+
+    console.log("Datos recibidos para insertar partida:", request.body);
 
     try {
         connection = await connectToDB();
@@ -236,8 +238,8 @@ app.post('/api/Partidas/insertar-con-intento', async (request, response) => {
         const nuevo_intento = (rows[0].ultimo_intento || 0) + 1;
 
         const [results] = await connection.query(
-            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, mejora_salto, mejora_danio, mejora_vida) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas, mejoraSalto, mejoraDanio, mejoraVida]
+            'INSERT INTO Partidas (id_usuario, intento, nivel, plataformas_alcanzadas, tiempo, mejora_salto, mejora_danio, mejora_vida) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [id_usuario, nuevo_intento, nivel, plataformas_alcanzadas, tiempo, mejoraSalto, mejoraDanio, mejoraVida]
         );
 
         response.status(201).json({ message: "Insertado correctamente", intento: nuevo_intento });
@@ -312,13 +314,13 @@ app.put('/api/seleccionarMejora', async (request, response) => {
         // Asegurarse de que no se superen los límites de nivel de cada mejora (supongamos que el límite es 5)
         let updated = false;
         if (mejora === 'salto' && current[0].cantidad_salto < 5) {
-            await connection.query('UPDATE Inventario SET cantidad_mejora_1 = cantidad_mejora_1 + 1 WHERE id_usuario = ?', [id_usuario]);
+            await connection.query('UPDATE Inventario SET cantidad_mejora_salto = cantidad_mejora_salto + 1 WHERE id_usuario = ?', [id_usuario]);
             updated = true;
         } else if (mejora === 'danio' && current[0].cantidad_danio < 5) {
-            await connection.query('UPDATE Inventario SET cantidad_mejora_2 = cantidad_mejora_2 + 1 WHERE id_usuario = ?', [id_usuario]);
+            await connection.query('UPDATE Inventario SET cantidad_mejora_danio = cantidad_mejora_danio + 1 WHERE id_usuario = ?', [id_usuario]);
             updated = true;
         } else if (mejora === 'vida' && current[0].cantidad_vida < 5) {
-            await connection.query('UPDATE Inventario SET cantidad_mejora_3 = cantidad_mejora_3 + 1 WHERE id_usuario = ?', [id_usuario]);
+            await connection.query('UPDATE Inventario SET cantidad_mejora_vida = cantidad_mejora_vida + 1 WHERE id_usuario = ?', [id_usuario]);
             updated = true;
         }
 

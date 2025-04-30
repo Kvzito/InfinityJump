@@ -39,7 +39,7 @@ body {
 #ajustesButton {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 90px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
@@ -186,6 +186,9 @@ input:checked + .slider:before {
 }
 
 #homeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     padding: 10px 15px;
     background-color: lightblue;
     color: black;
@@ -204,7 +207,7 @@ input:checked + .slider:before {
   #gameTimer{
     position: absolute;
     top: 17px;
-    left: 125px;
+    left: 200px;
     font-size: 20px;
     color: white;
   }
@@ -227,6 +230,26 @@ footer {
     text-align: center;
     box-shadow: 0 0 15px #000;
 }
+
+.boton-popup {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boton-popup:hover {
+    background-color: #1fec4f;
+}
+
 
 .opciones-mejora {
     display: flex;
