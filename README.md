@@ -2,7 +2,7 @@
 
 #### _Participantes_
 
-Creado por el estudio Silver Way
+Creado por el estudio Silver Way Studios
 
 - Santiago Cordova Molina
 - Maria Rivera Gutierrez
@@ -37,97 +37,198 @@ Creado por el estudio Silver Way
     2. [Sonidos y música necesarios](#sonidos-y-música-necesarios)
 8. [Itinerario](#itinerario)
 
-##  _Diseño del Juego_
+## _Diseño del Juego_
 
 ---
 
 ### **Resumen**
 
+¡Malvin tiene un sueño increíble: llegar a la luna y conquistar al amor de su vida! Él salta continuamente, desplazándose verticalmente en un mapa con plataformas generadas aleatoriamente. Pero el camino no será fácil: tendrá que superar desafíos, enfrentarse a enemigos únicos y recoger mejoras. Para derrotar a los enemigos, deberá caer sobre ellos desde arriba y así poder avanzar al siguiente nivel.
+
+¿Te atreves a acompañarlo en esta épica aventura llena de emoción y valentía? ¡La luna lo espera!
+
 ### **Juego**
 
-Nuestro juego se trata de que nuestro personaje principal () tiene que ir saltando entre diferentes plataformas hasta llegar a una determinada altura. Más explícitamente, esta altura va a ser lograda al pasar una serie de obstáculos, dividiendo el objetivo en 3 niveles, cada uno de estos va a estar constituido por cierto número de plataformas (100, 150 y 200 respectivamente) y un mini jefe al pasar todas estas plataformas.
+Nuestro juego trata sobre Malvin, el personaje principal, quien debe saltar entre diferentes plataformas hasta alcanzar una determinada altura. Esta altura se logra superando una serie de obstáculos, divididos en 3 niveles. Cada nivel consta de un número determinado de plataformas (100, 150 y 200 respectivamente) y un mini jefe que aparece al final de cada uno.
 
-Cada uno de los niveles está ambientado de diferente manera, representando el progreso que hace el jugador cada que derrota a un jefe, las plataformas y el fondo cambian dependiendo del nivel en el que se encuentre. Estas plataformas son la forma de avanzar del jugador, ya que la pantalla lo que va a ir mostrando va a ser únicamente las plataformas y si el jugador no calcula bien el salto y no rebota en una de estas va a morir instantáneamente, regresando al inicio de todo el juego independientemente del nivel en el que se encontraba.
+Cada nivel está ambientado de forma distinta, representando el progreso del jugador tras derrotar a un jefe. Las plataformas y el fondo cambian según el nivel en el que se encuentra. Estas plataformas son el único medio para avanzar, ya que la pantalla mostrará únicamente el entorno vertical. Si el jugador no calcula bien el salto y falla en caer sobre una plataforma, morirá al caer, regresando al inicio del juego, sin importar el nivel alcanzado.
 
-Existe la posibilidad de conseguir mejoras para el jugador, ya sean temporales o permanentes a lo largo de sus intentos. Un ejemplo de una temporal sería una catapulta que te haga saltar 4 plataformas de un solo salto, un ejemplo de una mejora permanente sería disminuir la velocidad de caída del jugador en 5% para que tenga mayor control sobre esto.
+A lo largo de sus intentos, el jugador podrá conseguir mejoras, ya sean temporales, permanentes o instantáneas.  
+- Ejemplo de mejora **temporal**: una catapulta que permite saltar cuatro plataformas de un solo brinco.  
+- Ejemplo de mejora **permanente**: aumentar el poder de daño para derrotar enemigos más rápidamente.  
+- Ejemplo de mejora **instantánea**: obtener vida extra.
 
-Los mini jefes van a encontrarse después de pasar el número de plataformas determinado por nivel, y va a ser una página diferente, donde no puedes caerte y van a haber plataformas definidas por nosotros las cuales van a constituir el nivel del jefe en sí y te van a dar la libertad de moverte para poder derrotar a este. Este jefe va a tener una barra de vida y para poder hacerle daño el jugador va a tener que saltar arriba de ellos estilo Mario Bros. Si el jugador colisiona con el jefe en cualquier otra parte de este que no sea su parte superior, va a recibir daño y también, con su respectiva barra de vida, eventualmente después de un número de golpes puede morir ante el jefe.
+Los mini jefes aparecen al superar la cantidad de plataformas correspondiente a cada nivel. Al llegar a ellos, se accede a una pantalla diferente donde no se puede caer, y donde las plataformas son prediseñadas. Estas permiten al jugador moverse con libertad para enfrentarse al jefe. Cada jefe tiene una barra de vida, y solo puede ser dañado si el jugador le cae encima, al estilo Mario Bros. Si el jugador colisiona con el jefe por cualquier otro lado, recibirá daño. Si la barra de vida del jugador llega a cero, morirá y deberá reiniciar.
 
 ### **Mentalidad**
 
-El juego está diseñado para que el jugador esté constantemente poniendo a prueba sus habilidades. Debido a la mecánica principal del juego, que es el salto continuo del personaje, el jugador prácticamente va a tener que estar activamente prestando atención a sus movimientos. Solo hay un momento donde esto no es así, al derrotar cada uno de los mini jefes, y con mucha razón, ya que buscamos que sea algo frenético que una vez completes tengas como recompensa un momento de calma y un tiempo para poder utilizar las monedas que has ido recolectando y comprar tus mejoras favoritas.
+El juego está diseñado para que el jugador ponga a prueba sus habilidades constantemente. Debido a la mecánica principal —el salto continuo—, el jugador debe estar siempre atento a sus movimientos. También debe observar el tipo y posición de las plataformas para planear cómo avanzar sin caer.
 
-##  _Técnico_
+Además, debe controlar su precisión para dañar a los enemigos solo cayéndoles encima, evitando contacto por los lados. El único momento de respiro llega tras vencer a un mini jefe, lo cual es intencional: buscamos que ese momento de frenesí se vea recompensado con una breve pausa en la que el jugador pueda elegir sus mejoras favoritas para el futuro.
+
+## _Técnico_
 
 ---
 
 ### **Pantallas**
 
-+ Pantalla de inicio de sesión
-    - Pantalla de menú principal
-      1. Pantalla principal del juego
-           + Pantalla de la tienda de mejoras
-           + Pantalla de pausa
-                1. Pantalla de controles
-                2. Regresar al menú principal
-           + Pantalla al morir
-           + Pantalla por mini jefe
-      3. Pantalla de estadísticas
-      4. Pantalla de créditos finales
+- **Pantalla de inicio de sesión**
+- **Pantalla de menú principal**
+  1. **Pantalla principal del juego**
+     - Pantalla de login
+     - Pantalla de registro
+     - Pantalla del juego, con todos los niveles:
+       - Nivel 1
+       - Enemigo 1
+       - Nivel 2
+       - Enemigo 2
+       - Nivel 3
+       - Enemigo 3
+       - Final
+     - Pantalla de ajustes:
+       - Sonido
+       - Música
+     - Pantalla de pausa
+     - Pantalla de Game Over
+  2. **Pantalla de estadísticas**
+  3. **Pantalla de historia**
+  4. **Pantalla de instrucciones**
+  5. **Pantalla de créditos**
 
 ### **Controles**
 
-+ Las flechas ( `←` y `→` ) y las teclas `A` y `D` van a servir para desplazar al personaje en su eje X, de izquierda a derecha respectivamente. Como el usuario no va a tener que saltar manualmente, la flecha hacia arriba no servirá de nada.
-+ En momentos específicos (como el inicio de un run del jugador, o después de derrotar un minijefe) el juego le va a dar la oportunidad al jugador de presionar la tecla `T` para abrir la tienda de mejoras.
-+ Con la tecla `Esc` se despliega un menú de pausa.
+- Las flechas (`←` y `→`) y las teclas `A` y `D` sirven para desplazar al personaje en su eje X, de izquierda a derecha respectivamente.
+- Como el jugador no necesita saltar manualmente, la flecha hacia arriba no tiene funcionalidad.
+- Con la tecla `Esc` o `P` se despliega el menú de pausa.
+
 
 ### **Mecánicas**
 
-Las plataformas en Infinity Jump se generan de manera aleatoria, pero al decir esto me refiero exclusivamente al eje X en el que se encuentren y a su tipo, ya que para temas de dificultad contamos con varios tipos de plataformas. Pero en sí siempre se van a generar cada Y coordenada, con una distribución que se ajusta a la dificultad del nivel. A medida que el jugador asciende, las plataformas pueden aparecer con espaciado variable, forzando al jugador a ajustar sus tiempos de movimiento.
+---
+Las plataformas en *Infinity Jump* se generan de manera aleatoria, exclusivamente en el eje X y según su tipo, ya que existen distintos tipos de plataformas para aumentar la dificultad. Sin embargo, siempre se generarán a intervalos regulares en el eje Y, con una distribución que se ajusta a la dificultad del nivel. A medida que el jugador asciende, habrá más plataformas y de mayor complejidad.
 
-El juego cuenta con un sistema de físicas simplificado, donde el personaje tiene una velocidad de caída constante, pero ciertos ítems pueden alterar la gravedad o permitir movimientos especiales.
+### **Plataformas**
 
-En cuanto a las colisiones, el juego detectará si el usuario efectivamente aterrizó en una plataforma para que al hacer contacto con esta vuelva a saltar y de esta manera conseguir llegar al mini jefe de cada nivel después de pasar por todas las plataformas de estos.
+Durante cada nivel, las plataformas tendrán un diseño diferente acorde a la temática:
+- En el bosque: ramas, flores, plantas.
+- En el cielo: nubes, pajaros.
+- En el espacio: planetas, cohetes, esteroides.
 
-Vamos a manejar físicas expeciales para ciertas mejoras, ya sean temporales o permanentes, esto con el objetivo de darle un mejor control al jugador sobre su personaje. Estas físicas pueden ser tales como una reducción en la velocidad de caida, un mayor salto o incluso un rebote en caso de caer al vacío.
+Los *assets* de las plataformas cambiarán dependiendo del nivel y del tipo de plataforma. A medida que se avanza, las plataformas se vuelven más variadas y difíciles, obligando al jugador a usar mejoras para progresar.
 
-Los enemigos que se van a encontrar son principalmente los minijefes y eventualmente en los niveles 2 y 3 ciertas plataformas contarán con la mecánica de que si las tocas por debajo te hacen daño, y para vencerlos tienes que saltar encima de ellos. Los jefes teniendo una barra de vida la cual será reducida con cierto número de saltos.
+Tipos de plataformas:
 
+1. **Estática**  
+   Una vez que el algoritmo posiciona esta plataforma, permanecerá fija en su lugar. Es la opción más sencilla para el jugador.
 
+2. **Móvil**  
+   Se desplaza horizontalmente en la misma coordenada Y. El jugador debe calcular mejor el momento para subirse. El personaje permanece sobre ella mientras se mueve.
 
-##  _Diseño de Niveles_
+3. **Desaparece**  
+   Aparece en un lugar fijo, pero el jugador tiene un tiempo limitado para permanecer en ella antes de que desaparezca. Requiere saltar rápidamente.
+
+4. **Un solo salto**  
+   Al tocarla una vez, desaparece inmediatamente. No se puede permanecer en ella.
+
+---
+
+### **Movimientos**
+
+El juego utiliza un sistema de físicas simplificado: el personaje tiene una velocidad de caída constante y está saltando continuamente. El jugador solo controla el movimiento horizontal usando las teclas de flechas para alcanzar las plataformas más cercanas.
+
+Las colisiones determinan si el personaje aterrizó correctamente sobre una plataforma. Al hacerlo, rebota automáticamente. Existen mejoras que aumentan el impulso del salto. Este sistema permite alcanzar al mini jefe al final de cada nivel tras superar todas las plataformas. También hay mejoras que incrementan el daño del personaje.
+
+---
+
+### **Mejoras**
+
+Existen tres tipos de mejoras: **temporales**, **permanentes** e **instantáneas**, cada una con funciones específicas para ayudar al jugador a avanzar, incluso en niveles de mayor dificultad.
+
+#### *Temporales*
+
+1. **Escudo**  
+   Se recoge durante el nivel. Brinda una protección contra el enemigo y se desactiva después de recibir daño. No se conserva tras terminar el nivel.
+
+2. **Súper Salto**  
+   También se recoge en las plataformas y se activa automáticamente. Permite avanzar cuatro plataformas de un solo salto, ayudando a progresar más rápidamente.
+
+#### *Permanentes*
+
+Estas se obtienen al derrotar a un enemigo. El jugador puede elegir hasta 5 mejoras de cada tipo. Cada vez que selecciona una, se suman 20 puntos. Se mantienen incluso si el jugador pierde la partida, y se acumulan en partidas futuras.
+
+1. **Más Vida**  
+   Aumenta la resistencia contra enemigos y obstáculos.
+
+2. **Más Daño**  
+   Permite derrotar a los enemigos más rápido.
+
+3. **Más Salto**  
+   Facilita superar los niveles de plataformas más rápidamente.
+
+#### *Instantáneas*
+
+Se recogen durante un nivel y otorgan una bonificación inmediata de 20 puntos, pero solo duran mientras se juegue esa partida.
+
+1. **Vida Extra**  
+   Añade 20 puntos de vida, ya sea para recuperar vida perdida o tener un extra.
+
+2. **Daño Extra**  
+   Aumenta el daño en 20 puntos para facilitar la derrota del enemigo.
+
+### **Enemigos**
+
+Los enemigos que se encontrarán en el juego son principalmente los **mini jefes**. A partir de los niveles 2 y 3, algunas plataformas también contarán con una mecánica especial: si el jugador las toca por debajo, recibirá daño. Para vencer a los enemigos, será necesario **saltar sobre ellos**, al estilo clásico de plataformas. Cada jefe tendrá una barra de vida que se reduce con una cantidad específica de impactos desde arriba.
+
+1. **Primer enemigo**  
+   Se moverá libremente por todo el lienzo (*canvas*), generando trayectorias impredecibles.
+
+2. **Segundo enemigo**  
+   Se moverá horizontalmente sobre el mismo eje Y y lanzará proyectiles directamente hacia el personaje.
+
+3. **Tercer enemigo**  
+   Combina los patrones del primero y el segundo: se moverá como el primer enemigo, pero de forma más rápida, y además lanzará proyectiles mientras se desplaza.
+
+---
+
+## _Diseño de Niveles_
 
 ---
 
 ### **Temas**
 
 1. 🌲 **Bosque**
-    1. Estado: Misterioso, pasivo, inquietante
-    2. Objetos:
-        1. _Ambiente_: Árboles, montañas, animales de bosque, cielo despejado
-        2. _Interactivo_: Ramas
-2. ☁️ **Cielo**
-    1. Estado: Impredecible, dinámico
-    2. Objetos:
-        1. _Ambiente_: Aviones, nubes enormes
-        2. _Interactivo_: Nubes, pájaros
-3. 🌌 **Espacio exterior**
-    1. Estado: Asfixiante, eufórico, frenético
-    2. Objetos:
-        1. _Ambiente_: Planetas, estrellas fugaces
-        2. _Interactivo_: Cohetes espaciales, OVNI's
+   - **Estado**: Misterioso, pasivo, inquietante  
+   - **Objetos**:
+     - *Ambiente*: Árboles, montañas, animales del bosque, cielo despejado  
+     - *Interactivo*: Ramas
 
+2. ☁️ **Cielo**
+   - **Estado**: Impredecible, dinámico  
+   - **Objetos**:
+     - *Ambiente*: Aviones, nubes enormes  
+     - *Interactivo*: Nubes, pájaros
+
+3. 🌌 **Espacio exterior**
+   - **Estado**: Asfixiante, eufórico, frenético  
+   - **Objetos**:
+     - *Ambiente*: Planetas, estrellas fugaces  
+     - *Interactivo*: Cohetes espaciales, OVNIs
+    
 ### **Flujo de Juego**
 
+1. El jugador comienza en el centro de la pantalla, debajo de las primeras plataformas visibles del primer nivel.
 
-1. El jugador empieza en el centro de la pantalla, debajo de las primeras plataformas visibles del primer nivel
-2. En cuanto presiona la tecla de iniciar partida, el personaje del jugador comienza a saltar automáticamente, y el usuario tiene que comenzar a utilizar las plataformas arriba de él para ir subiendo en el nivel.
-3. Mientras más plataformas vaya subiendo, va ir encontrando objetos que le ayuden como monedas para gastar en un futuro en la tienda o mejoras de un solo uso como un gran salto de 5 plataformas. Además va a encontrarse con plataformas que tienen una mayor dificultad como las del primer nivel que van a haber algunas que desaparezcan después de un salto del usuario en ellas.
-4. Al pasar el número de plataformas por nivel, va a encontrarse con un portal que lo va a trasladar al mini jefe de cada nivel, siendo ese el punto donde no puede caerse pero sí puede morir por daño del jefe.
-5. Después de derrotar al jefe, se le va a dar la oportunidad de comprar mejoras en la tienda mientras sigue en esa pantalla, y en cuanto decida avanzar únicamente va a tener que saltar la plataforma que se le va a generar para tomar el portal de salida en la parte superior de la pantalla.
-6. Tiene que repetir este proceso por 3 diferentes niveles y mientras vaya progresando en estos las plataformas van a ir aumentando su nivel de dificultad y los mini jefes de cada nivel también.
-7. Concluye el juego una vez derrotado el jefe del tercer nivel y se le agradece haber jugado.
+2. Al presionar la tecla de iniciar partida, el personaje empieza a **saltar automáticamente**, y el usuario debe usar las plataformas que aparecen encima para comenzar a ascender.
 
+3. A medida que sube, encontrará mejoras —algunas de uso inmediato y otras que podrá guardar para después— además de plataformas con distintas mecánicas. Tendrá que pensar con rapidez para decidir cómo avanzar sin caer.
+
+4. Al superar el número de plataformas necesarias por nivel, aparecerá un **portal** que lo llevará al mini jefe. En esta sección el jugador **no puede caerse**, pero sí puede morir si recibe demasiado daño del jefe.
+
+5. Tras vencer al jefe, el jugador podrá elegir una mejora entre varias opciones disponibles. Una vez seleccionada, se generará una plataforma que, al saltarla, lo llevará al **portal de salida** ubicado en la parte superior de la pantalla.
+
+6. Este proceso se repite a lo largo de **tres niveles**, cada uno con plataformas más desafiantes y enemigos más fuertes.
+
+7. El juego concluye al derrotar al jefe del tercer nivel, mostrando cómo el personaje cumple su propósito y agradece al jugador por acompañarlo en su aventura.
 
 ##  _Desarrollo_
 
@@ -135,78 +236,176 @@ Los enemigos que se van a encontrar son principalmente los minijefes y eventualm
 
 ### **Clases abstractas**
 
+1. MainCharacter
+2. Jefe
+3. Plataforma
+4. PowerUP
+
 ### **Clases derivadas**
+
+Extiende de jefe:
+1. JefeNivel1
+2. JefeNivel2
+3. JefeFinal
+
+Extiende de Plataforma
+1. PlataformaMovimiento
+2. PlataformaDestruible
+3. PlataformaOnOff
+4. PlataformaCambio
+
+Extiende de PowerUP
+1. Escudo
+2. Salto
+3. Más Vida
+4. Más Daño
+5. Más Salto
+6. Vida extra
+7. Daño extra
 
 ## _Gráficos_
 
 ---
 
-Para este juego vamos a usar un estilo animado de pixel art. Este estilo se podrá ver alrededor de todo el juego, tanto en los personajes, el principal y los enemigos, las plataformas en los diferentes niveles, como en las páginas. Esto con la finalidad de hacer que le juego se sienta en el mismo universo aunque vayas avanzando de nivel.
+Para este juego utilizaremos un estilo animado de **pixel art**. Este estilo estará presente en todo el juego: personajes (el principal y los enemigos), plataformas en los diferentes niveles y también en las distintas pantallas del juego. La finalidad de esto es que el juego mantenga una coherencia visual y se sienta como un mismo universo, incluso al avanzar de nivel. Todos los textos utilizarán una fuente pixelada, manteniéndose en línea con la temática.
 
-Los colores que usaremos en el juego serán llamativos pero siempre acorde al ambiente para que se puedan identificar en cualquier escenario, además de siempre los mejores para el estilo visual mencionado anteriormente. El personaje tendrá el mismo color blanco para que se pueda distinguir en cualquier nivel. Las plataformas cambiaran de color dependiendo del ambiente del nivel, que quede con la tematica simulando algo que se encuentre en ese ambiente. Por ejemplo, en el primer nivel que es un bosque, la plataforma es verde y café como una rama de los árboles del fondo de este mismo. 
+Los colores serán llamativos, pero siempre acordes al ambiente de cada nivel, facilitando la identificación de elementos visuales. El personaje principal será siempre de color blanco para destacarse en cualquier escenario. Las plataformas cambiarán de color y forma dependiendo del nivel, simulando objetos del entorno (por ejemplo, en el bosque serán ramas de color verde y café).
 
-Habrá un cuadro explicativo con los controles del juego en el apartado de “Controles” que aparecerá al darle pausa al juego o en el menú principal de este. De esta manera el jugador sabrá cómo moverse. Además cada vez que el jugador complete un nivel, se regresará una nueva página en donde va a poder acceder a la tienda, en donde podrá gastar sus monedas en mejoras temporales o permanentes. Antes de comprar se verá una pequeña descripción de qué es lo que hace dicha mejora. 
+### Diseños
 
-##  _Sonidos y Música_
+#### 1. Personajes
+
+1. **Personaje Principal**  
+   ![malvin](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/Jump1.PNG)
+
+2. **Enemigo 1**  
+   ![planta](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/JefePlantaIzq.png)
+
+3. **Enemigo 2**  
+   ![mago](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/Jefe2.png)
+
+4. **Enemigo 3**  
+   ![alien](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/Jefe3.png)
+
+---
+
+#### 2. Plataformas
+
+##### **Primer Nivel – Bosque**
+
+- **Estático y móvil**  
+  ![rama](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/Plataforma1.png)
+
+- **Desaparece**  
+  ![flores](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/desaparece.png)
+
+- **Una vez**  
+  ![bush](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/bush.png)
+
+##### **Segundo Nivel – Cielo**
+
+- **Estático y móvil**  
+  ![nube](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/PlataformaNube.png)
+
+- **Desaparece**  
+  ![aguila](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/aguila.png)
+
+- **Una vez**  
+  ![pajaro](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/pajaroRojo.png)
+
+##### **Tercer Nivel – Espacio**
+
+- **Estático y móvil**  
+  ![planeta](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/plataformaEspacioUno.png)
+
+- **Desaparece**  
+  ![cohete](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/cohete.png)
+
+- **Una vez**  
+  ![roca](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/espacio.png)
+
+---
+
+#### 3. Fondos
+
+1. **Fondo de bosque**  
+   ![bosque](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/Fondo%20Nivel%201.webp)
+
+2. **Fondo de cielo**  
+   ![cielo](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/FondoCielo.png)
+
+3. **Fondo de espacio**  
+   ![espacio](https://github.com/Kvzito/InfinityJump/blob/main/Infinity_Jump/videogame/Assets/FondoEspacio.webp)
+
+## _Sonidos y Música_
 
 ---
 
 ### **Atributos de estilo**
 
-La música del juego dependerá del nivel de dificultad del nivel en el que se encuentre el jugador, es decir, no será una única temática a lo largo de todo el juego y esto reflejará el progreso del jugador a medida avanza por los niveles.
+La música del juego variará según el nivel de dificultad en el que se encuentre el jugador. No habrá una sola pista para todo el juego; en cambio, cada etapa musical reflejará el progreso del jugador y su contexto.
 
-Buscaremos que cada uno de estos tracks reflejen efectivamente lo que el jugador está experimentando, es decir, en cada uno de los 3 mini jefes, una canción que exprese la dificultad de estos y sea exclusiva del evento, además una para cada nivel de plataformas que si bien será más pasiva se logrará diferenciar una de la otra.
+Cada uno de los tres mini jefes tendrá una canción exclusiva que represente su dificultad. Además, cada nivel contará con su propio tema de plataformas: será más pasivo en comparación con los jefes, pero claramente diferenciable entre sí.
 
-Para los efectos de sonido, buscamos que sean claros y funcionales, proporcionando retroalimentación sin saturar la experiencia auditiva. Queremos que cada sonido ayude al jugador a reaccionar a lo que sucede en la pantalla sin distraerlo.
-
+Los efectos de sonido serán claros y funcionales, brindando retroalimentación sin sobrecargar la experiencia auditiva. Queremos que estos sonidos ayuden al jugador a reaccionar rápidamente a lo que ocurre en pantalla sin distraerlo del juego.
 
 ### **Sonidos y música necesarios**
 
-#### Sonidos
+#### 🎧 Sonidos
 
-+ Efectos de movimiento. Efectos de sonido al rebotar en plataformas, caer al vacío o chocar con obstáculos.
-+ Sonidos de los jefes. Ruidos de movimiento, golpes o ataques.
+- Efectos de movimiento: rebote en plataformas, choques con obstáculos, saltos.
+- Sonidos de los jefes: movimientos, golpes, ataques especiales.
 
-#### Música
+#### 🎵 Música
 
-+ Tema del menú. Una melodía previa al inicio del juego, tranquila pero anticipatoria.
-+ Música en los niveles. Un ritmo por nivel, con su propio estilo musical, como un tema misterioso en el bosque o algo más intergaláctico en el espacio.
-+ Música en los jefes. Una pista única por jefe para demostrar su dificultad y desafío a la hora de encontrarlos.
+- Tema del menú: melodía tranquila pero anticipatoria, que prepare al jugador para comenzar.
+- Música de niveles: una pista por nivel, adaptada a su ambiente (ej. misterioso en el bosque, intergaláctico en el espacio).
+- Música de jefes: una pista única por jefe, más intensa y desafiante.
+
+---
 
 ## _Itinerario_
 
 ---
 
+1. **Semanas 1 a 3**  
+   - Definir el concepto general del juego  
+     - Mecánicas:  
+       - Compra de habilidades  
+       - Aleatoriedad en plataformas  
+       - Movimiento automático y control  
+     - Reglas:  
+       - Gestión y selección de habilidades  
+       - Requerimientos básicos del jugador  
 
-1. Determinar el concepto general del juego (primeras 3 semanas)
-    1. Mecánicas
-        1. Compra de habilidades
-        2. Aleatoriedad en las plataformas
-        3. Movimiento
-    2. Reglas
-        1. Gestión de habilidades
-        2. Requerimientos de 
-2. Desarrollo de documentación/issues del proyecto (semana 4)
-    1. Historias de usuario
-    2. Casos de uso
-    3. Issues
-4. Primer sprint (semana 5)
-    1. Inicialización base de datos
-    2. Assets del videojuego 
-5. Segundo sprint (semana 6)
-    1. Programación de clases abstractas del juego
-        1. Habilidades
-        2. Jugador
-        3. Obstáculos
-        4. Entorno
-6. Tercer sprint (semana 7)
-    1. Desarrollo de clases derivadas
-    2. Desarrollo de web
-7. Cuarto sprint (semana 8)
-    1. Conexión de web con base de datos y videojuego
-    2. Sprites y visuales
-8. Quinto sprint (semana 9)
-    1. Terminar visuales y audio
-    2. Web completamente terminada y funcional
-9. Semana 10
-    1. Presentación final del videojuego
+2. **Semana 4**  
+   - Desarrollo de documentación e issues  
+     - Historias de usuario  
+     - Casos de uso  
+     - Issues iniciales para GitHub  
+
+3. **Semana 5 – Primer Sprint**  
+   - Inicialización de la base de datos  
+   - Creación de los assets del videojuego  
+
+4. **Semana 6 – Segundo Sprint**  
+   - Programación de clases abstractas:  
+     - Habilidades  
+     - Jugador  
+     - Obstáculos  
+     - Entorno  
+
+5. **Semana 7 – Tercer Sprint**  
+   - Desarrollo de clases derivadas  
+   - Desarrollo inicial de la web  
+
+6. **Semana 8 – Cuarto Sprint**  
+   - Conexión de la web con base de datos y el videojuego  
+   - Implementación de sprites y visuales  
+
+7. **Semana 9 – Quinto Sprint**  
+   - Finalización de elementos visuales y de audio  
+   - Web completamente funcional  
+
+8. **Semana 10 – Cierre**  
+   - Presentación final del videojuego  
