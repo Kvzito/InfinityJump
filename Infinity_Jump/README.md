@@ -1,10 +1,10 @@
 ## **Instrucciones para prototipo**
 
 ### ¿En qué escena comienza el prototipo?
-Empieza en la pagina login, por el momento solo funciona el usuario = hola y la contraseña "1234". Esto  te lleva la nivel 1.
+Empieza en la pagina login, después de haber descargado todos los scripts de MySQL, puedes entrar con cuelquiera de los usuarios en la tabla llamada de la misma manera, un ejemplo es el usuario1, con contraseña "pass123".
 
 ### ¿Cuáles son los controles del juego? 
-El personaje salta solo, el jugador lo mueve con las flechas o con las teclas A y D. 
+El personaje salta solo, el jugador lo mueve de izquierda a derecha con las flechas o con las teclas A y D. 
 
 El jugador tiene que conseguir subir todas las plataformas al siguiente nivel. Al llegar a la pantaña del enemigo, tienes que saltar en la cabeza para hacerle daño hasta matarlo.
 
