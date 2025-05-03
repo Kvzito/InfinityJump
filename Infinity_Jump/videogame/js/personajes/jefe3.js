@@ -74,21 +74,21 @@ class Jefe3 extends Jefe {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
-        ctx.strokeStyle = "red";
-        ctx.strokeRect(
-            this.x + this.hitboxOffsetX,
-            this.y + this.hitboxOffsetY,
-            this.hitboxWidth,
-            this.hitboxHeight
-        );
+        // ctx.strokeStyle = "red";
+        // ctx.strokeRect(
+        //     this.x + this.hitboxOffsetX,
+        //     this.y + this.hitboxOffsetY,
+        //     this.hitboxWidth,
+        //     this.hitboxHeight
+        // );
 
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(
-            this.x,
-            this.y,
-            this.width - 5,
-            this.topHitboxHeight
-        );
+        // ctx.strokeStyle = "green";
+        // ctx.strokeRect(
+        //     this.x,
+        //     this.y,
+        //     this.width - 5,
+        //     this.topHitboxHeight
+        // );
 
         for (let p of this.proyectiles) {
             p.draw(ctx);

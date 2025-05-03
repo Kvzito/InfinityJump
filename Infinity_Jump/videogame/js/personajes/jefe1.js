@@ -36,22 +36,22 @@ class Jefe1 extends Jefe {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
         // Hitbox principal que hace daño al main character
-        ctx.strokeStyle = "red";
-        ctx.strokeRect(
-            this.x + this.hitboxOffsetX,
-            this.y + this.hitboxOffsetY,
-            this.hitboxWidth,
-            this.hitboxHeight
-        );
+        // ctx.strokeStyle = "red";
+        // ctx.strokeRect(
+        //     this.x + this.hitboxOffsetX,
+        //     this.y + this.hitboxOffsetY,
+        //     this.hitboxWidth,
+        //     this.hitboxHeight
+        // );
 
         // Hitbox superior el cual recibe daño si el maincharacter salta sobre el
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(
-            this.x,
-            this.y,
-            this.width - 5,
-            this.topHitboxHeight
-        );
+        // ctx.strokeStyle = "green";
+        // ctx.strokeRect(
+        //     this.x,
+        //     this.y,
+        //     this.width - 5,
+        //     this.topHitboxHeight
+        // );
     }
 
     // colisiones y como afectan sus estadisticas

@@ -28,10 +28,10 @@ class Proyectil {
         ctx.drawImage(this.img, this.x - this.size, this.y - this.size, this.size * 2, this.size * 2);
 
         // Hitbox circular (para depuración)
-        ctx.strokeStyle = "purpule";
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.stroke();
+        // ctx.strokeStyle = "purpule";
+        // ctx.beginPath();
+        // ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        // ctx.stroke();
     }
 
     colisionaCon(jugador) {
